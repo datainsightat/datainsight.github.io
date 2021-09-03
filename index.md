@@ -4,34 +4,34 @@
 
 ### Infrastructure
 
-[Linux](pages/de/linux.html)
-[Windows]
-[Docker]
-[Kubernetes]
+* [Linux](pages/de/linux.html)
+* [Windows]
+* [Docker]
+* [Kubernetes]
 
 ### Code
 
-[Big O](pages/cs/bigo.html)
-[Algorithms]
-[Datastructure]
+* [Big O](pages/cs/bigo.html)
+* [Algorithms]
+* [Datastructure]
 
 ###ä Languages
 
-[R]
-[Pyhton]
-[JavaScript]
-[SQL]
+* [R]
+* [Pyhton]
+* [JavaScript]
+* [SQL]
 
 ## Data Engineering
 
-[MongoDB]
-[Azure]
-[AWS]
+* [MongoDB]
+* [Azure]
+* [AWS]
 
 ## Data Science
 
-[Exploratory Data Analysis]
-[Machine Learning]
+* [Exploratory Data Analysis]
+* [Machine Learning]
 
 # Sources
 
