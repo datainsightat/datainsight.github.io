@@ -15,16 +15,18 @@
 * [Algorithms]
 * [Datastructure]
 
-###ä Languages
+### Languages
 
 * [R]
 * [Pyhton]
+* [HTML/CSS]
 * [JavaScript]
 * [SQL]
+* [MongoDB]
 
 ## Data Engineering
 
-* [MongoDB]
+* [Git]
 * [Azure]
 * [AWS]
 
@@ -32,6 +34,12 @@
 
 * [Exploratory Data Analysis]
 * [Machine Learning]
+* [Deep Learning]
+
+## Business Intelligence
+
+* [Shiny]
+* [Power BI]
 
 # Sources
 
