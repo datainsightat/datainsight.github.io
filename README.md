@@ -1,2 +1,2 @@
 # datainsight.github.io
-All about DataSince, DataEngineering and ComputerScience
+All about DataScince, DataEngineering, ComputerScience and Business Intelligence
