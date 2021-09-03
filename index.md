@@ -21,6 +21,7 @@
 * [Pyhton]
 * [HTML/CSS]
 * [JavaScript]
+* [Visual Basic]
 * [SQL]
 * [MongoDB]
 
