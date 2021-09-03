@@ -9,7 +9,7 @@
 
 Characterise code in terms of runtime and memory requirements.
 
-![Big O Chart](https://en.wikipedia.org/wiki/Big_O_notation#/media/File:Comparison_computational_complexity.svg)
+![Big O Chart](../_img/big0_chart_wikipedia.jpg)
 
 ## Time Complexity
 
