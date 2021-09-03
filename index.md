@@ -1,6 +1,6 @@
-# Documentation
+# Index
 
-## Computer Science
+## CS - Computer Science
 
 ### Infrastructure
 
@@ -24,22 +24,24 @@
 * [SQL]
 * [MongoDB]
 
-## Data Engineering
+## DE - Data Engineering
 
 * [Git]
 * [Azure]
 * [AWS]
 
-## Data Science
+## DS - Data Science
 
 * [Exploratory Data Analysis]
 * [Machine Learning]
 * [Deep Learning]
 
-## Business Intelligence
+## BI - Business Intelligence
 
 * [Shiny]
 * [Power BI]
+
+# Projects
 
 # Sources
 
