@@ -2,9 +2,11 @@
 
 ## Computer Science
 
+[Big O](pages/cs/bigo.html)
+
 ## Data Engineering
 
-[Linux](pages/cs/linux.html)
+[Linux](pages/de/linux.html)
 
 ## Data Science
 
