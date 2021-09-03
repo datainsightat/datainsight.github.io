@@ -2,13 +2,36 @@
 
 ## Computer Science
 
+### Infrastructure
+
+[Linux](pages/de/linux.html)
+[Windows]
+[Docker]
+[Kubernetes]
+
+### Code
+
 [Big O](pages/cs/bigo.html)
+[Algorithms]
+[Datastructure]
+
+###ä Languages
+
+[R]
+[Pyhton]
+[JavaScript]
+[SQL]
 
 ## Data Engineering
 
-[Linux](pages/de/linux.html)
+[MongoDB]
+[Azure]
+[AWS]
 
 ## Data Science
+
+[Exploratory Data Analysis]
+[Machine Learning]
 
 # Sources
 
