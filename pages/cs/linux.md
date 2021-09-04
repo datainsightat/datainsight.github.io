@@ -890,3 +890,246 @@ useradd [options] username
 ## Change File Owner
 
 	sudo chown -R $USER ~/.blabla
+
+# Networking
+
+## TCP/IP
+	
+	TCP	control data exchange
+	IP	Internet protocol send data from a device to another
+
+	IP address	subnet mask	broadcast address
+	199.83.131.186	255.255.255.0	199.83.131.255
+
+	Netword Address	What the host belongs to
+	Hoast Address	Specific host address
+
+### Classful Networks
+	
+	Class	Network	Hosts
+	A	1.0 > 127.0	16.777.216
+	B	128.0 > 191.255	65.536
+	C	192.0.0 > 233.255.255	255
+
+### Subnet Masks
+	
+	Class	Subnet Mask
+	A	255.0.0.0
+	B	255.255.0.0
+	C	255.255.255.0
+
+### Broadcast Address
+	
+	Broadcasts messages to all hosts in network
+	Class	Network	Subnet Mask	Boradcast
+	A	17.0.0.0	255.0.0.0	17.255.255.255
+	B	183.194.0.0	255.255.0.0	183.194.255.255
+	C	199.83.131.0	255.255.255.0	199.83.131.255
+
+### Classless Inter-Domain Routing / CIDR
+	
+	IP: 121.67.198.94
+		Class A network: 121.0.0.0
+		Class A subnet: 255.0.0.0
+		Class A bradcast: 121.255.255.255
+
+	IP: 121.67.198.94 Subnet: 255.255.255.0
+		CIDR network: 121.67.198.0
+		CIDR subnet: 255.255.255.0
+		CIDR broadcast: 121.67.198.255
+
+### Reserved Private Address Space
+	
+	Class	Range	Private Address Space
+	A	1.0.0.0 - 127.255.255.255	10.0.0.0 - 10.255.255.255
+	B	128.0.0.0 - 191.255.255.255	172.16.0.0 - 172.31.255.255
+	C	192.0.0.0 - 233.255.255.255	192.168.0.0 - 192.168.255.255
+
+## DNS and hostnames
+
+### ip address
+	
+	$ ip address
+
+### ifconfig
+	
+	$ ifconfig
+
+### hostnames
+	
+	human readable name for an IP address
+
+### DNS hostnames
+	
+	FQDN fully qualified domain name
+		webprod01.mycompany.com
+
+	TLD
+		.com, .net …
+
+	domain
+		left of TLD
+
+	subdomain
+		left of domain
+
+### hostname
+	
+	$ hostname
+	$ uname -n
+	$ hostname -f
+	$ hostname webprod01
+	$ echo 'webprod01' > /etc/hostname
+
+### host
+	
+	$ host www.mycompany.com
+
+### /etc/hosts
+	
+	127.0.01	localhost
+	1.2.1.6	webprod01.mycompany.com
+	10.11.13.7	dbcluster
+
+### /etc/nsswitch.conf
+	
+	NSS = Name Service Switch
+
+	hosts: files dns
+	hosts: files nis dns
+
+## DHCP
+	
+Dynmaic host configuration protocol
+
+### Network Ports
+	
+	1-1023	System ports
+	22	ssh
+	25	smtp
+	80	http
+	143	imap
+	389	ldap
+	443	https
+
+### Configure DHCP Client
+	
+	ifconfig -a
+	ip link
+
+### DHCP Client RHEL
+	
+	/etc/sysconfig/betwork-scripts/ifcfg-device
+	BOOTPROTO=dhcp
+
+### DHCP Client Ubuntu
+	
+	auto eth0
+	iface etth0 inet dhcp
+
+### Static IP RHEL
+	
+	/etc/sysconfig/network-scripts/ifcfg-eth0
+	DEVICE=eth0
+	BOOTPROTO=static
+	IPADDR=10.109.155.174
+	NETMASK=255.255.255.0
+	NETWORK=10.109.155.0
+	BROADCAST=10.109.155.255
+	GATEWAY=10.109.155.1
+	ONBOOT=yes
+
+### Static IP Address Ubuntu
+	
+	/etc/network/interfaces
+	auth eth0
+	iface eth0 inet static
+	  address 10.109.155.174
+	  netmask 255.255.255.0
+	  gateway 10.109.155.1
+
+
+### Manually Assign IP Address
+	
+	$ ip address add 10.11.12.13 dev eth0
+	$ ip address add 10.11.12.13/255.255.255.0 eth0
+	$ ip link set eth0 up
+
+	$ ifconfig eth0 10.11.12.13
+	$ ifconfig eth0 10.11.12.13 netmask 255.255.255.0
+	$ ifconfig eth0 up
+
+### ifup/ifdown
+	
+	$ ifup eth0
+	$ ifdown eth0
+
+### GUI/TUI Tools
+	
+	$ nmtui
+	$ YaST
+
+## Network Troubleshooting
+	
+	ping
+	traceroute
+	netstat
+	tcpdump
+	telnet
+
+	ping -c COUNT HOST
+	$ ping -c 3 google.com
+	$ traceroute -n google.com
+	$ tracepath -n google.com
+
+### netstat
+	
+	netstat	Analyse network
+	-n	Numerical addresses
+	-i	list of network interfaces
+	-r	route table (netstat -rn)
+	-p	pid and program
+	-l	listening sockets (netstat -nlp)
+	-t	limit output to tcp (netstat -ntlp)
+	-u	limit output to udp (netstat -nulp)
+
+	$ netstat -i
+	$ netstat -rn
+	$ sudo netstat -ntlp
+
+### Packet sniffing tcpdump
+	
+	tcpdump	Sniff packages
+	-n	numerical addresses and ports
+	-A	ASCII output
+	-v	Verbose mode
+	-vvv	Even more output
+
+	$ sudo tcpdump
+	$ sudo tcpdump -Anvvv
+
+### telnet
+	
+	$ telnet google.com 80
+	$ GET /
+	$ ^]
+	$ quit
+	
+# Advanced Command Line
+
+## Tab completion
+	
+	$ host<TAB>
+	$ host<TAB><TAB>
+
+## Repeat as Root
+	
+	$ sudo !!
+
+## Reuse Arguments
+	
+	$ !*
+
+## Strip out comments and blank lines
+	
+	$ grep -Ev '^#|^$' file.txt
