@@ -25,6 +25,7 @@
 * [JavaScript]
 * [Visual Basic]
 * [Oracle SQL](pages/cs/oraclesql.md)
+* [Microsoft SQL Server](pages/cs/mssql.md)
 * [MongoDB]
 
 ## DE - Data Engineering
