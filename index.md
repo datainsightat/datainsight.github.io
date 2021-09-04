@@ -30,6 +30,7 @@
 ## DE - Data Engineering
 
 * [Git](pages/de/git.md)
+* [Gitlab CI/CD](pages/de/gitlab_cicd.md)
 * [Azure]
 * [AWS]
 
