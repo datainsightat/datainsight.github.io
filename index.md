@@ -5,6 +5,7 @@
 ### Infrastructure
 
 * [Linux](pages/cs/linux.html)
+  * [Arch](pages/cs/archlinux.html) 
 * [Windows]
 * [Docker]
 * [Kubernetes]
