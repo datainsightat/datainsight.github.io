@@ -38,7 +38,7 @@
 * [Git](pages/de/git.md)
 * [Gitlab CI/CD](pages/de/gitlab_cicd.md)
 * [Azure]
-* [AWS]
+* [AWS](pages/de/aws.md)
 
 ## DS - Data Science
 
