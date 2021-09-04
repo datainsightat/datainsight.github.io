@@ -17,6 +17,7 @@
 
 ### Languages
 
+* [Shell Script](pages/cs/shellscript.md)
 * [R]
 * [Pyhton]
 * [HTML/CSS]
