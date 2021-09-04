@@ -4,7 +4,7 @@
 
 ### Infrastructure
 
-* [Linux](pages/de/linux.html)
+* [Linux](pages/cs/linux.html)
 * [Windows]
 * [Docker]
 * [Kubernetes]
