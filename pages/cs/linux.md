@@ -1,4 +1,6 @@
-# Directory Structure
+# Fundamentals
+
+## Directory Structure
 
     /	Root
     /bin	Binaries
@@ -16,7 +18,7 @@
     /media	Mount point
     /srv	Data served by the systm
 
-# Basic Linux Commands
+## Basic Linux Commands
 
     ls	List directory
     cd	Change directory
@@ -27,13 +29,13 @@
     exit	Exit the shell
     clear	Clear screen
 
-# Working with Directories
+## Working with Directories
 
     mkdir [-p] directory	Create directory. -p: parents
     rmdir [-p] directory	Remove directory
     rm -rf directory	Recursively delete directory
 
-# ls Options
+## ls Options
 
     -l	List View
     -F	File type
@@ -44,7 +46,7 @@
     -d	Directory names
     -R	Recursively
 
-# File and Directory Permissions
+## File and Directory Permissions
 
     $ ls -l
 
@@ -94,7 +96,7 @@
 
     chmod 777 - umask 002 =  chmod 775
 
-# Findig Files and Directories
+## Findig Files and Directories
 
     find [path] [expression]
     -name pattern	match pattern
@@ -115,7 +117,7 @@
 
     $ locate sales.txt
 
-# Viewing Files
+## Viewing Files
 
     cat file	Display contents
     more file	Browser through text file
@@ -127,7 +129,7 @@
 
     $ tail -f file
 
-# vi
+## vi
 
     Esc	Command mode
     iLaA	Insert
@@ -177,7 +179,7 @@
     /<pattern>	Forward search
     ?<pattern>	Reverse search
 
-# Delete, Copy, Move and Rename File
+## Delete, Copy, Move and Rename File
 
     rm file	Remove file
     rm -r dir	Remove directory and files
@@ -204,7 +206,7 @@
     $ cat more-secrets
     $ sort -u -k2 more-secrets
 
-# tar	collection of files
+## tar	collection of files
 
 	-c … create
 	-x … extract
