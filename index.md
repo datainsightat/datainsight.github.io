@@ -28,6 +28,11 @@
 * [Microsoft SQL Server](pages/cs/mssql.md)
 * [MongoDB]
 
+### Other
+
+* [Vim Configuration](pages/cs/vim.md)
+* [Markdown](pages/cs/md.md)
+
 ## DE - Data Engineering
 
 * [Git](pages/de/git.md)
