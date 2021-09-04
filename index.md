@@ -29,7 +29,7 @@
 
 ## DE - Data Engineering
 
-* [Git]
+* [Git](pages/de/git.md)
 * [Azure]
 * [AWS]
 
