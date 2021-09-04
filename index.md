@@ -24,7 +24,7 @@
 * [HTML/CSS]
 * [JavaScript]
 * [Visual Basic]
-* [SQL]
+* [Oracle SQL](pages/cs/oraclesql.md)
 * [MongoDB]
 
 ## DE - Data Engineering
