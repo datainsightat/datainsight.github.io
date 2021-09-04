@@ -228,3 +228,253 @@
     Merge files
 
     $ rsync -a /source /target
+
+# Intermediate
+
+## Wildcards
+
+	*	zero or more characters
+	?	Exactily one character
+	[]	Character class
+		ca[nt]* > can, cat, candy, catch
+	[!]	Exclude characters
+	\	escape character
+		*\?
+
+## Input/Output Type
+
+	Standard Input 	stdin 	0
+	Standard Output 	stdout 	1
+	Standard Error 	stderr	2
+
+	>	Redirect file overwrite
+	>>	Redirect file append
+	<	Redirect file to command
+
+	& File descriptor
+
+	ls -l > files.txt
+	ls >> files.txt
+	sort < files.txt
+	Sort < files.txt > sortet_files.txt
+	echo new last line >> file.txt
+
+	ls files.txt not-here 1>out 2>out.err
+
+	files.txt not-here 2>/dev/null
+
+## Comparing Files
+
+	diff file1 file2	Compare 2 files
+	sdiff file2 file2	Side-by-side comparison
+	vimdiff file2 file2	Highlight differences in vim
+
+## Searching in Files
+
+	grep pattern file	Display lines matching pattern 
+
+	-i	ignore case
+	-c	count occurences
+	-n	Precede output with new line
+	-v	Invert Match
+
+	grep user secret
+	grep -v o secret
+
+	file	Display the file type
+	strings	Display printable strings
+
+## Pipes
+
+	|	Pipe symbol
+
+	command-output  | command-input
+
+	cat file  | grep pattern
+
+	cut file	Cut out selection of a file 
+		-d delimiter
+		-f n Display nth field
+
+### Example
+
+	grep bob /etc/passwd | cut -d: -f1,5 | sort | tr ":" " " | column -t
+
+	Piping Output to a Pager
+	more	less
+
+	cat /etc/passwd | less
+
+## Copy Files over Network
+
+	scp	Secure copy
+	sftp	ssh file transfer protocol
+	ftp host	File transfer protocol
+
+	sftp linuxsvr
+
+	lpwd	local pwd
+	lls	local ls
+
+	scp z.txt linuxsvr:/tmp/
+	scp z.txt adminuser@linuxsvr:/home/adminuser/
+
+## Customize Shell Prompt
+
+	$PS1	Primary Prompt String 
+		\d Date
+		\h Hostname
+		\n Newline
+		\t Current time
+		\A Current time
+		\u User name
+		\w Current working directory
+		\$ 0,# or $
+
+	echo 'export PS1="[\u@\h \w]\$ "' >> ~/.bash_profile
+
+## Aliases
+
+	Use for long commands
+
+	alias [name[=value]]
+	unalias  [name]
+
+	alias cls='clear'
+
+## Environment Variables
+
+	printenv	Displays all environment variables
+	printenv PATH
+	echo $PATH
+
+	export VAR="value"	Create environment variable
+	export EDITOR="vi"
+
+	unser VAR	Remove Environment variable
+
+	$ cat ~/.bash_profile
+	export TZ="US/Central"
+
+## Processes and Job Control
+
+	ps	display process status 
+		-e Everything
+		-f full format
+		-u username
+		-p pid
+
+	ps -ef	Full list all processes
+	ps -eH	Process tree
+	pstree	Tree format
+	top	Interactive process viewer
+	htop	as above
+
+	command &	Start command in background
+	Ctrl-c	Kill foreground process
+	Ctrl-z	Suspend process
+	bg [%num]	Background a suspended process
+	fg [%num]	Foreground a background process
+	kill	Kill process by job number, or PID 
+		-l List all kill signals
+	jobs [%num]	List jobs
+
+## Scheduling Repeated Jobs with Cron
+
+	m h d M D command
+	0 7 * * 1 /opt/sales/bin/weekly-report	Run every Monday at 07:00
+
+	0 2 * * * /root/backupd > /tmp/backupd.log
+
+	0,15,30,45 * * * *	Run every 15 minutes
+	0 0 1 1 *	@yearly
+	0 0 1 * * 	@monthly
+	0 0 * * 0	@weekly
+
+	crontab file	Install a new crontab from file
+	crontab -l	List you cron jobs
+	crontab -e	Edit you cron jobs
+	crontab -r	Remove all you cron jobs
+
+	vi my-cron
+	crontab my-cron
+
+## Switching Users and Running Commands as Others
+
+	su [username]	Change user ID or become superuser 
+		-c command
+	sudo	Execute as superuser 
+		-l List available commands
+		-u user command
+		-s start root shell
+		-u user -s start shell as user
+	whoami	show current user
+	visudo	Edit the /etc/sudoers file
+
+	su -c 'echo $ORACLE_HOME' - oracle
+	sudo su - username
+
+	/etc/sudoers
+	user host=(users)[NOPASSWD:]commands
+	adminuser ALL=(ALL) NOPASSWD:ALL
+
+## Shell History and Autocompletion
+
+	~/.bash_history
+	~/.history
+	~/.histfile
+
+	history	Show previous commands
+	!N	Repeat command line number N
+	!!	Repeat previous command line
+	!string	Repreat the most recent commant starting with "string"
+	!:N	Event Separator Word
+	!^	First argument = !:1
+	!$	Last argument
+
+	head files.txt sorted_files.txt notes.txt
+	vi !:2 = vi sorted_files.txt
+
+## Installing Softare
+
+### rpm/YUM
+
+	yum search string	Search for string
+	yum info [package]	Display Info
+	yum install [-y] package	Install package
+	yum remove package	Remove package
+	rpm -qa	List installed packages
+	rpm -qf file	Show package file relates to
+	rpm -ql package	List package files
+	rpm -ivh package.rpm	Install package
+	rpm -e package	Remove package
+
+	yum search inkscape
+	yum info inkscape.i686
+	sudo yum install inkscape
+	yum remove inkscape
+
+	yum search dropbox
+	rpm -ivh dropbox.rpm
+
+	rpm -qf /usr/bin/which
+	rpm -ql which
+
+### dpkg/APT - Advanced Packaging Tool
+
+	apt-cache search string	Search for a string
+	apt-get install [-y] package	Install package
+	apt-get remove package	Remove package
+	apt-get purge package	Purge package
+	apt-cache show package	Display information about package
+	dpkg -l	List packages
+	dpkg -S /path/file	Display package file belongs to
+	dpkg -L package	List all files in package
+	dpkg -i package.deb	Install package
+
+	apt-cache search inkscape
+	sudo apt-get install inkscape
+	sudo apt-get remove inkscape
+	
+![image](https://user-images.githubusercontent.com/35584158/132084214-5eb12194-17e8-4448-b848-9ba1b0faa70a.png)
+
