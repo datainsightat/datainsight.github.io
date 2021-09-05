@@ -1,0 +1,7 @@
+#header {
+    background: url("images/adele-payman-537971-unsplash.jpg");
+    background-size: cover;
+    background-position: center;
+    color:  white;
+    text-shadow: 5px 10px 5px rgba(0,0,0,0.7);
+}
