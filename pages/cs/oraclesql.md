@@ -568,9 +568,9 @@ job_sal table:
 	select * from recyclebin;
 
 	flashback table [schema.] table
-	to {{{scn|timestamp} expr |
+	to {scn|timestamp} expr |
 	restore point restore_point [{enable|disable} triggers] |
-	before drop [rename to table] }}};
+	before drop [rename to table];
 
 	flashback table employees_copy to timestamp sysdate - 1 / (24 * 60);
 
