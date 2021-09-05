@@ -15,7 +15,7 @@
 # Bootstrap 4
 
 * [Pattern](html/11_bs4_pattern.html)
-* [Museum Candy](html/11_bs4_museum_candy.html)
+* [Museum Candy](html/12_bs4_museum_candy.html)
   
 # Source
 
