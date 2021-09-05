@@ -570,7 +570,7 @@ job_sal table:
 	flashback table [schema.] table
 	to {{{scn|timestamp} expr |
 	restore point restore_point [{enable|disable} triggers] |
-	before drop [rename to table] };
+	before drop [rename to table] }}};
 
 	flashback table employees_copy to timestamp sysdate - 1 / (24 * 60);
 
