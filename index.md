@@ -21,7 +21,7 @@
 * [Shell Script](pages/cs/shellscript.md)
 * [R]
 * [Pyhton]
-* [HTML/CSS]
+* [HTML/CSS](pages/cs/html/01_html_list.html)
 * [JavaScript]
 * [Visual Basic]
 * [Oracle SQL](pages/cs/oraclesql.md)
