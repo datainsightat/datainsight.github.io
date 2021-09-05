@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form Assignment</title>
+</head>
+<body>
+	<h1>Register</h1>
+	<form action="http://wikipedia.org" method="POST">
+		<div>
+			<label for="firstname">First Name: </label>
+			<input id="firstname" type="text" name="FirstName" required="True">
+			<label for="lastname">Last Name: </label>
+			<input id="lastname" type="text" name="LastName" required="True">
+		</div>
+		<div>
+			<label for="gender-1">Male </label>
+			<input id="gender-1" type="radio" name="Gender" value="Male">
+			<label for="gender-2">Female </label>
+			<input id="gender-2" type="radio" name="Gender" value="Female">
+			<label for="gender-3">Other </label>
+			<input id="gender-3" type="radio" name="Gender" value="Other">
+		</div>
+		<div>
+			<label for="email">Email: </label>
+			<input id="email" type="email" name="Email" required="True">
+			<label for="password">Password: </label>
+			<input id="password" type="password" name="Password" required="True" minlength="5" maxlength="10">
+		</div>
+		<div>
+			<label for="month">Birthday: </label>
+			<input id="month" type="month" name="Birthday" min="01" max="12" value="01">
+			<input id="day" type="day" name="Birthday" min="01" max="31" value="01">
+			<input id="year" type="year" name="Birthday" min="1950" max="2019" value="2019">
+		</div>
+		<div>
+			<label for="terms">I agree to the terms and conditions: </label>
+			<input id="terms" type="checkbox" name="Terms">
+		</div>
+		<div>
+			<input type="submit" name="Submit" value="Submit">
+		</div>
+	</form>
+</body>
+</html>
