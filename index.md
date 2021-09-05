@@ -23,7 +23,7 @@
 * [Pyhton]
 * [HTML/CSS](pages/cs/html.md)
 * [JavaScript]
-* [Visual Basic]
+* [Visual Basic](pages/cs/js.md)
 * [Oracle SQL](pages/cs/oraclesql.md)
 * [Microsoft SQL Server](pages/cs/mssql.md)
 * [MongoDB]
