@@ -76,7 +76,7 @@ http://www.initializr.com/
 
     $ pwd
     $ cd projects
-    $ git clone https://github.com/BernhardMayrhofer/starter-web.git
+    $ git clone https://github.com/XXX/starter-web.git
     $ cd starter-web
     $ ls -al
     $ git status
