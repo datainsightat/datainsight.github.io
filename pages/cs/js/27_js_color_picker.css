@@ -1,0 +1,61 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: darkgrey;
+}
+
+h1 {
+    background-color: cornflowerblue;
+    text-transform: uppercase;
+    margin: 0;
+    font-weight: normal;
+    color: white;
+    line-height: 40px;
+    text-align: center;
+    padding: 20px 0;
+    height: 100%;
+}
+
+button {
+    height: 100%;
+    border: none;
+    background-color: white;
+    color: black;
+}
+
+button:hover {
+    background-color: cornflowerblue;
+    color: white;
+    transition-duration: 0.6s;
+}
+
+#menu {
+    background-color: white;
+    text-align: center;
+    height: 30px;
+}
+
+#feedback {
+    display: inline-block;
+    min-width: 150px;
+    max-width: 250px;
+}
+
+#pickedColor{
+    width: 100%;
+}
+
+#gameBoard{
+    max-width: 600px;
+    margin: 10px auto 0 auto;
+}
+
+.box {
+    background-color: blueviolet;
+    width: 30%;
+    height: 150px;
+    margin: 10px 1.6%;
+    float: left;
+    border-radius: 5%;
+    transition-duration: 0.6s;
+}
