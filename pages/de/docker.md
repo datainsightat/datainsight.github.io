@@ -98,7 +98,7 @@ Build image
     workdir /usr/src/app
     copy package.json package.json
     run npm install && npm cache clean
-    copy ..
+    copy . .
     cmd [tini","--","node","./bin/www"]
     
     $ docker built -t testnode .
