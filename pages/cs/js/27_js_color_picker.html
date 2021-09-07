@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="27_js_color_picker.css">
+    <title>ColorPicker</title>
+</head>
+
+<body>
+    <h1>The ColorPicker Game<br><span id="pickedColor"></span> </h1>
+    <div id="menu">
+        <button onclick="init()" name="newGame">New Game</button> <span id="feedback"></span> <button onclick="init('easy')" name="newGameEasy">Easy</button>  <button onclick="init('hard')" name="newGameHard">Hard</button> 
+    </div>
+        <div id="gameBoard">
+        <div>
+            <div class="box"> </div>
+            <div class="box"> </div>
+            <div class="box"> </div>
+            <div class="box"> </div>
+            <div class="box"> </div>
+            <div class="box"> </div>
+        </div>
+    </div>
+
+    <script src="27_js_color_picker.js"></script>
+
+</body>
+
+</html>
