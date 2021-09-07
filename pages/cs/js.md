@@ -16,6 +16,14 @@
 * [Score Keeper](js/26_js_score_keeper.html)
 * [Color Picker](js/27_js_color_picker.html)
 
+## Node
+
+* [Echo](js/31_js_node_echo.html)
+* [Conditional](js/14_js_conditional.html)
+* [Guessing Game](js/15_js_guessing_game.html)
+* [Annoy-O-Matic](js/16_js_annoyomatic.html)
+* [While Loop 1](js/17_js_while_loop.html)
+
 # Source
 
 The content was originally created during the [Web Developer Bootcamp](https://www.udemy.com/course/the-web-developer-bootcamp/learn/lecture/22587506?start=0#overview) by Colt Steele.
