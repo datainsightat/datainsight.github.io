@@ -8,5 +8,5 @@ Create Project
 
     RStudio > File > New Project > Package for Shiny App using golem
 
-[Add Local Project to Github](../de/git.html#addlocalprojecttogithub)
+[Add Local Project to Github](../de/git.md#addlocalprojecttogithub)
 
