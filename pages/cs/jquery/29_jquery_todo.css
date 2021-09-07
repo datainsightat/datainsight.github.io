@@ -1,0 +1,65 @@
+body {
+    font-family: Roboto;
+}
+
+h1 {
+    line-height: 100%;
+    padding: 10px 20px;
+    margin: 0;
+    background-color: rgb(66, 36, 62);
+    color: white;
+}
+
+#container {
+    background-color: rgb(66, 36, 62);;
+    width: 400px;
+    margin: 150px auto;
+    color: white;
+}
+
+#inputText {
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 20px;
+    height: 40px;
+}
+
+.checked {
+    color: grey;
+    text-decoration: line-through;
+}
+
+ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+li {
+    margin: 0px;
+    height: 40px;
+    line-height: 100%;
+    padding-left: 20px;
+}
+
+li:nth-child(2n) {
+    background-color: rgb(172, 94, 161);
+}
+
+li:hover .itemClass {
+    width: 40px;
+    background-color: red;
+    color: white;
+    opacity: 1;
+    box-sizing: border-box;
+}
+
+.itemClass {
+    width: 0px;
+    display: inline-block;
+    height: 40px;
+    transition: 0.2s linear;
+    opacity: 0;
+    line-height: 40px;
+    text-align: center;
+}
