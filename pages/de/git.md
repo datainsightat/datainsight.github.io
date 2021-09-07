@@ -87,8 +87,7 @@ http://www.initializr.com/
     $ git add .
     $ git commit -m 'My first commit'
 
-* Create new project on Github, without any files (no readme.md)
-* Copy remote repository URL
+Create new project on Github, without any files (no readme.md). Copy remote repository URL  
 
     $ git remote add origin <REMOTE URL>
     $ git remote -v
