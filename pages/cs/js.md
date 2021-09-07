@@ -15,3 +15,7 @@
 * [Color Selector](js/25_js_color_selector.html)
 * [Score Keeper](js/26_js_score_keeper.html)
 * [Color Picker](js/27_js_color_picker.html)
+
+# Source
+
+The content was originally created during the [Web Developer Bootcamp](https://www.udemy.com/course/the-web-developer-bootcamp/learn/lecture/22587506?start=0#overview) by Colt Steele.
