@@ -21,7 +21,7 @@
 * [Echo](js/31_js_node_echo.html)
 * [Faker](js/32_js_node_faker.html)
 * [Grader](js/33_js_node_grader.html)
-* [Get REquest](js/34_js_node_get.html)
+* [Get Request](js/34_js_node_get.html)
 * [Post Request](js/35_js_node_post.html)
 * [API](js/36_js_node_api.html)
 
