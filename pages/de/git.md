@@ -80,8 +80,9 @@ http://www.initializr.com/
     $ cd starter-web
     $ ls -al
     $ git status
-    
-## [Add Local Project to Gihub](#addlocalprojecttogithub)
+
+<a name="addlocalprojecttogithub"></a>
+## Add Local Project to Github
 
     $ git init
     $ git add .
