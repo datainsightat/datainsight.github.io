@@ -48,5 +48,5 @@
 
 ## BI - Business Intelligence
 
-* [Shiny]
+* [Shiny](pages/bi/shiny.md)
 * [Power BI]
