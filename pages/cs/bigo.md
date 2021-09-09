@@ -14,7 +14,7 @@ Data Structures + Algorithms = Programs
 
 Characterise code in terms of runtime and memory requirements.
 
-![Big O Chart](/wiki/pages/_img/big0_chart_wikipedia.jpg)
+![Big O Chart](../img/big0_chart_wikipedia.jpg)
 
 * O(1) Constant - no loops
 * O(log N) Logartihmic - search algorithms
