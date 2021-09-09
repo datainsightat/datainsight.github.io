@@ -151,5 +151,5 @@ Two separate collections: O(a * b)
 
 # Sources
 
-[Udemy]('https://www.udemy.com/course/master-the-coding-interview-data-structures-algorithms/')
-[Big O Cheatsheet]('https://www.bigocheatsheet.com/')
+* [Udemy]('https://www.udemy.com/course/master-the-coding-interview-data-structures-algorithms/')
+* [Big O Cheatsheet]('https://www.bigocheatsheet.com/')
