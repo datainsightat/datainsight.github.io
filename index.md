@@ -4,7 +4,7 @@
 
 ### Infrastructure
 
-#### linux
+#### Linux
 
 * [Admin](pages/cs/linux.html)
 * [Arch Linux](pages/cs/archlinux.html)
