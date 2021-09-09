@@ -4,8 +4,13 @@
 
 ### Infrastructure
 
-* [Linux](pages/cs/linux.html)
-  * [Arch](pages/cs/archlinux.html) 
+#### linux
+
+* [Admin](pages/cs/linux.html)
+* [Arch Linux](pages/cs/archlinux.html)
+ 
+#### Other
+
 * [Windows]
 * [Docker]
 * [Kubernetes]
