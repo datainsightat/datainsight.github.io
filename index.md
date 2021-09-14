@@ -19,7 +19,7 @@
 
 * [Big O](pages/cs/bigo.html)
 * [Algorithms]
-* [Datastructure]
+* [Datastructure](pages/cs/datastructure.html)
 
 ### Languages
 
