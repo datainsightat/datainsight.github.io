@@ -768,3 +768,64 @@ test.yml
  # Source
  
  https://www.udemy.com/share/101tcu3@turtaB_9G3MUry_KPrGUt0rcHoPfdDOTyUBCm6GCE-9kZ5lcuZo_fXrVuJ2pgWjO/
+ 
+ # Deploy R-Shiny App
+ 
+ ## Create gitlab-ci.yml
+ 
+ /gitlab-ci.yml
+ 
+     # WORKSPACE         defined below
+     # SHINY_USER        <USER>
+     # SHINY_SERVER      <SERVER>
+     # SHINY_APP_DIR     defined below
+
+     image: alpine
+
+     variables:
+        SHINY_USER: <USERNAME>
+        SHINY_PATH: <SHINY PATH>
+        WORKSPACE: "../${CI_PROJECT_NAME}"
+
+     stages:
+       - deploy
+       - cleanup
+
+     .copy_to_shiny:
+         stage: deploy # staging
+         script:
+            - echo "Copy directory to shiny"
+            - rsync -r --chmod=u+rwx,g+rwx,o+rx ${WORKSPACE} ${SHINY_USER}@${SHINY_SERVER}:${SHINY_APP_DIR}
+         variables:
+            WORKSPACE: "../${CI_PROJECT_NAME}"
+            SHINY_APP_DIR: <SHINY APP DIR>
+
+     # Run ------------------------------------------
+     deploy_to_shiny_test:
+        extends: .copy_to_shiny
+        only:
+          - develop
+        variables:
+            SHINY_SERVER: <SHINY DEV SERVER>
+
+     deploy_to_shiny_prod:
+        extends: .copy_to_shiny
+        only:
+          - master
+        variables:
+            SHINY_SERVER: <SHINY PROD SERVER>
+        allow_failure: true
+
+     # Cleanup
+     cleanup:
+       stage: cleanup
+       script:
+         - echo "cleanup"
+         - rm -rf $WORKSPACE/*
+
+## Create Gitlab Runner
+
+Gitlab > Settings > CI/CD > Runners  
+
+
+
