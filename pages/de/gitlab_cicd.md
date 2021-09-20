@@ -771,9 +771,9 @@ test.yml
  
  # Deploy R-Shiny App
  
- ## Create gitlab-ci.yml
+ ## Create .gitlab-ci.yml
  
- /gitlab-ci.yml
+ /.gitlab-ci.yml
  
      # WORKSPACE         defined below
      # SHINY_USER        <USER>
