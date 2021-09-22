@@ -185,18 +185,70 @@ Different keys can generate same memory address, because of limited memory space
         let hash = 0;
         for (let i = 0; i < key.length; i++) {
           hash = (hash + key.charCodeAt(i) * i) %
-          this.data.length
+          this.data.length;
         }
         return hash;
       }
       
-      set() {
+      set(key, value) {
+        let address = this._hash(key);
+        if (!this.data[adress]) {
+          this.data[address] = [];
+        }
+        this.data[address].push(key,value]);
       }
       
-      get() {
+      get(key) {
+        let address = this._hash(key);
+        const currentBucket = this.data[address];
+        if (currentBucket) {
+          for(let i = 0; i < currentBucket.length; i++) {
+            if (currentBucket[i][0] === key) {
+              return currentBucket[i][1];
+            }
+          }
+        }
+      }
+      
+      keys() {
+        const keysArray = [];
+        for (let i=0; i < this.data.length; i++) {
+          if(this.data[i]) {
+            keysArray.push(this.data[i][0][0]);
+          }
+        }
+        return keysArrays;
       }
     }
     
     const myHashTable = new HashTable(50);
     myHashTable.set('grapes',10000);
+    myHashTable.set('apples',50);
+    myHashTable.set('oranges',1);
     myHashTable.get('grapes);
+    myHashTable.keys();
+
+## Comparison
+
+|Method|Arrays|HashTables|
+|-|-|-|
+|search|O(n)|O(1)|
+|lookup|O(1)|O(1)|
+|push|O(1)||
+|insert|O(1)|O(1)|
+|delete|O(n)|O(1)|
+
+## Examples
+
+    //Given an array = [2,5,1,2,3,5,1,2,4]
+    //Tell the first recurring Number (2)
+    
+    function firstRecurringCharacter(input) {
+      let map = {};
+      for (let i = 0; i < input.length; i++) {
+        if(map[input[i]]) {
+          return input[i];
+        } else {
+        } 
+      }
+    }
