@@ -153,7 +153,9 @@ Values are put in specific position in memory, based on the value. We do not nee
 
 ## Downside: Collision
 
-Different keys can generate same memory address, because of limited memory space. This is called collision. This proplem is solved by another datastructures like linked lists. Collisions slow down hash tables.  
+Different keys can generate same memory address, because of limited memory space. This is called collision. This proplem is solved by another datastructures like linked lists. Collisions slow down hash tables.
+
+![Hash Table]()
   
 ## Examples
 
@@ -240,15 +242,70 @@ Different keys can generate same memory address, because of limited memory space
 
 ## Examples
 
+    //Given 2 arras, create a function that let's user know whether these two arrays contain any common items.
+    
+    fucntion containsCommonItem_slow(arr1,arr2) {
+      for (let i=0; arr1.length; i++) {
+      }
+        for (let j=0; arr2.length; j++) {
+          if(arr1[i] === arr2[j]) {
+            return true;
+          }
+        }
+      }
+    } //O(n^2)
+    
+    function containsCommonItem_fast(arr1,arr2) {
+      let map = {};
+      for (let i=0; i < arr1.length; i++) {
+        if(!map[array1[i]]) {
+          const item = array1[i];
+          map[item] = true;
+        }
+      }
+      for (let j=0; j < arr2.length; j++) {
+        if(map[array2[i]]) {
+          return array2[j];
+        }
+      }
+    } // O(n)
+
     //Given an array = [2,5,1,2,3,5,1,2,4]
     //Tell the first recurring Number (2)
     
-    function firstRecurringCharacter(input) {
+    function fristRecurringCharacter_slow(input) {
+      for (let i = 0; i < input.length; i++) {
+        for (let j = i + 1; j < input.length; i++) {
+          return input[i];
+        }
+      }
+    } //O(n^2) //Solution: 2
+    
+    function firstRecurringCharacter_fast(input) {
       let map = {};
       for (let i = 0; i < input.length; i++) {
-        if(map[input[i]]) {
+        if(map[input[i]] !== undefined) {
           return input[i];
         } else {
+          map[input[i]] = i
         } 
       }
-    }
+    } //O(n) //downside: higher memory requirement //Solution 5
+    
+    firstRecurringCharacter_fast([2,5,5,2,3,5,1,2,4])
+    
+  ## Conclusion
+  
+  |Pro|Con|
+  |-|-|
+  |Fast lookups|Unordered|
+  |Fast Inserts|Slow Iteration|
+  |Flexible Keys||
+  
+  # Linked Lists
+  
+  * Singly Linked Lists
+  * Doubly Linked Lists
+  <a/>
+  
+  
