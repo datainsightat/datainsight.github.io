@@ -155,7 +155,7 @@ Values are put in specific position in memory, based on the value. We do not nee
 
 Different keys can generate same memory address, because of limited memory space. This is called collision. This proplem is solved by another datastructures like linked lists. Collisions slow down hash tables.
 
-![Hash Table]()
+![Hash Table]((../img/hash_table.jpg))
   
 ## Examples
 
@@ -294,18 +294,22 @@ Different keys can generate same memory address, because of limited memory space
     
     firstRecurringCharacter_fast([2,5,5,2,3,5,1,2,4])
     
-  ## Conclusion
-  
-  |Pro|Con|
-  |-|-|
-  |Fast lookups|Unordered|
-  |Fast Inserts|Slow Iteration|
-  |Flexible Keys||
-  
-  # Linked Lists
-  
-  * Singly Linked Lists
-  * Doubly Linked Lists
-  <a/>
-  
-  
+## Conclusion
+
+|Pro|Con|
+|-|-|
+|Fast lookups|Unordered|
+|Fast Inserts|Slow Iteration|
+|Flexible Keys||
+
+# Linked Lists
+
+* Singly Linked Lists
+* Doubly Linked Lists
+<a/>
+
+![Linked List Singly]((../img/linked_list_singly.jpg))
+
+    const basket = ['apples','grapes','pears'];
+    
+    
