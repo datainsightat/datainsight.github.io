@@ -155,7 +155,7 @@ Values are put in specific position in memory, based on the value. We do not nee
 
 Different keys can generate same memory address, because of limited memory space. This is called collision. This proplem is solved by another datastructures like linked lists. Collisions slow down hash tables.
 
-![Hash Table]((../img/hash_table.jpg))
+![Hash Table](../img/hash_table.jpg)
   
 ## Examples
 
@@ -308,7 +308,7 @@ Different keys can generate same memory address, because of limited memory space
 * Doubly Linked Lists
 <a/>
 
-![Linked List Singly]((../img/linked_list_singly.jpg))
+![Linked List Singly](../img/linked_list_singly.jpg)
 
     const basket = ['apples','grapes','pears'];
     
@@ -355,10 +355,7 @@ Different keys can generate same memory address, because of limited memory space
     
     class LinkedList {
       constuctor(value) {
-        this.head = {
-          value: value,
-          next: null
-        };
+        this.head = new Node(value);
         this.tail = this.head;
         this.length = 1;
       }
@@ -433,5 +430,5 @@ Different keys can generate same memory address, because of limited memory space
     
 ## Doubly Linked Lists
 
-![Linked List Doubly]((../img/linked_list_doubly.jpg))
+![Linked List Doubly](../img/linked_list_doubly.jpg)
 
