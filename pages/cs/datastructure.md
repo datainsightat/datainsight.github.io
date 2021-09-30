@@ -628,7 +628,7 @@ Different keys can generate same memory address, because of limited memory space
 
 # Stacks and Queues
 
-![Stack and Queues](../img/stacks_queues.jpg)
+![Stack and Queues](../img/stack_queue.jpg)
 
 ## Stacks
 
