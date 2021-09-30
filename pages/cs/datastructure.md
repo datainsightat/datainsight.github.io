@@ -433,22 +433,7 @@ Different keys can generate same memory address, because of limited memory space
 ![Linked List Doubly](../img/linked_list_doubly.jpg)
 
 ## Example Doubly Linked List
- 
-    //1 --> 10 --> 5 --> 99 --> 16
-    
-    //let myLinkedList = {
-    //  head: {
-    //    value: 10
-    //    next: {
-    //      value: 5,
-    //      next: {
-    //        value: 16,
-    //        next: null
-    //      }
-    //    }
-    //  }
-    //}
-    
+
     class newNode {
       constuctor(value) {
         this.value = value;
@@ -477,6 +462,101 @@ Different keys can generate same memory address, because of limited memory space
         const newNode = new Node(value);
         newNode.next = this.head;
         this.head.prev = newNode;
+        this.head = newNode;
+        this.length++;
+        return this;
+      }
+      
+      printList(){
+        const array = [];
+        let currentNode = this.head;
+        while (currentNode !== null) {
+          array.push(currentNode.value);
+          currentNode = currentNode.next;
+        }
+      }
+      
+      insert(index, value) {
+        //check params
+        if (index >= this.length) {
+          return this.append;
+        }
+        const leader = this.traverseToIndex(index-1);
+        const follower = leader.next;
+        leader.next = newNode;
+        newNode.prev = leader;
+        newNode.next = follower;
+        follower.prev = newNode;
+        this.length++;
+        return this.printList();
+      }
+      
+      traverseToIndex(index) {
+        //check params
+        let counter = 0;
+        let currentNode = this.head;
+        while (counter !== index {
+          currentNode = currentNode.next;
+          coutner++;
+        }
+        return currentNode;
+      }
+      
+      remove(index) {
+        //check params
+        const leader = this.traverseToIndex(index-1);
+        const unwantedNode = leader.next;
+        const follower = unwantedNode.next;
+        leader.next = unwantedNode.next;
+        follower.prev = unwantedNode.prev;
+        this.length--;
+        return this.printLIst();
+      }
+      
+    }
+    
+    const myLinkedList = new LinkedList(10);
+    myLinkedList.append(5);
+    myLinkedList.append(16);
+    myLinkedList.prepend(1);
+    myLinkedList.insert(2,99);
+    
+## Singly vs Doubly Linked Lists
+
+|Singly|Doubly|
+|-|-|
+|+ simple|- complex|
+|+ memory efficient|- more memory|
+|+ fast|- slower|
+|- no backwards search|+ backwards search|
+
+## Reverse Singly Linked List
+
+    class newNode {
+      constuctor(value) {
+        this.value = value;
+        this.next = null;
+      }
+    }
+    
+    class LinkedList {
+      constuctor(value) {
+        this.head = new Node(value);
+        this.tail = this.head;
+        this.length = 1;
+      }
+      
+      append(value){
+        const newNode = new Node(value);
+        this.tail.next = newNode;
+        this.tail = newNode;
+        this.length++;
+        return this;
+      }
+      
+      prepend(value){
+        const newNode = new Node(value);
+        newNode.next = this.head;
         this.head = newNode;
         this.length++;
         return this;
@@ -526,10 +606,159 @@ Different keys can generate same memory address, because of limited memory space
         return this.printLIst();
       }
       
+      reverse () {
+        if (!this.head.next){
+          return this.head;
+        }
+        let first = this.head;
+        this.tail = this.head;
+        let second = first.next;
+        while(second) {
+          const temp = second.next;
+          second.next = first;
+          first = second;
+          second = temp;
+        }
+        this.head.next = null;
+        this.head = first;
+        return this.printList();
+      }
+      
+    }
+
+# Stacks and Queues
+
+![Stack and Queues](../img/stacks_queues.jpg)
+
+## Stacks
+
+Browser history ...  
+
+LIFO (Last im, first out)  
+
+|Operation|O|
+|-|-|
+|loopkup|O(n)|
+|pop|O(1)|
+|push|O(1)|
+|peek|O(1)|
+
+## Queues
+
+FIFO (First in, first out)
+
+|Operation|O|
+|-|-|
+|lookup|O(1)|
+|enqueue|O(1)|
+|dequeue|O(1)|
+|peek|O(1)|
+
+## Example Stack
+
+    class Node {
+      constructor(value){
+        this.value = value;
+        this.next = null;
+      }
+    }
+
+    class Stack {
+      constructor(){
+        this.top = null;
+        this.bottom = null;
+        this.length = 0;
+      }
+      
+      peek(){
+        return this.top;
+      }
+      
+      push(value){
+        const newNode = new Node(value);
+        if (this.length) == 0 {
+          this.bottom = newNode;
+        } else {
+          const holdingPointes = this.top;
+          this.top = newNode;
+          this.top.next = holdingPointer;
+        }
+        this.length++;
+        return this;
+      }
+      
+      pop(){
+        if (!this.top) {
+          return null;
+        }
+        if (this.top === this.bottom) {
+          this.bottom = null;
+        }
+        //const holdingPointer = this.top;
+        this.top = this.top.next;
+        this.length--;
+        return this;
+      }
     }
     
-    const myLinkedList = new LinkedList(10);
-    myLinkedList.append(5);
-    myLinkedList.append(16);
-    myLinkedList.prepend(1);
-    myLinkedList.insert(2,99);
+    const myStack = new Stack();
+    myStack.push('google');
+    myStack.push('udemy');
+    myStack.push('discord');
+    myStack.peek();
+    myStack.pop();
+ 
+## Example Queue
+
+    class Node {
+      constructor(value){
+        this.value = value;
+        this.next = null;
+      }
+    }
+    
+    class Queue {
+      constructor() {
+        this.first = null;
+        this.last = null;
+        this.length = 0;
+      }
+    }
+    
+    peek(){
+      return this.first;
+    }
+    
+    enqueue(value){
+      newNode = new Node(value);
+      if (this.length === 0) {
+        this.first = newNode;
+        this.last = newNode;
+      } else {
+        this.last.next = newNode;
+        this.last = newNode;
+      }
+      this.length++;
+      return this;
+    }
+    
+    dequeue(){
+      if(!this.first) {
+        return null;
+      }
+      if(this.first === this.last) {
+        this.last = null;
+      }
+      this.first = this.first.next;
+      this.length--;
+      return this;
+    }
+    
+    const myQueue = new Queue();
+    myQueue.enqueue('Joy');
+    myQueue.enqueue('Matt');
+    myQueue.enqueue('Pavel');
+    myQueue.peek();
+    myQueue.dequeue();
+    myQueue.dequeue();
+    myQueue.dequeue();
