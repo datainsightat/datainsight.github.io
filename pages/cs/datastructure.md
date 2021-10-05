@@ -762,3 +762,105 @@ FIFO (First in, first out)
     myQueue.dequeue();
     myQueue.dequeue();
     myQueue.dequeue();
+
+# Trees
+
+![Trees](../img/tree.jpg)
+
+Abstract syntax tree  
+
+## Binary Trees
+
+![Binary Tree](..(img/binary_tree.jpg)
+
+    function BinaryTreeNode(value) {
+      this.value = value;
+      this.left = null;
+      this.right = null;
+    }
+    
+* 'Perfect binary tree' -> All nodes are filled
+* 'Full Binary Tree' -> A node has either 0, 1 or 2 children.
+<a/>
+
+![Perfect Full Binary Tree](../img/perfect_full_binary_tree.jpg)
+
+|operation|O|
+|-|-|
+|lookup|O(log N)|
+|insert|O(log N)|
+|delete|O(log N)|
+
+### O(log N)
+
+    Level 0: 2^0 = 1;
+    Level 1: 2^1 = 2;
+    Level 2: 2^2 = 4;
+    Level 3: 2^3 = 8;
+
+    number of nodes = 2^h - 1;  
+    log nodes = height
+
+Binary Search Tree: Example, search for a person in a phonebook.  
+
+### Binary Search Trees
+
+[VisualGo](https://visualgo.net/en/bst)
+
+               101
+           33       105
+         9   37  104   144
+
+* All values right of the node are bigger than the node
+* All values left of the node are smaller than the node
+* A node can only have two children
+<a/>
+
+|operation|O|
+|-|-|
+|lookup|O(log N)|
+|insert|O(log N)|
+|delete|O(log N)|
+
+|Pro|Con|
+|-|-|
+|Better than O(n)|No O(1) operations|
+|Ordered||
+|Flexible Size||
+
+### Balanced vs Unbalanced
+
+Tree turns into linked list, if items are just appended on one side. There are ways to balance the tree using 'AVL Time', or 'Red Black Tree'.  
+
+=> O[log n] turns into O[n]  
+
+### Example Binary Search Tree
+
+    class Node {
+      constructor(value){
+        this.node = value;
+        this.left = null;
+        this.right = null;
+      }
+    }
+    
+    class BinarySearchTree {
+      constructor(){
+        this.root = null;
+      }
+      insert(value){
+      }
+      lookup(value){
+        if (value < currentNode.value {
+        } else {
+        }
+        while currentNode.left
+      }
+      //remove
+    }
+    
+    const tree = new BinarySearchTree();
+    
+    //       9
+    //   4       20
+    // 1   6   15  170
