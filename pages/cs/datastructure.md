@@ -1018,5 +1018,11 @@ Each element in queue has prioority.
 |Flexible Size||
 |Fast insert||
 
+## Trie
 
+Does a word exist in a body of text? Search for a city in car navigation.
+
+![Trie](../img/trie.jpg)
+
+O(length of the word)
 
