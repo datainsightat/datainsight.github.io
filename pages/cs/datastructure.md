@@ -1069,10 +1069,18 @@ Examples: [VisualGo](https://visualgo.net/en/bst)
         this.numberOfNodes = 0;
         this.adjacentList = {};
       }
+      
       addVertex(node){
+        this.adjecentList[node] = [];
+        this.numberOfNodes++;
       }
+      
       addEdge(node1,node2){
+        //undire
+        this.adjacentList[node1].push(node2);
+        this.adjacentList[node2].push(node1);
       }
+      
       showConnections(){
         const allNodes = Objects.keys;
         (this.adjacentList);
@@ -1084,6 +1092,7 @@ Examples: [VisualGo](https://visualgo.net/en/bst)
           for (vertex of nodeConnections) {
             connections += vertex + " ";
           }
+          console.log(node + "-->" + connections);
         }
       }
     }
@@ -1106,3 +1115,11 @@ Examples: [VisualGo](https://visualgo.net/en/bst)
     myGraph.addEdge('6','5');
     
     myGraph.showConnections();
+    
+## Review
+
+|Pro|Con|
+|-|-|
+|Relationships|Scaling is hard|
+
+[Neo4J](https://neo4j.com/)
