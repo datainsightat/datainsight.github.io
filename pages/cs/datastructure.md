@@ -771,7 +771,7 @@ Abstract syntax tree
 
 ## Binary Trees
 
-![Binary Tree](..(img/binary_tree.jpg)
+![Binary Tree](../img/binary_tree.jpg)
 
     function BinaryTreeNode(value) {
       this.value = value;
@@ -1026,3 +1026,83 @@ Does a word exist in a body of text? Search for a city in car navigation.
 
 O(length of the word)
 
+# Graphs
+
+![Graph](../img/graph.jpg)
+
+Linked lists and trees are special cases of graphs.
+
+Examples: [VisualGo](https://visualgo.net/en/bst)
+
+## Directed vs Undirected
+
+![Directed vs Undirected Graph](../img/directed_vs_undirected_graph.jpg)
+
+## Weighted vs Unweighted
+
+![Weighted vs Unweighted Graph](../img/weighted_vs_unweighted_graph.jpg)
+
+## Cyclic vs Acyclic
+
+![Cyclic vs Acyclic Graph](../img/cyclic_vs_acyclic_graph.jpg)
+
+## Example
+
+![Example Graph](../img/graph_example.jpg)
+
+    //Edge List
+    const graph = [[0,2],[2,3],[2,1],[1,3]];
+    
+    //Adjacent List
+    const graph = [[2],[2,3],[0,1,3],[1,2]];
+    
+    //Adjacent Matrix
+    const graph = [
+      [0,0,1,0],
+      [0,0,1,1],
+      [1,1,0,1],
+      [0,1,1,0]
+    ]
+    
+    class Graph {
+      constructor(){
+        this.numberOfNodes = 0;
+        this.adjacentList = {};
+      }
+      addVertex(node){
+      }
+      addEdge(node1,node2){
+      }
+      showConnections(){
+        const allNodes = Objects.keys;
+        (this.adjacentList);
+        for (let node of allNodes) {
+          let nodeConnections =
+          this.addjacentList[node];
+          let connections = "";
+          let vertex;
+          for (vertex of nodeConnections) {
+            connections += vertex + " ";
+          }
+        }
+      }
+    }
+    
+    const myGraph = new GRaph();
+    myGraph.addVertex('0');
+    myGraph.addVertex('1');
+    myGraph.addVertex('2');
+    myGraph.addVertex('3');
+    myGraph.addVertex('4');
+    myGraph.addVertex('5');
+    myGraph.addVertex('6');
+    myGraph.addEdge('3','1');
+    myGraph.addEdge('3','4');
+    myGraph.addEdge('4','2');
+    myGraph.addEdge('4','5');
+    myGraph.addEdge('1','2');
+    myGraph.addEdge('1','0');
+    myGraph.addEdge('0','2');
+    myGraph.addEdge('6','5');
+    
+    myGraph.showConnections();
