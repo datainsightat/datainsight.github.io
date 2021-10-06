@@ -18,7 +18,7 @@
 ### Code
 
 * [Big O](pages/cs/bigo.html)
-* [Algorithms]
+* [Algorithm](pages/cs/algorithm.html)
 * [Datastructure](pages/cs/datastructure.html)
 
 ### Languages
