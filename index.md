@@ -60,4 +60,5 @@
 
 # Projects
 
-* [Big Data Architecute](pages/projects/bigdata.md)
+## Big Data
+* [Analyse 1bn Records using Hive](pages/projects/analyse_1b_records_hive.md)
