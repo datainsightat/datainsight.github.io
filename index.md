@@ -1,4 +1,4 @@
-# Index
+# Technology
 
 ## CS - Computer Science
 
@@ -56,3 +56,7 @@
 
 * [Shiny](pages/bi/shiny.md)
 * [Power BI]
+
+# Projects
+
+* [Big Data Architecute](pages/projeccts/bigdata.md)
