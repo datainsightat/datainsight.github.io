@@ -41,11 +41,18 @@
 
 ## DE - Data Engineering
 
+### CI/CD
 * [Git](pages/de/git.md)
 * [Gitlab CI/CD](pages/de/gitlab_cicd.md)
+
+### Cloud
 * [Azure]
 * [AWS](pages/de/aws.md)
-* [Google Cloud Platform (GCP)](pages/de/gcp.md)
+* [Google Cloud Platform (GCP)]
+
+### Stack
+* [Hive](pages/de/hive.md)
+* [Spark](pages/de/spark.md)
 
 ## DS - Data Science
 
