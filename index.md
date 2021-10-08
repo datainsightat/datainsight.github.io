@@ -45,6 +45,7 @@
 * [Gitlab CI/CD](pages/de/gitlab_cicd.md)
 * [Azure]
 * [AWS](pages/de/aws.md)
+* [Google Cloud Platform (GCP)](pages/de/gcp.md)
 
 ## DS - Data Science
 
@@ -59,4 +60,4 @@
 
 # Projects
 
-* [Big Data Architecute](pages/projeccts/bigdata.md)
+* [Big Data Architecute](pages/projects/bigdata.md)
