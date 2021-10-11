@@ -74,4 +74,4 @@
 
 ### ETL
 
-* [PySpark Transform Customer Data](pages/projects/pyspark_transform_bank_customer_data.ipynb
+* [PySpark Transform Customer Data](pages/projects/pyspark_transform_bank_customer_data.ipynb)
