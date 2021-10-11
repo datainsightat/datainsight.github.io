@@ -775,57 +775,50 @@ test.yml
  
  /.gitlab-ci.yml
  
-     # WORKSPACE         defined below
-     # SHINY_USER        <USER>
-     # SHINY_SERVER      <SERVER>
-     # SHINY_APP_DIR     defined below
+    
+    image: alpine
 
-     image: alpine
-
-     variables:
-        SHINY_USER: <USERNAME>
-        SHINY_PATH: <SHINY PATH>
+    variables:
+        SHINY_USER: 'shiny_user'
         WORKSPACE: "../${CI_PROJECT_NAME}"
+        SHINY_SERVER: 'server_user'
 
-     stages:
-       - deploy
-       - cleanup
+    stages:
+        #- pull apps
+        - deploy
+        - cleanup
 
-     .copy_to_shiny:
-         stage: deploy # staging
-         script:
+    .copy_to_shiny:
+        stage: deploy # staging
+        script:
             - echo "Copy directory to shiny"
             - rsync -r --chmod=u+rwx,g+rwx,o+rx ${WORKSPACE} ${SHINY_USER}@${SHINY_SERVER}:${SHINY_APP_DIR}
-         variables:
+        variables:
             WORKSPACE: "../${CI_PROJECT_NAME}"
-            SHINY_APP_DIR: <SHINY APP DIR>
 
-     # Run ------------------------------------------
-     deploy_to_shiny_test:
+    # Run ------------------------------------------
+    deploy_to_shiny_dev:
         extends: .copy_to_shiny
         only:
-          - develop
+            - develop
         variables:
-            SHINY_SERVER: <SHINY DEV SERVER>
+            SHINY_APP_DIR: "/XXX/${SHINY_USER}/apps/dev"
 
-     deploy_to_shiny_prod:
+    deploy_to_shiny_prod:
         extends: .copy_to_shiny
         only:
-          - master
+            - master
         variables:
-            SHINY_SERVER: <SHINY PROD SERVER>
+            SHINY_APP_DIR: "/XXX/${SHINY_USER}/apps"
         allow_failure: true
 
-     # Cleanup
-     cleanup:
-       stage: cleanup
+    # Cleanup
+        cleanup:
+            stage: cleanup
        script:
-         - echo "cleanup"
-         - rm -rf $WORKSPACE/*
+           - echo "cleanup"
+           - rm -rf $WORKSPACE/*
 
 ## Create Gitlab Runner
 
 Gitlab > Settings > CI/CD > Runners  
-
-
-
