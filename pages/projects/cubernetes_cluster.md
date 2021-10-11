@@ -1,7 +1,23 @@
 # General
 
 * Ubuntu Server > k8s, docker
-* [Kubernetes Dashboard](https://github.com/kubernetes/dashboard)
+
+# Install Docker
+
+    $ sudo apt update
+    $ sudo apt install apt-transport-https ca-certificates curl software-properties-common
+    $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+    $ apt-cache policy docker-ce
+    $ sudo apt install docker-ce
+    $ sudo systemctl status docker
+    
+Docker can be run by any user:  
+    
+    $ sudo usermod -aG docker ${USER}
+    $ su - ${USER}
+    $ groups
+    $ sudo usermod -aG docker username
 
 # Install Microk8s
 
@@ -12,7 +28,20 @@
     $ microk8s status --wait-ready
     $ microk8s enable dashboard dns ingress
     $ microk8s kubectl get all --all-namespaces
-    $ microk8s dashboard-proxy
-    $ microk8s start
+
+## Start/Stop Service
+
     $ microk8s stop
+    $ microk8s start
     
+# Dashboard
+    
+## Enable Kubernetes Dashboard
+
+    $ token=$(microk8s kubectl -n kube-system get secret | grep default-token | cut -d " " -f1)
+microk8s kubectl -n kube-system describe secret $token
+    $ microk8s kubectl port-forward -n kube-system service/kubernetes-dashboard 10443:443
+    
+## Start Dashboard
+
+    $ microk8s dashboard-proxy
