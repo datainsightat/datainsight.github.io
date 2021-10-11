@@ -74,4 +74,5 @@
 
 ### ETL
 
-* [PySpark Transform Customer Data](pages/projects/pyspark_transform_bank_customer_data.ipynb)
+* [PySpark Transform Customer Data Colab](pages/projects/pyspark_transform_bank_customer_data_colab.ipynb)
+* [PySpark Transform Customer Data GCP](pages/projects/pyspark_transform_bank_customer_data_gcp.md)
