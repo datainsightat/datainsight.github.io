@@ -67,10 +67,14 @@
 
 # Projects
 
+## Stack
+
+* [Kubernetes Cluster](pages/projects/kubernetes_cluster.md)
+* [Hadoop Cluster](pages/projects/hadoop_cluster.md)
+
 ## Big Data
 
 * [Analyse 1bn Records using Hive](pages/projects/analyse_1b_records_hive.md)
-* [Big Data Cluster](pages/projects/big_data_cluster.md)
 
 ### ETL
 
