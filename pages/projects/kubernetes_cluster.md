@@ -22,6 +22,14 @@ Download [Ubuntu](https://ubuntu.com/#download) and create a USB-Sticl with [Ruf
     $ sudo apt install docker-ce
     $ sudo systemctl status docker
     
+## Docker Compose
+
+[Git](https://github.com/docker/compose/releases)
+
+    $ sudo curl -L "https://github.com/docker/compose/releases/download/v2.0.1/docker-compose-linux-x86_64" -o /usr/local/bin/docker-compose
+    $ sudo chmod +x /usr/local/bin/docker-compose
+    $ docker-compose --version
+    
 Docker can be run by any user:  
     
     $ sudo usermod -aG docker ${USER}
