@@ -27,16 +27,18 @@ Docker can be run by any user:
     $ sudo usermod -aG docker ${USER}
     $ su - ${USER}
     $ groups
-    $ sudo usermod -aG docker username
+    $ sudo usermod -aG docker $USER
 
 # Install Microk8s
+
+[Documentation](https://microk8s.io)
 
     $ sudo snap install microk8s --classic
     $ sudo usermod -a -G microk8s $USER
     $ sudo chown -f -R $USER ~/.kube
     $ su - $USER
     $ microk8s status --wait-ready
-    $ microk8s enable dashboard dns ingress
+    $ microk8s enable dashboard dns ingress dashboard dns registry istio
     $ microk8s kubectl get all --all-namespaces
 
 ## Start/Stop Service
@@ -49,7 +51,7 @@ Docker can be run by any user:
 ## Enable Kubernetes Dashboard
 
     $ token=$(microk8s kubectl -n kube-system get secret | grep default-token | cut -d " " -f1)
-microk8s kubectl -n kube-system describe secret $token
+    $ microk8s kubectl -n kube-system describe secret $token
     $ microk8s kubectl port-forward -n kube-system service/kubernetes-dashboard 10443:443
     
 ## Start Dashboard
