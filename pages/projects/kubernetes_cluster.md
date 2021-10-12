@@ -2,7 +2,13 @@
 
 * Ubuntu Server > k8s, docker
 
-# Install Docker
+# Install
+
+## Ubuntu
+
+    [Ubuntu](https://ubuntu.com/#download)
+    
+## Docker
 
     $ sudo apt update
     $ sudo apt install apt-transport-https ca-certificates curl software-properties-common
