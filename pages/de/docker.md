@@ -101,7 +101,7 @@ Build image
     copy . .
     cmd [tini","--","node","./bin/www"]
     
-    $ docker built -t testnode .
+    $ docker build -t testnode .
     $ docker container run --vm -p 80:3000 testnode
     $ docker tag testnode username/testing-node
     $ docker push username/testing-node
