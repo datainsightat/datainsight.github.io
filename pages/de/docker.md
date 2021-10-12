@@ -28,7 +28,7 @@ detached, port mirror
 
 interactive
 
-    $ docker container run -it --name ubuntu unbuntu bash
+    $ docker container run -it --name ubuntu ubuntu bash
     
 ### View Container
 
