@@ -6,8 +6,12 @@
 
 ## Ubuntu
 
-    [Ubuntu](https://ubuntu.com/#download)
-    
+Download [Ubuntu](https://ubuntu.com/#download) and create a USB-Sticl with [Rufus (Win)](https://rufus.ie/en/), or the Ubuntu Disk Creator tool.
+
+## Git
+
+    $ sudo apt install git-all
+
 ## Docker
 
     $ sudo apt update
