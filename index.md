@@ -12,7 +12,7 @@
 #### Other
 
 * [Windows]
-* [Docker]
+* [Docker](pages/de/docker.html)
 * [Kubernetes]
 
 ### Code
