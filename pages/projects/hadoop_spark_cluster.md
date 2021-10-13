@@ -4,12 +4,12 @@
 
 ## Cluster Architecture
 
-|VM|HDFS|YARN|Spark|Other|
-|-|-|-|-|-|
-|head|NameNode||Master||
-|body||ResourceManager|JobHistoryServer|ProxyServer|
-|slave1|DataNode|NodeManager|Slave||
-|slave2|DataNode|NodeManager|Slave||
+|VM|HDFS|YARN|Spark|
+|-|-|-|-|
+|head|NameNode||Master|
+|body||ResourceManager</br>JobHistoryServer</br>ProxyServer||
+|slave1|DataNode|NodeManager|Slave|
+|slave2|DataNode|NodeManager|Slave|
 
 ## Webinterfaces
 
