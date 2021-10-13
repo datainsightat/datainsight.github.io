@@ -73,12 +73,6 @@ Install Package
     $ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
     $ sudo apt-get update && sudo apt-get install vagrant
     
-Add user 'vagrant' do /etc/sudoers
-
-    $ sudo nano /etc/sudoers
-    
-    vagrant ALL=(ALL) NOPASSWD:ALL
-    
 reboot the host.
 
 ## Setup Cluster
