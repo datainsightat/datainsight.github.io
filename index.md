@@ -70,7 +70,7 @@
 ## Stack
 
 * [Kubernetes Cluster](pages/projects/kubernetes_cluster.md)
-* [Hadoop Cluster](pages/projects/hadoop_cluster.md)
+* [Hadoop Spark Cluster](pages/projects/hadoop_spark_cluster.md)
 
 ## Big Data
 
