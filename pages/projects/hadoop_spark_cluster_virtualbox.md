@@ -1,6 +1,6 @@
 # Hadoop Spark Cluster
 
-[Source](https://web.njit.edu/~avp38/projects/multi_projects/hadoop_spark_environment.html)
+[Source](https://github.com/avp38/Hadoop-Spark-Environment)
 
 The goal of this project is to create a Hadoop/Spark Cluster in a VirtualBox Environment that can be interfaced using Jupyter Lab.
 
@@ -75,14 +75,16 @@ Install Package
     $ curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
     $ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
     $ sudo apt-get update && sudo apt-get install vagrant
+    $ vagrant plugin install vagrant-vbguest
 
 # Setup Cluster
 
     $ git clone https://github.com/avp38/Hadoop-Spark-Environment.git
     $ cd Hadoop-Spark-Environment/resources
-    $ wget https://mirror.klaus-uwe.me/apache/hadoop/common/hadoop-3.3.1/hadoop-3.3.1.tar.gz
-    $ wget https://mirror.klaus-uwe.me/apache/spark/spark-3.1.2/spark-3.1.2-bin-hadoop3.2.tgz
+    $ wget https://archive.apache.org/dist/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz
+    $ wget http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2.7.tgz
     $ sudo vagrant up
+    $ vagrant vbguest --do install
     
 ## Initialze Hadoop
 
@@ -95,18 +97,30 @@ Install Package
 ## Start Hadoop
     
     $ vagrant ssh head
-    head $ sshpass -p vagrant $SPARK_HOME/sbin/start-dfs.sh
-      head $ hdfs --daemon start namenode --config $HADOOP_CONF_DIR
-      head $ hdfs --daemon start datanode --config $HADOOP_CONF_DIR
     
-    ERROR: Cannot set priority of datanode process 76531
+    
+    head $ $HADOOP_PREFIX/sbin/hadoop-daemon.sh --config $HADOOP_CONF_DIR --script hdfs start namenode
+    head $ sshpass -p vagrant $HADOOP_PREFIX/sbin/hadoop-daemons.sh --config $HADOOP_CONF_DIR --script hdfs start datanode
+
+     head $ hdfs --daemon start namenode --config $HADOOP_CONF_DIR
+     head $ hdfs --daemon start datanode --config $HADOOP_CONF_DIR
+    head $ jps
+    
+     ERROR: Cannot set priority of datanode process 76531
     
     $ vagrant ssh body
-    body $ sshpass -p vagrant $SPARK_HOME/sbin/start-yarn.sh
-      body $ yarn --daemon start resourcemanager --config $HADOOP_CONF_DIR 
-      body $ yarn --daemon start nodemanager --config $HADOOP_CONF_DIR 
-      body $ yarn --daemon start proxyserver --config $HADOOP_CONF_DIR
-      body $ yarn --daemon start timelineserver --config $HADOOP_CONF_DIR
+    
+    body $ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh --config $HADOOP_CONF_DIR start resourcemanager
+    body $ sshpass -p vagrant $HADOOP_YARN_HOME/sbin/yarn-daemons.sh --config $HADOOP_CONF_DIR start nodemanager
+    body $ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh start proxyserver --config $HADOOP_CONF_DIR
+    body $ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh start historyserver --config $HADOOP_CONF_DIR
+
+     body $ yarn --daemon start resourcemanager --config $HADOOP_CONF_DIR 
+     body $ yarn --daemon start nodemanager --config $HADOOP_CONF_DIR 
+     body $ yarn --daemon start proxyserver --config $HADOOP_CONF_DIR
+     body $ yarn --daemon start timelineserver --config $HADOOP_CONF_DIR
+     
+    body $ jps
 
 ## Test yarn
 
