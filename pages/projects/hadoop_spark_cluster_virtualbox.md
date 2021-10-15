@@ -1,6 +1,6 @@
 # Hadoop Spark Cluster
 
-[Source](https://github.com/avp38/Hadoop-Spark-Environment)
+The basis ot this project was created by [avp38](https://github.com/avp38/Hadoop-Spark-Environment)
 
 The goal of this project is to create a Hadoop/Spark Cluster in a VirtualBox Environment that can be interfaced using Jupyter Lab.
 
@@ -108,7 +108,6 @@ Install Package
     body $ sshpass -p vagrant $HADOOP_YARN_HOME/sbin/yarn-daemons.sh --config $HADOOP_CONF_DIR start nodemanager
     body $ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh start proxyserver --config $HADOOP_CONF_DIR
     body $ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh start historyserver --config $HADOOP_CONF_DIR
-     
     body $ jps
 
 ## Test yarn
