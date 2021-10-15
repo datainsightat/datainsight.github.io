@@ -98,15 +98,9 @@ Install Package
     
     $ vagrant ssh head
     
-    
     head $ $HADOOP_PREFIX/sbin/hadoop-daemon.sh --config $HADOOP_CONF_DIR --script hdfs start namenode
     head $ sshpass -p vagrant $HADOOP_PREFIX/sbin/hadoop-daemons.sh --config $HADOOP_CONF_DIR --script hdfs start datanode
-
-     head $ hdfs --daemon start namenode --config $HADOOP_CONF_DIR
-     head $ hdfs --daemon start datanode --config $HADOOP_CONF_DIR
     head $ jps
-    
-     ERROR: Cannot set priority of datanode process 76531
     
     $ vagrant ssh body
     
@@ -114,11 +108,6 @@ Install Package
     body $ sshpass -p vagrant $HADOOP_YARN_HOME/sbin/yarn-daemons.sh --config $HADOOP_CONF_DIR start nodemanager
     body $ $HADOOP_YARN_HOME/sbin/yarn-daemon.sh start proxyserver --config $HADOOP_CONF_DIR
     body $ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh start historyserver --config $HADOOP_CONF_DIR
-
-     body $ yarn --daemon start resourcemanager --config $HADOOP_CONF_DIR 
-     body $ yarn --daemon start nodemanager --config $HADOOP_CONF_DIR 
-     body $ yarn --daemon start proxyserver --config $HADOOP_CONF_DIR
-     body $ yarn --daemon start timelineserver --config $HADOOP_CONF_DIR
      
     body $ jps
 
@@ -154,6 +143,18 @@ Install Package
     head $ sshpass -p vagrant $SPARK_HOME/sbin/stop-all.sh
     $ cd PATH_TO_CLUSTER
     $ sudp vagrant halt
+    
+# Update Hadoop, Spark
+
+If you update the cluster to new versions of hadoop and spark, use these commands to start the cluster:
+
+     body $ yarn --daemon start resourcemanager --config $HADOOP_CONF_DIR 
+     body $ yarn --daemon start nodemanager --config $HADOOP_CONF_DIR 
+     body $ yarn --daemon start proxyserver --config $HADOOP_CONF_DIR
+     body $ yarn --daemon start timelineserver --config $HADOOP_CONF_DIR
+     
+     head $ hdfs --daemon start namenode --config $HADOOP_CONF_DIR
+     head $ hdfs --daemon start datanode --config $HADOOP_CONF_DIR
 
 # Setup Jupyter Lab (optional)
 
