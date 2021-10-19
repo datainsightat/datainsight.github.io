@@ -71,6 +71,7 @@
 
 * [Kubernetes Cluster](pages/projects/kubernetes_cluster.md)
 * [Hadoop Spark Cluster](https://github.com/datainsightat/hadoop_spark_cluster)
+* [BigDataEurope Spark Cluster](https://github.com/big-data-europe/docker-spark)
 
 ## Big Data
 
