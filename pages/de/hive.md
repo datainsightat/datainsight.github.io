@@ -89,6 +89,32 @@ GCP > DataProc > create Cluster
 A 'drop table' command delets also the hdfs subdirectory in which the csv files were stored. To prevent this from happening, use the 'external' keyword.  
   
     hive> create external table retailcustext (age INT, salary FLOAT, gender String, country String, purchased String) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LOCATION '/user/newuser/retaildata/' TBLPROPERTIES ("skip.header.line.count"="1");
+    
+## Partition Table
+
+GCP > DataProc > create Cluster
+
+    $ wget https://github.com/mayrhofer_b/bigdata/raw/master/retailstore_large.zip
+    $ unzip retailstore_large.zip
+    $ hadoop fs -mkfir /user/newuser
+    $ hadoop fs -mkfir /user/newuser/retailcust
+    $ hadoop fs -put retailstore_large.csv /user/newuser/retailcust
+    $ hadoop fs -ls retailcust
+    
+    $ hive
+    hive> create database if not exists retailcust;
+    hive> use retailcust;
+    hive> create external table retailcustext_large (customerid INT, age INT, salary FLOAT,gender String,country String) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LOCATION '/user/mayrhofer_b/retailcust/' TBLPROPERTIES ("skip.header.line.count"="1") ;
+    hive> select count(*) from retailcustext_large where country = 'Germany';
+
+Create partitions to increase speed. Hive creates subdirectories for every country.
+
+    hive> set hive.exec.dynamic.partition=true;
+    hive> set hive.exec.dynamic.partition.mode=nonstrict;
+    hive> create external table retailcustext_large_partitioned (customerid INT, age INT, salary FLOAT,gender String) partitioned by (country String) location  '/user/mayrhofer_b/retailcust-partitioned/';
+    hive> insert into table retailcustext_large_partitioned partition(country) select * from retailcustext_large;
+    hive> show partitions retailcustext_large_partitioned;
+    hive> select count(*) from retailcustext_large_partitioned where country = 'Germany';
   
 # Terminate Cluster
   
