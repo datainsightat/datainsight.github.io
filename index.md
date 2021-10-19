@@ -51,6 +51,7 @@
 * [Google Cloud Platform (GCP)]
 
 ### Stack
+* [Hadoop](pages/de/hadoop.md)
 * [Hive](pages/de/hive.md)
 * [Spark](pages/de/spark.md)
 
