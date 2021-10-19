@@ -2,7 +2,7 @@
 
 The project is based on the [Big Data Europe](https://www.big-data-europe.eu/) [HDFS/Spark Workbench](https://github.com/big-data-europe/docker-hadoop-spark-workbench.git) project.
 
-# Cluster Architectue
+# Cluster Architecture
 
 |Interface|URL|
 |-|-|
