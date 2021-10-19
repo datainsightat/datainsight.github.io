@@ -70,7 +70,7 @@
 ## Stack
 
 * [Kubernetes Cluster](pages/projects/kubernetes_cluster.md)
-* [Spark Cluster Virtualbox](https://github.com/datainsightat/spark_cluster_virtualbox.md)
+* [Spark Cluster Virtualbox](https://github.com/datainsightat/hadoop_spark_cluster)
 * [BigDataEurope Spark Cluster Docker](https://github.com/datainsightat/spark_cluster_docker.md)
 
 ## Big Data
