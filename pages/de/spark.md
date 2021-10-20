@@ -278,5 +278,6 @@ Dataframes are immutable. To change a dataframe, create a copy.
     colab> customer_df.na.drop().show()
     colab> customer_df.na.fill('NEW VALUE').show()
     
-    
-    
+# [UDF User Defined Functions](https://github.com/datainsightat/spark_examples/blob/main/pyspark_udf_join.ipynb)
+
+# [Joins](https://github.com/datainsightat/spark_examples/blob/main/pyspark_udf_join.ipynb)
