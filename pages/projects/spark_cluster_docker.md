@@ -12,6 +12,7 @@ The project is based on the [Big Data Europe](https://www.big-data-europe.eu/) [
 |Spark-Notebook|http://localhost:9001|
 |HDFS Filebrowser (user:user)|http://localhost:8088/home|
 |[Jupyter-Notebook](https://jupyter-docker-stacks.readthedocs.io/en/latest/index.html)|http://localhost:8888|
+|[Theia IDE](https://hub.docker.com/r/theiaide/theia)|http://loacalhost:3000|
 
 # Setup Cluster
 
