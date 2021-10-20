@@ -105,3 +105,7 @@ Build image
     $ docker container run --vm -p 80:3000 testnode
     $ docker tag testnode username/testing-node
     $ docker push username/testing-node
+
+# Get Bash in Docker
+
+    $ docker exec -it <container name> /bin/bash
