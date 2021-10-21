@@ -26,7 +26,7 @@
 * [Shell Script](pages/cs/shellscript.md)
 * [R]
 * [Pyhton]
-* [Scala]
+* [Scala](pages/cs/scala.md)
 * [HTML/CSS](pages/cs/html.md)
 * [JavaScript](pages/cs/js.md)
 * [Visual Basic]
