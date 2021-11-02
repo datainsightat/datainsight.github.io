@@ -78,6 +78,7 @@
 
 * [Analyse 1bn Records using Hive](pages/projects/analyse_1b_records_hive.md)
 * [PySpark Examples](https://github.com/datainsightat/spark_examples)
+* [Scala Examples](https://github.com/datainsightat/scala_examples.git)
 
 ### ETL
 
