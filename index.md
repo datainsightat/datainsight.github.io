@@ -70,6 +70,7 @@
 
 ## Stack
 
+* [BigData Development Environment](https://github.com/datainsightat/bigdata_development_environment.git)
 * [Kubernetes Cluster](pages/projects/kubernetes_cluster.md)
 * [Spark Cluster Virtualbox](https://github.com/datainsightat/virtualbox_hadoop_spark.git)
 * [Spark Cluster Docker](https://github.com/datainsightat/docker-hadoop-spark.git)
