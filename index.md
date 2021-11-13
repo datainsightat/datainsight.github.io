@@ -65,6 +65,7 @@
 
 * [Shiny](pages/bi/shiny.md)
 * [Power BI]
+* [XLWings|(https://www.xlwings.org/)
 
 # Projects
 
