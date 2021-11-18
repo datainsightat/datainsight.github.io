@@ -24,7 +24,7 @@
 ### Languages
 
 * [Shell Script](pages/cs/shellscript.md)
-* [R]
+* [R](pages/cs/r.md)
 * [Pyhton]
 * [Scala](pages/cs/scala.md)
 * [HTML/CSS](pages/cs/html.md)
