@@ -68,21 +68,21 @@
 
 * [Shiny](pages/bi/shiny.md)
 * [Power BI]
-* [XLWings|(https://www.xlwings.org/)
+* [XLWings](https://www.xlwings.org/)
 
 # Projects
 
 ## Stack
 
-* [BigData Development Environment](https://github.com/datainsightat/bigdata_development_environment.git)
-* [Kubernetes Cluster](pages/projects/kubernetes_cluster.md)
+* [BigData Development Environment](https://github.com/datainsightat/BigDatDevEnv_Docker.git)
 * [Spark Cluster Virtualbox](https://github.com/datainsightat/virtualbox_hadoop_spark.git)
 * [Spark Cluster Docker](https://github.com/datainsightat/docker-hadoop-spark.git)
 
 ## Big Data
 
+* [Tutorials for the BigData Development Environment](https://github.com/datainsightat/BigDatDevEnv_Template.git)
 * [Analyse 1bn Records using Hive](pages/projects/analyse_1b_records_hive.md)
-* [PySpark Examples](https://github.com/datainsightat/spark_examples)
+* [PySpark Examples](https://github.com/datainsightat/spark_examples.git)
 * [Scala Examples](https://github.com/datainsightat/scala_examples.git)
 
 ### ETL
