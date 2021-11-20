@@ -60,9 +60,14 @@
 
 ## DS - Data Science
 
-* [Exploratory Data Analysis]
-* [Machine Learning]
-* [Deep Learning]
+* [Methods](https://github.com/datainsightat/DataScience_Examples/tree/main/ds/DS_Methods)
+* [Machine Learning](https://github.com/datainsightat/DataScience_Examples/tree/main/ds)
+
+### Deep Learning
+
+* [TensorFlow](https://github.com/datainsightat/DataScience_Examples/tree/main/ds/TensorfFlow)
+* [Pytorch](https://github.com/datainsightat/DataScience_Examples/tree/main/ds/Pytorch)
+* [Keras](https://github.com/datainsightat/DataScience_Examples/tree/main/ds/Keras)
 
 ## BI - Business Intelligence
 
