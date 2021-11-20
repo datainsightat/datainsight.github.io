@@ -62,6 +62,7 @@
 
 * [Methods](https://github.com/datainsightat/DataScience_Examples/tree/main/ds/DS_Methods)
 * [Machine Learning](https://github.com/datainsightat/DataScience_Examples/tree/main/ds)
+* [Genetic Algorithm](pages/ds/ga.md)
 
 ### Deep Learning
 
