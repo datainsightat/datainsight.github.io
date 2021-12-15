@@ -13,7 +13,9 @@
   * A good amount to start is 3 brokers
   * Only a single broker can be a leader for a specific partition. The other brokers synchronise the data (ISR in-sync-replica).
   * Each brokers knows about the other brokers
-    
+
+![Kafka Brokers](../img/kafka_brokers.jpg)
+
 * Producer: Writes data to topics
   * Loadbalancing between brokers
   * Message Keys: If null > round robin, If key is send data gets always to the same partition. Key can be any string. Kafka ensures that data for a specific key is always written to the same partition and is therefore sorted.
