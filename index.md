@@ -57,6 +57,7 @@
 * [Hadoop](pages/de/hadoop.md)
 * [Hive](pages/de/hive.md)
 * [Spark](pages/de/spark.md)
+* [Kafka](pages/de/kafka.md)
 
 ## DS - Data Science
 
