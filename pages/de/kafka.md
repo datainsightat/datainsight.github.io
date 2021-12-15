@@ -30,4 +30,4 @@
   * Manages brokers (keeps a list of them)
   * Kafka cannot work without Zookeeper
   
-[Kafka Concepts](../)
+![Kafka Concepts](../img/kafka_concepts.jpg)
