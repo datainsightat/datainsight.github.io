@@ -73,3 +73,23 @@ Messages are split between consumers within the same consumer group by the topic
     
 Get status consumer group
 
+    $ kafka-consumer-groups.sh --bootstrap-server 0.0.0.0:9092 --describe --group my-first-application
+    
+    GROUP                TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG
+    my-first-application first_topic     0          0               1               1
+    my-first-application first_topic     1          1               2               1
+    my-first-application first_topic     2          1               2               1
+
+Catch up Messages
+
+    $ kafka-console-consumer.sh --bootstrap-server 0.0.0.0:9092 --topic first_topic --group my-first-application
+    $ kafka-consumer-groups.sh --bootstrap-server 0.0.0.0:9092 --describe --group my-first-application
+
+    GROUP                TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG
+    my-first-application first_topic     0          1               1               0
+    my-first-application first_topic     1          2               2               0
+    my-first-application first_topic     2          2               2               0
+
+## Reset Offsets
+
+    $ kafka-consumer-groups.sh --bootstrap-server 0.0.0.0:9092 --group my-first-application --reset-offsets --to-earliest --execute --topic first_topic
