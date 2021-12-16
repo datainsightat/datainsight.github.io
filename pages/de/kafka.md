@@ -25,7 +25,7 @@
   * Read data from a topic
   * Groups: Consumers read data in groups
   * No Consumers > No Partitions: Some consumers are inactive
-  * Offset: Each consumer group has its own offsets. Stored in a Kafka Topic
+  * Offset: Each consumer group stores its specific offset per topic in a Kafka Topic
   * Delivery Semantics: At most once, At least one (preferred), Exactly once
 
 * Zookeper
@@ -33,3 +33,43 @@
   * Kafka cannot work without Zookeeper
   
 ![Kafka Concepts](../img/kafka_concepts.jpg)
+
+# Commands
+
+## Topic
+
+    $ kafka-topics.sh --zookeeper 0.0.0.0:2181 --topic first_topic --create --partitions 3 --replication-factor 1
+    $ kafka-topics.sh --zookeeper 0.0.0.0:2181 --list
+    $ kafka-topics.sh --zookeeper 0.0.0.0:2181 --topic first_topic --describe
+    
+## Producer
+
+    $ kafka-console-producer.sh --broker-list 0.0.0.0:9092 --topic first_topic
+    > first
+    > second
+    > ...
+    $ kafka-console-producer.sh --broker-list 0.0.0.0:9092 --topic first_topic --producer-property acks=all
+    > third
+    > fourth
+    > ...
+    
+## Consumer
+
+Only messages that are currently streamed by the producer are displayed by the consumer
+
+    $ kafka-console-consumer.sh --bootstrap-server 0.0.0.0:9092 --topic first_topic
+    
+Sho historic messages
+
+    $ kafka-console-consumer.sh --bootstrap-server 0.0.0.0:9092 --topic first_topic --from-beginning
+    
+## Consumer Group
+
+Messages are split between consumers within the same consumer group by the topic partitions
+
+    $ kafka-console-consumer.sh --bootstrap-server 0.0.0.0:9092 --topic first_topic --group my-first-application
+    $ kafka-console-consumer.sh --bootstrap-server 0.0.0.0:9092 --topic first_topic --group my-first-application
+    $ kafka-console-consumer.sh --bootstrap-server 0.0.0.0:9092 --topic first_topic --group my-first-application
+    
+Get status consumer group
+
