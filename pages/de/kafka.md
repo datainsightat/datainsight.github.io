@@ -1,5 +1,7 @@
 # General
 
+## Architecture
+
 * Topic: a particular stream of data (like a table in a relational db)
   * Replication Factor: How often is a certain topic distributed on the Kafka cluster?
   
@@ -33,6 +35,18 @@
   * Kafka cannot work without Zookeeper
   
 ![Kafka Concepts](../img/kafka_concepts.jpg)
+
+## Acks
+* acks = 0: No feedback
+* acks = 1: OK, from broker leader
+* acks = all; OK, from all replicas
+
+## Safe Producer Settings
+* enable.indempotence=true
+* min.insync.replicas=2
+
+## Compression
+* compression.type "gzip"
 
 # Commands
 
