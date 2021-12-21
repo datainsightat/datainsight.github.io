@@ -48,6 +48,12 @@
 ## Compression
 * compression.type "gzip"
 
+## Kafka Connect
+
+Connect Kafka to other applications.
+
+![Kafka Connecct](../img/kafka_connect.jpg)
+
 # Commands
 
 ## Topic
