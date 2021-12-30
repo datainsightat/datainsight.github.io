@@ -51,7 +51,7 @@
 ### Cloud
 * [Azure]
 * [AWS](pages/de/aws.md)
-* [Google Cloud Platform (GCP)]
+* [Google Cloud Platform (GCP)](pages/de/gcp.md)
 
 ### Stack
 * [Hadoop](pages/de/hadoop.md)
