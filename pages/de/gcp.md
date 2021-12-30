@@ -37,3 +37,6 @@
     $ cd $HOME
     § vi ./.bashrc
 
+# Compute Options
+
+![Compute Options](../img/gcp_compute_options.png)
