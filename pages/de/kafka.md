@@ -52,7 +52,7 @@
 
 Connect Kafka to other applications.
 
-![Kafka Connecct](../img/kafka_connect.jpg)
+![Kafka Connect](../img/kafka_connect.png)
 
 # Commands
 
