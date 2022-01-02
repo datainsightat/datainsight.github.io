@@ -1,10 +1,10 @@
 # Google Cloud
 
-![GCP Architecture](../img/gcp_archtitecture.png)
+![GCP Architecture](../../img/gcp_archtitecture.png)
 
 ## Big Data Team
 
-![GCP Team](../img/gcp_team.png)
+![GCP Team](../../img/gcp_team.png)
 
 ## Resource Hierarchy
 
@@ -18,13 +18,13 @@ Organization > Folder > Project > Resource
 |Cloud Function (FAAS)|Cloud Spanner|Dataproc|AutoML|
 ||Cloud Datastorage|Notebooks|Tranaslation|
 
-![GCP Services](../img/gcp_services.png)
+![GCP Services](../../img/gcp_services.png)
 
 ## Compute
 
-![Pre Trained Models](../img/gcp_pretrainedmodels.png)
+![Pre Trained Models](../../img/gcp_pretrainedmodels.png)
 
-![GCP Big Data Tools}(../img/gcp_bigdatatools.png)
+![GCP Big Data Tools}(../../img/gcp_bigdatatools.png)
 
 ## Storage
 
@@ -39,11 +39,11 @@ Organization > Folder > Project > Resource
 
 Google network 10 GB/s
 
-![Google Network](../img/gcp_network.png)
+![Google Network](../../img/gcp_network.png)
 
 ## Security
 
-![Google Security](../img/gcp_security.png)
+![Google Security](../../img/gcp_security.png)
 
 # Big Query
 
