@@ -1,6 +1,6 @@
 # Google Cloud
 
-![GCP Architecture](../../img/gcp_archtitecture.png)
+![GCP Architecture](../../img/gcp_architecture.png)
 
 ## Big Data Team
 
@@ -44,22 +44,4 @@ Google network 10 GB/s
 ## Security
 
 ![Google Security](../../img/gcp_security.png)
-
-# Big Query
-
-gcp > Big Data > Big Query
-
-Import public dataset 'usa names'
-
-    select
-        name, gender,
-        sum(number) as total
-    from
-        `bigquery-public-data.usa_names.usa_1910_2013`
-    group by
-        name, gender
-    order by 
-        total desc 
-    limit 
-        10
   
