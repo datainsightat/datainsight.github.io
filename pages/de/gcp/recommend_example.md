@@ -100,4 +100,73 @@ Connect to this instance > Cloud SQL
     
 ## Load data from Cloud Storage to SQL
 
-SQL > rentals > import
+gpc > SQL > rentals > import
+
+## Launch Dataproc
+
+gpc > Dataproc > create Cluster
+
+Configure Nodes:
+* Master: n1-standard-2
+* Worker: n1-standard-2
+<a/>
+
+    $ echo "Authorizing Cloud Dataproc to connect with Cloud SQL"
+    CLUSTER=rentals
+    CLOUDSQL=rentals
+    ZONE=us-central1-c
+    NWORKERS=2
+    machines="$CLUSTER-m"
+    for w in `seq 0 $(($NWORKERS - 1))`; do
+       machines="$machines $CLUSTER-w-$w"
+    done
+    echo "Machines to authorize: $machines in $ZONE ... finding their IP addresses"
+    ips=""
+    for machine in $machines; do
+        IP_ADDRESS=$(gcloud compute instances describe $machine --zone=$ZONE --format='value(networkInterfaces.accessConfigs[].natIP)' | sed "s/\['//g" | sed "s/'\]//g" )/32
+        echo "IP address of $machine is $IP_ADDRESS"
+        if [ -z  $ips ]; then
+           ips=$IP_ADDRESS
+        else
+           ips="$ips,$IP_ADDRESS"
+        fi
+    done
+    echo "Authorizing [$ips] to access cloudsql=$CLOUDSQL"
+    gcloud sql instances patch $CLOUDSQL --authorized-networks $ips
+
+gpc > SQL > Pulic IP Address '35.188.24.164'
+
+## Run ML Model
+
+    $ gsutil cp gs://cloud-training/bdml/v2.0/model/train_and_apply.py train_and_apply.py
+    cloudshell edit train_and_apply.py
+    
+Change IP Address in Line 30. 
+
+    $ gsutil cp train_and_apply.py gs://$DEVSHELL_PROJECT_ID
+    
+gpc > Dataproc > Clusters > rental > Submit Job
+
+* Job type: PySpark
+* Main python file: gs://qwiklabs-gcp-04-f016ca343a1f/train_and_apply.py
+
+## Explore
+
+    $ gcloud sql connect rentals --user=root --quiet
+    mysql > USE recommendation_spark;
+    mysql > SELECT COUNT(*) AS count FROM Recommendation;
+    
+    mysql > SELECT
+        r.userid,
+        r.accoid,
+        r.prediction,
+        a.title,
+        a.location,
+        a.price,
+        a.rooms,
+        a.rating,
+        a.type
+    FROM Recommendation as r
+    JOIN Accommodation as a
+    ON r.accoid = a.id
+    WHERE r.userid = 10;
