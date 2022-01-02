@@ -8,7 +8,7 @@ Google: RankBrain (ML for search ranking)
 
 ? How to find a similar user ?
 
-![Recommend 1](../../img/gcp_recommend_1.png)
+![Recommend 1](../../../img/gcp_recommend_1.png)
 
 ## Objectives
 
@@ -24,9 +24,9 @@ Google: RankBrain (ML for search ranking)
 
 Dump user ratings in Hadoop Cluster. About 5 Mio Lines of can be stored in a realational DB.
 
-![Recommend 2](../../img/gcp_recommend_2.png)
+![Recommend 2](../../../img/gcp_recommend_2.png)
 
-![Recommend 9](../../img/gcp_recommend_9.png)
+![Recommend 9](../../../img/gcp_recommend_9.png)
 
 #
 
