@@ -2,6 +2,8 @@
 
 ![GCP Architecture](../../img/gcp_architecture.png)
 
+Storage and Compute ressources are connected with an 1 Petbit/sec connection.
+
 ## Big Data Team
 
 ![GCP Team](../../img/gcp_team.png)
