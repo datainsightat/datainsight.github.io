@@ -3,7 +3,7 @@
 ![Storage Tree](../../img/gcp_storage_patterns3.png)
 
 # Transfer On-Premise to Google Cloud.
-
+![Recommend 3](../../img/gcp_dataproc_1.png)  
 ![Recommend 3](../../img/gcp_recommend_3.png)
 
 Store recommendations to Cloud SQL.
