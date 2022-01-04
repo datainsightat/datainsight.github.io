@@ -44,6 +44,8 @@ Prebuilt Chatbots
 
 # AutoML
 
+AutoML takes more time to come up with a model, due to ensemble learning.
+
 ![Auto ML](../../img/gcp_unstructured_10.png)  
 ![Auto ML](../../img/gcp_unstructured_11.png)  
 ![Auto ML](../../img/gcp_unstructured_12.png)  
@@ -54,3 +56,9 @@ Prebuilt Chatbots
 |Primary use|Classification|Face detection, OCR ...|
 |Data|Images with Labels|Justt Images|
 
+# Custom Models
+
+* BigQuery ML
+* TensorFlow, Keras
+
+Model Quality: Custom Model > AutoML > BigQueryML
