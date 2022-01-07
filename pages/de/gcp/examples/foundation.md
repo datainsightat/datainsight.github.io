@@ -9,11 +9,11 @@
     
 ## Create BigQuery Dataset
 
-gcp > BigQuery > Prject > Create Dataset > lab_757
+gcp > BigQuery > Project > Create Dataset > lab_760
 
 ## Create Cloud Storage Bucket
 
-gcp > Cloud Storage > Create Bucket > e73bfb79-cb0b-4603-99cd-ac38a9c7d83c
+gcp > Cloud Storage > Create Bucket > 9258b099-b0d1-402a-9ffd-09d91324664f
 
 ## Dataflow
 
@@ -58,16 +58,17 @@ gcp > Dataproc > Cluster > Submit Job
 
 ## Copy File to Cloud Storage
 
-    $ gsutil cp gs://cloud-training/gsp323/runs.csv gs://e73bfb79-cb0b-4603-99cd-ac38a9c7d83c
+    $ gsutil cp gs://cloud-training/gsp323/runs.csv gs://9258b099-b0d1-402a-9ffd-09d91324664f
 
 ## Create New Flow
 
-gcp > Dataprep  
+gcp > Dataprep
 Cloud Storage > Create Blank Flow
+Import Dataset > 2068a861-c6b0-462f-814e-65041d53be84
 
 ## Add Receipe
 
-Add Receipe > New Step
+Edit Receipe > New Step
 
 * Rename Columns
 * Filter 'state' that ist not 'FAILURE'
@@ -81,10 +82,10 @@ run
 
 ### Create API Key
 
-gcp > APIs & Services > Credentials > Create Credentials > API Key > AIzaSyBLpGXlk9G645QnPSkT7EkKppHBa8QmqPc
+gcp > APIs & Services > Credentials > Create Credentials > API Key > AIzaSyA3SpysNpuUIr2lhLSO2MBzWYmNie62g-I
 gcp > Compute Engine > ssh
 
-    $ export API_KEY=AIzaSyBLpGXlk9G645QnPSkT7EkKppHBa8QmqPc
+    $ export API_KEY=AIzaSyA3SpysNpuUIr2lhLSO2MBzWYmNie62g-I
     
 ### Create Request
     
@@ -100,13 +101,37 @@ gcp > Compute Engine > ssh
     }
     EOF
     
-    $ curl -s -X POST -H "Content-Type: application/json" --data-binary @request.json "https://speech.googleapis.com/v1/speech:recognize?key=${API_KEY}" > task4-gcs-777.result
+    $ curl -s -X POST -H "Content-Type: application/json" --data-binary @request.json "https://speech.googleapis.com/v1/speech:recognize?key=${API_KEY}" > task4-gcs-664.result
 
 ### Save Result in Cloud Storage
 
-Add User to Owner Group qwiklabs-gcp-04-d3167d22221a-marking
+Add User student-03-0472d5fcaf73@qwiklabs.net to Owner Group qwiklabs-gcp-04-d3167d22221a-marking
+
+gcp > Cloud Storage > Manage access
 
 Copy csv to cloud storage
 
-    $ gsutil cp task4-gcs-777.result gs://qwiklabs-gcp-04-d3167d22221a-marking/
+    $ gsutil cp task4-gcs.result gs://qwiklabs-gcp-03-a517a1725026-marking/
+
+## Natural Language API
+
+## Create API Key
+
+    $ export GOOGLE_CLOUD_PROJECT=$(gcloud config get-value core/project)
+    $ gcloud iam service-accounts create my-natlang-sa \
+    --display-name "my natural language service account"
+    $ gcloud iam service-accounts keys create ~/key.json \
+    --iam-account my-natlang-sa@${GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com
+    $ export GOOGLE_APPLICATION_CREDENTIALS="/home/USER/key.json"
+    
+## Entity Analysis Request
+
+gcp > Compute Engine > ssh
+
+    $ gcloud ml language analyze-entities --content="Old Norse texts portray Odin as one-eyed and long-bearded, frequently wielding a spear named Gungnir and wearing a cloak and a broad hat." > task4-gcs-492.result
+
+    $ gsutil cp task4-cnl-801.result gs://qwiklabs-gcp-04-d3167d22221a-marking/
+
+## Video API
+
 
