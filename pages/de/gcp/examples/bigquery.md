@@ -1,4 +1,4 @@
-# Setup
+# Big Query
 
 ## Explore Datasets
 
@@ -63,7 +63,7 @@ ghcn_d > ghcnd_2015
     ORDER BY
       wx.date
       
- ## Correlation Weather Bike Travels
+ ## Join Tables > Correlation Weather Bike Travels
  
     WITH bicycle_rentals AS (
       SELECT
@@ -99,4 +99,55 @@ ghcn_d > ghcnd_2015
     
  ![Result](../../../img/gcp_bigqueryexample_1.png)
  
- 
+## Load Data
+
+### Create Dataset
+
+gcp > BigQuery  
+Project > Create Dataset > nyctaxi  
+
+### Ingest Dataset from CSV
+
+nyctaxi > Create Table > 2018trips > Upload, File, csv, Autodetect Schema
+
+    #standardSQL
+    SELECT
+      *
+    FROM
+      nyctaxi.2018trips
+    ORDER BY
+      fare_amount DESC
+    LIMIT  5
+    
+### Ingest Dataset from Google Cloud Storage
+
+    $ bq load \
+    --source_format=CSV \
+    --autodetect \
+    --noreplace  \
+    nyctaxi.2018trips \
+    gs://cloud-training/OCBL013/nyc_tlc_yellow_trips_2018_subset_2.csv
+    
+### Create Tables from other Tables
+
+    #standardSQL
+    CREATE TABLE
+      nyctaxi.january_trips AS
+    SELECT
+      *
+    FROM
+      nyctaxi.2018trips
+    WHERE
+      EXTRACT(Month
+      FROM
+        pickup_datetime)=1;
+        
+    #standardSQL
+    SELECT
+      *
+    FROM
+      nyctaxi.january_trips
+    ORDER BY
+      trip_distance DESC
+    LIMIT
+      1
