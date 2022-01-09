@@ -115,22 +115,20 @@ Copy csv to cloud storage
 
 ## Natural Language API
 
-## Create API Key
+### Create API Key
 
     $ export GOOGLE_CLOUD_PROJECT=$(gcloud config get-value core/project)
-    $ gcloud iam service-accounts create my-natlang-sa \
-    --display-name "my natural language service account"
-    $ gcloud iam service-accounts keys create ~/key.json \
-    --iam-account my-natlang-sa@${GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com
+    $ gcloud iam service-accounts create my-natlang-sa --display-name "my natural language service account"
+    $ gcloud iam service-accounts keys create ~/key.json --iam-account my-natlang-sa@${GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com
     $ export GOOGLE_APPLICATION_CREDENTIALS="/home/USER/key.json"
     
-## Entity Analysis Request
+### Entity Analysis Request
+    
+    $ gcloud ml language analyze-entities --content="Old Norse texts portray Odin as one-eyed and long-bearded, frequently wielding a spear named Gungnir and wearing a cloak and a broad hat." > result.json
 
-gcp > Compute Engine > ssh
+### Save Result in Cloud Storage
 
-    $ gcloud ml language analyze-entities --content="Old Norse texts portray Odin as one-eyed and long-bearded, frequently wielding a spear named Gungnir and wearing a cloak and a broad hat." > task4-cnl-896.result
-
-    $  gsutil cp task4-cnl-896.result gs://qwiklabs-gcp-00-05a2418427e9-marking/task4-cnl-896.result
+    $ gsutil cp result.json gs://qwiklabs-gcp-00-05a2418427e9-marking/task4-cnl-896.result
 
 ## Video API
 
@@ -149,7 +147,6 @@ gcp > Compute Engine > ssh
     'https://videointelligence.googleapis.com/v1/videos:annotate' \
     -d @request.json > task4-gvi-956.result
     
-
-Copy csv to cloud storage
+### Save Result in Cloud Storage
 
     $ gsutil cp task4-gvi-956.result gs://qwiklabs-gcp-00-05a2418427e9-marking/task4-gvi-956.result
