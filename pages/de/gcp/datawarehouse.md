@@ -63,3 +63,44 @@ The cost of a query occures always at a project.
 ![BigQuery Data Transfer Service Process](../../img/gcp_datawarehouse_16.png)  
 
 User Defined Functions (UDF) in SQL and JavaScript.
+
+## Schemas
+
+### Normal Form
+
+![Normal Form](../../img/gcp_datawarehouse_17.png)  
+
+Normalizing increases the orderlyness of the data.  
+
+![Denormalizing](../../img/gcp_datawarehouse_18.png) 
+
+![Joins](../../img/gcp_datawarehouse_20.png) 
+
+### Nested and Repeated Fields
+
+De-Normalizing increases speed. Fields with 1 to many relations decrease speed.  
+
+![Nested Fields](../../img/gcp_datawarehouse_19.png)  
+
+![Nested Fields](../../img/gcp_datawarehouse_21.png)    
+
+### ARRAYS and STRUCTS
+
+Data in Structs is pre-joined. Different levels of granularity in one dataset.   
+
+* STRUCTS(RECORD)
+* ARRAYS(REPEATED)
+* ARRAYS can be part of regular fields or STRUCTS
+* A single table can have many STRUCTS
+
+![STRUCTS](../../img/gcp_datawarehouse_22.png)
+
+![STRUCTS](../../img/gcp_datawarehouse_23.png)  
+
+![STRUCTS](../../img/gcp_datawarehouse_24.png)  
+
+## Optimal Schema
+
+* Instead of joins tage advantage of nested and repeated fields in denormalized tables.
+* Tables < 10 Gb = Normalized
+* Tables > 10 Gb = De-Normalized
