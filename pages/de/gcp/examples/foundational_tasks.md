@@ -101,17 +101,11 @@ gcp > Compute Engine > ssh
     }
     EOF
     
-    $ curl -s -X POST -H "Content-Type: application/json" --data-binary @request.json "https://speech.googleapis.com/v1/speech:recognize?key=${API_KEY}" > task4-gcs-293.result
+    $ curl -s -X POST -H "Content-Type: application/json" --data-binary @request.json "https://speech.googleapis.com/v1/speech:recognize?key=${API_KEY}" > result.json
 
 ### Save Result in Cloud Storage
 
-Add User student-03-0472d5fcaf73@qwiklabs.net to Owner Group qwiklabs-gcp-04-d3167d22221a-marking
-
-gcp > Cloud Storage > Manage access
-
-Copy csv to cloud storage
-
-    $ gsutil cp task4-gcs-293.result gs://qwiklabs-gcp-00-05a2418427e9-marking/task4-gcs-293.result
+    $ gsutil cp result.json gs://qwiklabs-gcp-00-05a2418427e9-marking/task4-gcs-293.result
 
 ## Natural Language API
 
@@ -145,8 +139,8 @@ Copy csv to cloud storage
     $ curl -s -H 'Content-Type: application/json' \
     -H "Authorization: Bearer $ACCESS_TOKEN" \
     'https://videointelligence.googleapis.com/v1/videos:annotate' \
-    -d @request.json > task4-gvi-956.result
+    -d @request.json > result.json
     
 ### Save Result in Cloud Storage
 
-    $ gsutil cp task4-gvi-956.result gs://qwiklabs-gcp-00-05a2418427e9-marking/task4-gvi-956.result
+    $ gsutil cp result.json gs://qwiklabs-gcp-00-05a2418427e9-marking/task4-gvi-956.result
