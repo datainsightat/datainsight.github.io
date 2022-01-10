@@ -43,6 +43,7 @@
 ### ETL
 * [Dataprep](gcp/examples/dataprep.md)
 * [Dataproc Commandline](gcp/dataproc_commandline.md)
+* [Dataproc Spark](gcp/dataproc_spark.md)
 * [Dataflow Template](gcp/examples/dataflow_template.md)
 * [Dataflow Python](gcp/examples/dataflow_python.md)
 * [Realtime Dashboard](gcp/examples/realtime_dashboard.md)
