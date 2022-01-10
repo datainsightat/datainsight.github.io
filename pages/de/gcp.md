@@ -1,11 +1,13 @@
-# Cloud Shell
+# Cloud Computing
 
-## General
+## Cloud Shell
+
+### General
 
     $ gcloud auth list
     $ gcloud config list project
 
-## Set Zone
+### Set Zone
 
     $ gcloud config get-value compute/zone
     $ gcloud config get-value compute/region
@@ -30,36 +32,36 @@ SSH into new VM
 
     $ gcloud compute instances create gcelab2 --machine-type n1-standard-2 --zone $ZONE
   
-## Help
+### Help
 
     $ gcloud compute instances create --help
     
-## Install new Component
+### Install new Component
 
     $ sudo apt-get install google-cloud-sdk
     $ gcloud beta interactive
     $ gcloud compute instances describe gcelab2
     
-## Connect to VM with ssh
+### Connect to VM with ssh
 
     $ gcloud compute ssh gcelab2 --zone $ZONE
     
-## User Home directory
+### User Home directory
 
     $ cd $HOME
     $ vi ./.bashrc
 
-# Compute Options
+## Compute Options
 
 ![Compute Options](../img/gcp_compute_options.png)
 
-# Autoscaling
+## Autoscaling
 
 Provide ressources as needed
 
 ![Autoscaler](../img/gcp_autoscaler.png)
 
-# App Engine
+## App Engine
 
 Provide fully managed environment > PAAS. App Enging has autoscaling.  
 
@@ -82,12 +84,12 @@ Provide fully managed environment > PAAS. App Enging has autoscaling.
     $ gcloud app deploy
     $ gcloud app browse
 
-# Cloud Functions
+## Cloud Functions
 
     $ mkdir gcf_hello_world
     $ cd gcf_hello_world
     
-## Create function
+### Create function
 
     $ nano index.js
     
@@ -106,11 +108,11 @@ Provide fully managed environment > PAAS. App Enging has autoscaling.
     console.log(`My Cloud Function: ${name}`);
     };
     
-## Create Cloud Storage Bucket
+### Create Cloud Storage Bucket
 
     $ gsutil mb -p qwiklabs-gcp-04-fbbaef90a336 gs://qwiklabs-gcp-04-fbbaef90a336-bucket
     
-## Deploy Function
+### Deploy Function
 
     $ gcloud functions deploy helloWorld \
     --stage-bucket gs://qwiklabs-gcp-04-fbbaef90a336-bucket \
@@ -118,15 +120,15 @@ Provide fully managed environment > PAAS. App Enging has autoscaling.
     --runtime nodejs8
     $ gcloud functions describe helloWorld
     
-## Test Function 
+### Test Function 
     
     $ DATA=$(printf 'Hello World!'|base64) && gcloud functions call helloWorld --data '{"data":"'$DATA'"}'
 
-## Read Logs
+### Read Logs
 
     $ gcloud functions logs read helloWorld
     
-# Google Kubernetes Engine (GKE)
+## Google Kubernetes Engine (GKE)
 
 ![Kubernetesengine](../img/gcp_kubernetesengine.png)
 
@@ -134,35 +136,35 @@ Provide fully managed environment > PAAS. App Enging has autoscaling.
     $ gcloud config list project
     $ gcloud config set compute/zone us-central1-a
     
-## Create GKE Cluser
+### Create GKE Cluser
 
     $ gcloud container clusters create my-cluster
     
-## Get Credentials
+### Get Credentials
 
     $ gcloud container clusters get-credentials my-cluster
     
-## Create Deployment
+### Create Deployment
 
     $ kubectl create deployment hello-server --image=gcr.io/google-samples/hello-app:1.0
     
-## Create Kubernetes Service
+### Create Kubernetes Service
 
     $ kubectl expose deployment hello-server --type=LoadBalancer --port 8080
     $ kubectl get service
     
-## Delete Cluster
+### Delete Cluster
 
     $ gcloud container clusters delete my-cluster
     
-# Set Up Network Balancer
+## Set Up Network Balancer
 
     $ gcloud auth list
     $ gcloud config list project
     $ gcloud config set compute/zone us-central1-a
     $ gcloud config set compute/region us-central1
     
-## Create 3 VMs
+### Create 3 VMs
 
     $ gcloud compute instances create www1 \
     --image-family debian-9 \
@@ -197,17 +199,17 @@ Provide fully managed environment > PAAS. App Enging has autoscaling.
     sudo service apache2 restart
     echo '<!doctype html><html><body><h1>www3</h1></body></html>' | tee /var/www/html/index.html"
     
-## Create Firewall Rule
+### Create Firewall Rule
 
     $ gcloud compute firewall-rules create www-firewall-network-lb \
     --target-tags network-lb-tag --allow tcp:80
     
-## Verify
+### Verify
 
     $ gcloud compute instances list
     $ curl http://[IP_ADDRESS]
     
-## Configure Load Balancing Service
+### Configure Load Balancing Service
 
     $ gcloud compute addresses create network-lb-ip-1 \
     --region us-central1
@@ -222,7 +224,7 @@ Provide fully managed environment > PAAS. App Enging has autoscaling.
     --address network-lb-ip-1 \
     --target-pool www-pool
     
-## Send Traffic to Load Balancing Service
+### Send Traffic to Load Balancing Service
 
 Get IP Address of Load Balancer
 
@@ -232,9 +234,9 @@ Send Traffic
     
     $ while true; do curl -m1 34.122.157.81; done
     
-# Set Up HTTP Load Balancer
+## Set Up HTTP Load Balancer
 
-## Create Load Balancer Template
+### Create Load Balancer Template
 
     $ gcloud compute instance-templates create lb-backend-template \
     --region=us-central1 \
@@ -254,12 +256,12 @@ Send Traffic
      tee /var/www/html/index.html
      systemctl restart apache2'
      
-## Create Managed Instance Group
+### Create Managed Instance Group
 
     $ gcloud compute instance-groups managed create lb-backend-group \
    --template=lb-backend-template --size=2 --zone=us-central1-a
    
-## Create Firewall Rule
+### Create Firewall Rule
 
     $ gcloud compute firewall-rules create fw-allow-health-check \
     --network=default \
@@ -269,7 +271,7 @@ Send Traffic
     --target-tags=allow-health-check \
     --rules=tcp:80
     
-## Set Up Static IP Address
+### Set Up Static IP Address
 
     $ gcloud compute addresses create lb-ipv4-1 \
     --ip-version=IPV4 \
@@ -277,12 +279,12 @@ Send Traffic
     
 Output: https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-022d93612fb0/global/addresses/lb-ipv4-1
 
-## Create Health Check
+### Create Health Check
 
     $ gcloud compute health-checks create http http-basic-check \
     --port 80
     
-## Create Backend Service
+### Create Backend Service
 
     $ gcloud compute backend-services create web-backend-service \
     --protocol=HTTP \
@@ -290,24 +292,24 @@ Output: https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-022d93612
     --health-checks=http-basic-check \
     --global
     
-## Add Instance Group to Backend Service
+### Add Instance Group to Backend Service
 
     $ gcloud compute backend-services add-backend web-backend-service \
     --instance-group=lb-backend-group \
     --instance-group-zone=us-central1-a \
     --global
     
-## Create URL Map to Default Backend Service
+### Create URL Map to Default Backend Service
 
     $ gcloud compute url-maps create web-map-http \
     --default-service web-backend-service
     
-## Create Target Proxy to Route Requests to URL Map
+### Create Target Proxy to Route Requests to URL Map
 
     $ gcloud compute target-http-proxies create http-lb-proxy \
     --url-map web-map-http
     
-## Create Forwarding Rule
+### Create Forwarding Rule
 
     $ gcloud compute forwarding-rules create http-content-rule \
     --address=lb-ipv4-1\
@@ -315,6 +317,6 @@ Output: https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-022d93612
     --target-http-proxy=http-lb-proxy \
     --ports=80
     
- ## Verify
+ ### Verify
  
  gcp > Network Services > Load Balancing > Backend
