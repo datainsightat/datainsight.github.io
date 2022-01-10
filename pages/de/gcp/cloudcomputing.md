@@ -53,13 +53,13 @@ SSH into new VM
 
 ## Compute Options
 
-![Compute Options](../img/gcp_compute_options.png)
+![Compute Options](../../img/gcp_compute_options.png)
 
 ## Autoscaling
 
 Provide ressources as needed
 
-![Autoscaler](../img/gcp_autoscaler.png)
+![Autoscaler](../../img/gcp_autoscaler.png)
 
 ## App Engine
 
@@ -130,7 +130,7 @@ Provide fully managed environment > PAAS. App Enging has autoscaling.
     
 ## Google Kubernetes Engine (GKE)
 
-![Kubernetesengine](../img/gcp_kubernetesengine.png)
+![Kubernetesengine](../../img/gcp_kubernetesengine.png)
 
     $ gcloud auth list
     $ gcloud config list project
