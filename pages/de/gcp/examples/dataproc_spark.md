@@ -1,5 +1,7 @@
 # Running Spark Jobs on Dataproc
 
+[Jupyter Notebook](https://github.com/datainsightat/DataScience_Examples/blob/main/de/Spark/gcp_dataprog_spark.ipynb)
+
 ## Initialize
 
     $ gcloud auth list
