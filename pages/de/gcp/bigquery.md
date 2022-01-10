@@ -81,3 +81,25 @@ Show how usefull an item is to predict value.
 ### Overview
            
 ![Types ML Models](../../img/gcp_bigquery_10.png)
+
+## Partitioning and Clustering
+
+![Overview](../../img/gcp_bigquery_18.png)
+
+### Partitioning
+
+![Partitioning](../../img/gcp_bigquery_11.png)  
+
+![Partitioning Time](../../img/gcp_bigquery_12.png)  
+
+![Create Partitioning Time](../../img/gcp_bigquery_13.png)  
+
+![Partition Filter](../../img/gcp_bigquery_14.png)
+
+### Clustering
+
+![Cluster](../../img/gcp_bigquery_15.png)  
+
+![Create Cluster](../../img/gcp_bigquery_16.png)  
+
+![Automatic Reclustering](../../img/gcp_bigquery_17.png)
