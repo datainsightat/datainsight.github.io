@@ -237,3 +237,21 @@ Use time windows.
     )
     
     windowed_counts = windowed_counts | beam.ParDo(PrintWindowFn())
+
+## Templates
+
+![Templates](../../img/gcp_dataflow_28.png)
+
+Separate developer from user.  
+
+### Create own Template
+
+![Own Templates](../../img/gcp_dataflow_29.png)
+
+Each template has metadata:  
+
+![Metadata](../../img/gcp_dataflow_30.png)  
+
+## Dataflow SQL
+
+![Dataflow SQL](../../img/gcp_dataflow_31.png)  
