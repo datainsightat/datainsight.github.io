@@ -21,7 +21,7 @@ gcp > Cloud Storage > Create Bucket > qwiklabs-gcp-01-9a5bf01c7342
     $ BUCKET="qwiklabs-gcp-01-9a5bf01c7342"
     $ echo $BUCKET
 
-## DataflwoProject
+## DataflowProject
 
 ### Setup
 
