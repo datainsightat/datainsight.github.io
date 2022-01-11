@@ -151,3 +151,175 @@ nyctaxi > Create Table > 2018trips > Upload, File, csv, Autodetect Schema
       trip_distance DESC
     LIMIT
       1
+
+# JSON and ARRAY Data
+
+gcp > BigQuery > Project > Create Dataset > fruit_store  
+
+    #standardSQL
+    SELECT
+    ['raspberry', 'blackberry', 'strawberry', 'cherry'] AS fruit_array;
+
+    #standardSQL
+    SELECT person, fruit_array, total_cost FROM `data-to-insights.advanced.fruit_store`;
+    
+JSON
+
+    [
+      {
+        "person": [
+          "sally"
+        ],
+        "fruit_array": [
+          "raspberry",
+          "blackberry",
+          "strawberry",
+          "cherry"
+        ],
+        "total_cost": [
+          "10.99"
+        ]
+      },
+      {
+        "person": [
+          "frederick"
+        ],
+        "fruit_array": [
+          "orange",
+          "apple"
+        ],
+        "total_cost": [
+          "5.55"
+        ]
+      }
+    ]
+
+Project > fruit_store > Create Table > fruit_details  
+
+![Create Table](../../../img/gcp_bigquery_20.png)
+
+## Create own Arrays
+
+    SELECT
+      fullVisitorId,
+      date,
+      v2ProductName,
+      pageTitle
+      FROM `data-to-insights.ecommerce.all_sessions`
+    WHERE visitId = 1501570398
+    ORDER BY date;
+
+    SELECT
+      fullVisitorId,
+      date,
+      ARRAY_AGG(v2ProductName) AS products_viewed,
+      ARRAY_AGG(pageTitle) AS pages_viewed
+      FROM `data-to-insights.ecommerce.all_sessions`
+    WHERE visitId = 1501570398
+    GROUP BY fullVisitorId, date
+    ORDER BY date;
+    
+    SELECT
+      fullVisitorId,
+      date,
+      ARRAY_AGG(v2ProductName) AS products_viewed,
+      ARRAY_LENGTH(ARRAY_AGG(v2ProductName)) AS num_products_viewed,
+      ARRAY_AGG(pageTitle) AS pages_viewed,
+      ARRAY_LENGTH(ARRAY_AGG(pageTitle)) AS num_pages_viewed
+      FROM `data-to-insights.ecommerce.all_sessions`
+    WHERE visitId = 1501570398
+    GROUP BY fullVisitorId, date
+    ORDER BY date;
+    
+    SELECT
+      fullVisitorId,
+      date,
+      ARRAY_AGG(DISTINCT v2ProductName) AS products_viewed,
+      ARRAY_LENGTH(ARRAY_AGG(DISTINCT v2ProductName)) AS distinct_products_viewed,
+      ARRAY_AGG(DISTINCT pageTitle) AS pages_viewed,
+      ARRAY_LENGTH(ARRAY_AGG(DISTINCT pageTitle)) AS distinct_pages_viewed
+      FROM `data-to-insights.ecommerce.all_sessions`
+    WHERE visitId = 1501570398
+    GROUP BY fullVisitorId, date
+    ORDER BY date;
+    
+## Query Datasets with ARRAYs
+
+    SELECT
+      *
+    FROM `bigquery-public-data.google_analytics_sample.ga_sessions_20170801`
+    WHERE visitId = 1501570398;
+    
+    SELECT DISTINCT
+      visitId,
+      h.page.pageTitle
+    FROM `bigquery-public-data.google_analytics_sample.ga_sessions_20170801`,
+    UNNEST(hits) AS h
+    WHERE visitId = 1501570398
+    LIMIT 10;
+
+## STRUCTs
+
+    SELECT
+      visitId,
+      totals.*,
+      device.*
+    FROM `bigquery-public-data.google_analytics_sample.ga_sessions_20170801`
+    WHERE visitId = 1501570398
+    LIMIT 10;
+    
+## Practice ARRAYs
+
+    #standardSQL
+    SELECT STRUCT("Rudisha" as name, 23.4 as split) as runner
+    
+    #standardSQL
+    SELECT STRUCT("Rudisha" as name, [23.4, 26.3, 26.4, 26.1] as splits) AS runner
+    
+    #standardSQL
+    SELECT
+      p.name,
+      SUM(split_times) as total_race_time
+    FROM racing.race_results AS r
+    , UNNEST(r.participants) AS p
+    , UNNEST(p.splits) AS split_times
+    WHERE p.name LIKE 'R%'
+    GROUP BY p.name
+    ORDER BY total_race_time ASC;
+    
+    #standardSQL
+    SELECT
+      p.name,
+      split_time
+    FROM racing.race_results AS r
+    , UNNEST(r.participants) AS p
+    , UNNEST(p.splits) AS split_time
+    WHERE split_time = 23.2;
+
+## Ingest JSON Data
+
+gcp > BigQuery > Project > Create Dataset > racing  
+racing > Create Table > race_results  
+
+![Create Table](../../../img/gcp_bigquery_21.png)  
+
+    #standardSQL
+    SELECT * FROM racing.race_results;
+    
+    #standardSQL
+    SELECT race, participants.name
+    FROM racing.race_results
+    CROSS JOIN
+    race_results.participants # full STRUCT name;
+    
+    #standardSQL
+    SELECT race, participants.name
+    FROM racing.race_results AS r, r.participants;
+    
+## Practice STRUCTs
+
+    #standardSQL
+    SELECT COUNT(p.name) AS racer_count
+    FROM racing.race_results AS r, UNNEST(r.participants) AS p
+    
+    
