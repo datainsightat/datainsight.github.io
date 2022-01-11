@@ -113,7 +113,7 @@ In a PCollection all data is immutable and stored as bytestring.
       write_disposition=beam.io.BigQuerryDisposition.WRITE_TRUNCATE,
       create_disposition=beam.io.BigQueryDisposition.CREATE_IT_NEEDED)
 
-### Transform
+### Map Phase > Transform
 
     'WordLengths' >> beam.Map(word, len(word))
 
@@ -146,4 +146,51 @@ In a PCollection all data is immutable and stored as bytestring.
     below = results.below_cutoff_strings
     above = results.above_cutoff_strings
     marked = results['marked strings']
+
+### GroupByKey
+
+![GoupByKey](../../img/gcp_dataflow_20.png)  
+
+Data skew makes grouping less efficient at scale.  
+
+![GoupByKey](../../img/gcp_dataflow_21.png)  
+
+    totalAmount = salesAmounts | CombineGlobally(sum)
+    totalSalesPerPerson = salesRecords | CombinePerKey(sum)
+    
+### CombineFn works by overriding exisintg operations
+
+You must provide four functions
+
+    class AverageFn(beam.CombineFn):
+    
+        def create_accumulator(self):
+            return(0.0,0)
+        
+        def add_input(self, sum_count, input):
+            (sum, count) = sum_count
+            return sum + input, count + 1
+            
+        def merge_accumulators(self, accumulators):
+            sums, counts = zip(*accumulators)
+            return sum(sums), sum(counts)
+            
+        def extract_output(self, sum_count):
+            (sum, count) = sum_count
+            return sum / count if count else float('NaN')
+            
+    pc = ...
+    average = pc | beam.CombineGlobally(AverageFn())
+    
+Combine is more efficient that GroupByKey  
+
+![GoupByKey vs Combine](../../img/gcp_dataflow_22.png)  
+
+### Flatten Merges identical PCollections
+
+![Flatten](../../img/gcp_dataflow_23.png)
+
+### Partition Splits PCollections
+
+![Partition](../../img/gcp_dataflow_24.png)
 
