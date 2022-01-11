@@ -39,7 +39,7 @@ Deactivate and activate Dataflow API to make this example run.
     --output $BUCKET/results/output \
     --region us-central1
   
-## Ceck Result
+## Check Result
 
 Check, if Pipeline is running: gcp > DataFlow
 
