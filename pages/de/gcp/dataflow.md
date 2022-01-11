@@ -194,3 +194,46 @@ Combine is more efficient that GroupByKey
 
 ![Partition](../../img/gcp_dataflow_24.png)
 
+## Side-Inputs and Windows
+
+### Side-Input
+
+A side-input is an input the do-function can access every time it processes an element of the inputP collection.  
+
+![Side Input](../../img/gcp_dataflow_25.png)  
+
+    words = ...
+    
+    def filter_using_length(word, lower_bound, upper_bound=floar('inf')):
+        if lower_bound <= len(word) <= upper_bound:
+            yield word
+            
+    small_words = words | 'small' >> beam.FlatMap(filter_using_length, 0, 3)
+    
+    # Side input
+    avg_word_len = (words
+               | beam.Map(len)
+               | beam.CombineGlobally(beam.containers.MeanCombineFn())
+    
+    larger_than_average = (words | 'large' >> beam.FlatMap(
+        filter_using_length,
+        lower_bound=value.AsSingleton(avg_word_len)))
+        
+### Window
+
+Unbounded PCCollection not useful for Streaming data.  
+
+![Side Input](../../img/gcp_dataflow_26.png)  
+
+Use time windows.  
+
+    lines = p | 'Create' >> beam.io.ReadFromText('access.log')
+    
+    windowd_counts = (
+        lines
+        | 'Timestamp' >> beam.Map(beam.window.TimestampedValue(X, extract_timestamp(x)))
+        | 'Window' >> beam.WindowInto(beam.window.SlidingWindows(60,30))
+        | 'Count' >> (beam.CombineGlobally(beam.combiners.CountCombineFn()).without_defaults())
+    )
+    
+    windowed_counts = windowed_counts | beam.ParDo(PrintWindowFn())
