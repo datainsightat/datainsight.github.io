@@ -117,7 +117,7 @@ Save
     
 gcp > Dataflow > job  
 
-![Job Progress](../../../img/gcp_datflow_19.png)
+![Job Progress](../../../img/gcp_dataflow_19.png)
 
     $ gsutil cp gs://$BUCKET/javahelp/output* .
     $ cat output*
