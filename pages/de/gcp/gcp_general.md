@@ -26,7 +26,7 @@ Organization > Folder > Project > Resource
 
 ![Pre Trained Models](../../img/gcp_pretrainedmodels.png)
 
-![GCP Big Data Tools}(../../img/gcp_bigdatatools.png)
+![GCP Big Data Tools](../../img/gcp_bigdatatools.png)
 
 ## Storage
 
