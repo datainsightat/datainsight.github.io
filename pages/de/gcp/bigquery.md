@@ -135,5 +135,62 @@ Streaming data is charged transaction.
 
 ![Bi Engine](../../img/gcp_bigquery_21.jpg)
 
+## Analytic Window Functions
+
+* Standard aggregations
+* Navigation functions
+* Ranking and numbering functions
+<a/>
+
+### Navigation
+
+* NTH_VALUE
+* LAG
+* FIRST_VALUE
+* LAST_VALUE
+<a/>
+
+### Rank
+
+    with
+      longest_trips as (
+        select
+          start_station_id,
+          duration,
+          rank() over(partition by start_station_id order by duration desc) as nth_longest
+        from
+          `bigquery-public-data`.london_bicycles.cycle_hire
+        )
+      
+      select
+        start_station_id,
+        array_agg (
+          duration
+          order by
+            nth_longest
+          limit
+            3
+          ) as durations
+      from
+        longest trips
+      groub by
+        start_station_id
+
+* cume_dist
+* dense_rank
+* row_number
+* percent_rank
+<a/>
+
+## GIS Functions
+
+* ST_DWithin
+* ST_GeogPoint
+* ST_Intersects
+<a/>
+
+![GIS](../../img/gcp_bigquery_22.jpg)  
+
+## Performance
 
 
