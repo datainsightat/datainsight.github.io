@@ -86,6 +86,23 @@ Show how usefull an item is to predict value.
 
 ![Overview](../../img/gcp_bigquery_18.png)
 
+    create table mydataset.myclusteredtable
+      (
+      c1 numeric,
+      userId string,
+      c3 string,
+      enventDate timestamp,
+      c5 geography
+      )
+    partition by date(eventDate)
+    cluster by userId
+    options
+      (
+      partition_expiration_days=3,
+      description="cluster"
+      )
+    as select * from maydataset.myothertable
+
 ### Partitioning
 
 ![Partitioning](../../img/gcp_bigquery_11.png)  
@@ -193,4 +210,21 @@ Streaming data is charged transaction.
 
 ## Performance
 
+![Pipeline](../../img/gcp_bigquery_23.jpg)  
 
+* I/O: How many bytes are read?
+* Shuffling: How many bytes were passed to the next stage?
+* Grouping: How many bytes were passed through to each group?
+* Materialization: How many byters were written?
+* Functions and UDFs: How much CPU are the functions using?
+<a/>
+
+![Performance](../../img/gcp_bigquery_24.jpg)  
+
+### Intermediate Tables
+
+![Intermediate Tables](../../img/gcp_bigquery_25.jpg)  
+
+gcp > BigQuery > Execution Details
+
+### Aproximate Functions
