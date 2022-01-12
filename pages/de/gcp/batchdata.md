@@ -20,27 +20,27 @@ Pipelines process a certain amount of data an then exits.
 
 #### Filter to identify and isolate invalid data
 
-![Filter invalid data](../../img/gcp_batchdata_1.md)
+![Filter invalid data](../../img/gcp_batchdata_1.png)
 
 #### Duplicates
 
-![Duplicates](../../img/gcp_batchdata_2.md)
+![Duplicates](../../img/gcp_batchdata_2.png)
 
 #### Accuracy
 
-![Accuracy](../../img/gcp_batchdata_3.md)
+![Accuracy](../../img/gcp_batchdata_3.png)
 
 #### Completeness
 
-![Completeness](../../img/gcp_batchdata_4.md)
+![Completeness](../../img/gcp_batchdata_4.png)
 
 #### Missing
 
-![Missing](../../img/gcp_batchdata_5.md)
+![Missing](../../img/gcp_batchdata_5.png)
 
 #### Uniform
 
-![Uniform](../../img/gcp_batchdata_6.md)
+![Uniform](../../img/gcp_batchdata_6.png)
 
 ## ETL
 
@@ -57,7 +57,7 @@ Tranformation cannot be expressed in SQL. Use Dataflow as ETL Tool and land data
 * Write Data to BigQuery
 <a/>
 
-![ETL Tools](../../img/gcp_batchdata_7.md)
+![ETL Tools](../../img/gcp_batchdata_7.png)
 
 * Dataflow
 * Dataproc
@@ -76,11 +76,11 @@ Look Beyond Dataflow and BigQuery
 
 #### Dataproc
 
-![Dataproc](../../img/gcp_batchdata_8.md)
+![Dataproc](../../img/gcp_batchdata_8.png)
 
 #### Cloud Data Fusion
 
-![Cloud Data Fusion](../../img/gcp_batchdata_9.md)
+![Cloud Data Fusion](../../img/gcp_batchdata_9.png)
 
 ### Data Catalog
 
@@ -89,7 +89,7 @@ Metadata as a service.
 * Data Lineage
 * Meta Data
 
-![Labels](../../img/gcp_batchdata_10.md)
+![Labels](../../img/gcp_batchdata_10.png)
 
 * Simplify data discovery
 * Unified view
