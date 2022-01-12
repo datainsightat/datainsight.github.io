@@ -276,10 +276,10 @@ Table or partition not edited 90+ days
 
 ### Fair Scheduler
 
-[BigQuery Slots](../../img/gcp_bigquery_29.jpg)  
+![BigQuery Slots](../../img/gcp_bigquery_29.jpg)  
 
-[Fair Scheduler](../../img/gcp_bigquery_30.jpg)  
+![Fair Scheduler](../../img/gcp_bigquery_30.jpg)  
 
-[Fair Scheduler](../../img/gcp_bigquery_31.jpg)  
+![Fair Scheduler](../../img/gcp_bigquery_31.jpg)  
 
 You can set hierarchical reservation.  
