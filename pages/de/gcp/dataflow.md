@@ -2,7 +2,7 @@
 
 * Scalable
 * Low latency
-* Batch and Strem
+* Batch and Stream
 
 ||Dataflow|Dataproc|
 |-|-|-|
