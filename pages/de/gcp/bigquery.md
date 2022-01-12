@@ -103,3 +103,37 @@ Show how usefull an item is to predict value.
 ![Create Cluster](../../img/gcp_bigquery_16.png)  
 
 ![Automatic Reclustering](../../img/gcp_bigquery_17.png)
+
+## Streaming
+
+Streaming data is charged transaction.  
+
+![Streaming](../../img/gcp_bigquery_19.jpg)
+
+    $ export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/[FILE_NAME].json"
+    $ pip install google-cloud-bigquery
+    
+    from google.cloud import bigquery
+    client = bigquery.Client(project='PROJECT_ID')
+    
+    dataset_ref = bigquery_client.dataset('my_dataset_id')
+    table_ref = dataset_ref.table('my_dataset_id')
+    table = bigquery_client.get_table(table_ref)
+    
+    to_to_insert = [
+      (u'customer 1', 5),
+      (u'customer 2', 17)
+    ]
+    
+    errors = bigquery_client.insert_rows(table, rows_to_insert)
+
+### Data Studio
+
+![Data Studio](../../img/gcp_bigquery_20.jpg)  
+
+### BI Engine
+
+![Bi Engine](../../img/gcp_bigquery_21.jpg)
+
+
+
