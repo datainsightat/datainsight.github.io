@@ -83,7 +83,7 @@ In a PCollection all data is immutable and stored as bytestring.
              --temp_location=gs://$BUCKET/tmp/ \
              --runnner)DataflowRunner
  
- ### Read Data
+### Read Data
  
     with beam.Pipeline(options=pipeline_options as p:
     
@@ -98,7 +98,7 @@ In a PCollection all data is immutable and stored as bytestring.
       BQ_source = beam.io.BigQuerySource(query = <query>, use_standard_sql=True)
       BQ_data = pipeline | beam.io.Read(BG_srouce)
       
- ### Write to Sinks
+### Write to Sinks
  
     from apache_beam.io.gcp.internal.clients import bigquery
     
@@ -255,3 +255,91 @@ Each template has metadata:
 ## Dataflow SQL
 
 ![Dataflow SQL](../../img/gcp_dataflow_31.png)  
+
+## Streaming Data Challenges
+
+* Scalability
+* Fault Tolerance
+* Model (Sreaming, Repeated Batch)
+* Timing
+* Aggregation
+
+![Aggregation](../../img/gcp_dataflow_32.jpg)  
+
+![Aggregation](../../img/gcp_dataflow_33.jpg)  
+
+### Message Ordering
+
+![Ordering](../../img/gcp_dataflow_34.jpg)  
+
+Timestamps can be modified
+
+![Timestamp](../../img/gcp_dataflow_35.jpg)  
+
+    unix_timestamp = extract_timestamp_from_log_entry(element)
+    yield beam.window.TimestampedValue(element, unix_timestamp)
+    
+### Duplication
+
+    msg.publish(event_data, ,myid="34xwy57223cdg")
+    
+    p.apply(PubsubIO.readStrings().fromTopic(t).idLabel("myid"))
+    
+## Windowing
+
+* Fixed
+* Sliding
+* Session
+
+![Windows](../../img/gcp_dataflow_36.jpg)
+
+### Fixed
+
+    from apache_beam import window
+    fixed_window_items = (items | 'window' >> beam.WindowInto(window.FixedWindows(60)))
+    
+
+### Sliding
+
+    from apache_beam import window
+    fixed_window_items = (items | 'window' >> beam.WindowInto(window.SlidingWindows(30,5)))
+    
+
+### Session
+
+    from apache_beam import window
+    fixed_window_items = (items | 'window' >> beam.WindowInto(window.Sessions(10*60)))
+    
+## Pipeline Processing
+
+### No Latency
+
+![No Latency](../../img/gcp_dataflow_37.jpg)
+
+
+### Latencies (Watermark)
+
+![Latency](../../img/gcp_dataflow_38.jpg)  
+
+![Watermark](../../img/gcp_dataflow_39.jpg)
+
+Late messages won't be processed. You can decide to re-read the dataset.  
+
+### Triggers
+
+![Triggers](../../img/gcp_dataflow_40.jpg)
+
+### Allow late Data past the Watermark
+
+    pc = [Initial PCollection]
+    pc | beam.WindowInto(
+        FixedWindow(60),
+        trigger=trigger_fn,
+        accumulation_mode=accumulation_mode,
+        timestamp_combiner=timestamp_combiner,
+        allowed_lateness=Duration(seconds=2*24*60*60)) # 2 days
+
+### Accumulation Mode
+
+![Accumulation Mode](../../img/gcp_dataflow_41.jpg)
+
