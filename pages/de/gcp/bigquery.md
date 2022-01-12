@@ -228,3 +228,58 @@ Streaming data is charged transaction.
 gcp > BigQuery > Execution Details
 
 ### Aproximate Functions
+
+* Approc_count_distinct
+
+## Prcing
+
+### Active Storage
+
+* 100 MB, half a month = 0.001 $
+* 500 GB, half a month = 5 $
+* 1 TB, full month = 20 $
+<a/>
+
+### Long-term Storage
+
+Table or partition not edited 90+ days
+
+* Price drops 50%
+* No degregation
+* Applies to BigQuery storage only
+<a/>
+
+![BigQuery Slots](../../img/gcp_bigquery_28.jpg) 
+
+### On-Demand Pricing
+
+* 5 $ / TB of data processed
+* Quota Limit 2000 slots
+* Slots shared amond all users
+* 1st TB of data is free each month
+<a/>
+
+### Flat-Rate Pricing
+
+* 10000 $ / month per 500 slots
+* Slots are dedicated 24/7
+* Starting at 500 slots
+* unlimited use of slots
+<a/>
+
+### Flex Slots
+
+* BigQuery Slots per minute
+* increment 100 slots
+* 0.04 $ / slot / hour
+<a/>
+
+### Fair Scheduler
+
+[BigQuery Slots](../../img/gcp_bigquery_29.jpg)  
+
+[Fair Scheduler](../../img/gcp_bigquery_30.jpg)  
+
+[Fair Scheduler](../../img/gcp_bigquery_31.jpg)  
+
+You can set hierarchical reservation.  
