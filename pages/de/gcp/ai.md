@@ -83,8 +83,6 @@ Sentiment analysis on each eantity of a document.
 * Literature
 <a/>
 
-
-
 ### Vision API
 
 ![Vision API](../../img/gcp_unstructured_3.png)
@@ -119,17 +117,88 @@ Prebuilt Chatbots
 
 ## AutoML
 
+![AI](../../img/gcp_ai_9.jpg)
+
+* Train
+    * Dataset preparation
+    * Readiness Analysis
+    * Train
+    * Test and Evaluate   
+* Deploy
+* Server
+    * Predict
+    * Classify
+<a/>
+
+### Process
+
+#### Prepared Dataset to train custom Model
+
+![Process](../../img/gcp_ai_10.jpg)
+
+#### Preliminary Analysis
+
+![Analysis](../../img/gcp_ai_11.jpg)
+
+One full run through all training data is called 'epoch'.
+
+#### Evaluation
+
+![Analysis](../../img/gcp_ai_12.jpg)
+
+#### Activate Model
+
+![Activation](../../img/gcp_ai_13.jpg)
+
+#### Serve Model
+
+![Classification](../../img/gcp_ai_14.jpg)
+
+### Multiple Models
+
+![Multiple Models](../../img/gcp_ai_15.jpg)
+
+### AutoML Products
+
+#### AutoML Vision
+
 AutoML takes more time to come up with a model, due to ensemble learning.
 
 ![Auto ML](../../img/gcp_unstructured_10.png)  
 ![Auto ML](../../img/gcp_unstructured_11.png)  
 ![Auto ML](../../img/gcp_unstructured_12.png)  
 
-|Attribute|AutoML Vision|Visoin API|
+|Attribute|AutoML Vision|Vision API|
 |-|-|-|
 |Objective|Enabling developers with no ML expertise to build ML models|Enable ML practitiones to use Googles ML|
 |Primary use|Classification|Face detection, OCR ...|
 |Data|Images with Labels|Justt Images|
+
+##### Process
+
+![AutoML Vision](../../img/gcp_ai_17.jpg)  
+
+##### Improving Data
+
+![Improving Data](../../img/gcp_ai_18.jpg)  
+
+### AutoML Natural Language
+
+#### Process
+
+![AutoML Natural Language](../../img/gcp_ai_19.jpg) 
+
+##### Improving Data
+
+![Improving Data](../../img/gcp_ai_20.jpg) 
+
+### AutoML Tables
+
+![AutoML Table](../../img/gcp_ai_21.jpg) 
+
+#### Price Suggestions
+
+![Price Suggestions](../../img/gcp_ai_22.jpg)
 
 ## Custom Models
 
@@ -137,3 +206,11 @@ AutoML takes more time to come up with a model, due to ensemble learning.
 * TensorFlow, Keras
 
 Model Quality: Custom Model > AutoML > BigQueryML
+
+## Make or Buy Models?
+
+![MOB](../../img/gcp_ai_16.jpg)
+
+## BigQuery ML, AutoML or Custom Model?
+
+![Which Ml Tools](../../img/gcp_ai_23.jpg)
