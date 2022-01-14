@@ -18,6 +18,26 @@ Ad-How:
 
 ![ML Models](../../img/gcp_ai_2.jpg)  
 
+## Notebooks
+
+Customize hardware for your specific notebook needs.  
+
+![Notebooks](../../img/gcp_ai_7.jpg)  
+
+![Notebooks Hardware](../../img/gcp_ai_8.jpg) 
+
+### BigQuery Magic
+
+BigQuery result is saved in pandas dataframe 'df'. Be aware that memory is limited in notebooks.  
+
+    %%biquery df
+    select
+      *
+    from
+      ...
+    limit
+      50
+
 # ML on Unstructured Data
 
 Unstructured data is about 90% of a companies data.  
