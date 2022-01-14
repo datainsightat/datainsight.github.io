@@ -55,9 +55,45 @@ Distribution of ML models
 
 ![Distribution ML Models](../../img/gcp_bigquery_5.png)
 
-Types of ML models
+### Types of ML models
 
 ![Types ML Models](../../img/gcp_bigquery_6.png)
+
+#### Linear Classifier (Logistic Regression)
+
+![Linear Classifier](../../img/gcp_bigquery_34.jpg)
+
+#### DNN Classifier
+
+![Deep Neural Network](../../img/gcp_bigquery_35.jpg)
+
+#### XGBoost Classifier
+
+![XGBoost](../../img/gcp_bigquery_36.jpg)
+
+#### Linear Regression
+
+![Linear Regression](../../img/gcp_bigquery_37.jpg)
+
+#### DNN Regression
+
+![DNN Regression](../../img/gcp_bigquery_38.jpg)
+
+#### XGBoost Regression
+
+![XGBoost Regression](../../img/gcp_bigquery_39.jpg)
+
+#### Train TF, Predict BigQuery
+
+![TF Model](../../img/gcp_bigquery_40.jpg)
+
+#### Recommendation, Matrix Factorization
+
+![Matrix Model](../../img/gcp_bigquery_41.jpg)
+
+#### Clustering
+
+![KNN Clustering](../../img/gcp_bigquery_42.jpg)
 
 ### ML in BigQuery
            
@@ -81,6 +117,56 @@ Show how usefull an item is to predict value.
 ### Overview
            
 ![Types ML Models](../../img/gcp_bigquery_10.png)
+
+### Example
+
+![Workflow](../../img/gcp_bigquery_33.jpg)
+
+#### Extract Data
+
+    select
+      url, title
+    from
+      `bigquery-public-data.hacker_news.stories`
+    where
+       langth(title) > 10
+       and length(url) > 0
+    limit 10;
+    
+#### Create Model
+
+    create or replace model
+      advdata.txtclass
+      options(model_type='logistic_reg', input_label_cols=['source'])
+      as
+      
+      with
+        extract as (
+          ...
+        ),
+        ds as (
+          ...
+        )
+
+#### Evaluate Model
+
+    select
+      *
+    from
+      ml.evaluate(model adcdata.txtclass)
+      
+#### Predict
+
+    select
+      *
+    from
+      ml.predict(model advdata.txtclass, (
+        select
+          'government' as word 1,
+          'shutdown' as word 2,
+          'leaves' as word 3,
+          'workers' as word 4,
+          'reeling' as word 5)
 
 ## Partitioning and Clustering
 
