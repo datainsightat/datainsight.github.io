@@ -20,7 +20,7 @@ gcp > Compute Engine > VM Instances > Create Instance
 
 ## Create new Instance with gcloud
 
-    $ gcloud compute instance create gcelab2 --machineptype n1-standard-2 --zone us-central-f
+    $ gcloud compute instances create gcelab2 --machine-type n1-standard-2 --zone us-central-f
     
 ### Connect to Instance
 
