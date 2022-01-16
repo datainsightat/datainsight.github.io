@@ -83,13 +83,13 @@
 ### Create Template
 
     $ gcloud compute instance-templates create lb-backend-template \
-   --region=us-central1 \
-   --network=default \
-   --subnet=default \
-   --tags=allow-health-check \
-   --image-family=debian-9 \
-   --image-project=debian-cloud \
-   --metadata=startup-script='#! /bin/bash
+    --region=us-central1 \
+    --network=default \
+    --subnet=default \
+    --tags=allow-health-check \
+    --image-family=debian-9 \
+    --image-project=debian-cloud \
+    --metadata=startup-script='#! /bin/bash
      apt-get update
      apt-get install apache2 -y
      a2ensite default-ssl
