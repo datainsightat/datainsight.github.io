@@ -167,3 +167,101 @@ gcp > DataFlow > Create Job from Template > Textfiles on Cloud Storage to BigQue
 
 [Dataflow Template Code](https://github.com/GoogleCloudPlatform/DataflowTemplates/blob/master/src/main/java/com/google/cloud/teleport/templates/TextIOToBigQuery.java)
 
+# Dataflow ETL Pypeline Python
+
+## Initilalize
+
+        $ gcloud auth list
+        $ gcloud config list project
+        
+Cloud Shell Editor
+    
+        $ git clone https://github.com/GoogleCloudPlatform/training-data-analyst
+        $ cd ~/training-data-analyst/quests/dataflow_python/
+
+## Write ETL Pipeline
+
+        $ cd 1_Basic_ETL/lab
+        $ export BASE_DIR=$(pwd)
+        
+### Install Virtual Environment
+
+        $ sudo apt-get install -y python3-venv
+        $ python3 -m venv df-env
+        $ source df-env/bin/activate
+        
+### Install Packages
+
+        $ python3 -m pip install -q --upgrade pip setuptools wheel
+        $ python3 -m pip install apache-beam[gcp]
+        
+## Write First Pipeline
+
+### Generate Synthetic Data
+
+        $ cd $BASE_DIR/../..
+        $ source create_batch_sinks.sh
+        $ bash generate_batch_events.sh
+        $ head events.json
+        
+### Read Data from Source
+
+[Gitlab Source Code](https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/quests/dataflow_python/1_Basic_ETL/solution/my_pipeline.py)
+
+        $ cd $BASE_DIR
+        $ export PROJECT_ID=$(gcloud config get-value project)
+        $ python3 my_pipeline.py \
+        --project=${PROJECT_ID} \
+        --region=us-central1 \
+        --stagingLocation=gs://$PROJECT_ID/staging/ \
+        --tempLocation=gs://$PROJECT_ID/temp/ \
+        --runner=DirectRunner
+        
+### Transform
+
+### Write Data to Sink
+
+        $ bq ls
+        $ bq ls logs
+       
+### Run Pipeline
+
+        $ python3 my_pipeline.py \
+        --project=${PROJECT_ID} \
+        --region=us-central1 \
+        --stagingLocation=gs://$PROJECT_ID/staging/ \
+        --tempLocation=gs://$PROJECT_ID/temp/ \
+        --runner=DataflowRunner
+        
+![Dataflow Python](../../../img/gcp_dataflow_65.jpg)
+        
+## Parametrizing Basic ETL
+
+### Create JSON Schema File
+
+        $ cd $BASE_DIR/../..
+        $ bq show --schema --format=prettyjson logs.logs
+        
+        $ bq show --schema --format=prettyjson logs.logs | sed '1s/^/{"BigQuery Schema":/' | sed '$s/$/}/' > schema.json
+        $ cat schema.json
+        $ export PROJECT_ID=$(gcloud config get-value project)
+        $ gsutil cp schema.json gs://${PROJECT_ID}/
+        
+### Create Transform JavaScript
+
+transform.js
+
+        function transform(line) {
+          return line;
+        }
+        
+        $ export PROJECT_ID=$(gcloud config get-value project)
+        $ gsutil cp *.js gs://${PROJECT_ID}/
+        
+### Run Dataflow Template
+
+gcp > Dataflow > Create Job From Template
+
+![Dataflow Job](../../../img/gcp_dataflow_66.jpg)  
+
+![Dataflow Job](../../../img/gcp_dataflow_67.jpg)  
