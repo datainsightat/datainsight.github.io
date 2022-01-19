@@ -722,7 +722,7 @@ Decide when to close window, even if late data has not arrived.
     * Watermarks
 <a/>
 
-## Data Sinks
+## Beam Data Sinks
 
     Java
     @AutoValue
@@ -1089,3 +1089,42 @@ Decide when to close window, even if late data has not arrived.
     
     clas FileToWordsFn(beam.DoFn):
         def process(...)
+
+## Beam Schemas
+
+### Convert Elements into Objects
+
+![Convert Elements](../../img/gcp_dataflow_88.jpg)
+
+### Schemas
+
+* Describes a type in Terms of fields and values
+* String names or numerical indexed
+* Primitive Types int, long, string
+* Some field can be marked optional
+* Schemas can be nested
+<a/>
+
+### Code Examples
+
+#### Filter Purchases
+
+##### Without Schemas
+
+    purchases.apply(Filter.by(purchase -> {
+        return purchase.location.lat < 40.720 && purchase.location.lat > 40.699
+            && purchase.location.lon < -73.969 && purchase.locatoin.lon > -74.747}));
+            
+##### With Schemas
+
+    purchases.apply(
+        Filter.whereFieldName("location.lat", (double lat) -> lat < 40.720 && lat > 40.699)
+              .whereFieldName("lcoation.lon", (double lon) -> lon < -73.969 && lon > -74.747));
+              
+#### Total Purchases per Transaction
+
+    PCollection<UserPurchases> userSums =
+    purchases.apply(Join.innerJoin(transactions).using("transactionId"))
+             .apply(Select.fieldNames("lhs.userId","rhs.totalPurchase"))
+             .apply(Group.byField("userId").aggregateField(Sum.ofLongs(),"totalPurchase"));
+
