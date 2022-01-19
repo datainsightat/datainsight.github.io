@@ -575,6 +575,8 @@ Start Dataflow Pipeline
 
 ## Beam Basics (Beam = Batch + Stream)
 
+[Apache Beam Programming Guide](https://beam.apache.org/documentation/programming-guide/#pipeline-io)
+
 ![Beam Components](../../img/gcp_dataflow_58.jpg)
 
 ## Transforms
@@ -710,3 +712,380 @@ Decide when to close window, even if late data has not arrived.
           AfterProcessingTime(1*60))),
       accumulation_mode=AccumulationMode.DISCARDING,
       allowed_lateness=Duration(seconds=2*24*60*60))
+
+# Sources and Sinks
+
+* Source: Read Data
+    * Bounded: Batch Data (Read Data in Bundles)
+    * Unbounded: Stream Data
+* Sink: Write Data (PTransform Write)
+    * Watermarks
+<a/>
+
+## Data Sinks
+
+    Java
+    @AutoValue
+        public abstract static class Write<T> extends
+    PTransform<PCollectoin<T>,WriteResult> {
+    
+    Python
+    class WriteToPubSub(PTransform):
+    
+### Text IO
+
+#### Reading
+
+##### Java
+
+    Pipeline
+        .apply(
+            "Read from source",
+            TextIO
+                .read()
+                .from(options
+                .getInputFilePattern()))
+
+###### Reading with Filenames
+
+    p.apply(
+        FileIO
+        .match()
+        .filepattern("hdfs://path/to/*.gz"))
+    .apply(
+        FileIO
+        .readMatches().withCompression(Compression.GZIP))
+    .apply(
+        ParDo.of(
+            mew DoDn<FileIO.ReadableFile, String>() {
+            @ProcessElement
+            public void process(
+                @Element FileIO.ReadableFile file) {
+                    LOG.info("File Metadata resourceId is {} ",
+                        file.getMetadata().resourceId());
+                }
+            }));
+
+###### Processing Files as they arrive
+
+    p.apply(
+        FileIO.match()
+            .filepattern("...")
+            .continuously (
+                Duration.standardSeconds(30),
+                Watch.Growth.afterTimeSinceNewOutput(
+                    Duration.standardHours(1))));
+
+###### Contextual Text reading
+
+    PCollection<Row> records1 =
+        p.apply(ContextualTextIO.read().from("..."));
+        
+    PCollection<Row> records2 =
+        p.apply(ContextualTextIO.read()
+            .from("/local/path/to/files/*.csv")
+            .withHasMultilineCSVRecors(true));
+    
+    PCollection<Row> records3 =
+        p.apply(ContexturalTextIO.read()
+            .from("/local/path/to/files/*")
+            .watchForNewFiles(
+                Duration.standardMinutes(1),
+                afterTimeSinceNewOutput(
+                    Duration.standardHours(1))));
+                    
+##### Python
+
+    pcoll1 = (pipeline
+        | 'Create' >> Create([file_name])
+        | 'ReadAll' >> ReadAllFromText())
+        
+    pcoll2 = pipeline | 'Read' >> ReadFromText(file_name)
+
+###### Reading with Filenames
+
+    with beam.Pipeline() as p:
+        readable_files = (
+            p
+            | fileio.MatchFiles ('hdfs://path/to/*.txt')
+            | fileio.ReadMatches()
+            | beam.Reshuffle())
+        files_and_contens = (
+            readable_files
+            | beam.Map(lambda x: (x.metadata.path,
+                x.read_utf8)))
+
+###### Processing Files as they Arrive
+
+    with beam.Pipeline() as p:
+        readable_files = (
+            p
+            | beam.io.ReadFromPubSub(...)
+            ... #<Parse PubSub Message and Yield Filename>
+        )
+        files_and_contents = (
+            readable_files
+            | ReadAllFromText())
+
+#### Writing
+
+##### Java
+
+    csv.appy(
+        "Write to storage",
+        TextIO
+        .write()
+        .to(Options
+            .getTextWritePrefix())
+            .withSuffix(".csv"));
+
+###### Text Writing with Dynamic Destinations
+
+    PCollection<BankTransaction> transactions = ...;
+    
+    transactions.apply(FileIO.<TransactionType,
+        Transaction>writeDynamic()
+        .by(Transaction::getTypeName)
+        .via(tx -> tx.getTypeName().toFields(tx),
+            type -> new CSVSink(type.getFieldNames()))
+        .to(".../path/to/")
+        .withNaming(type -> defaultNaming(
+            type + "-transactions", ".csv"));
+            
+##### Python
+
+    transformed_data
+    | 'write' >> WriteToText(
+        known_args.output, coder=JsonCoder()))
+
+###### Text Writing with Dynamic Destinations
+
+    (my_pcollection
+    | beam.io.fileio.WriteToFiles(
+        path='/my/file/path',
+        destination=lamba record: 'avro'
+            if record ['type'] == 'A' else 'csv',
+        sink = lamda dest: AvroSink()
+            if fest == 'avro' else CsvSink(),
+                file_naming = beam.io.fileio
+                .destination_prefix_naming()))
+ 
+ ### BigQuery IO
+ 
+ #### Reading
+ 
+ ##### Java
+ 
+    PCollection<Double> maxTemperatures = 
+        p.apply(
+            BigQueryIO.read(
+                (SchemaAndRecord elem) -> (Double)
+                    elem.getRecord()
+                    .get("max_temperature"))
+            .fromQuery(
+                "select max_temperature from
+                `clouddataflow-readonly.samples.weather_stations`")
+            .usingStandardSql()
+            .withCoder(DoubleCoder.of()));
+            
+###### Reading with BiqQuery Storage API
+
+    PCollection<MyData> rows =
+        pipeline.apply("Read from BitQuery table",
+            BigQueryIO.readTableRows()
+                .from(
+                    String.format("%s:%s,%s,
+                        project, dataset, table))
+                .withMethod(Method.DIRECT_READ)
+                //.withRowRestriction
+                .withSelectedFields(
+                    Arrays.asList(..."string_...","Int64...")))
+                        .apply("TableRows to MyData",
+                            MapElements.into(
+                                TypeDescriptor.of(MyData.class))
+                        .via(MyData::fromTableRow))
+
+##### Python
+
+    max_temperatures = (
+        p
+        | 'QueryTableStdSQL' >> beam.io.ReadFromBigQuery(
+            query = 'select max_temperature from '\
+            `clouddataflow-readonly.samples.weather_stations`',
+            use_standard_sql=True)
+        | beam.Map(lambda elem: elem['max_temperature']))
+        
+#### Writing
+
+##### Java
+
+###### Dynamic Destinations
+
+        pc.apply(BigQueryIO.<Purchase>write(tableSpec)
+            .useBeamSchema()
+            .to((ValueInSingleWindow<Purchase> purchase) -> {
+                return new TableDestition(
+                    "project:dataset-" +
+                        purchase.getValue().getUser() +
+                        ":purchases","");
+            });
+
+##### Python
+
+    def table_fn(element, fictional_characters):
+        if element in fictional_characters:
+            return 'my_dataset.fictional_quotes'
+        else:
+            return 'my_dataset.real_quotes'
+            
+    quotes | 'WriteWithDynamicDestination' >>
+    beam.io.WriteToBigQuery(
+        table_fn,
+        schema=table_schema,
+        table_side_inputs=(fictional_characters_view, ),
+        ...)
+        
+### Pub/Sub IO
+
+#### Java
+
+    pipline
+        .apply("Read PubSub Messages",
+            PubsubIO
+            .readStrings()
+            .fromTopic(options.getInputTopic()))
+        .apply(
+            Window.into(
+                FixedWindows.of(
+                    Duration.standardMinutes(
+                        options.getWindowSize()))));
+
+#### Python
+
+    class GroupWindowsIntoBatches(beam.PTransform):
+    ...
+        >> beam.WindowInto(
+            window.FixedWindows(self.window_size))
+    
+    pipeline
+        | "Read PubSub Messages"
+            >> beam.io.ReadFromPubSub(topic=input_topic)
+        | "Window into"
+            >> GroupWindowsIntoBatches(window_size)
+
+### Kafka IO
+
+#### Java
+
+    PCollectoin<KV<String, String>> records =
+    pipeline
+        .apply("Rad From Kafka",
+            KafkaIO.<String, String>read()
+                .withConsumerConfigUpdates(ImmutableMap.of(
+                    CosumerConfig
+                        .AUTO_OFFSET_RESET_CONFIG, "earlies"))
+        .withBootstrapServers(options.getBootstrapServers())
+            .withTopics(<...list...>)
+            .withKeyDeserializersAndCoder(...))
+            .withValueDeserializerAndCoder(...)
+            .withoutMetadata())
+            
+#### Python
+
+    pipeline
+        | ReadFromKafka(
+            consumer_config={
+                'bootstrap.servers':bootstrap_servers},
+                topics=[topic])
+
+### BigTable IO
+
+#### Java
+
+    p.appy("filterd read",
+        BittableIO.read()
+            .withProjectId(projectId)
+            .withInstanceId(instanceId)
+            .withTableId("table")
+            .withRowFilter(filter));
+
+##### Reading with Prefix Scan
+
+    ByteKeyRange keyRange = ...;
+    p.appy("read",
+    BittableIO.read()
+        .withProjectId(projecctId)
+        .withInstanceId(instanceId)
+        .withTableId("table")
+        .withKeyRange(keyRange));
+
+##### BigTable IO writing with additional actions
+
+    PCollection<KV<..., Iterable<Mutation>>> data = ...;
+    
+    PCollection<BigtableWriteResult> writeResults = 
+        data.apply("write",BittableIO.write()
+            .withProjectId("project")
+            .withInstanceId("instance")
+            .withTableId("table"))
+            .withWriteResults();
+    
+    PCollection<...> moreData = ...;
+    
+    moreData
+        .apply("wait for writes", Wait.on(writeResults))
+        .apply("do something", ParDo.of(...))
+        
+### Avro IO
+
+#### Java
+
+    PCollection<AvroAutoGenClass> records =
+        p.apply(AvroIO.read(AvroAutoGenClass.class)
+            .from("gs:...*.avro"));
+    
+    Schema schema = new Schema.Parser()
+        .parse(new File("schema.avsc"));
+    
+    PCollecction<GenericRecord> records =
+        p.apply(AvroIO.readGenericRecords(schema)
+            .from("gs:...-*.avro"));
+
+#### Python
+
+    with beam.Pipeline() as p:
+        records = p | 'Read' >> beam.io.ReadFromAvro('/mypath/myavrofiles*')
+
+### Splittable DoFn
+
+![Splittable](../../img/gcp_dataflow_87.jpg)
+
+#### Java
+
+    @BoundPerElement
+    private static class FileToWordsFn extends DoFn<String,Integer> {
+        @GetInitialRestriction
+        public OffsetRange getInitialRestriction(
+            @Element String fileName) throws IOException {
+                return new OffsetRange(0,
+                    new File(fileNam).length());
+            }
+
+    @ProcessElement
+    public void processElement(
+        @Element String fileName,
+        RestrictionTracker<OffsetRange, Long> tracker,
+        OutputReceiver<Integer> outputReceiver){...}
+        
+
+#### Python
+
+    class FileToWordsRestrictionProvider(
+        beam.io.RestrictionProvider):
+            def initial_restriction(self, file_name):
+                return OffsetRange(0,os.stat(file_name).st_size)
+            def create_tracker(self,restriction):
+                return beam.io.restriction_trackers.OffsetRestrictionTracker()
+    
+    clas FileToWordsFn(beam.DoFn):
+        def process(...)
