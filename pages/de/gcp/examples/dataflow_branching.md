@@ -121,3 +121,107 @@ MyPipeline.java
     --tableName=${TABLE_NAME}"
     
 ![Pipeline](../../../img/gcp_dataflow_91.jpg)
+
+# Dataflow Branching - Python
+
+## Initialize
+
+    $ gcloud auth list
+    $ gcloud config list project
+    
+## Get Repo
+    
+    $ git clone https://github.com/GoogleCloudPlatform/training-data-analyst
+    $ cd ~/training-data-analyst/quests/dataflow_python/
+    
+## Multiple Transactions
+
+    [PCollection1] = [Initial Input PCollection] | [A Transform]
+    [PCollection2] = [Initial Input PCollection] | [A Different Transform]
+    
+## Implement Branching Pipeline
+
+### Open Lab
+
+    $ cd 2_Branching_Pipelines/lab
+    $ export BASE_DIR=$(pwd)
+    
+### Setup Virtual Environment
+
+    $ sudo apt-get install -y python3-venv
+    $ python3 -m venv df-env
+    $ source df-env/bin/activate
+    
+### Install Packages
+
+    $ python3 -m pip install -q --upgrade pip setuptools wheel
+    $ python3 -m pip install apache-beam[gcp]
+    
+### Enable Dataflow API
+
+    $ gcloud services enable dataflow.googleapis.com
+
+### Setup Data Environment
+
+    $ cd $BASE_DIR/../..
+    $ source create_batch_sinks.sh
+    $ source generate_batch_events.sh
+    $ cd $BASE_DIR
+    
+### Add Branch
+
+    # Read in lines to an initial PCollection that can then be branched off of
+    lines = p | 'ReadFromGCS' >> beam.io.ReadFromText(input_path)
+
+    # Write to Google Cloud Storage
+    lines | 'WriteRawToGCS' >> beam.io.WriteToText(output_path)
+
+    # Read elements from Json, filter out individual elements, and write to BigQuery
+    (lines
+        | 'ParseJson' >> beam.Map(parse_json)
+        | 'DropFields' >> beam.Map(drop_fields)
+        | 'FilterFn' >> beam.Filter(lambda row: row['num_bytes'] < 120)
+        | 'WriteToBQ' >> beam.io.WriteToBigQuery(
+            table_name,
+            schema=table_schema,
+            create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
+            write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE
+            )
+    )
+
+### Filter Data by Field
+
+    def drop_field(element):
+      element.pop('field_name')
+      return element
+      
+### Filter Data by Element
+
+    purchases | beam.Filter(lambda element : element['cost_cents'] > 20*100)
+    
+### Add Custom Command-Line Parameters
+
+    parser = argparse.ArgumentParser(description='...')
+    # Define and parse arguments
+    options = PipelineOptions()
+    # Set options values from options
+    p = beam.Pipeline(options=options)
+    
+    parser.add_argument('--argument_name', required=True, help='Argument description')
+    
+    opts = parser.parse_args()
+    arg_value = opts.arg_name
+
+### Add Nullable Fields
+
+    {
+        "name": "field_name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    }
+    
+[Github Source](https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/quests/dataflow_python/2_Branching_Pipelines/solution/my_pipeline.py)
+    
+## Run Pipeline
+
+![Pipeline](../../../img/gcp_dataflow_92.jpg)
