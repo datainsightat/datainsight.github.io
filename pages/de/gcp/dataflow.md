@@ -1130,3 +1130,173 @@ Decide when to close window, even if late data has not arrived.
              .apply(Select.fieldNames("lhs.userId","rhs.totalPurchase"))
              .apply(Group.byField("userId").aggregateField(Sum.ofLongs(),"totalPurchase"));
 
+## State and Timers
+
+* Domain-specific triggering
+* Slowly changing dimensions
+* Stream joins
+* Fine-grained aggregation
+* Per-key workflows
+<a/>
+
+### States
+
+![Aggregation](../../img/gcp_dataflow_93.jpg)  
+
+#### Types of State Variables
+
+|Type|Strength|Dataflow|
+|-|-|-|
+|Value|Read/write any value|yes|
+|Bag|Cheap append no ordering on read|yes|
+|Combining|Associatie/cummulative compaction|yes|
+|Map|Read/write just keys you specify|yes|
+|Set|Membership checking|no|
+
+#### Stateful ParDo
+
+![Stateful ParDo](../../img/gcp_dataflow_94.jpg)  
+
+![State Variables](../../img/gcp_dataflow_95.jpg)  
+
+#### Accumulate Calls
+
+    class StatefulBufferingFn(beam.DoFn):
+        MAX_BUFFER_SIZE = 500;
+        BUFFER_STATE = BagStateSpec('buffer', EventCoder())
+        COUNT_STATE = CombiningValueStateSpec('count',VarIntCoder(),combiners.SumCombineFn())
+        
+        def process(self, element,
+            buffer_state=beam.DoFn.StateParam(BUFFER_STATE),
+            count_state=beam.DoFn.StateParam(COUNT_STATE)):
+            
+            buffer_state.add(element)
+            count_state.add(1)
+            count=count_state.read()
+            
+            if count >= MAX_BUFFER_SIZE:
+                for event in buffer_state.read():
+                    yield event
+                count_state.clear()
+                buffer_state.clear()
+
+? What happens with the last Buffer, if it has not got enough messages to be cleared?
+
+### Timers
+
+![Timers](../../img/gcp_dataflow_96.jpg)
+
+    class StatefulBufferingFn(beam.DoFn):
+        ...
+        
+        EXPIRY_TIMER = TimerSpec('expiry', TimeDomatin.WATERMARK)
+        
+        def process(self, element,
+            w = beam.DoFn.WindowParam,
+            ...
+            expiry_timer=beam.DoFn.TimerParam(EXPIRY_TIMER)):
+                expiry_timer.set(w.end + ALLOWED_LATENESS)
+                
+        @on_timer(EXPIRY_TIMER)
+        def_expiry(self,
+            buffer_state=beam.DoFn.StateParam(BUFFER_STATE),
+            count_state=beam.DoFn.StateParam(COUNT_STATE)):
+            
+            events = buffer_state.read()
+            for event in events:
+                yield event
+            buffer_state.clear()
+            count_state.clear()
+
+![Timers](../../img/gcp_dataflow_97.jpg)  
+
+![Timers](../../img/gcp_dataflow_98.jpg)  
+
+## Best Practices
+
+### Handling Unprocessable Data
+
+![Error Data](../../img/gcp_dataflow_100.jpg)  
+
+    final TupleTag successTag;
+    final TupleTag deadLetterTag;
+    PCollection input = /* ... */;
+    
+    PCollectionTuple outputTuple = input.apply(ParDo.of(new DoDn(){
+        @Override
+        void processElement(ProcessContext ctxt) {
+            try {
+                c.output(process(c.element));
+            } catch(MyException ex) {
+                //optional Logging at debug level
+                c.sideOutPut(deadLetterTag, c.element);
+            }
+        }
+    })).writeOutPutTags(successTag, TupleTagList.of(deadLetterTag));
+    
+    // Write dead letter elements to separate sink
+    outputTuple.get(deadLetterTag).apply(BigQuery.write(...));
+    
+    //Process the successful element differently
+    PCollection success = outputTuple.get(successTag);
+    
+### Error Handling
+
+* Errors are part of any data processing dataline
+* Always wrap code in try-cat block
+* In exception store exception to sink
+<a/>
+
+### AutoValue Code Generator
+
+* Schemas are best way to represent objects in pipeline.
+* There are still places where a POJO (Plain Old Java Objects) is needed.
+* Use AutoValue class to generate POJOs.
+<a/>
+
+### Jandling JSON Data
+
+    PCollection<MyUserType> = json
+        .apply("Parse JSON to BEAM Rows", JsonToRow.withSchema(expectedSchema))
+        .apply("Convert to a user type with a compatible schema registered", Convet.to(MyUserType.class))
+
+### DoFn Lifecycle
+
+![DoFn](../../img/gcp_dataflow_101.jpg)
+
+    public class External extends DoFn{
+    @Override
+    public void startBundle(){
+        Instantiate your external service client (Static if threadsafe)
+    }
+    @Override
+    public void processElement(){
+        Call out to external service
+    }
+    @Override
+    puvlic void finishBundle(){
+        Shutdown your external service client if needed
+    }}
+    
+    class MyDoFn(beam.DoFn):
+        def setup(self):
+            pass
+        def start_bundle(self):
+            pass
+        def process(self,element):
+            pass
+        def finish_bundle(self):
+            pass
+        def teardown(self):
+            pass
+
+### Pipeline Optimizations
+
+* Filter data early
+* Move any steps that reduce data volume up
+* Apply data transformations serially to let Dataflow optimize DAG
+* Transform applied serially are good candidates for graph optimization
+* While working with external systems, look out for back pressure.
+* Ensure external system are configured to handle peak volume.
+<a/>
+
