@@ -1457,6 +1457,40 @@ ZetaSQL
         | beam.Map(lambda row: f'{row.word}:{row.count}')
         | beam.Map(print))
 
+## Beam Notebooks
 
+![Notebooks](../../img/gcp_dataflow_104.jpg)
 
+* Interactive Notebooks
+* Access to intermediate results
+* Stream or Batch Sources
+<a/>
 
+gcp > Datflow > Notebooks  
+
+### Add a transform
+
+    words = p | "read" >> beam.io.ReadFromPubSub(topic=topic)
+    
+    windowed_words = (words
+        | "window" >> beam.WindowInto(beam.window.FixedWindows(10)))
+    
+    windowed_words_counts = (windowed_words
+        | "count" >> beam.combiners.Count.PerElement())
+
+#### Interactivity Optins before we run the Cell
+
+* ib.options.recording_duration
+* ib.options.recording_size_limit
+* ib.show
+* ib.collect
+<a/>
+
+### Development to Production
+
+    from apache_beam.runners import DataflowRunner
+    
+    options = pipeline_options.PipelineOptions()
+    
+    runner = DataflowRunner()
+    runner.run_pipeline(p,options=options)
