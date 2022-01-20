@@ -1300,3 +1300,163 @@ Decide when to close window, even if late data has not arrived.
 * Ensure external system are configured to handle peak volume.
 <a/>
 
+## SQL
+
+Providing a schema enables SQL API.
+
+|Input|Input|Input|
+|-|-|-|
+|BigQuery UI|Analytical queries over historical data|Data analyst|
+|Dataflow SQL UI|Analytical queries over real-time data|Data analyst|
+|Beam SQL|Integrating SQL within a Beam pipeline|Data engineer|
+
+### Beam SQL
+
+* Works with stream and batch inputs
+* Can be embedded in an existing pupeline usin SqlTransform
+* Supports UDFs in Java
+* Integrates with Schemas
+* Stream aggregations support windows
+<a/>
+
+### Dialects
+
+Apache Calcite
+* Compatibility
+* Mature implementation
+<a/>
+
+ZetaSQL
+* BigQuery compatibility
+<a/>
+
+### Dataflow SQL
+
+* Beam ZetaSQL
+* Write Dataflow SQL in BigQuery UI
+* Optional engine for long running jobs
+<a/>
+
+![Dataflow SQL](../../img/gcp_dataflow_103.jpg)  
+
+* Select from PubSub
+* Join with batch data
+* Aggregate over Window
+* Publish to BigQuery or PubSub
+<a/>
+
+    $ gcloud dataflow sql query 'select sum(foo) as baz, end_of_window
+    from my_topic where something_is_true(bizzle)
+    group by tumbling(timestamp, 1 hour)'
+
+    String sql1 = "select my_func(c1), c2 from pcollection";
+    PCollection<Row> outpoutTableA = inputTableA.apply(
+        SqlTransform
+            .query(sql1)
+            .addUdf("MY_FUNC", MY_FUNC.class, "FUNC");
+    
+### Windowing in SQL
+
+### Fixed Windows
+
+    select
+        productId,
+        tumble_start("INTERVAL 10 SECOND") as period_start, count(transactionId) as num_purchases
+    from
+        pubsub.topic.`instant-insights`.`retaildemo-online-purchases-json` as pr
+    group by
+        productId,
+        tumble(pr.event_timestamp, "INTERVAL 10 SECOND");
+
+### Sliding Windows
+
+    select
+        productId,
+        hop_start("INTERVAL 10 SECOND","INTERVAL 30 SECOND") as period_start,
+        hop_end("INTERVAL 10 SECOND","INTERVAL 30 SECOND") as period_end,
+        count(transactionId) as num_purchases
+    from
+        pubsub.topic.`instant-insights`.`retaildemo-online-purchases-json` as pr
+    group by
+        productId,
+        hop(pr.event_timestamp,"INTERVAL 10 SECOND","INTERVAL 30 SECOND");
+
+### Session Windows
+
+    select
+        userId,
+        session_start("INTERVAL 10 MINUTE") as interval_start,
+        session_end("INTERVAL 10 MINUTE") as interval_end,
+        count(transactionId) as num_transactions
+    from
+        pubsub.topic.`instant-insights`.`retaildemo-online-purchases-json` as pr
+    group by
+        userId,
+        session(pr.event_timestamp, "INTERVAL 10 MINUTE");
+        
+### Beam DataFrames
+
+* Compatible with Pandas DataFrames
+* Prallel processing with Beam model
+* Provides access to familiar interfase within Beam pipeline
+<a/>
+
+#### DataFrames GroupBy
+
+    pc = p | beam.Creaate(['strawberry','raspberry','blackberry','blueberry','bananan']
+    pc | GroupBy(lambda name: name[0])
+    
+#### DataFrames Transform
+
+    def my_function(df):
+        df['C'] = df.A + 2*df.B
+        result = df.groupby('C').sum().filter('A < 0')
+        return result
+        
+    output = input | DataframeTransform(my_function)
+
+### Convert PCollection to Beam DataFrames
+
+    with beam.Pipeline() as p:
+        pc1 = ...
+        pc2 = ...
+        
+        df1 = to_dataframe(pc1)
+        df2 = to_dataframe(pc2)
+        ...
+        result = ...
+        
+        result_pc = to_pcollection(result)
+        
+        result_pc | beam.WriteToText(...)
+
+### Differences from standard Pandas
+
+* Operations are deferred
+* Result columns must be computable without access to the data
+* PCollections in Beam are inherently unordered
+<a/>
+
+### Use case: Count Words
+
+    words = (
+        lines
+            | 'Split' >> beam.FlatMap(
+                lamda line: re.findall(r'[\w]+', line)).with_output_types(str)
+            | 'ToTows' >> beam.Map(lambda word: beam.Row(word=word)))
+    df = to_dataframe(words)
+    df['count'] = 1
+    counted = df.groupby['word'].sum()
+    counted.to_csv(known_args.output)
+
+    counted_pc = to_pcollection(counted, include_indexes=True)
+    
+    _ = (
+        counted_pc
+        | beam.Filter(lambda row: row.count > 50)
+        | beam.Map(lambda row: f'{row.word}:{row.count}')
+        | beam.Map(print))
+
+
+
+
