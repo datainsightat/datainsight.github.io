@@ -1494,3 +1494,44 @@ gcp > Datflow > Notebooks
     
     runner = DataflowRunner()
     runner.run_pipeline(p,options=options)
+
+# Cloud Monitoring
+
+## Job Information
+
+Filtered view is saved in URL => Copy and Paste
+
+* List
+* Info
+* Graph
+* Metrics
+    * CPU Utilization: All workers should have the same load. Group_by clauses can not be sprlit across workers. This might be a cause for uneven worker load.
+    * Data Freshness: Difference between real-time and output watermark. 
+    * System Latencies: How long does data take to be processed?
+<a/>
+
+# Troubleshooting
+
+* Check for errors
+* Looking for anomalies
+<a/>
+
+## Types of Troubles
+
+* Failure in building the pipeline
+    * Validate "Beam Model" aspects
+    * Validate input/output specifications
+    * Reproduce it with direct runner, in a unit test
+* Failure in starting the pipeline
+* Failure during pipeline execution
+* Performance problems
+    * Pipeline design
+    * Data shape
+    * Interactions with sources, sinks and external connections
+<a/>
+
+
+
+
+
+
