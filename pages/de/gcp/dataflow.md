@@ -13,21 +13,21 @@
 
 ![Dataflow vs Dataproc](../../img/gcp_dataflow_10.png)
 
-## Apache Beam
+# Apache Beam
 
 ![Apache Beam](../../img/gcp_dataflow_11.png)
 
-### Datagraph
+## Datagraph
 
 ![Datagraph](../../img/gcp_dataflow_12.png)
 
-### PCollection
+## PCollection
 
 ![PCollection](../../img/gcp_dataflow_13.png)
 
 In a PCollection all data is immutable and stored as bytestring.
 
-## How does Dataflow Work?
+# How does Dataflow Work?
 
 * Fully Managed
 * Optimizes Datagraph
@@ -37,17 +37,17 @@ In a PCollection all data is immutable and stored as bytestring.
 
 ![How Dataflow works](../../img/gcp_dataflow_14.png)
 
-## Dataflow Pipelines
+# Dataflow Pipelines
 
-### Simple Pipeline
+## Simple Pipeline
 
 ![Simple Pipeline](../../img/gcp_dataflow_15.png)
 
-### Branching Pipeline
+## Branching Pipeline
 
 ![Branching](../../img/gcp_dataflow_16.png)
 
-### Start End
+## Start End
 
     import apache_beam as beam
     
@@ -70,11 +70,11 @@ In a PCollection all data is immutable and stored as bytestring.
     
     pipeline = beam.Pipeline(options=pipeline_options) # Creates the pipeline
 
-#### Run local
+### Run local
 
     $ python ./grep.py
 
-#### Run on cloud
+### Run on cloud
 
     $ python ./grep.py \
              --project=$PROJECT \
@@ -83,7 +83,7 @@ In a PCollection all data is immutable and stored as bytestring.
              --temp_location=gs://$BUCKET/tmp/ \
              --runnner)DataflowRunner
  
-### Read Data
+## Read Data
  
     with beam.Pipeline(options=pipeline_options as p:
     
@@ -98,7 +98,7 @@ In a PCollection all data is immutable and stored as bytestring.
       BQ_source = beam.io.BigQuerySource(query = <query>, use_standard_sql=True)
       BQ_data = pipeline | beam.io.Read(BG_srouce)
       
-### Write to Sinks
+## Write to Sinks
  
     from apache_beam.io.gcp.internal.clients import bigquery
     
@@ -113,7 +113,7 @@ In a PCollection all data is immutable and stored as bytestring.
       write_disposition=beam.io.BigQuerryDisposition.WRITE_TRUNCATE,
       create_disposition=beam.io.BigQueryDisposition.CREATE_IT_NEEDED)
 
-### Map Phase > Transform
+## Map Phase > Transform
 
     'WordLengths' >> beam.Map(word, len(word))
 
@@ -123,7 +123,7 @@ In a PCollection all data is immutable and stored as bytestring.
         
     'Grep' >> beam.FlatMap(my_grep(line, searchTerm))
 
-#### ParDo Parallel Processing
+### ParDo Parallel Processing
 
 ![ParDo](../../img/gcp_dataflow_18.png)
 
@@ -137,7 +137,7 @@ In a PCollection all data is immutable and stored as bytestring.
     # ParDo
     word_lengths = words | beam.ParDo(ComputeWordLengthFn())
 
-##### Multiple Variables
+#### Multiple Variables
 
     results = (words | beam.PrDo(ProcessWords(),
       cutoff_length=2, marker='x')
@@ -147,7 +147,7 @@ In a PCollection all data is immutable and stored as bytestring.
     above = results.above_cutoff_strings
     marked = results['marked strings']
 
-### GroupByKey
+## GroupByKey
 
 ![GoupByKey](../../img/gcp_dataflow_20.png)  
 
@@ -158,7 +158,7 @@ Data skew makes grouping less efficient at scale.
     totalAmount = salesAmounts | CombineGlobally(sum)
     totalSalesPerPerson = salesRecords | CombinePerKey(sum)
     
-### CombineFn works by overriding exisintg operations
+## CombineFn works by overriding exisintg operations
 
 You must provide four functions
 
@@ -186,17 +186,17 @@ Combine is more efficient that GroupByKey
 
 ![GoupByKey vs Combine](../../img/gcp_dataflow_22.png)  
 
-### Flatten Merges identical PCollections
+## Flatten Merges identical PCollections
 
 ![Flatten](../../img/gcp_dataflow_23.png)
 
-### Partition Splits PCollections
+## Partition Splits PCollections
 
 ![Partition](../../img/gcp_dataflow_24.png)
 
-## Side-Inputs and Windows
+# Side-Inputs and Windows
 
-### Side-Input
+## Side-Input
 
 A side-input is an input the do-function can access every time it processes an element of the inputP collection.  
 
@@ -219,7 +219,7 @@ A side-input is an input the do-function can access every time it processes an e
         filter_using_length,
         lower_bound=value.AsSingleton(avg_word_len)))
         
-### Window
+## Window
 
 Unbounded PCCollection not useful for Streaming data.  
 
@@ -238,13 +238,13 @@ Use time windows.
     
     windowed_counts = windowed_counts | beam.ParDo(PrintWindowFn())
 
-## Templates
+# Templates
 
 ![Templates](../../img/gcp_dataflow_28.png)
 
 Separate developer from user.  
 
-### Create own Template
+## Create own Template
 
 ![Own Templates](../../img/gcp_dataflow_29.png)
 
@@ -252,11 +252,11 @@ Each template has metadata:
 
 ![Metadata](../../img/gcp_dataflow_30.png)  
 
-## Dataflow SQL
+# Dataflow SQL
 
 ![Dataflow SQL](../../img/gcp_dataflow_31.png)  
 
-## Streaming Data Challenges
+# Streaming Data Challenges
 
 * Scalability
 * Fault Tolerance
@@ -268,7 +268,7 @@ Each template has metadata:
 
 ![Aggregation](../../img/gcp_dataflow_33.jpg)  
 
-### Message Ordering
+## Message Ordering
 
 ![Ordering](../../img/gcp_dataflow_34.jpg)  
 
@@ -279,13 +279,13 @@ Timestamps can be modified
     unix_timestamp = extract_timestamp_from_log_entry(element)
     yield beam.window.TimestampedValue(element, unix_timestamp)
     
-### Duplication
+## Duplication
 
     msg.publish(event_data, ,myid="34xwy57223cdg")
     
     p.apply(PubsubIO.readStrings().fromTopic(t).idLabel("myid"))
     
-## Windowing
+# Windowing
 
 * Fixed
 * Sliding
@@ -293,13 +293,13 @@ Timestamps can be modified
 
 ![Windows](../../img/gcp_dataflow_36.jpg)
 
-### Fixed
+## Fixed
 
     from apache_beam import window
     fixed_window_items = (items | 'window' >> beam.WindowInto(window.FixedWindows(60)))
     
 
-### Sliding
+## Sliding
 
     from apache_beam import window
     fixed_window_items = (items | 'window' >> beam.WindowInto(window.SlidingWindows(30,5)))
@@ -310,14 +310,14 @@ Timestamps can be modified
     from apache_beam import window
     fixed_window_items = (items | 'window' >> beam.WindowInto(window.Sessions(10*60)))
     
-## Pipeline Processing
+# Pipeline Processing
 
-### No Latency
+## No Latency
 
 ![No Latency](../../img/gcp_dataflow_37.jpg)
 
 
-### Latencies (Watermark)
+## Latencies (Watermark)
 
 ![Latency](../../img/gcp_dataflow_38.jpg)  
 
@@ -325,11 +325,11 @@ Timestamps can be modified
 
 Late messages won't be processed. You can decide to re-read the dataset.  
 
-### Triggers
+## Triggers
 
 ![Triggers](../../img/gcp_dataflow_40.jpg)
 
-### Allow late Data past the Watermark
+## Allow late Data past the Watermark
 
     pc = [Initial PCollection]
     pc | beam.WindowInto(
@@ -339,11 +339,11 @@ Late messages won't be processed. You can decide to re-read the dataset.
         timestamp_combiner=timestamp_combiner,
         allowed_lateness=Duration(seconds=2*24*60*60)) # 2 days
 
-### Accumulation Mode
+## Accumulation Mode
 
 ![Accumulation Mode](../../img/gcp_dataflow_41.jpg)
 
-## Apache Beam
+# Apache Beam
 
 * Programming model for bath and streaming data pipelines.
 * Pipelines can run locally or other backend servers
@@ -352,7 +352,7 @@ Late messages won't be processed. You can decide to re-read the dataset.
 
 ![Cloud Runner](../../img/gcp_dataflow_50.jpg)
 
-### Beam Portability
+## Beam Portability
 
 Provide portability framework for data pipelines.
 
@@ -369,26 +369,26 @@ Provide portability framework for data pipelines.
 * Faster delivery of new features
 <a/>
 
-### Dataflow Runner V2
+## Dataflow Runner V2
 
-### Container Environment
+## Container Environment
 
 * Containerized with Docker
 * Per-operation execution
 <a/>
 
-#### Custom Container
+### Custom Container
 
 * Apache Beam SDK 2.25.0 or later
 * Docker is required, to test pipeline locally
 
-##### Create Dockerfile
+#### Create Dockerfile
 
     $ from apache/beam_python3.8_sdk:2.25.0
     $ env my_file_name=my_file.txt
     $ copy path/to/myfile/$MY_FILE_NAME ./
     
-##### Build Image
+#### Build Image
 
     $ export PROJECT=my-project-id
     $ export REPO=my-repository
@@ -401,7 +401,7 @@ Provide portability framework for data pipelines.
     $ docker build -f Dockerfile -t $IMAGE_URI ./
     $ docker push $IMAGE_URI
     
-##### Launch Job
+#### Launch Job
 
     $ python my-pipeline.py \
     --input=INPUT_FILE \
@@ -412,7 +412,7 @@ Provide portability framework for data pipelines.
     --runner=DataflowRunner \
     --worker_harness_container_image=$IMAGE_URI
     
-### Cross-Language Transforms
+## Cross-Language Transforms
 
 ![Cross Language](../../img/gcp_dataflow_51.jpg)
 
@@ -426,23 +426,23 @@ Provide portability framework for data pipelines.
     
 ![Cross Language](../../img/gcp_dataflow_52.jpg)
 
-## Separate Compute and Storage
+# Separate Compute and Storage
 
 Dataflow allows executing Apache Beam Pipelines on Google Cloud.
 
-### Dataflow Shuffle Service
+## Dataflow Shuffle Service
 
 Only for Batch pipelines. Faster execution time.  
 
 ![Shuffle Service](../../img/gcp_dataflow_53.jpg)
 
-### Dataflow Streaming Engine
+## Dataflow Streaming Engine
 
 For Streaming Data pipelines. Less CPU and Memory.
 
 ![Streaming Service](../../img/gcp_dataflow_54.jpg)
 
-### Flexible Resource Scheduling (FlexRS)
+## Flexible Resource Scheduling (FlexRS)
 
 Reduce cost of batch processing pipelines
 * Advanced scheduling
@@ -452,22 +452,22 @@ Reduce cost of batch processing pipelines
 
 Execution within 6 hours. For non-time critical workflows.
 
-## IAM
+# IAM
 
-### Job Submission
+## Job Submission
 
 ![Streaming Service](../../img/gcp_dataflow_55.jpg)
 
-### Three Credentials
+## Three Credentials
 
-#### User roles
+### User roles
 
 * Dataflow Viewer: Read-Only access to DF ressources
 * Dataflow Developer: View, Update and Cancel DF jobs
 * Dataflow Admin: Create and manage Dataflow jobs
 <a/>
 
-### Dataflow Service Account
+## Dataflow Service Account
 
 * Interacts between project and Dataflow
 * Used for worker creation and monitoring
@@ -475,7 +475,7 @@ Execution within 6 hours. For non-time critical workflows.
 * Dataflow Agent role
 <a/>
 
-### Dataflow Controller Service Account
+## Dataflow Controller Service Account
 
 * Used by the workers to access resources needed by the pipeline
 * <project-number>-compute@developer.gserviceaccount.com
@@ -483,23 +483,23 @@ Execution within 6 hours. For non-time critical workflows.
   
 ![Controller Service](../../img/gcp_dataflow_56.jpg)
 
-## Quotas
+# Quotas
   
-### CPU
+## CPU
   
 Total number of CPUs consumed in a region.  
 
 gcp > IAM > Quota.  
   
-### IP
+## IP
   
 Total number of VMs with external IP address in a region.
   
-### Persistent Disks
+## Persistent Disks
   
 Either HDD, or SSD. set --worker_disk_type flag (pd-ssd).
 
-#### Batch
+### Batch
   
 * VM to PD ration is 1:1 for batch
 * Size if Shuffle on VM: 250 GB
@@ -507,7 +507,7 @@ Either HDD, or SSD. set --worker_disk_type flag (pd-ssd).
 * Override default: --disk_size_gb
 <a/>
   
-#### Streaming
+### Streaming
 
 * Fixed numer of PD
 * Default size if shuffle on VM: 400 GB
@@ -516,9 +516,9 @@ Either HDD, or SSD. set --worker_disk_type flag (pd-ssd).
 * --max_num_workers
 <a/>
 
-## Security
+# Security
   
-### Data Locality
+## Data Locality
   
 Ensure all data and metadata stays in one region.
   
@@ -527,7 +527,7 @@ Ensure all data and metadata stays in one region.
 * Stores and handles metadata about you DF job.
 <a/>
   
-#### Reasons for regional endpoint.
+### Reasons for regional endpoint.
 
 * Security and complience
 * Min network latency and network transport costs
@@ -537,7 +537,7 @@ Ensure all data and metadata stays in one region.
 * Specific region endpoint: --region $REGION -- worker_zone $WORKER_ZONE
 <a/>
   
-### Shared VPC (Virtual Private Cloud)
+## Shared VPC (Virtual Private Cloud)
   
 * Jobs can run in either VPC of Shared VPC
 * Works for both default and custom networks
@@ -549,15 +549,16 @@ Ensure all data and metadata stays in one region.
 
 * --network default
   
-## Private IPs
+# Private IPs
   
 * Secure you data processing infrastructure
 * Pipeline cannot access the internet and other Google Cloud networks
 * Network must have Pricate Google Access to reach Google Cloud APIs and services
 * --subnetwork regions/$REGION/subnetworks/$SUBNETWORK \
   --no_use_public_ips
+<a/>
 
-## CMEK
+# CMEK
   
 Customer Managed Encryption Key. By default, Google manages key encryption. Customers can use symmetric CMEK keys stored in Google Cloud managed key service. Job metadata is encrypted with Google encryption.
 
@@ -1457,7 +1458,7 @@ ZetaSQL
         | beam.Map(lambda row: f'{row.word}:{row.count}')
         | beam.Map(print))
 
-## Beam Notebooks
+# Beam Notebooks
 
 ![Notebooks](../../img/gcp_dataflow_104.jpg)
 
@@ -1468,7 +1469,7 @@ ZetaSQL
 
 gcp > Datflow > Notebooks  
 
-### Add a transform
+## Add a transform
 
     words = p | "read" >> beam.io.ReadFromPubSub(topic=topic)
     
@@ -1478,7 +1479,7 @@ gcp > Datflow > Notebooks
     windowed_words_counts = (windowed_words
         | "count" >> beam.combiners.Count.PerElement())
 
-#### Interactivity Optins before we run the Cell
+### Interactivity Optins before we run the Cell
 
 * ib.options.recording_duration
 * ib.options.recording_size_limit
@@ -1486,7 +1487,7 @@ gcp > Datflow > Notebooks
 * ib.collect
 <a/>
 
-### Development to Production
+## Development to Production
 
     from apache_beam.runners import DataflowRunner
     
@@ -1530,8 +1531,336 @@ Filtered view is saved in URL => Copy and Paste
     * Interactions with sources, sinks and external connections
 <a/>
 
+# Performance
 
+## Topology
 
+Filter early in the pipeline:  
+Read > Filter > Window > GBK  
 
+## Coders
 
+Econding and decoding cause larger overheads.
 
+## Windows
+
+![Notebooks](../../img/gcp_dataflow_105.jpg)
+
+## Graph Optimizations
+
+![Graph](../../img/gcp_dataflow_106.jpg)
+
+Fanout transformations: A single element outputs multiple elements. Avoid fusion, use side input.  
+
+![Side Input](../../img/gcp_dataflow_107.jpg)  
+
+## Logging
+
+* Balance between excessive logging vs no logging
+* Avoid logging at info level agains PCollection element granularity
+* Use a dead letter pattern followed by a count per window for reporting data errors.
+<a/>
+
+## Data Shape
+
+* Data skew causes inbalanced worker load.
+<a/>
+
+### Hot Key mitigation
+
+* withFanout(int)
+* witHotKeyFanout(Sfn)
+* Use Dataflow Shuffle service
+<a/>
+
+Let Dataflow service log hotkeys with "hotKeyLoggingEnabled"
+
+## Key space and parallelism
+
+* Low parallelism (to few keys)
+    * Increase number of keys
+    * Read from files, prefer splittable compression formats like Avro
+* Too high parallelism
+    * If key space is large, consider unsing hashes separating keys
+    * Re-use processing keys from the past that are not active
+
+## Source, Sinks & External Systems
+
+* TextOP + Compressed file
+    * Only one machine can read compressed file
+    * Fused stages will need to run on the same worker that read the data
+    * A single machine will need to push all the data from the file to all other machines.
+<a/>
+
+Switch to: AcroIO, TextIO + Uncompressed  
+
+### External System
+
+![External System](../../img/gcp_dataflow_108.jpg) 
+
+## Dataflow Shuffle
+
+![Shuffle](../../img/gcp_dataflow_109.jpg)  
+
+* Faste execution of batch pipeline
+* Reduction of worker resources
+* Better autoscaling
+* Better fault tolerance
+<a/>
+
+![Shuffle](../../img/gcp_dataflow_110.jpg)  
+
+# Testing and CI/CD Overview
+
+## Concepts
+
+![CI/CD](../../img/gcp_dataflow_111.jpg)  
+
+* Unit Tests
+* Pipeline Unit Test
+* System Integration Test
+* End-to-End test
+<a/>
+
+### Direct Runner vs Production Runner
+
+![CI/CD](../../img/gcp_dataflow_112.jpg)  
+
+![CI/CD](../../img/gcp_dataflow_113.jpg)  
+
+![CI/CD](../../img/gcp_dataflow_114.jpg)  
+
+![CI/CD](../../img/gcp_dataflow_115.jpg)  
+
+## Unit Testing
+
+* Unit test in Beam are mini-pipelines that assert that the behaviour of small portions of out pipeline are correct.
+* Unit test your DoFns or PTransforms
+* Unit tests should run quickly, locally, and without dependencies on external systems.
+* JUnit 4 for unit testing
+
+    @Rule
+    public TestPipeline p = TestPipeline.create();
+    
+    @Test
+    public void testASingleTransform() {
+        // Setup your PCollection
+        // from an in-memory or local data source.
+        ...
+        // Apply your transform.
+        PCollection<String> words = lines.apply(ParDo.of(new WordCount.ExtractWordsFn()));
+        
+        // Setup assertions on the pipeline.
+        ...
+        p.run();
+    }
+
+## Testing Classes
+    
+Do not use Anonymous DoFns. Prefer named Subclasses.
+
+### Java
+    
+    @Rule
+    public final transient TestPipeline p = TestPipeline.create();
+    
+    @Test
+    @Catergory(NeedsRunner.class)
+    public void myPipelineTest() throws Expectation {
+        final PCollection<String> pcol = d.apply(...)
+        PAssert.that(pcol).containsInAnyOrder(...);
+        p.run();
+    }
+
+### Python
+    
+    with TestPipeline as P:
+        ...
+
+    from apache_beam.testing.util import assert_that
+    from apache_beam.testing.util import equal_to
+    
+    output = ...
+    
+    # Check whether a PCollection
+    # contains some elements in any order.
+    assert_that(
+        output,
+        equal_to(["elem1","elem3","elem2"]))
+
+## Testing Windowing Behaviour
+    
+    @Test
+    @Category(NeedsRunner.class)
+    public void testWindowedData() {
+        PCollection<String> input = 
+            p.apply(Create.timestamped(
+                TimestampedValue.of("a", new Instant(0L)),
+                TimestampedValue.of("b", new Instant(0L)),
+                TimestampedValue.of("c", new Instant(0L)),
+                TimestampedValue.of("c", new instant(0L))
+                .plus(WINDOW_DURATION))
+            .withCoder(StringUtf8Coder.of()));
+    
+            PCollection<KV<Sting, long>> windowedCount = input.apply(
+                Window.into(FixedWindows.of(WINDOW_DURATION))).apply(Count.perElement());
+    
+            PAssert.that(windowedCount).containtsInAnyOrderd(
+                // Ouput from first window
+                KV.of("a", 2L),
+                KV.of("b", 1L),
+                KV.of("c", 1L),
+                KV.of("c", 1L));
+    
+        p.run();
+    }
+
+### Test Streaming Pipelines
+    
+TestStream is a testing input that:
+* Generates unbounded PCollectoin of elements
+* Advances the watermar
+* Processes time as elements are emitted
+* Stops producting output after all specified elements are emitted
+<a/>
+    
+    @Test
+    @Category(NeedsRunner.class)
+    public void testDroppedLateData() {
+        TestStream<String> input =
+            TestStream.create(StringUtf8Coder.of())
+            .addElements(
+                TimestampedValue.of("a", new Instant(0L)),
+                TimestampedValue.of("b", new Instant(0L)),
+                TimestampedValue.of("c", new Instant(0L)),
+                TimestampedValue.of("c", new instant(0L))
+                .plus(Duration.standardMinutes(3))))
+            .advanceWatermarkTo(new instant(0L).plus(WINDOW_DURATION)
+                .plus(Duration.standardMinutes(1))))
+            .addElements(TimestampedValue.of("c", new Instant(0L)))
+            .advanceWatermarkToInfinity();
+    
+            PCollection<KV<String, Long>> windowedCount = ...
+            .withCoder(StringUtf8Coder.of()));
+    
+        PAssert.that(windowedCount).containtsInAnyOrderd(
+            // Ouput from first window
+            KV.of("a", 2L),
+            KV.of("b", 1L),
+            KV.of("c", 1L));
+    
+        p.run();
+    }
+    
+## Integration Testing
+    
+Test complete pipeline without sources and sinks.  
+    
+Batch Pipeline: Clone production pipeline into test-pipeline.  
+    
+![CI/CD](../../img/gcp_dataflow_116.jpg)  
+    
+Streaming Pipeline: Create a new subscription to the topic.  
+    
+![CI/CD](../../img/gcp_dataflow_117.jpg)  
+
+## Artifact Building
+    
+Use Beam 2.26 and higher
+
+## Deployment
+    
+### Deployment
+    
+* Direct launch: Launch from development environment
+* Templates: Launch outside of developer environment
+<a/>
+
+### In-Flight
+    
+#### Snapshot
+
+Save the state of streaming pipeline and launch new versions without losing state.  
+
+* Testing & Rollback updates
+* Backup & Revocery
+* Migrate to Streaming Engine
+    
+![Snapshot](../../img/gcp_dataflow_118.jpg)  
+
+Create job from snapshot:
+    
+    mvn -Pdataflow-runner compile exec:java \
+        -Dexec.mainClass=org.apache.beacm.examples.WordCount \
+        -Dexec.args="--project=PROJECT_ID \
+            --stagingLocation=gs://STORAGE_BUCKET/staging/ \
+            --inputFile=gs://apache-beam-samples/shakespeare/* \
+            --output=gs://STORAGE_BUCKET/output \
+            --runner=DataflowRunner \
+            --enableStreamingEngine \
+            --createFromSnapshot=SNAPSHOT_ID \
+            --region="REGION"
+    
+#### Update
+
+Replace you existing job with a new job that runs updated pipeline code
+
+* Improve pipeline code
+* Fix bugs in pipeline code
+* Update your pipeline
+* Account for changes in data source
+<a/>
+    
+##### Java
+
+    mvn -Pdataflow-runner compile exec:java \
+    
+    -Dexec.mainClass=org.apache.beam.examples.WordCound \
+        -Dexec.args="--project=PROJECT_ID \
+            --stagingLocations=gs://STORAGE_BUCKET/staging/ \
+            --inputFile=gs://apache-beam-samples/shakespeare/* \
+            --ouput=gs://STORAGE_BUCKET/ouput \
+            --runner=DataflowRunner \
+            --update \
+            --jobName [prior job name] \
+            --transformNameMapping='{"oldTransform1":"newTransform1","oldTransform2":"newTransform2",...}
+            --reagion=REGION"
+
+##### Python
+    
+    python -m apache_beam.examples.wordcount \
+    
+        --project $PROJECT \
+        --staging_location gs://$BUCKET/tmp/
+        --input gs://dataflow-samples/shakespeare/kinglear.txt \
+        --output gs://$BUCKET/results/outputs \
+        --runner DataflowRunner \
+        --update \
+        --job_name [prior job name] \
+        --transform_name_mapping=='{oldTransform1":"newTransform1","oldTransform2":"newTransform2",...}'
+        --region $REGION \
+
+### Compatibility Failures
+
+* No transform mapping
+* Add/remoge side input
+* Change coders
+* Switching locations
+* Removing stateful operations
+<a/>
+
+## Termination
+
+* Drain: Stop data ingestion and continue data compute
+    * No data is lost
+    * Incomplete aggregations
+* Cancel: Stop ingestion and compute immediately
+    * Easy for non-mission critical workloads
+    * Data is lost
+<a/>
+
+![CI/CD](../../img/gcp_dataflow_119.jpg)  
+
+## Decission Tree
+    
+![CI/CD](../../img/gcp_dataflow_120.jpg)  
