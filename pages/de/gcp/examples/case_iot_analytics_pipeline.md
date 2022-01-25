@@ -15,7 +15,7 @@ iotlab > view Permissions > Add Principal > cloud-iot@system.gserviceaccount.com
 gcp > BigQuery > Create Dataset > iotlabdataset  
 iotlabdataset > Create Table > sensordata
 
-![BigQuery Table](../../../img/gcp_iotpipeline_1)
+![BigQuery Table](../../../img/gcp_iotpipeline_1.jpg)
 
 ## Create Cloud Storage Bucket
 
@@ -35,7 +35,7 @@ gcp > Dataflow > Create Job From Template > iotlabflow
 |Max workers|2|
 |Machine Type|n1-standard-1|
 
-![Dataflow Pipeline](../../../img/gcp_iotpipeline_2)
+![Dataflow Pipeline](../../../img/gcp_iotpipeline_2.jpg)
 
 ## Prepare Computeengine VM
 
