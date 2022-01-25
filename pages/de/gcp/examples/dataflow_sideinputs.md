@@ -21,7 +21,7 @@ gcp > Cloud Storage > Create Bucket > qwiklabs-gcp-01-7fe462fa934e
 ## Install Apache Beam
 
     $ cd ~/training-data-analyst/courses/data_analysis/lab2/python
-sudo ./install_packages.sh
+    $ sudo ./install_packages.sh
 
 ## Use BigQuery
 
