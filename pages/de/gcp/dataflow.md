@@ -1864,3 +1864,233 @@ Replace you existing job with a new job that runs updated pipeline code
 ## Decission Tree
     
 ![CI/CD](../../img/gcp_dataflow_120.jpg)  
+
+# Reliability
+
+* Batch
+    * Rerun
+    * Source Data not lost
+* Stream
+    * Protect against various failure modes
+    * Minimize data loss
+    * Minimize downtime
+<a/>
+
+## Failure Types
+
+|User Code & Data Shape|Outages|
+|-|-|
+|Transient errors|Service outage|
+|Corrupted data|Zonal outage|
+||Regional outage| 
+
+## Dead Letter sink
+    
+![Reliability](../../img/gcp_dataflow_124jpg)  
+    
+    final TupleTag successTag;
+    final TupleTag deadLetterTag;
+    PCollection input = /* ... */
+    
+    PCollection Tuple ouputTuple = input.apply(ParDo.of(new DoFn() {
+        @Override
+        void processElement(ProcessContext ctxt) {
+            try {
+                c.output(process(c.element));
+            } catch(MyException ex) {
+                // Optional Loccing at debug level
+                c.sideOutPut(deadLetterTag, c.element);
+            }
+        })).writeOutPutTags(successTag, TupleTagList.of(deadLetterTag));
+    
+        // Write dead letter elements to separate sink
+        outputTuple.get(deadLetterTag).apply(BigQuery.write(...));
+    
+        // Process the successful element differently.
+        PCollection success = outputTuple.get(successTag);
+
+## Monitoring and Alerting
+
+Streaming jobs try to re-run indefinetly.  
+    
+![Reliability](../../img/gcp_dataflow_123.jpg)  
+
+* Catch issues before they bring down production systems.
+* Datflow Job Metrics tab provides an integrated monitoring experiencce
+* Cloud Monitoring integration extends capabilities
+<a/>
+
+![Reliability](../../img/gcp_dataflow_124.jpg) 
+    
+### Batch
+    
+* Job Status
+* Elapsed time
+<a/>
+
+### Streaming
+
+* Data freshness
+* System latency
+<a/>
+    
+## Geolocation
+
+* Specify region
+* Do not specify region and worker zone
+<a/>
+
+![Reliability](../../img/gcp_dataflow_125.jpg)  
+
+## Disaster Recovery
+
+### Pub/Sub
+    
+* Snapshots: Save subscriptions ack state
+* Seek: Revert messages to a prior ack state
+<a/>
+
+#### Make Snapshot
+    
+    gcloud pubsub snapshots create my-snapshot --subscription=my-sub
+
+#### Stop an drain Pipeline
+    
+    gcloud dataflow jobs drain [job-id]
+
+#### Seek your subscription to the snapshot
+    
+    gcloud pubsub subscriptions seek my-sub --snapshot=my-snapshot
+
+#### Resubmit pipeline
+    
+    gcloud dataflow jobs run my-job-name --gcs_locatoin=my_gcs_bucket
+
+### Dataflow
+    
+* Restart pipeline without processing in-flight data
+* No data loss with minimal downtime
+* Option to create a Snapshot with Pub/Sub source
+<a/>
+    
+![Reliability](../../img/gcp_dataflow_126.jpg)  
+
+* Schedule Weely Dataflow Snapshot with CloudComposer
+* Snapshots are stored in the region of their job.
+<a/>
+
+## High Availability
+
+* Downtime
+* Data Loss
+* Cost
+<a/>
+
+### Redundand Sources
+
+![Reliability](../../img/gcp_dataflow_127.jpg)
+
+### Redundand Pipelines
+    
+![Reliability](../../img/gcp_dataflow_128.jpg)
+
+# Flex Templates
+    
+## Classic Templates
+
+![Templates](../../img/gcp_dataflow_129.jpg)
+
+## Flex Templates
+    
+![Templates](../../img/gcp_dataflow_130.jpg)  
+
+![Templates](../../img/gcp_dataflow_131.jpg)
+
+### Create
+
+* Create Metadata file
+* Run flex-template build gcloud command
+<a/>
+
+#### metadata.json
+    
+    {
+        "name":"PubSub To Biggquery",
+        "description":"An Apache Beam streaming pipeline that reads JSON",
+        "parameters":[
+            {
+                "name":"inputSubscription",
+                "label":"Pub/Sub input subscription"
+                "helpText":"Pub7Sub subscription to read from",
+                "regexes":["[a-zA-Z][-_.~+%]"]
+            },
+            {
+                "name":"outputTable",
+                "label":"BigQuery outputTable",
+                "helpText":"Write to table",
+                "regexes":["^:"]
+            }
+        ]
+    }
+
+#### Build the flex template
+    
+    $ gcloud dataflow flex-template build "$TEMPLATE_SPEC_PATH" \
+    --image-gcr-path "$TEMPLATE_IMAGE" \
+    --sdk-language "JAVA" \
+    --flex-template-base-image JAVA8 \
+    --metadata-file "metadata.json" \
+    --jar "target/pubsub-bigquery-1.0.jar" \
+    --env FLEXTEMPLATE_JAVA_MAIN_CLASS="com.google.cloud.PubSuibBigquery"
+
+### Launch Flex Template
+    
+#### Console
+
+    $ gcloud dataflow flex-template run "job-name-`date +%Y%m%d-%H-%M-%S`" \
+    --template-file-gcs-location "$TEMPLATE_PATH" \
+    --parameters inputSubscription="$SUBSCRIPTION" \
+    --parameters outputTable="$PROJECT:$DATASET.$TABLE" \
+    --region "$REGION"
+
+#### REST API
+    
+    $ curl -X POST \
+    "https://dataflow.googleapis.com/v1b3/projects/$PROJECT/locations/${REGION}/flexTemplates:launch" \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+    -d '{
+        "launch_parameter":{
+            "jobName":"job-name-`date +%Y%m%d-%H%M%S`",
+            "parameters":{
+                "inputSubscription":"'SUBSCRIPTION'",
+                "outputTable":"'$PROJECT:$DATASET.$TABLE'"
+            },
+            "containerSpecGcsPath":"'$TEMPLATE_PATH'"
+        }
+    }'
+    
+#### Cloud Scheduler
+    
+    $ gcloud scheduler jobs create http scheduler-job --schedule="*/30 * * * *"
+    --uri="https://dataflow.googleapis.com/v1b3/projects/$PROJECT/locations/${REGION}/flexTemplates:launch" --http-method=POST \
+    --oauth-service-account-email=email@project.iam.gserviceaccount.com \
+    --message-body=' {
+        "launch_parameter":{
+            "jobName":"job-name"
+            "parameters":{
+                "inputSubscription":"'$SUBSCRIPTION'",
+                "outputTable":"'$PROJECT:$DATASTE.$TABLE'"
+            },
+            "containerSpecGcsPath":"'$TEMPLATE_PATH'"
+        }
+    }'
+    
+## Google Templates
+
+* Extensive Collection
+* Point-to-Point Transfer
+* Simple Transformation using Javascript UDF
+* Code available on GitHub
+<a/>
+
