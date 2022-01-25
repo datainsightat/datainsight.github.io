@@ -13,8 +13,7 @@
 |Ingestion|Storage|Analytics|Machine Learning|Orchestration|
 |-|-|-|-|-|
 |[Dataflow](gcp/dataflow.md)|[Cloud Storage](gcp/cloudstorage.md)|[BigQuery](gcp/bigquery.md)|[AI](gcp/ai.md)|[Cloud Composer](gcp/cloudcomposer.md)|
-|[Pub/Sub](gcp/pubsub.md)||[BigTable](gcp/bigtable.md)|||
-|[Kubeflow](gcp/kubeflow.md)||[Dataproc](gcp/dataproc.md)|||
-|[Datafusion](gcp/datafusion.md)|||||
+|[Datafusion](gcp/datafusion.md)||[BigTable](gcp/bigtable.md)|[Kubeflow](gcp/kubeflow.md)||
+|[Pub/Sub](gcp/pubsub.md)||[Dataproc](gcp/dataproc.md)|||
 
 ## [Examples](gcp/examples/)
