@@ -24,7 +24,7 @@ Explore Data > Data Sudio
     GROUP BY
       dayofweek;
       
-![Day of Week](../../../gcp_bigquery_44.jpg)
+![Day of Week](../../../img/gcp_bigquery_44.jpg)
 
     SELECT
       bikes_count,
@@ -38,7 +38,7 @@ Explore Data > Data Sudio
     GROUP BY
       bikes_count;
       
-![Bikes Count](../../../gcp_bigquery_45.jpg)
+![Bikes Count](../../../img/gcp_bigquery_45.jpg)
 
 ## Create Training Dataset
 
