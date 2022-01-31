@@ -29,32 +29,59 @@ You are building a new real-time data warehouse for your company and will use Bi
 B is not correct because this doesn’t get you the latest value, but will get you a sum of the same event over time which doesn’t make too much sense if you have duplicates.
 C is not correct because if you have events that are not duplicated, it will be excluded.
 D is correct because it will just pick out a single row for each set of duplicates.
-  
+
+You are designing a streaming pipeline for ingesting player interaction data for a mobile game. You want the pipeline to handle out-of-order data delayed up to 15 minutes on a per-player basis and exponential growth in global users. What should you do?
+1. X Design a Dataflow streaming pipeline with session windowing and a minimum gap duration of 15 minutes. Use "individual player" as the key. Use Pub/Sub as a message bus for ingestion.
+2. O Design a Dataflow streaming pipeline with session windowing and a minimum gap duration of 15 minutes. Use "individual player" as the key. Use Apache Kafka as a message bus for ingestion.
+3. O Design a Dataflow streaming pipeline with a single global window of 15 minutes. Use Pub/Sub as a message bus for ingestion.
+4. O Design a Dataflow streaming pipeline with a single global window of 15 minutes. Use Apache Kafka as a message bus for ingestion.
+>A Is correct because the question requires delay be handled on a per-player basis and session windowing will do that. Pub/Sub handles the need to scale exponentially with traffic coming from around the globe.
+B Is not correct because Apache Kafka will not be able to handle an exponential growth in users globally as well as Pub/Sub.
+C is not correct because a global window does not meet the requirements of handling out-of-order delay on a per-player basis.
+D is not correct because a global window does not meet the requirements of handling out-of-order delay on a per-player basis.
+
 Your company is loading CSV files into BigQuery. The data is fully imported successfully; however, the imported data is not matching byte-to-byte to the source file. What is the most likely cause of this problem?
-1. The CSV data loaded in BigQuery is not flagged as CSV.
-2. The CSV data had invalid rows that were skipped on import.
-3. The CSV data loaded in BigQuery is not using BigQuery’s default encoding.
-4. The CSV data has not gone through an ETL phase before loading into BigQuery.
-  
+1. O The CSV data loaded in BigQuery is not flagged as CSV.
+2. O The CSV data had invalid rows that were skipped on import.
+3. X The CSV data loaded in BigQuery is not using BigQuery’s default encoding.
+4. O The CSV data has not gone through an ETL phase before loading into BigQuery.
+>A is not correct because if another data format other than CSV was selected then the data would not import successfully.
+B is not correct because the data was fully imported meaning no rows were skipped.
+C is correct because this is the only situation that would cause successful import.
+D is not correct because whether the data has been previously transformed will not affect whether the source file will match the BigQuery table.
+
 Your company is migrating their 30-node Apache Hadoop cluster to the cloud. They want to re-use Hadoop jobs they have already created and minimize the management of the cluster as much as possible. They also want to be able to persist data beyond the life of the cluster. What should you do?
-1. Create a Dataflow job to process the data.
-2. Create a Dataproc cluster that uses persistent disks for HDFS.
-3. Create a Hadoop cluster on Compute Engine that uses persistent disks.
-4. Create a Dataproc cluster that uses the Cloud Storage connector.
-5. Create a Hadoop cluster on Compute Engine that uses Local SSD disks.
-  
+1. O Create a Dataflow job to process the data.
+2. O Create a Dataproc cluster that uses persistent disks for HDFS.
+3. O Create a Hadoop cluster on Compute Engine that uses persistent disks.
+4. X Create a Dataproc cluster that uses the Cloud Storage connector.
+5. O Create a Hadoop cluster on Compute Engine that uses Local SSD disks.
+> A is not correct because the goal is to re-use their Hadoop jobs and MapReduce and/or Spark jobs cannot simply be moved to Dataflow.
+B is not correct because the goal is to persist the data beyond the life of the ephemeral clusters, and if HDFS is used as the primary attached storage mechanism, it will also disappear at the end of the cluster’s life.
+C is not correct because the goal is to use managed services as much as possible, and this is the opposite.
+D is correct because it uses managed services, and also allows for the data to persist on GCS beyond the life of the cluster.
+E is not correct because of the same reasons as option C.
+
 You have 250,000 devices which produce a JSON device status event every 10 seconds. You want to capture this event data for outlier time series analysis. What should you do?
-1. Ship the data into BigQuery. Develop a custom application that uses the BigQuery API to query the dataset and displays device outlier data based on your business requirements.
-2. Ship the data into BigQuery. Use the BigQuery console to query the dataset and display device outlier data based on your business requirements.
-3. Ship the data into Cloud Bigtable. Use the Cloud Bigtable cbt tool to display device outlier data based on your business requirements.
-4. Ship the data into Cloud Bigtable. Install and use the HBase shell for Cloud Bigtable to query the table for device outlier data based on your business requirements.
-  
+1. O Ship the data into BigQuery. Develop a custom application that uses the BigQuery API to query the dataset and displays device outlier data based on your business requirements.
+2. O Ship the data into BigQuery. Use the BigQuery console to query the dataset and display device outlier data based on your business requirements.
+3. X Ship the data into Cloud Bigtable. Use the Cloud Bigtable cbt tool to display device outlier data based on your business requirements.
+4. O Ship the data into Cloud Bigtable. Install and use the HBase shell for Cloud Bigtable to query the table for device outlier data based on your business requirements.
+>C is correct because the data type, volume, and query pattern best fits BigTable capabilities and also Google best practices as linked below.
+A, B are not correct because you do not need to use BigQuery for the query pattern in this scenario.
+D is not correct because you can use the simpler method of 'cbt tool' to support this scenario.  
+[Best Practice](https://cloud.google.com/bigtable/docs/go/cbt-overview)  
+
 You are selecting a messaging service for log messages that must include final result message ordering as part of building a data pipeline on Google Cloud. You want to stream input for 5 days and be able to query the current status. You will be storing the data in a searchable repository. How should you set up the input messages?
-1. Use Pub/Sub for input. Attach a timestamp to every message in the publisher.
-2. Use Pub/Sub for input. Attach a unique identifier to every message in the publisher.
-3. Use Apache Kafka on Compute Engine for input. Attach a timestamp to every message in the publisher.
-4. Use Apache Kafka on Compute Engine for input. Attach a unique identifier to every message in the publisher.
-  
+1. X Use Pub/Sub for input. Attach a timestamp to every message in the publisher.
+2. O Use Pub/Sub for input. Attach a unique identifier to every message in the publisher.
+3. O Use Apache Kafka on Compute Engine for input. Attach a timestamp to every message in the publisher.
+4. O Use Apache Kafka on Compute Engine for input. Attach a unique identifier to every message in the publisher.
+>A is correct because of recommended Google practices; see the links below.
+B is not correct because you should not attach a GUID to each message to support the scenario.
+C, D are not correct because you should not use Apache Kafka for this scenario (it is overly complex compared to using Pub/Sub, which can support all of the requirements).  
+[Best Practice](http://www.jesse-anderson.com/2016/07/apache-kafka-and-google-cloud-pubsub/)  
+
 You want to publish system metrics to Google Cloud from a large number of on-prem hypervisors and VMs for analysis and creation of dashboards. You have an existing custom monitoring agent deployed to all the hypervisors and your on-prem metrics system is unable to handle the load. You want to design a system that can collect and store metrics at scale. You don't want to manage your own time series database. Metrics from all agents should be written to the same table but agents must not have permission to modify or read data written by other agents. What should you do?
 1. Modify the monitoring agent to publish protobuf messages to Pub/Sub. Use a Dataproc cluster or Dataflow job to consume messages from Pub/Sub and write to BigTable.
 2. Modify the monitoring agent to write protobuf messages directly to BigTable.
