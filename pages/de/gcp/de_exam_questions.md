@@ -83,71 +83,121 @@ C, D are not correct because you should not use Apache Kafka for this scenario (
 [Best Practice](http://www.jesse-anderson.com/2016/07/apache-kafka-and-google-cloud-pubsub/)  
 
 You want to publish system metrics to Google Cloud from a large number of on-prem hypervisors and VMs for analysis and creation of dashboards. You have an existing custom monitoring agent deployed to all the hypervisors and your on-prem metrics system is unable to handle the load. You want to design a system that can collect and store metrics at scale. You don't want to manage your own time series database. Metrics from all agents should be written to the same table but agents must not have permission to modify or read data written by other agents. What should you do?
-1. Modify the monitoring agent to publish protobuf messages to Pub/Sub. Use a Dataproc cluster or Dataflow job to consume messages from Pub/Sub and write to BigTable.
-2. Modify the monitoring agent to write protobuf messages directly to BigTable.
-3. Modify the monitoring agent to write protobuf messages to HBase deployed on Compute Engine VM Instances
-4. Modify the monitoring agent to write protobuf messages to Pub/Sub. Use a Dataproc cluster or Dataflow job to consume messages from Pub/Sub and write to Cassandra deployed on Compute Engine VM Instances.
+1. X Modify the monitoring agent to publish protobuf messages to Pub/Sub. Use a Dataproc cluster or Dataflow job to consume messages from Pub/Sub and write to BigTable.
+2. O Modify the monitoring agent to write protobuf messages directly to BigTable.
+3. O Modify the monitoring agent to write protobuf messages to HBase deployed on Compute Engine VM Instances
+4. O Modify the monitoring agent to write protobuf messages to Pub/Sub. Use a Dataproc cluster or Dataflow job to consume messages from Pub/Sub and write to Cassandra deployed on Compute Engine VM Instances.
+>A Is correct because Bigtable can store and analyze time series data, and the solution is using managed services which is what the requirements are calling for.
+B Is not correct because BigTable cannot limit access to specific tables.
+C is not correct because it requires deployment of an HBase cluster.
+D is not correct because it requires deployment of a Cassandra cluster.
   
 You are designing storage for CSV files and using an I/O-intensive custom Apache Spark transform as part of deploying a data pipeline on Google Cloud. You intend to use ANSI SQL to run queries for your analysts. How should you transform the input data?
-1. Use BigQuery for storage. Use Dataflow to run the transformations.
-2. Use BigQuery for storage. Use Dataproc to run the transformations.
-3. Use Cloud Storage for storage. Use Dataflow to run the transformations.
-4. Use Cloud Storage for storage. Use Dataproc to run the transformations.
-  
+1. O Use BigQuery for storage. Use Dataflow to run the transformations.
+2. X Use BigQuery for storage. Use Dataproc to run the transformations.
+3. O Use Cloud Storage for storage. Use Dataflow to run the transformations.
+4. O Use Cloud Storage for storage. Use Dataproc to run the transformations.
+>B is correct because of the requirement to use custom Spark transforms; use Dataproc. ANSI SQL queries require the use of BigQuery.
+A is not correct because Dataflow does not support Spark.
+C, D are not correct because Cloud Storage does not support SQL, and you should not use Dataflow, either.  
+[Best Practice](https://stackoverflow.com/questions/46436794/what-is-the-difference-between-google-cloud-dataflow-and-google-cloud-dataproc)  
+
 You are designing a relational data repository on Google Cloud to grow as needed. The data will be transactionally consistent and added from any location in the world. You want to monitor and adjust node count for input traffic, which can spike unpredictably. What should you do?
-1. Use Cloud Spanner for storage. Monitor storage usage and increase node count if more than 70% utilized.
-2. Use Cloud Spanner for storage. Monitor CPU utilization and increase node count if more than 70% utilized for your time span.
-3. Use Cloud Bigtable for storage. Monitor data stored and increase node count if more than 70% utilized.
-4. Use Cloud Bigtable for storage. Monitor CPU utilization and increase node count if more than 70% utilized for your time span.
-  
+1. O Use Cloud Spanner for storage. Monitor storage usage and increase node count if more than 70% utilized.
+2. X Use Cloud Spanner for storage. Monitor CPU utilization and increase node count if more than 70% utilized for your time span.
+3. O Use Cloud Bigtable for storage. Monitor data stored and increase node count if more than 70% utilized.
+4. O Use Cloud Bigtable for storage. Monitor CPU utilization and increase node count if more than 70% utilized for your time span.
+>B is correct because of the requirement to globally scalable transactions—use Cloud Spanner. CPU utilization is the recommended metric for scaling, per Google best practices, linked below.
+A is not correct because you should not use storage utilization as a scaling metric.
+C, D are not correct because you should not use Cloud Bigtable for this scenario.  
+[Best Practice](https://cloud.google.com/spanner/docs/monitoring)  
+
 You have a Spark application that writes data to Cloud Storage in Parquet format. You scheduled the application to run daily using DataProcSparkOperator and Apache Airflow DAG by Cloud Composer. You want to add tasks to the DAG to make the data available to BigQuery users. You want to maximize query speed and configure partitioning and clustering on the table. What should you do?
-1. Use "BashOperator" to call "bq insert".
-2. Use "BashOperator" to call "bq cp" with the "--append" flag.
-3. Use "GoogleCloudStorageToBigQueryOperator" with "schema_object" pointing to a schema JSON in Cloud Storage and "source_format" set to "PARQUET".
-4. Use "BigQueryCreateExternalTableOperator" with "schema_object" pointing to a schema JSON in Cloud Storage and "source_format" set to "PARQUET".
-  
+1. O Use "BashOperator" to call "bq insert".
+2. O Use "BashOperator" to call "bq cp" with the "--append" flag.
+3. X Use "GoogleCloudStorageToBigQueryOperator" with "schema_object" pointing to a schema JSON in Cloud Storage and "source_format" set to "PARQUET".
+4. O Use "BigQueryCreateExternalTableOperator" with "schema_object" pointing to a schema JSON in Cloud Storage and "source_format" set to "PARQUET".
+>B Is not correct because bq cp is for existing BigQuery tables only
+A Is not correct because bq insert will not set the partitioning and clustering and only supports JSON
+C is correct because it loads the data and sets partitioning and clustering
+D is not correct because an external table will not satisfy the query speed requirement  
+[Best Practice](https://cloud.google.com/bigquery/docs/loading-data)  
+
 You have a website that tracks page visits for each user and then creates a Pub/Sub message with the session ID and URL of the page. You want to create a Dataflow pipeline that sums the total number of pages visited by each user and writes the result to BigQuery. User sessions timeout after 30 minutes. Which type of Dataflow window should you choose?
-1. A single global window
-2. Fixed-time windows with a duration of 30 minutes
-3. Session-based windows with a gap duration of 30 minutes
-4. Sliding-time windows with a duration of 30 minutes and a new window every 5 minute
-  
+1. O A single global window
+2. O Fixed-time windows with a duration of 30 minutes
+3. X Session-based windows with a gap duration of 30 minutes
+4. O Sliding-time windows with a duration of 30 minutes and a new window every 5 minute
+>B. There is no per-user metric being used so it’s possible a sum will be created for some users while they are still browsing the site.
+D. If a user is still visiting the site when the 30-min window closes, the sum will be wrong.
+C. This is correct because it continues to sum user page visits during their browsing session and completes at the same time as the session timeout.
+A. A user-specific sum is never calculated, just sums for arbitrary 30-min windows of time staggered by 5 minutes.  
+[Best Practice](https://cloud.google.com/dataflow/docs/resources)  
+
 You are designing a basket abandonment system for an ecommerce company. The system will send a message to a user based on these rules: a). No interaction by the user on the site for 1 hour b). Has added more than $30 worth of products to the basket c). Has not completed a transaction. You use Dataflow to process the data and decide if a message should be sent. How should you design the pipeline?
-1. Use a fixed-time window with a duration of 60 minutes.
-2. Use a sliding time window with a duration of 60 minutes.
-3. Use a session window with a gap time duration of 60 minutes.
-4. Use a global window with a time based trigger with a delay of 60 minutes.
-  
+1. O Use a fixed-time window with a duration of 60 minutes.
+2. O Use a sliding time window with a duration of 60 minutes.
+3. X Use a session window with a gap time duration of 60 minutes.
+4. O Use a global window with a time based trigger with a delay of 60 minutes.
+>A is not correct because assuming there is one key per user, a message will be sent every 60 minutes.
+B is not correct because assuming there is one key per user, a message will be sent 60 minutes after they first started browsing even if they are still browsing.
+C is correct because it will send a message per user after that user is inactive for 60 minutes.
+D is not correct because it will cause messages to be sent out every 60 minutes to all users regardless of where they are in their current session.  
+[Best Practice](https://beam.apache.org/documentation/programming-guide/#windowing)  
+
 You need to stream time-series data in Avro format, and then write this to both BigQuery and Cloud Bigtable simultaneously using Dataflow. You want to achieve minimal end-to-end latency. Your business requirements state this needs to be completed as quickly as possible. What should you do?
-1. Create a pipeline and use ParDo transform.
-2. Create a pipeline that groups the data into a PCollection and uses the Combine transform.
-3. Create a pipeline that groups data using a PCollection and then uses Bigtable and BigQueryIO transforms.
-4. Create a pipeline that groups data using a PCollection, and then use Avro I/O transform to write to Cloud Storage. After the data is written, load the data from Cloud Storage into BigQuery and Bigtable.
-  
+1. O Create a pipeline and use ParDo transform.
+2. O Create a pipeline that groups the data into a PCollection and uses the Combine transform.
+3. X Create a pipeline that groups data using a PCollection and then uses Bigtable and BigQueryIO transforms.
+4. O Create a pipeline that groups data using a PCollection, and then use Avro I/O transform to write to Cloud Storage. After the data is written, load the data from Cloud Storage into BigQuery and Bigtable.
+>A Is not correct because ParDo doesn’t write to BigQuery or BigTable
+B Is not correct because Combine doesn’t write to BigQuery or Bigtable
+C Is correct because this is the right set of transformations that accepts and writes to the required data stores.
+D Is not correct because to meet the business requirements, it is much faster and easier using dataflow answer C  
+[Best Practice](https://cloud.google.com/blog/products/gcp/guide-to-common-cloud-dataflow-use-case-patterns-part-1)  
+
 Your company’s on-premises Apache Hadoop servers are approaching end-of-life, and IT has decided to migrate the cluster to Dataproc. A like-for-like migration of the cluster would require 50 TB of Google Persistent Disk per node. The CIO is concerned about the cost of using that much block storage. You want to minimize the storage cost of the migration. What should you do?
-1. Put the data into Cloud Storage.
-2. Use preemptible virtual machines (VMs) for the Dataproc cluster.
-3. Tune the Dataproc cluster so that there is just enough disk for all data.
-4. Migrate some of the cold data into Cloud Storage, and keep only the hot data in Persistent Disk.
-  
+1. X Put the data into Cloud Storage.
+2. O Use preemptible virtual machines (VMs) for the Dataproc cluster.
+3. O Tune the Dataproc cluster so that there is just enough disk for all data.
+4. O Migrate some of the cold data into Cloud Storage, and keep only the hot data in Persistent Disk.
+>A is correct because Google recommends using Cloud Storage instead of HDFS as it is much more cost effective especially when jobs aren’t running.
+B is not correct because this will decrease the compute cost but not the storage cost.
+C is not correct because while this will reduce cost somewhat, it will not be as cost effective as using Cloud Storage.
+D is not correct because while this will reduce cost somewhat, it will not be as cost effective as using Cloud Storage.  
+[Best Practice](https://cloud.google.com/dataproc/docs/concepts/connectors/cloud-storage)  
+
 You are designing storage for two relational tables that are part of a 10-TB database on Google Cloud. You want to support transactions that scale horizontally. You also want to optimize data for range queries on non-key columns. What should you do?
-1. Use Cloud SQL for storage. Add secondary indexes to support query patterns.
-2. Use Cloud SQL for storage. Use Dataflow to transform data to support query patterns.
-3. Use Cloud Spanner for storage. Add secondary indexes to support query patterns.
-4. Use Cloud Spanner for storage. Use Dataflow to transform data to support query patterns.
-  
+1. O Use Cloud SQL for storage. Add secondary indexes to support query patterns.
+2. O Use Cloud SQL for storage. Use Dataflow to transform data to support query patterns.
+3. X Use Cloud Spanner for storage. Add secondary indexes to support query patterns.
+4. O Use Cloud Spanner for storage. Use Dataflow to transform data to support query patterns.
+>A is not correct because Cloud SQL does not natively scale horizontally.
+B is not correct because Cloud SQL does not natively scale horizontally.
+C is correct because Cloud Spanner scales horizontally, and you can create secondary indexes for the range queries that are required.
+D is not correct because Dataflow is a data pipelining tool to move and transform data, but the use case is centered around querying.  
+
 Your company is streaming real-time sensor data from their factory floor into Bigtable and they have noticed extremely poor performance. How should the row key be redesigned to improve Bigtable performance on queries that populate real-time dashboards?
-1. Use a row key of the form <timestamp>.
-2. Use a row key of the form <sensorid>.
-3. Use a row key of the form <timestamp>#<sensorid>.
-4. Use a row key of the form <sensorid>#<timestamp>.
+1. O Use a row key of the form <timestamp>.
+2. O Use a row key of the form <sensorid>.
+3. O Use a row key of the form <timestamp>#<sensorid>.
+4. X Use a row key of the form <sensorid>#<timestamp>.
+>A is not correct because this will cause most writes to be pushed to a single node (known as hotspotting)
+B is not correct because this will not allow for multiple readings from the same sensor as new readings will overwrite old ones.
+C is not correct because this will cause most writes to be pushed to a single node (known as hotspotting)
+D is correct because it will allow for retrieval of data based on both sensor id and timestamp but without causing hotspotting.  
+[Best Practice](https://cloud.google.com/bigtable/docs/schema-design)  
   
 You are developing an application on Google Cloud that will automatically generate subject labels for users’ blog posts. You are under competitive pressure to add this feature quickly, and you have no additional developer resources. No one on your team has experience with machine learning. What should you do?
-1. Call the Cloud Natural Language API from your application. Process the generated Entity Analysis as labels.
-2. Call the Cloud Natural Language API from your application. Process the generated Sentiment Analysis as labels.
-3. Build and train a text classification model using TensorFlow. Deploy the model using AI Platform Prediction. Call the model from your application and process the results as labels.
-4. Build and train a text classification model using TensorFlow. Deploy the model using a Kubernetes Engine cluster. Call the model from your application and process the results as labels.
-  
+1. X Call the Cloud Natural Language API from your application. Process the generated Entity Analysis as labels.
+2. O Call the Cloud Natural Language API from your application. Process the generated Sentiment Analysis as labels.
+3. O Build and train a text classification model using TensorFlow. Deploy the model using AI Platform Prediction. Call the model from your application and process the results as labels.
+4. O Build and train a text classification model using TensorFlow. Deploy the model using a Kubernetes Engine cluster. Call the model from your application and process the results as labels.
+>A is correct because it provides a managed service and a fully trained model, and the user is pulling the entities, which is the right label.
+B is not correct because sentiment is the incorrect label for this use case.
+C is not correct because this requires experience with machine learning.
+D is not correct because this requires experience with machine learning.  
+
 Your company is using WILDCARD tables to query data across multiple tables with similar names. The SQL statement is currently failing with the error shown below. Which table name will make the SQL statement work correctly?
 Captionless Image
 
@@ -163,61 +213,98 @@ Captionless Image
     order by
       age desc
 
-1. `bigquery-public-data.noaa_gsod.gsod`
-2. bigquery-public-data.noaa_gsod.gsod*
-3. ‘bigquery-public-data.noaa_gsod.gsod*’
-4. `bigquery-public-data.noaa_gsod.gsod*`
-
+1. O `bigquery-public-data.noaa_gsod.gsod`
+2. O bigquery-public-data.noaa_gsod.gsod*
+3. O ‘bigquery-public-data.noaa_gsod.gsod*’
+4. X `bigquery-public-data.noaa_gsod.gsod*`
+>A is not correct because this is not the correct wildcard syntax as there is no wildcard character present.
+B is not correct because this is not the correct wildcard syntax since it’s missing backticks.
+C is not correct because this is not the correct wildcard syntax since it’s not using a backtick as the last character
+D is correct because it follows the correct wildcard syntax of enclosing the table name in backticks and including the * wildcard character.
+ 
 You are working on an ML-based application that will transcribe conversations between manufacturing workers. These conversations are in English and between 30-40 sec long. Conversation recordings come from old enterprise radio sets that have a low sampling rate of 8000 Hz, but you have a large dataset of these recorded conversations with their transcriptions. You want to follow Google-recommended practices. How should you proceed with building your application?
-1. Use Cloud Speech-to-Text API, and send requests in a synchronous mode.
-2. Use Cloud Speech-to-Text API, and send requests in an asynchronous mode.
-3. Use Cloud Speech-to-Text API, but resample your captured recordings to a rate of 16000 Hz.
-4. Train your own speech recognition model because you have an uncommon use case and you have a labeled dataset.
-  
+1. X Use Cloud Speech-to-Text API, and send requests in a synchronous mode.
+2. O Use Cloud Speech-to-Text API, and send requests in an asynchronous mode.
+3. O Use Cloud Speech-to-Text API, but resample your captured recordings to a rate of 16000 Hz.
+4. O Train your own speech recognition model because you have an uncommon use case and you have a labeled dataset.
+>A Is correct because synchronous mode is recommended for short audio files.
+B is incorrect since the recommended way to process short audio files (shorter than 1 minutes) is a synchronous recognize request and not an asynchronous one.
+C Is incorrect since using the native sample rate is recommended over resampling.
+D Is incorrect since there is nothing in the question that suggests the off-the-shelf model will not perform sufficiently.
+ 
 You are developing an application on Google Cloud that will label famous landmarks in users’ photos. You are under competitive pressure to develop a predictive model quickly. You need to keep service costs low. What should you do?
-1. Build an application that calls the Cloud Vision API. Inspect the generated MID values to supply the image labels.
-2. Build an application that calls the Cloud Vision API. Pass landmark location as base64-encoded strings.
-3. Build and train a classification model with TensorFlow. Deploy the model using AI Platform Prediction. Pass client image locations as base64-encoded strings.
-4. Build and train a classification model with TensorFlow. Deploy the model using AI Platform Prediction. Inspect the generated MID values to supply the image labels.
-  
+1. O Build an application that calls the Cloud Vision API. Inspect the generated MID values to supply the image labels.
+2. X Build an application that calls the Cloud Vision API. Pass landmark location as base64-encoded strings.
+3. O Build and train a classification model with TensorFlow. Deploy the model using AI Platform Prediction. Pass client image locations as base64-encoded strings.
+4. O Build and train a classification model with TensorFlow. Deploy the model using AI Platform Prediction. Inspect the generated MID values to supply the image labels.
+>B is correct because of the requirement to quickly develop a model that generates landmark labels from photos.
+This is supported in Cloud Vision API; see the link below.
+A is not correct because you should not inspect the generated MID values; instead, you should simply pass the image locations to the API and use the labels, which are output.
+C, D are not correct because you should not build a custom classification TF model for this scenario.  
+ 
 You are building a data pipeline on Google Cloud. You need to select services that will host a deep neural network machine-learning model also hosted on Google Cloud. You also need to monitor and run jobs that could occasionally fail. What should you do?
-1. Use AI Platform Prediction to host your model. Monitor the status of the Operation object for 'error' results.
-2. Use AI Platform Prediction to host your model. Monitor the status of the Jobs object for 'failed' job states.
-3. Use a Google Kubernetes Engine cluster to host your model. Monitor the status of the Jobs object for 'failed' job states.
-4. Use a Google Kubernetes Engine cluster to host your model. Monitor the status of Operation object for 'error' results.
-  
+1. O Use AI Platform Prediction to host your model. Monitor the status of the Operation object for 'error' results.
+2. X Use AI Platform Prediction to host your model. Monitor the status of the Jobs object for 'failed' job states.
+3. O Use a Google Kubernetes Engine cluster to host your model. Monitor the status of the Jobs object for 'failed' job states.
+4. O Use a Google Kubernetes Engine cluster to host your model. Monitor the status of Operation object for 'error' results.
+>B is correct because of the requirement to host an ML DNN and Google-recommended monitoring object (Jobs); see the links below.
+A is not correct because you should not use the Operation object to monitor failures.
+C, D are not correct because you should not use a Kubernetes Engine cluster for this scenario.
+ 
 You work on a regression problem in a natural language processing domain, and you have 100M labeled examples in your dataset. You have randomly shuffled your data and split your dataset into training and test samples (in a 90/10 ratio). After you have trained the neural network and evaluated your model on a test set, you discover that the root-mean-squared error (RMSE) of your model is twice as high on the train set as on the test set. How should you improve the performance of your model?
-1. Increase the share of the test sample in the train-test split.
-2. Try to collect more data and increase the size of your dataset.
-3. Try out regularization techniques (e.g., dropout or batch normalization) to avoid overfitting.
-4. Increase the complexity of your model by, e.g., introducing an additional layer or increasing the size of vocabularies or n-grams used to avoid underfitting.
-  
+1. O Increase the share of the test sample in the train-test split.
+2. O Try to collect more data and increase the size of your dataset.
+3. O Try out regularization techniques (e.g., dropout or batch normalization) to avoid overfitting.
+4. X Increase the complexity of your model by, e.g., introducing an additional layer or increasing the size of vocabularies or n-grams used to avoid underfitting.
+>A Is incorrect since test sample is large enough
+C Is incorrect since regularization helps to avoid overfitting and we have a clear underfitting case
+B is incorrect since dataset is pretty large already, and having more data typically helps with overfitting and not with underfitting
+D Is correct since increasing model complexity generally helps when you have an underfitting problem
+ 
 You are using Pub/Sub to stream inventory updates from many point-of-sale (POS) terminals into BigQuery. Each update event has the following information: product identifier "prodSku", change increment "quantityDelta", POS identification "termId", and "messageId" which is created for each push attempt from the terminal. During a network outage, you discovered that duplicated messages were sent, causing the inventory system to over-count the changes. You determine that the terminal application has design problems and may send the same event more than once during push retries. You want to ensure that the inventory update is accurate. What should you do?
-1. Inspect the "publishTime" of each message. Make sure that messages whose "publishTime" values match rows in the BigQuery table are discarded.
-2. Inspect the "messageId" of each message. Make sure that any messages whose "messageId" values match corresponding rows in the BigQuery table are discarded.
-3. Instead of specifying a change increment for "quantityDelta", always use the derived inventory value after the increment has been applied. Name the new attribute "adjustedQuantity".
-4. Add another attribute orderId to the message payload to mark the unique check-out order across all terminals. Make sure that messages whose "orderId" and "prodSku" values match corresponding rows in the BigQuery table are discarded.
-  
+1. O Inspect the "publishTime" of each message. Make sure that messages whose "publishTime" values match rows in the BigQuery table are discarded.
+2. O Inspect the "messageId" of each message. Make sure that any messages whose "messageId" values match corresponding rows in the BigQuery table are discarded.
+3. O Instead of specifying a change increment for "quantityDelta", always use the derived inventory value after the increment has been applied. Name the new attribute "adjustedQuantity".
+4. X Add another attribute orderId to the message payload to mark the unique check-out order across all terminals. Make sure that messages whose "orderId" and "prodSku" values match corresponding rows in the BigQuery table are discarded.
+>B Is not correct because duplication in this case could be caused by a terminal re-try, in which case messageId could be different for the same event.
+A Is not correct because publishTime cannot uniquely identify a message and it does not address push retries.
+D is correct because the client application must include a unique identifier to disambiguate possible duplicates due to push retries.
+C is not correct because there are many terminals. Calculating the projected inventory values on the terminal introduces a race condition where multiple terminals could update the inventory data simultaneously.
+ 
 You designed a database for patient records as a pilot project to cover a few hundred patients in three clinics. Your design used a single database table to represent all patients and their visits, and you used self-joins to generate reports. The server resource utilization was at 50%. Since then, the scope of the project has expanded. The database table must now store 100 times more patient records. You can no longer run the reports, because they either take too long or they encounter errors with insufficient compute resources. How should you adjust the database design?
-1. Add capacity (memory and disk space) to the database server by the order of 200.
-2. Shard the tables into smaller ones based on date ranges, and only generate reports with pre-specified date ranges.
-3. Normalize the master patient-record table into the patients table and the visits table, and create other necessary tables to avoid self-join.
-4. Partition the table into smaller tables, with one for each clinic. Run queries against the smaller table pairs, and use unions for consolidated reports.
-  
+1. O Add capacity (memory and disk space) to the database server by the order of 200.
+2. O Shard the tables into smaller ones based on date ranges, and only generate reports with pre-specified date ranges.
+3. X Normalize the master patient-record table into the patients table and the visits table, and create other necessary tables to avoid self-join.
+4. O Partition the table into smaller tables, with one for each clinic. Run queries against the smaller table pairs, and use unions for consolidated reports.
+> A is not correct because adding additional compute resources is not a recommended way to resolve database schema problems.
+B is not correct because this will reduce the functionality of the database and make running reports more difficult.
+C is correct because this option provides the least amount of inconvenience over using pre-specified date ranges or one table per clinic while also increasing performance due to avoiding self-joins.
+D is not correct because this will likely increase the number of tables so much that it will be more difficult to generate reports vs. the correct option.
+ 
 Your startup has never implemented a formal security policy. Currently, everyone in the company has access to the datasets stored in BigQuery. Teams have the freedom to use the service as they see fit, and they have not documented their use cases. You have been asked to secure the data warehouse. You need to discover what everyone is doing. What should you do first?
-1. Use Cloud Audit Logs to review data access.
-2. Get the identity and access management (IAM) policy of each table.
-3. Use Cloud Monitoring to see the usage of BigQuery query slots.
-4. Use the Cloud Billing API to see what account the warehouse is being billed to.
-  
+1. X Use Cloud Audit Logs to review data access.
+2. O Get the identity and access management (IAM) policy of each table.
+3. O Use Cloud Monitoring to see the usage of BigQuery query slots.
+4. O Use the Cloud Billing API to see what account the warehouse is being billed to.
+>A is correct because this is the best way to get granular access to data showing which users are accessing which data.
+B is not correct because we already know that all users already have access to all data, so this information is unlikely to be useful. It will also not show what users have done, just what they can do.
+C is not correct because slot usage will not inform security policy.
+D is not correct because a billing account is typically shared among many people and will only show the amount of data queried and stored.
+ 
 You created a job which runs daily to import highly sensitive data from an on-premises location to Cloud Storage. You also set up a streaming data insert into Cloud Storage via a Kafka node that is running on a Compute Engine instance. You need to encrypt the data at rest and supply your own encryption key. Your key should not be stored in the Google Cloud. What should you do?
-1. Create a dedicated service account, and use encryption at rest to reference your data stored in Cloud Storage and Compute Engine data as part of your API service calls.
-2. Upload your own encryption key to Cloud Key Management Service, and use it to encrypt your data in Cloud Storage. Use your uploaded encryption key and reference it as part of your API service calls to encrypt your data in the Kafka node hosted on Compute Engine.
-3. Upload your own encryption key to Cloud Key Management Service, and use it to encrypt your data in your Kafka node hosted on Compute Engine.
-4. Supply your own encryption key, and reference it as part of your API service calls to encrypt your data in Cloud Storage and your Kafka node hosted on Compute Engine.
-  
+1. O Create a dedicated service account, and use encryption at rest to reference your data stored in Cloud Storage and Compute Engine data as part of your API service calls.
+2. O Upload your own encryption key to Cloud Key Management Service, and use it to encrypt your data in Cloud Storage. Use your uploaded encryption key and reference it as part of your API service calls to encrypt your data in the Kafka node hosted on Compute Engine.
+3. O Upload your own encryption key to Cloud Key Management Service, and use it to encrypt your data in your Kafka node hosted on Compute Engine.
+4. X Supply your own encryption key, and reference it as part of your API service calls to encrypt your data in Cloud Storage and your Kafka node hosted on Compute Engine.
+>D is correct because the scenario requires you to use your own key and also to not store your key on Compute Engine, and also this is a Google recommended practice; see the links below.
+A is not correct because the scenario states that you must supply your own encryption key instead of using one generated by Google Cloud.
+B is not correct because the scenario states that you should use, but not store, your own key with Google Cloud services.
+C is not correct because it does not meet the scenario requirement to reference, but not store, your own key with Google Cloud services.
+ 
 You are working on a project with two compliance requirements. The first requirement states that your developers should be able to see the Google Cloud billing charges for only their own projects. The second requirement states that your finance team members can set budgets and view the current charges for all projects in the organization. The finance team should not be able to view the project contents. You want to set permissions. What should you do?
-1. Add the finance team members to the default IAM Owner role. Add the developers to a custom role that allows them to see their own spend only.
-2. Add the finance team members to the Billing Administrator role for each of the billing accounts that they need to manage. Add the developers to the Viewer role for the Project.
-3. Add the developers and finance managers to the Viewer role for the Project.
-4. Add the finance team to the Viewer role for the Project. Add the developers to the Security Reviewer role for each of the billing accounts.
+1. O Add the finance team members to the default IAM Owner role. Add the developers to a custom role that allows them to see their own spend only.
+2. X Add the finance team members to the Billing Administrator role for each of the billing accounts that they need to manage. Add the developers to the Viewer role for the Project.
+3. O Add the developers and finance managers to the Viewer role for the Project.
+4. O Add the finance team to the Viewer role for the Project. Add the developers to the Security Reviewer role for each of the billing accounts.
+>B is correct because it uses the principle of least privilege for IAM roles; use the Billing Administrator IAM role for that job function.
+A, C, D are not correct because it is a best practice to use pre-defined IAM roles when they exist and match your business scenario; see the links below.
