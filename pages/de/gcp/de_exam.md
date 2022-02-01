@@ -150,7 +150,7 @@ Opensource code for machine learning.
 
 Spark uses a DAG to process data. It executes commands only, if told to do so = "lazy evaluation" (oppostite "eager execution).
 
-![Tensor](../../img/gcp_de_exam_14.jpg)
+![Spark](../../img/gcp_de_exam_15.jpg)
 
 #### Dataproc can augment BigQuery
 
