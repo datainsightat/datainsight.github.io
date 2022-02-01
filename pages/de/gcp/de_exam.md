@@ -135,4 +135,65 @@ Opensource code for machine learning.
 
 ## Design Data Pipelines
 
+### Dataproc
 
+* Cluster node options: Single node, Standard, High availability
+* Benefits: Hadoop, Automated cluster management, Fast cluster resize
+* HDFS: Use Cloud Storage for stateless solution
+* HBASE: Use Cloud Bigtable for stateless solution
+* Objective: Shut down the cluster, Restart per job
+* Data storage: Dont't use hdfs
+* Cloud storage: Match you data locatoin with the compute location
+<a/>
+
+#### Spark
+
+Spark uses a DAG to process data. It executes commands only, if told to do so = "lazy evaluation" (oppostite "eager execution).
+
+![Tensor](../../img/gcp_de_exam_14.jpg)
+
+#### Dataproc can augment BigQuery
+
+    projectId = <your-project-id>
+    
+    sql = "
+      select
+        n.year,
+        n.month,
+        n.day,
+        n.weight_pounds
+      from
+        `bigquery-public-data.samples.natality` as n
+      order by
+        n.year
+      limit 50"
+      
+    print "Running query ..."
+    data = qbq.read_sql.gb1(sql,projectId=projectId)
+    data[:5]
+
+Extract data from BiqQuery using Dataproc and let Spark do the analysis.
+
+#### Open Source Software
+
+![Open Source](../../img/gcp_de_exam_16.jpg)
+
+* Kafka > Pub/Sub
+* HBASE > Cloud BigTable
+* HDFS > Cloud BigStorage
+<a/>
+
+#### Initialization Actions
+
+* Optional executable scripts
+* Allow you to install additional components
+* Provide common initialization actions on Github
+
+#### Cluster Properties
+
+* Allow you to modify properties in common configuration files like core-site.xml
+* Remove the need to manually change property files
+* Specified by file_prefix:property=value
+
+### Dataflow Pipelines
+ 
