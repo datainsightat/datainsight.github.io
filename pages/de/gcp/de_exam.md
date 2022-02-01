@@ -337,3 +337,53 @@ Migrating data warehousing and data processing
 
 # Building and Operationalizing Data Processing Systems
 
+## Building Dataprocessing Systems
+
+![Flowchart](../../img/gcp_de_exam_23.jpg)
+
+ACID - Consistency
+* Atomicity
+* Consistency
+* Isolation
+* Durability
+<a/>
+
+BASE - Availability
+* Basically Available
+* Soft state
+* Eventual consistency
+<a/>
+
+In Cloud Datastore there are just two APIs provide a strongly consistent view for reading entity values and indexes: lookup by key, ancestor query.
+
+## Cloud Storage
+
+Cluster node options
+* Persistent storage
+* Staging area for other services
+* Storage classes (Cold Line, Hot Line ...)
+<a/>
+
+Access
+* Granular access control: Project, Bucket or Object
+* IAM roles, ACLs and Signed URLs
+<a/>
+
+Features
+* Versioning
+* Encryption options: Google, CMEK, CSEK
+* Lifecycles
+* Change storage class
+* Streaming
+* Data transfer / synchronization
+* Storeage Transfer Service
+* JSON and XML APIs
+<a/>
+
+Best Practices
+* Traffic estimation
+<a/>
+
+## Cloud SQL
+
+Familiar:
