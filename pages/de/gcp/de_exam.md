@@ -79,7 +79,7 @@ Combines storage and compute.
 |struct|container of ordered fields|
 |timestamp|represents an absolutej point in time|
 
-### BigQuery Datasets, Tabnles and Jobs
+### BigQuery Datasets, Tables and Jobs
 
 * Project > Users and datasets
   * Limit access to datasets and jobs
@@ -195,5 +195,145 @@ Extract data from BiqQuery using Dataproc and let Spark do the analysis.
 * Remove the need to manually change property files
 * Specified by file_prefix:property=value
 
-### Dataflow Pipelines
- 
+## Dataflow
+
+* Java, or Python
+* Based on Apache Beam
+* Parallel tasks
+* Same Code does stream and batch
+* Input from many sources
+* Put code inside servlet, deploy it to App engine
+* Side inputs
+* User dataflow users to limit access to Dataflow ressources
+<a/>
+
+### Pipelines
+
+![Dataflow Pipeline](../../img/gcp_de_exam_17.jpg)
+
+### Operations
+
+|Operation|Action|
+|-|-|
+|ParDo|Allows for parallel processing|
+|Map|1:1 relationship between input and output in Python|
+|FlatMap|Non 1:1 relationships|
+|.apply(ParDo)|Java for Map and FlatMap|
+|GroupBy|Shuffle|
+|GroupByKey|Explicit Shuffle|
+|Combine|Aggregate values|
+
+Pipelines are often organized in Map and Reduce sequences.
+
+### Templates
+
+![Templates](../../img/gcp_de_exam_18.jpg)  
+
+Separation for work and better ressource allocation.
+
+## BigQuery
+
+* Near real-time analysis
+* NoOps
+* Pay for use
+* Date storage is inexpensive and durable
+* Queries charged on amount of data processed
+* Immutable audit logs
+* Iteractive analysis
+* SQL query language
+* Many ways to ingest, transform, load and export data
+* Nested and repeated fields
+* UDFs in JavaScript
+* Structured data
+* Frontend does analysis
+* Backend does storage
+* Datawarehouse solution
+* Access control: Project, dataset
+<a/>
+
+### Solutions
+
+Separate compute and storage enables serverless execution.  
+
+![Solutions](../../img/gcp_de_exam_19.jpg)  
+
+## Design Data Processing Infrastructure
+
+### Data Ingestion
+
+![Ingestion](../../img/gcp_de_exam_20.jpg)  
+
+### Load data into BigQuery
+
+![Load data](../../img/gcp_de_exam_21.jpg)  
+
+## PubSub
+
+* Serverless global message queue
+* Asynchronous: publisher never waits, a subscriber can get the message
+* At-least-onve deliver guarantee
+* Push subscription and pull subscription
+* 100s of ms -- fast
+</a>
+
+Pub/Sub holds messages up to 7 days.
+
+![PubSub](../../img/gcp_de_exam_22.jpg)
+
+|Ingest|Processing|Analysis|
+|-|-|-|
+|Pub/Sub|Dataflow|BigQuery|
+
+## Exam Guide Review
+
+### Storage
+
+Selecting the appropriate storage technologies
+* Mapping storage systems to business requirements
+* Data modeling
+* Tradeoffs involving latency, thoughput and transactions
+* Distributed sytems
+* Schema design
+<a/>
+
+>Be familiar with the common use cases and qualities of the different storage options. Each storage system or database is optimized for different things - some are best at automatically updating the data for transactions. Some are optimized for speed of data retrieval but not for updates or changes. Some are very fast and inexpensive for simple retrieval but slow for complex queries.
+
+### Pipelines
+
+Designing data pipelines
+* Data publishing and visualization
+* Batch and streaming
+* Online (interactive) vs batch predictions
+* Job automation and orchestration
+<a/>
+
+>An important element in designing the data processing pipeline starts with selecting the appropriate service or collection of services.  
+>All Platform Notebooks, Google Data Studion, BigQuery all have interactive interfaces. Do you know when to use each?
+
+### Processing Infrastructure
+
+Designing a data processing solution
+* Choice of infrastructure
+* System availability and fault tolerance
+* use of distributed systems
+* Capacity planning
+* Hybrid cloud and edge computing
+* Architecture options
+* At least once, in-order, and exactly once event planning
+<a/>
+
+>Pub/Sub and Dataflow together provide once, in-order, processing and possibly delayed or repeated streaming data.  
+>Be familiar with the common assemblies of services and how they are often used together: Dataflow, Dataproc, BigQuery, Cloud Storage and Pub/Sub.
+
+### Migration
+
+Migrating data warehousing and data processing
+* Awareness of current state and how to migrate design to a future state
+* Migrating from on-premise to cloud
+* Validating a migration
+<a/>
+
+>Technologically, Dataproc is superior to Open Source Hadoop and Dataflow is superior to Dataproc. However, this does not mean that the most advanced technology is always the best solution. You need to consider the business requirements. The client might want to first migrate from the data center to the cloud. Make sure everything is working (validate it). And only after they are confident with that solution, to consider improving and modernizing.
+
+# Building and Operationalizing Data Processing Systems
+
