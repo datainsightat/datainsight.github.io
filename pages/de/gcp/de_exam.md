@@ -337,6 +337,8 @@ Migrating data warehousing and data processing
 
 # Building and Operationalizing Data Processing Systems
 
+![Storage Options](../../img/gcp_de_exam_25.jpg)
+
 ## Building Dataprocessing Systems
 
 ![Flowchart](../../img/gcp_de_exam_23.jpg)
@@ -356,7 +358,9 @@ BASE - Availability
 
 In Cloud Datastore there are just two APIs provide a strongly consistent view for reading entity values and indexes: lookup by key, ancestor query.
 
-## Cloud Storage
+## Storage Options
+
+### Cloud Storage
 
 Cluster node options
 * Persistent storage
@@ -384,6 +388,114 @@ Best Practices
 * Traffic estimation
 <a/>
 
-## Cloud SQL
+### Cloud SQL
 
-Familiar:
+Familiar
+* MySQL
+* Stored Procedures
+<a/>
+
+Not Supported
+* User-definded functions
+<a/>
+
+Flexible pricing
+* Pay per use
+* Pay per hour
+<a/>
+
+Connect from anywhere
+* Assign IP address
+<a/>
+
+Fast
+* Place Cloud SQl instance in same region as App engine, or Compute engine
+<a/>
+
+Google Security
+* Secure Google data centers
+* Several ways to securely access a Cloud SQL instance
+<a/>
+
+### Cloud Bigtable
+
+Properties
+* High throughput data
+* Millisecond latency, NoSQL
+* Access is designed to optimize for a range of Row Key prefixes
+<a/>
+
+Important Features
+* Schema design and time-series support
+* Access control
+* Performance Design
+* Choosing between SSD and HDD
+<a/>
+
+### Cloud Spanner
+
+Properties
+* Globally
+* Fully managed
+* Relational database
+* Transactional consistency
+* Data in Cloud Spanner is strongly typed
+ * Define a schema for each database
+ * Schema must specify the data types of each column of each table
+<a/>
+
+Important features
+* Schema design, Data Model and updates
+* Secondary indexes
+* Timestamp bounds and Commit timestamps
+* Data types
+* Transactions
+<a/>
+
+![Cloud Spanner](../../img/gcp_de_exam_24.jpg)
+
+### Datastore
+
+Properties
+* Datastore is a NoSQL object database
+* Atomic transactions
+* ACID support
+* High availibility of reads and writes
+* Massive scalability with high performance
+* Flexible storage and querying of data
+* Blanace of strong and eventual consistency
+* Encryption at rest
+* Fully managed with no plannced downtime
+<a/>
+
+Important features
+* Identity and access management
+* Storage size calculations
+* Multitenancy
+* Encryption
+<a/>
+
+## Building and maintaining Pipelines
+
+### Apache Beam
+
+![Apache Beam](../../img/gcp_de_exam_26.jpg)  
+
+|Size|Scalability and Fault-tolerance|Programming Model|Unbound data|
+|-|-|-|-|
+|Autoscaling and rebalancing handles variable volumes of data and growth|On-demand and distribution of processing scales with fault tolerance|Efficient pipelines + Efficient execution|Windowing, triggering, incremental processing and out-of-order data are addressed in the streamning model.|
+
+#### Dataflow Windowing for streams
+
+* Triggering: controls how results are delivered to the next transforms in the pipeline.
+* Watermark: is a heuristic that tracks how far behind the system is in processing data from an event time.
+* Fixed, sliding and session-based windows.
+* Updated results (late), or speculative results (early)
+<a/>
+
+![Windowing](../../img/gcp_de_exam_27.jpg)
+
+### Side Inputs in Dataflow
+
+![Side Inputs](../../img/gcp_de_exam_28.jpg)
+
