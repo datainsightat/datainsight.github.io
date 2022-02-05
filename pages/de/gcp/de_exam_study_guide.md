@@ -2,6 +2,11 @@
 Compiled by Maverick Lin (http://mavericklin.com)
 Updated by Bernhad Mayrhofer (http://www.datainsight.at)
 
+## Sources
+
+[Google Cloud Documentation](https://cloud.google.com/why-google-cloud)
+
+
 ## What is Data Engineering?
 
 Data engineering enables data-driven decision making by collecting, transforming, and visualizing data. A data engineer designs, builds, maintain, and troubleshoots data processing systems with a particualr emphasis on the security, reliability, fault-tolernace, scalability, fidelity, and efficiency of such systems.  
@@ -196,4 +201,52 @@ Google-proprietary offering, more advanced than Cloud SQL. Mission-critical, rel
 #### Cloud Spanner Data Model
 
 A database can contain 1+ tables. Tables look like relational database tables. Data is strongly typed: must define a schema for each database and that schema must specify the data types of each column of each table. Parent-Child Relationsships: can optinally define relationships between tables to physicall co-locate their rows for effiecient retrieval (data locality: physicall storing 1+ rows of a table with a row from another table.
+
+### BigTable
+
+Columnar database ideal applications that need high throughput, low latencies, and scalability (IoT, user analytics, time-series data, graph data) for non-structured key/value data (each value is < 10 MB). A single value in each row is indexed and this value is knwon as the row key. Does not support SQL queries. Zonal service. Not good for data less than 1 TB of data or items greater than 10 MB. Ideal at handling large amounts of data (TB/PB) for long periods of time.
+
+#### Data Model
+
+4-Dimensiona: row key, column family (table name), coolumn name, timestamp.
+* Row key uniquely identifies an entity and coluns contain individual values for each row
+* Similar columns are grouped into column families
+* Each column is identified by a combination of the column family and a column qualifier, which is a unique name within the column family
+<a/>
+
+#### Load Balancing
+
+Automatically manages splitting, merging, and rebalancing. The master process balances workload/data volume within clusters. The master splits busier/larger tables in half and merges less accessed/smaller tables together, redistributin them between nodes. Best write performance can be achieved by using row keys that do not follow a predictable order and grouping related rows so they are adjacent to one another, which results in more efficient multiple row reads at the same time.
+
+#### Security
+
+Security can be managed at the project and instance level. Does not support tabl-level, row-level, column-level, or cell-level security restrictions.
+
+#### Design Schema
+
+For time-series data, use tall/narrow tables. Denormalize- prefer multiple tall and narrow tables.  
+
+Designing a Bigtable schema is different than designing a schema for a RDMS. Important considerations:
+* Each table has only one index, the row key (4 KB)
+* Rows are sorted lexicographically by row key.
+* All operations are atomic (ACID) by row key
+* Both reads and writes should be distributed evenly
+* Try to keep all info for an entity in a single row
+* Related entitites should be stored in adjacent rows
+* Try to store 10 MB in a single cell (max 100 MB) and 100 MB in a single row (max 256 MB)
+* Supports max of 1000 tables in each instance.
+* Choose row keys that don't follow predictable order
+* Can use up to around 100 column families
+* Column Qualifiers: can create as many as you need in each row, but should avoid splitting data across more column qulifiers than necessary (16 KB)
+* Tables are sparse. Empty columns don't take up any space. Can create large number of columns, even if most columns are empty in most rows.
+* Field promotion (shift a column as part of the row key) and salting (remainder of division of hash of timestamp plus a row key) are ways to help desin row keys.
+<a/>
+
+## Other Storage Options
+
+* Need SQL OLTP: Cloud SQL/Cloud Spanner
+* Need interactive querying for OLAP: BigQuery
+* Need to store blobs larger than 10 MB: Cloud Storage
+* Need to store structured objects in a document database, with ACID and SQL-like queries: Cloud Datastore
+<a/>
 
