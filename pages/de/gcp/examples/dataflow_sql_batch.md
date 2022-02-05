@@ -170,6 +170,7 @@ BatchMinuteTrafficSQLPipeline.java
 ## Dataflow SQL UI
 
 gcp > Dataflow > SQL Workspace
+https://console.cloud.google.com/bigquery?qe=df
 
     SELECT
       user_id,
