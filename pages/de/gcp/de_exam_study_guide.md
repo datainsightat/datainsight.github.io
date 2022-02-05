@@ -68,3 +68,53 @@ A high level scripting language (Pig Latin) that enables writing complex dat tra
 
 #### Spark
 
+Framework for writing fast, distributed programs for data processing and analysis. Spark solves similar problems as Hadoop MapReduce but with a fast in-memory approach. It is an unified engine that suppoerts SQL queries, stremaing data, machine learning and graph processing. Can operate spearately from Hadoop but integrates well with Hadoop. Data is processed using Resilient Distributed Datasets (RDDs), whic are immutable, lazily evaluated, and tracks lineage.
+
+#### Hbase
+
+Non-relationsl, NoSQL, column-oriented database management system that runs on top of HDFS. Well suited for sparse data sets (GCP: BitTable)
+
+#### Flink/Kafka
+
+Stream processing framework. Batch streaming is for bounded, finite datasets, with periodic updates, and delayed processing. Stream processing is for unboundedj datasets, with continuous updates, and immediate processing. Stream data and stream processing must be decoupled via a message queue. Can group streaming data (windows) using tumblind (non-overlapping time), sliding (overlapping time), od session (session gap) windows (GCP: Pub/Sub).
+
+#### Beam
+
+A programing model to define and execute data processing pipelines, including ETL, batch and stream (continuous) processing. After building the pipeline, it is executed by one of Beam's distributed processing backends (Apache Apex, Apache Flink, Apache Spark and Google Cloud Dataflow). Modeled as a Directed Acyclic Graph (DAG).
+
+#### Oozie
+
+Workflow scheduler system to manage Hadoop jobs
+
+#### Sqoop
+
+Transferring framework to transfer large amounts of data into HDFS from relational databases (MySQL)
+
+## Indentity Access Management (IAM)
+
+Access management service to manage different members of the platform- who has what access for which resource.  
+
+Each member jhas roles and permissions to allow them access to perform their duties on the platform. 3 member types: Google account (single person, gmail account), service acocunt (non-person, application), and Google Group (multiple people). Roles are a set of specific permissions for members. Cannot assign permissions to user directly, must grant roles.  
+
+If you grant a member access on a higher hierarchy level, that member will have access to all levels below that hierarchy level as well. You cannot be restricted a lower level. The policy is a union of assigneed and inherited plicies.
+
+* Primitive Roles: Owner (full access to reources, manage roles), Editor (Edit access to resources, change of add), Viewer (read access to resources)
+* Predefined Roles: Finer-grained access control than primitve roles, predefined by Google Cloud
+* Custom Roles
+<a/>
+
+Best Practice: use predefined roles when they exist (over primitive). Follow the principle of least privileged facors.
+
+## Stackdiver
+
+GCP's monitoring, logging, and diagnostics solution. Provides insights to health, performance, and availability of applications.  
+
+Main functions:
+* Debugger: inspect state of app in real time without stopping/slowing down e.g. code behaviour
+* Error Reporting: counts, analyzes, aggregates crashes in coud services
+* Monitoring: overview of performance, uptime and health of cloud services (metrics, events, metadata)
+* Alerting: create plicies to notify you when health and uptime check results exceed a certain limit
+* Tracing: tracks how requests propagate through applications/receive near real-time performance results, latency reports of VMs
+* Logging: store, search, monitor and analyze log data and events from GCP
+<a/>
+
