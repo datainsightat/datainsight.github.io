@@ -1,5 +1,6 @@
 # Google Data Engineering Cheatsheet
 Compiled by Maverick Lin (http://mavericklin.com)
+Updated by Bernhad Mayrhofer (http://www.datainsight.at)
 
 ## What is Data Engineering?
 
@@ -117,4 +118,82 @@ Main functions:
 * Tracing: tracks how requests propagate through applications/receive near real-time performance results, latency reports of VMs
 * Logging: store, search, monitor and analyze log data and events from GCP
 <a/>
+
+## Key Concepts
+
+### OLAP vs OLTP
+
+* Online Analytical Processing (OLAP): primary objective is data analysis. It is an online analysis and data retrieving process, characterized by a large volume of data an complex queries, uses data warehouses.
+* Online Transaction Processing (OLTP): primary objective is data processing, manages database modification, characterized by large numbers of short online transctions, simple queries, and traditional DBMS.
+
+### Row vs Columnar Database
+
+* Row Format: stores dat avy row
+* Column Format: sotres data tables by column rather than by row, which is suitable for analytical query processing and data warehouses.
+<a/>
+
+### IaaS, PaaS, SaaS
+
+* IaaS: gives you the infrasttructure pieces (VMs) but you have to maintain/join together the different infrastructure pieces for your application to work. Most flexible option.
+* PaaS: gives you all the infrastruct pieces already joined so you just have to deploy source code on the platform for your application to work. PaaS solutions are managed services/no-ops (highly available/reliable) and serverless/autoscaling (elastic). Less flexible than IaaS
+* Fully Managed, Hotspotting.
+<a/>
+
+## Compute Choices
+
+AppEngine is the PaaS option- serverless and ops free. Compute Engine is the IaaS option- fully controllable down to OS level. Kubernetes Engine is in the middle- clusters of machines running Kubernetes and hosting containers.  
+
+You can also mix and match multiple compute options.
+* Preemtible Instances: instances that run at a much lower price but may be terminated at any time, self-terminate after 24 hour. Ideal for interruptible workloads.
+* Snapshots: used for backups of disks
+* Images: VM OS
+<a/>
+
+### Google App Engine
+
+Flexible, serverless platform for building highly available applications. Ideal when you want to focus on wirting and developing code oand do not want to manage servers, cluster, of infrastructures. Use Cases: web sites, mobile app and gaming backends, RESTful APIs, IoT apps.
+
+### Google Kubernetes (Container) Engine
+
+Logical infrastructure powered by Kubernetes, an open-source conttainer orchestration system. Ideal for managing containers in productino, increase velocity and operatability, and don't have OS dependencies. Use Cases: containerized workloads, cloud-native distributed systems, hybrid applications.
+
+### Google Compute Engine (IaaS)
+
+Virtual Machines (VMs) running in Google's global data center. Ideal for when you need complete control over your infrastructure and direct access to high-performance hardware or need OS-level changes. Use Cases: any workload requiring a specific OS or OS configuration, currenty deployed and on-premises software that you want to run in the cloud.
+
+## Storage
+
+### Persistent Disk
+
+Fully-managed block storage (SSDs) that is suitable for VMs(containers. Good for snapshots of data backups/sharing read-only data across VMs.
+
+### Cloud Storage
+
+infinetly scalable, fully-managed and highly reliable object/blob storage. Good for data blobs: images, pictures, videos. Cannot query by content.  
+
+To use Cloud Storage, you create buckets to store data and the location can be specified. Bucket names are globally unique.  
+
+Storage classes:
+* Multi-Regional: frequnt access from anywhere in the world. Use for "hot data"
+* Regional: high local performance for region
+* Nearline: storage for data accessed less than once a month (archival)
+* Coldline: less than once a year (archival)
+<a/>
+
+## Relational DBs
+
+### Cloud SQL
+
+Fully-managed relational database service (supports MySQL/PostgresSQL). Use for relational data: tables, rows and columns, and super structured data. SQL compatible and can update fields. Not scalable (small storage- GBs). Good for web frameworks and OLTP workloads (not OLAP). Can use Cloud Storage Transfer Service of Transfer Applicance to data into Cloud Storage (from AWS, local, another bucket). Use gsutil if compying files over from on-premise.
+
+### Cloud Spanner
+
+Google-proprietary offering, more advanced than Cloud SQL. Mission-critical, relational database. Supports horizontal scaling. Combines benefits of relational and non-relational databases.
+
+* Ideal: relational, structured, and semi-structured data that requires high availibility, strong consistency, and transactional reads and writes.
+* Avoid: data is not relational or structured, want an open source RDBMS, strong consitency and high availability is unnecessary
+
+#### Cloud Spanner Data Model
+
+A database can contain 1+ tables. Tables look like relational database tables. Data is strongly typed: must define a schema for each database and that schema must specify the data types of each column of each table. Parent-Child Relationsships: can optinally define relationships between tables to physicall co-locate their rows for effiecient retrieval (data locality: physicall storing 1+ rows of a table with a row from another table.
 
