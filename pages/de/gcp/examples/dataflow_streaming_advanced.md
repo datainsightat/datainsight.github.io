@@ -290,5 +290,20 @@ streaming_minute_traffic_pipeline.py
     --window_duration=${WINDOW_DURATION} \
     --allowed_lateness=${ALLOWED_LATENESS} \
     --table_name=${OUTPUT_TABLE_NAME} \
-    --dead_letter_bucket=${DEADLETTER_BUCKET}
+    --dead_letter_bucket=${DEADLETTER_BUCKET} \
+    --allow_unsafe_triggers
 
+![Pipeline](../../../img/gcp_dataflow_136.jpg)
+
+    $ cd cd ~/training-data-analyst/quests/dataflow
+    $ bash generate_streaming_events.sh true
+
+## Test Pipeline
+
+gcp > Pub/Sub > my_topic > Messages > Publish Message
+
+    $ export PROJECT_ID=$(gcloud config get-value project)
+    $ export REGION='us-central1'
+export BUCKET=gs://${PROJECT_ID}/deadletter
+    $ gsutil ls $BUCKET
+    $ gsutil cat $BUCKET/*
