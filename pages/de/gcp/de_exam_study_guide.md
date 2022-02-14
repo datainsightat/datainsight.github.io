@@ -605,7 +605,7 @@ At each stage, GSP offers multiple services to manage your data.
 |||Cloud Dataprerp||
 |||Cloud Video Intelligence API||
 
-#### Ingest
+### Ingest
 
 There are a number of approaches to collect raw data, based on the data's size, source and latency
 
@@ -613,7 +613,7 @@ There are a number of approaches to collect raw data, based on the data's size, 
 * Streaming: Data consists of a continuous stream of small, asynchronous messages. Common uses include telemetry, or collecting data from geographically dispersed devices (IoT) and user events and analytics (Pub/Sub)
 * Batch: Large amounts of data are stored in a set of files that are transferred to storage in bulk. Common use cases include scientific workloads, backups, migration (Storage, Transfer Service, Appliance)
 
-#### Storage
+### Storage
 
 * Cloud Storage: Durable and highly-available object storage for structured and unstrucutred data
 * Cloud SQL: Fully managed, cloud RDBMS that offers both MySQL and PostgreSQL engines twith built-in support for replication, for low-latencyj, tansactional, relational database workloads. Supports RDBMS workloads up to 10 TB (storing financial transactions, user credentials, customer orders)
@@ -622,7 +622,7 @@ There are a number of approaches to collect raw data, based on the data's size, 
 * Big Query: jSotres large quantities of data for query and anaylsis instead of transactional processing.
 <a/>
 
-#### Exploration and Visualization
+### Exploration and Visualization
 
 Data exploration and visualization to better understand the results of the processing and analysis
 
@@ -630,7 +630,7 @@ Data exploration and visualization to better understand the results of the proce
 * Data Studio: Drag-and-Drop report builder that you can use to visualize data into reports and dash-boards that can the be shared with others, backed by live data, that can be shared and updated easily. Data sources can be data files, Google Sheets, Cloud SQL and BigQuery. Supports query a prefetch cache: Query remembers previous queries and if data is not found, goes to prefetch cache, which predicts data that could be requested.
 <a/>
 
-#### Process and Analyze
+### Process and Analyze
 
 in order to  derive business value and insights from data, you must transform and analyze it. This requires a processing framework that can either analyze the data directly or prepare the data for downstream analysis, as well as tools to analyze and understand processing results.
 * Processing: data from source systems is cleansed, normalized, an dprocessed across multiple machines, and stored in analytical systems
