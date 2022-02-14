@@ -140,6 +140,7 @@ gcp > Dataflow > Create Job from Template
 |Output file location|gs://qwiklabs-gcp-02-dbe8fd71a4e8-coldline/|
 |BigQuery output table|qwiklabs-gcp-02-dbe8fd71a4e8:logs.logs_filtered|
 
+![Dataflow](../../../img/gcp_dataflow_150.jpg)
 
 ### Execute Template using Gcloud
 
@@ -285,3 +286,4 @@ gcp > Dataflow > Create Job from Template
     --template-file-gcs-location ${TEMPLATE_LOC} \
     --parameters "inputPath=${INPUT_PATH},outputPath=${OUTPUT_PATH},tableName=${BQ_TABLE}"
     
+![Dataflow](../../../img/gcp_dataflow_151.jpg)
