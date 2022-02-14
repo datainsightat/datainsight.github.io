@@ -622,3 +622,38 @@ There are a number of approaches to collect raw data, based on the data's size, 
 * Big Query: jSotres large quantities of data for query and anaylsis instead of transactional processing.
 <a/>
 
+#### Exploration and Visualization
+
+Data exploration and visualization to better understand the results of the processing and analysis
+
+* Cloud Datalab: Interactive web-based tool that you can use to explore, analyze and visualize data built on top of Jupyter notebooks.
+* Data Studio: Drag-and-Drop report builder that you can use to visualize data into reports and dash-boards that can the be shared with others, backed by live data, that can be shared and updated easily. Data sources can be data files, Google Sheets, Cloud SQL and BigQuery. Supports query a prefetch cache: Query remembers previous queries and if data is not found, goes to prefetch cache, which predicts data that could be requested.
+<a/>
+
+#### Process and Analyze
+
+in order to  derive business value and insights from data, you must transform and analyze it. This requires a processing framework that can either analyze the data directly or prepare the data for downstream analysis, as well as tools to analyze and understand processing results.
+* Processing: data from source systems is cleansed, normalized, an dprocessed across multiple machines, and stored in analytical systems
+* Analysis: Processed data is stored in systems that allow for ad-hoc querying and exploration
+* Understanding: Based on analytical results, data is used to train and test automated machine-learning models
+<a/>
+
+#### Processing
+
+|Cloud Dataproc|Cloud Dataflow|Cloud Dataprep|
+|-|-|-|
+|Existing Hadoop/Spark Applications|New Data Processing Pipelines|UI-Driven Data Preparation|
+|Machine Learning/Data Science Ecosystem|Unified Straming & Batch|Scales On-Demand|
+|Tunable Clusters Parameters|Fully-Managed, No-Ops|Fully-Managed, No-Ops|
+
+* Cloud Dataproc: Migrate your existing Hadooop or Spark deployments to a fully-managed service that automates cluster creation, simplifies configuration and management of your cluster, has built-in monitoring and utilization reports, and can be shutdown when not in use.
+* Cloud Dataflow: Designed to simplify big data for both streaming and batch workloads, focus on filtering, aggregating, and transforming your data
+* Cloud Dataprep: Service for visually exploring, cleaning, and preparing data for analysis. Can transform data of any size stored in CSV, JSON or relational-table formats
+<a/>
+
+#### Analyzing
+
+* BigQuery: Query using SQL, all data encrypted, user analysis, device and operational metrics, business intelligence
+* Task-Specific ML: Vision, Speech, Natural Language, Translation, Video Intelligence
+* ML Engine: Managed platform you can use to run custom machine learning models at scale.
+<a/>
