@@ -101,11 +101,11 @@ Web Access
 
 # Storage Types
 
-![Types](../../gcp_datalage_8.png)
+![Types](../../gcp_datalake_8.png)
 
 ## Transactional vs Analytic Workload
 
-![Workload](../../gcp_datalage_9.png)
+![Workload](../../gcp_datalake_9.png)
 
 Transactional workload is write-heavy. Analytical systems are read-heavy. 
 
