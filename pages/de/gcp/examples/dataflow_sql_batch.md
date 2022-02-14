@@ -193,4 +193,165 @@ Create Job
 
 ![Dataflow](../../../img/gcp_dataflow_139.jpg)
 
+# Dataflow SQL Batch - Python
+
+## Initialize
+
+    $ gcloud auth list
+    $ gcloud config list project
+    
+## Aggregate Site Traffig by User
+
+### Clone Project
+
+    $ git clone https://github.com/GoogleCloudPlatform/training-data-analyst/
+    $ cd ~/training-data-analyst/quests/dataflow_python/
+    
+    $ cd 4_SQL_Batch_Analytics/lab
+    $ export BASE_DIR=$(pwd)
+    
+### Setup Virtual Environment
+
+    $ sudo apt-get install -y python3-venv
+    $ python3 -m venv df-env
+    $ source df-env/bin/activate
+
+### Install Packages
+
+    $ python3 -m pip install -q --upgrade pip setuptools wheel
+    $ python3 -m pip install apache-beam[gcp]
+    
+### Enable Dataflow API
+
+    $ gcloud services enable dataflow.googleapis.com
+    $ gcloud services enable datacatalog.googleapis.com
+    
+### Grant Dataflow Worker
+
+    $ PROJECT_ID=$(gcloud config get-value project)
+    $ export PROJECT_NUMBER=$(gcloud projects list --filter="$PROJECT_ID" --format="value(PROJECT_NUMBER)")
+    $ export serviceAccount=""$PROJECT_NUMBER"-compute@developer.gserviceaccount.com"
+    $ gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:${serviceAccount}" --role="roles/dataflow.worker"
+
+### Setup Data Environment
+
+    $ cd $BASE_DIR/../..
+    $ source create_batch_sinks.sh
+    $ source generate_batch_events.sh
+    $ cd $BASE_DIR
+
+## Aggregate Site Traffic by User
+
+### Add SQL Dependencies
+
+training-data-analyst/quests/dataflow_python/4_SQL_Batch_Analytics/lab/batch_user_traffic_SQL_pipeline.py
+
+    from apache_beam.transforms.sql import SqlTransform
+    
+    SELECT user_id,
+    COUNT(*) AS page_views, SUM(num_bytes) as total_bytes,
+    MAX(num_bytes) AS max_bytes, MIN(num_bytes) as min_bytes
+    FROM PCOLLECTION
+    GROUP BY user_id
+    
+    logs | 'WriteRawToBQ' >> beam.io.WriteToBigQuery(
+      raw_table_name,
+      schema=raw_table_schema,
+      create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
+      write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE
+      )
+    
+    SqlTransform(query, dialect='zetasql')
+    
+### Run Pipeline
+
+    $ export PROJECT_ID=$(gcloud config get-value project)
+    $ export REGION='us-central1'
+    $ export BUCKET=gs://${PROJECT_ID}
+    $ export PIPELINE_FOLDER=${BUCKET}
+    $ export RUNNER=DataflowRunner
+    $ export INPUT_PATH=${PIPELINE_FOLDER}/events.json
+    $ export TABLE_NAME=${PROJECT_ID}:logs.user_traffic
+    $ export AGGREGATE_TABLE_NAME=${PROJECT_ID}:logs.user_traffic
+    $ export RAW_TABLE_NAME=${PROJECT_ID}:logs.raw
+    $ python3 batch_user_traffic_SQL_pipeline.py \
+    --project=${PROJECT_ID} \
+    --region=${REGION} \
+    --staging_location=${PIPELINE_FOLDER}/staging \
+    --temp_location=${PIPELINE_FOLDER}/temp \
+    --runner=${RUNNER} \
+    --experiments=use_runner_v2 \
+    --input_path=${INPUT_PATH} \
+    --agg_table_name=${AGGREGATE_TABLE_NAME} \
+    --raw_table_name=${RAW_TABLE_NAME}
+    
+### Check Progress
+
+gcp > Dataflow > jobs
+
+![Dataflow](../../../img/gcp_dataflow_140.jpg)
+
+## Aggregate Site Traffic by Minute
+
+training-data-analyst/quests/dataflow_python/4_SQL_Batch_Analytics/lab/batch_minute_user_SQL_pipeline.py
+
+    ts = datetime.strptime(element.ts[:-8], "%Y-%m-%dT%H:%M:%S")
+    ts = datetime.strftime(ts, "%Y-%m-%d %H:%M:%S")
+
+    SELECT
+        COUNT(*) AS page_views,
+        STRING(window_start) AS start_time
+    FROM
+        TUMBLE(
+            (SELECT TIMESTAMP(ts) AS ts FROM PCOLLECTION),
+            DESCRIPTOR(ts),
+            'INTERVAL 1 MINUTE')
+    GROUP BY window_start
+    
+    SqlTransform(query, dialect='zetasql')
+
+### Run Pipeline
+
+    $ export PROJECT_ID=$(gcloud config get-value project)
+    $ export REGION='us-central1'
+    $ export BUCKET=gs://${PROJECT_ID}
+    $ export PIPELINE_FOLDER=${BUCKET}
+    $ export RUNNER=DataflowRunner
+    $ export INPUT_PATH=${PIPELINE_FOLDER}/events.json
+    $ export TABLE_NAME=${PROJECT_ID}:logs.minute_traffic
+    $ python3 batch_minute_traffic_SQL_pipeline.py \
+    --project=${PROJECT_ID} \
+    --region=${REGION} \
+    --stagingLocation=${PIPELINE_FOLDER}/staging \
+    --tempLocation=${PIPELINE_FOLDER}/temp \
+    --runner=${RUNNER} \
+    --inputPath=${INPUT_PATH} \
+    --tableName=${TABLE_NAME} \
+    --experiments=use_runner_v2
+    
+![Dataflow](../../../img/gcp_dataflow_141.jpg)
+
+### Check Result
+
+    $ bq head -n 10 $PROJECT_ID:logs.minute_traffic
+    
+## Dataflow SQL UI
+
+Dataflow Jobs > SQL Workspace
+
+    SELECT
+      user_id,
+      COUNT(*) AS pageviews,
+      SUM(num_bytes) AS total_bytes,
+      MAX(num_bytes) AS max_num_bytes,  
+      MIN(num_bytes) AS min_num_bytes
+    FROM
+      bigquery.table.`qwiklabs-gcp-01-545f0e12dd6d`.logs.raw
+    GROUP BY
+      user_id
+
+![Dataflow](../../../img/gcp_dataflow_142.jpg)  
+
+![Dataflow](../../../img/gcp_dataflow_143.jpg)
+
 
