@@ -130,3 +130,27 @@ Google Colab: https://colab.research.google.com/?utm_source=scs-index
     * timestamp_attributes(int): Value used as element timestamp. Specified argument should be a numerical value representing the number of milliseconds since the Unix epoch.
 <a/>
 
+### ParDo Transform
+
+A ParDo transform takes each element of input PCollection, performs processing function on it and emit 0,1 or multiple elements. By default, ParDo returns multiple elements (like Flatmap).
+
+* Filtering: Take each element of PCollectoin and decide either output or discard
+* Formatting: Change the type or format of input elements
+* Extract individual parts: Extract individual elements
+* Computations: Perform any processing function on the input elements
+</>
+
+### Combiner
+
+* Create_accumulator: Creates a new local accumulator in each machine
+* add_input: Adds an input element to accumulator
+* merge_accumulators: Merges all machines accumulators
+* extract_output: Performs final computation
+<a/>
+
+### CoGrouByKey
+
+Relational join of two or more key/value PCollections
+
+## Side Inputs
+
