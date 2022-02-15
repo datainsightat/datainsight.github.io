@@ -90,3 +90,43 @@ Google Colab: https://colab.research.google.com/?utm_source=scs-index
     * with_attributes(boolean): Output elements will be of type 'objects', otherwise of type 'bytes'.
     * timestamp_attributes(int): Value used as element timestamp. Specified argument should be a numerical value representing the number of milliseconds since the Unix epoch.
 
+### Write Transforms
+
+* WriteToText(): writes each element of the PCollection as a single line in the output file
+    * file_path_prefix(str): Path to write the oCollectoin
+    * file_name_suffix(str): Suffix of output file name
+    * num_shards(int): Number of shards
+    * append_trailing_newlines(boolean): Should lines be delimited with newline
+    * coder(str): Coder name to encode each line
+    * compression_type(str): Compression type of output file
+    * header(str): Header line of ouput file
+* WriteToAvro(): Write Avro file
+    * file_path_prefix(str)
+    * file_name_suffix(str)
+    * num_shards(int)
+    * compression_type(str)
+    * schema: The schema to use for writing, as returned by avro.schema.Parse
+    * codec: Compression codec to use for block level compression. Default 'deflate'
+    * use_fastavro(boolean): Use 'fastavro' library
+    * mime_type: Mime type for the produced output files
+* WriteToParquet(): Write to Parquet File
+    * file_path_prefix(str)
+    * file_name_suffix(str)
+    * num_shards(int)
+    * schema
+    * codec
+    * mime_type
+    * row_group_buffer_size: Byte size of the row group buffer
+    * record_batch_size: Number of records in each record batch
+* WriteToTFRecord(): Write to Tensor Flow records
+    * file_path_prefix(str)
+    * file_name_suffix(str)
+    * num_shards(int)
+    * compression_type(str)
+* WriteToPubsub(): Write to PubSub service
+    * topic(str): Topic name where the messages are getting published
+    * id_label(str): Attribute from incoming messages which should be considered as unique identifier
+    * with_attributes(boolean): Output elements will be of type 'objects', otherwise of type 'bytes'.
+    * timestamp_attributes(int): Value used as element timestamp. Specified argument should be a numerical value representing the number of milliseconds since the Unix epoch.
+<a/>
+
