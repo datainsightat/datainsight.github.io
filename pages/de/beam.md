@@ -52,3 +52,41 @@ Input > Read > P1 > Filter > P2 > GroupBy > P3 > Sum > Output
 
 Google Colab: https://colab.research.google.com/?utm_source=scs-index
     
+## Transformations in Beam
+
+### Read Transforms
+
+#### Files
+
+* ReadFromText(): parses a text file as newline delimited elements.
+    * file_pattern(str): Full path of input file. /data/input*.txt
+    * min_bundle_size(int): Splits source into bundles for parallel processing.
+    * compression_type(str): Specifies compression type of input
+    * strip_trailing_newlines(boolean): Should source remove newline character from each line before reading it.
+    * validate(boolean): Verify the presence of file during pipeline creation
+    * skip_header_lines(int): Specify the number of header lines
+* ReadFromAvro(): Read Avro files
+    * file_pattern(str)
+    * min_bundle_size(int)
+    * validate(boolean)
+    * use_fastavro(boolean): Uses 'fastavro' libraray to read the file.
+* ReadFromParquet(): Read Parquet files
+    * file_pattern(str)
+    * min_bundle_size(int)
+    * validate(boolean)
+    * columns(list[str]): Specifies the list of columns that will be read from the input file.
+* ReadFromTFRecord(): Read tensor flow records. Simple format for storing a sequence of binary records
+    * file_pattern(str)
+    * validate(boolean)
+    * compression_type(str)
+    * coder(str): Specifies the coder name to decode the input record. Default 'bytesCoder'
+
+#### Messaging Queues
+
+* ReadFromPubSub(): Read messages from Google PubSub service
+    * topic(str): Topic name where the messages are getting published
+    * subscription(str): Subscription name
+    * id_label(str): Attribute from incoming messages which should be considered as unique identifier
+    * with_attributes(boolean): Output elements will be of type 'objects', otherwise of type 'bytes'.
+    * timestamp_attributes(int): Value used as element timestamp. Specified argument should be a numerical value representing the number of milliseconds since the Unix epoch.
+
