@@ -58,6 +58,7 @@
 * [Hive](pages/de/hive.md)
 * [Spark](pages/de/spark.md)
 * [Kafka](pages/de/kafka.md)
+* [Beam](pages/de/beam.md)
 
 ## DS - Data Science
 
