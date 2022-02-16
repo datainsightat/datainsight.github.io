@@ -1,5 +1,9 @@
 # Apache Beam
 
+## Source
+
+https://www.udemy.com/share/102dea3@eL-yo5Kxb3rwTFhsHjhoKrSfdMPGMf6NtzfCEg1P1-m11kFEWjMTBIV9gGxDt792/
+
 ## Introduction
 
 Unified programming model for efficient and portable Big data processing pipelines. Beam is able to process batch and  streaming data (Batch + Stream = Beam). A Beam pipeline can be created in any language like Java, Python, Go etc and be able to run on any of the execution frameworks like Spark, Flink, Apex, Cloud DataFlow.  
@@ -153,4 +157,120 @@ A ParDo transform takes each element of input PCollection, performs processing f
 Relational join of two or more key/value PCollections
 
 ## Side Inputs
+
+Additional data provided to a DoFn object. Can be provided to Pardo or its child Transforms (Map, FlatMap).
+
+## Data Encoding
+
+Coders encode and decode the elements of a PCollection. Coders do not necessarily have a 1 to 1 relationship with types, there can be multiple encoders for a single input. Coder Registry maps the tpyes to their default order.
+
+|Python|Coder|
+|-|-|
+|int|VarIntCoder|
+|float|FloarCoder|
+|str|BytesCoder|
+|bytes|StrUtf8Coder|
+|Tuple|TupleCoder|
+
+    from apache_beam import coders
+    
+    # Display default coder
+    coders.registry.get_coder(int)
+
+    # Change default coder
+    coders.registry.register_coder(int, coders.FloatCoder)
+    
+### Create Custom Coder
+
+    class CustomCoder(beam.coders.Coder):
+
+        # Encodes the given object into a byte string
+        def encode(self, input_value):
+            return()
+
+        # Decodes the given byte string into the corresponding object
+        def decode(self, encoded_value):
+            return()
+
+        # Ensure elements are encoded the same way on all machines. Default pickle
+        def is_deterministic(self):
+            return True
+
+        # Estimates the encoded size of the given value, in bytes
+        def as_derterministic_coder(self, step_label, error_message=None):
+            if self.is_deterministic():
+                return self
+        else
+            raise ValueError(error_message)
+    
+        def estimate_size(self, value):
+            return len(self.encode(value))
+
+## Type Safety - Type Hints
+
+Prevention of typed errors in a programing language.
+
+* Simple TypeHint: Primitive types like str, int
+* Parametrized TypeHint: Nested types like List, Tuple
+* Special TypeHint: Special Types like Any, ...
+<a/>
+
+    evens = (
+        p
+        | beam.Create(['one','two','three'])
+        | beam.Filter(lambda x:x%2 == 0)
+    )
+
+### Inline
+
+Provided during pipeline construction (on Transforms)
+
+    evens = (
+        p
+        | beam.Create(['one','two','three'])
+        | beam.Filter(lambda x:x%2 == 0).with_input_types(int)
+    )
+    
+### Outline
+
+Provided as properties of the DoFn using decorators  
+
+    @beam.typehints.with_output_types(int)
+    @beam.typehints.with_input_types(int)
+    class FilterEvensDoFn(beam.DoFn):
+        def process(self, elemet):
+            if element % 2 == 0:
+                yield element
+                
+    evens = (
+        p
+        | beam.Create(['1','2','3'])
+        | beam.ParDo(FilterEvensDoFn())
+    )
+
+## Streaming Data Pipelines
+
+### PubSub Streaming Architecture
+
+Google Cloud PubSub is a fully managed real-time messaging service which allows you to send and receive messages efficiently between applications and services. Sender and Receiver of messages are decouled.
+
+![Beam](../img/beam_3.jpg)
+
+|Item|Description|
+|-|-|
+|Publisher|Application that creates and sends messages to a topic|
+|Topic|Named channel to which messages are sent by publishers. It is stored in a persistent storage where it can be passed to the subscriber|
+|Message|Combination of data and attributes that a publisher sends to a topic|
+|Subscriber|Consumer of the topic. It creates a subscription to a particualar topic|
+|Subscription|Named resource with represents the stream of messages from a single topic. After a subscriber created a subscription, all the messges in a topic are delivered to the subscriber|
+
+* Ensures at least once delivery
+* Ensures exactly once processing
+* Less points of failure
+* Easily scalable
+* Ingest millions of streaming events
+* Fine-graned access controls
+* Leverage multiple Google services
+* Open API
+<a/>
 
