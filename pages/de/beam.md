@@ -274,3 +274,53 @@ Google Cloud PubSub is a fully managed real-time messaging service which allows 
 * Open API
 <a/>
 
+## Windows
+
+* Tumbling/Fixed Windows
+* Sliding Windows
+* Session Windows
+* Global Windows
+<a/>
+
+### Time Notions
+
+Challenges with latency and incompletenes.
+
+* Event Time: Time, when a particular event occured at the source.
+* Processing Time: Time, when a particular event starts getting processed.
+<a/>
+
+![Beam](../img/beam_4.jpg)
+
+### Time-based Windows
+
+#### Tumbling
+
+![Beam](../img/beam_5.jpg)
+
+#### Sliding
+
+Sliding windows can Overlap. Calculation of averages.
+
+![Beam](../img/beam_6.jpg)
+
+### Session Windows
+
+Window closes, after a certain time after last occurance of the key.
+
+![Beam](../img/beam_7.jpg)
+
+### Global Windows
+
+A single window for each key. Triggers determine, if window should be calculated.
+
+![Beam](../img/beam_8.jpg)
+
+## Watermarks
+
+Measure progress in event time. Define 'late elements'. Alloews lateness is the time by which an element can be late before it is dropped.
+
+![Beam](../img/beam_9.jpg)
+
+
+
