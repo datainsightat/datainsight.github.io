@@ -322,5 +322,13 @@ Measure progress in event time. Define 'late elements'. Alloews lateness is the 
 
 ![Beam](../img/beam_9.jpg)
 
+## Triggers
 
+![Beam](../img/beam_10.jpg)
 
+* Event Time Trigger: Defatult trigger fires based upon progress of event time
+    * AfterWatermark(time)
+* Processing Time Trigger: Trigger is based upon process time
+    * .AfterProcessingTime(time)
+* Data-driven Trigger: Trigger fires when number of elements in a window exceeds amount
+    * -AfterCoun(No)
