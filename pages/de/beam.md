@@ -351,3 +351,6 @@ Measure progress in event time. Define 'late elements'. Alloews lateness is the 
         accumulation_mode=AccumulationMode.DISCARDING)
 
 
+## Case Study Game Development
+
+![Beam](../img/beam_11.jpg)
