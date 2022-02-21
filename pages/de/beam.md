@@ -332,3 +332,22 @@ Measure progress in event time. Define 'late elements'. Alloews lateness is the 
     * .AfterProcessingTime(time)
 * Data-driven Trigger: Trigger fires when number of elements in a window exceeds amount
     * -AfterCoun(No)
+
+### Composite Triggers
+
+* Early & Late firing
+* Repeatedly: Trigger that executes forever
+* AfterEach: Multiple triggers fire in a specified sequence
+* AfterFirst: Multiple triggers and make the windows to emit results when ANY of the triggers condition is satisfied
+* AfterAll: Multiple triggers and make the windows to emit results when ALL of the triggers conditions are satisfied
+* Finally: Final condition that causes any trigger to fire on final time
+<a/>
+
+    pcollection | WindowInto (FixedWindows(60)
+        trigger=Repeatedly(
+            AfterAny(
+                AfterCount(50),
+                AfterProcessingTime(20))),
+        accumulation_mode=AccumulationMode.DISCARDING)
+
+
