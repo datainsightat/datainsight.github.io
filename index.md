@@ -59,6 +59,7 @@
 * [Spark](pages/de/spark.md)
 * [Kafka](pages/de/kafka.md)
 * [Beam](pages/de/beam.md)
+* [Airflow|(pages/de/airflow.md)
 
 ## DS - Data Science
 
