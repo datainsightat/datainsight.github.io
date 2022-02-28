@@ -17,3 +17,5 @@
 |[Pub/Sub](gcp/pubsub.md)||[Dataproc](gcp/dataproc.md)|||
 
 ## [Examples](gcp/examples/)
+
+## [Google GIT Ressources](https://github.com/GoogleCloudPlatform/training-data-analyst)
