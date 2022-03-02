@@ -80,3 +80,66 @@ Combination of operatotr and dependencies in a DAG.
 ### Providers vs Extras
 
 Provider gives you new functionality (operators). Extras are only dependencies.
+
+## CLI Commands
+
+    $ docker container exec -it airflow /bin/bash
+
+### Admin
+
+    $ airflow -h
+
+#### Initialize DB
+
+    $ airflow db init
+
+#### Reset DB
+
+    $ airflow db reset
+    
+#### Update Airflow
+
+Upgrade schemas of metadata db.
+
+    $ airflow db upgrade
+    
+### Maintain
+
+#### Start Airflow
+
+    $ airflow webserver
+    $ airflow scheduler
+
+#### Dedicate Airflow Worker
+
+    $ airflow celery worker
+
+### Interact with DAGs
+
+#### List DAGs
+
+    $ airflow list dags
+    
+#### Trigger DAG
+
+    $ airflow dags trigger example_bash_operator -e 2022-02-03
+
+#### List DAG runs
+
+    $ airflow dags list-runs -d example_bash_operator
+    
+#### Trigger DAG runs for Time Period
+
+    $ airflow dags backfill -s 2022-02-03 -e 2022-02-05 --reset-dagruns
+    
+### Interact with Tasks of a DAG
+
+#### Show Tasks
+
+    $ airflow tasks list example_bash_operator
+    
+#### Test Tasks
+
+    $ airflow tasks test example_bash_operator runme_0 2022-01-01
+
+
