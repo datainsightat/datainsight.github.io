@@ -143,3 +143,15 @@ Upgrade schemas of metadata db.
     $ airflow tasks test example_bash_operator runme_0 2022-01-01
 
 
+## Docker
+
+    Application Service
+    
+    Airflow   - Webserver -> Container
+              \ Scheduler -> Container
+              \ DB        -> Container
+
+Containers run in the same network!
+    
+    Dockerfile -> Docker Image (Airflow)
+    Docker Compose File -> Run Airflow Services
