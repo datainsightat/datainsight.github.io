@@ -109,3 +109,12 @@ Build image
 # Get Bash in Docker
 
     $ docker exec -it <container name> /bin/bash
+
+# Run GUI Applications
+
+## Linux
+
+    $ xhost +
+    $ docker run -it --name gimp -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro gimp:0.1
+
+
