@@ -308,3 +308,35 @@ You are working on a project with two compliance requirements. The first require
 4. O Add the finance team to the Viewer role for the Project. Add the developers to the Security Reviewer role for each of the billing accounts.
 >B is correct because it uses the principle of least privilege for IAM roles; use the Billing Administrator IAM role for that job function.
 A, C, D are not correct because it is a best practice to use pre-defined IAM roles when they exist and match your business scenario; see the links below.
+
+An application that relies on Cloud SQL to read infrequently changing data is predicted to grow dramatically. How can you increase capacity for more read-only clients?
+ 
+ 1. O Configure high availibility on the primary node
+ 2. O Establish an external replica in the customer's data center
+ 3. O Use backups, so you can restore if there is an outage
+ 4. X Configure [read replicas](https://cloud.google.com/sql/docs/mysql/replication/tips#read-replica
+ 
+ >D is correct. A High availibility does nothing to improce throughput; it makes the service more accessible. B An external replica is more of a backup activity; it does not add to throughput on the cloud. C Backups would not make sense in this scenario.
+
+A BigQuery dataset was located near Tokyo. For efficiency reasons, the company wants the dataset duplicated in Germany.
+ 
+ 1. X Change the dataset from a regional location to mulit-region locations, specifying the regions to be included.
+ 2. O Export the data from BigQuery into a bucket in the new location, an import it into a new dataset at the new location.
+ 3. O Copy the data from the dataset in the source region to the dataset in the target region using BigQuery commands.
+ 4. O Export the data from BigQuery into a nerby bucket in Cloud Storage. Copy to a new reginal bucket in Cloud Storgage. Import into the new dataset in the new location.
+ 
+ >D is correct. BigQuery imports an exports data to local or multi-regional buckets in the same location. So you need to use Cloud Storage as an intermediary to transfer the data to the new location.A Datasets are immutable, so the location can't be updated. B BigQuery writes and reads from bearby buckets, so the new location can't read the old location data. C BigQuery doesn't provide a location-to-location move or copy command.
+ 
+Your client wans a tranactionally consistent global retlational repository. You need to be able to monitor and adjust node count for unpredictable traffic spikes.
+
+1. O Use Cloud Spanner. Monitor storage usage and increase node count if more than 70% utilized.
+2. X Use Cloud Spanner. Monitor CPU utilization and increase node count if more than 70% utilized for your time span.
+3. O Use Cloud Bigtable. Monitor data stored and increase node count if more than 70% utilized.
+4. O Use Cloud Bigtable. Monitor CPU utilization and increase node count if more than 70% utilized for you time span.
+ 
+>B is correct because of the requirement to globally scaleable transactions - use Cloud Spanner. CPU utilization is the recommended metric for scaling, per Google best practices, linked below. A is not correct because you should not use storage utilization as a scaling metric. C,D are not correct because you should not use Cloud Bigtable for such a scenario.
+
+
+ 
+ 
+ 
