@@ -499,3 +499,45 @@ Important features
 
 ![Side Inputs](../../img/gcp_de_exam_28.jpg)
 
+### Building a Streaming Pipeline
+
+* Stream from Pub/Sub into BigQuery. BQ can provide streaming ingest to unbounded data sets.
+* BQ provides stream ingestion at a rate of 100krows/table/second
+* Pub/Sub guarantees delivery, but not the order of messages.
+<a/>
+
+![Exam](../../img/gcp_de_exam_29.jpg)
+
+### Scaling Beyond BigQuery
+
+|BigQuery|Cloud BigTable|
+|-|-|
+|Easy, Inexpensive|Low latency, High throughput|
+|latency in order of seconds|100kQPS at 6ms latency in 10 node cluster|
+|100k rows/second streaming||
+
+# Analyze Data and enable Machine Learning
+
+## Analyze Data
+
+### Pretraned Models
+
+![Exam](../../img/gcp_de_exam_32.jpg)
+
+The three modes of the natural language API are: Sentiment, Entity and Syntax
+
+### Notebooks, Datalab
+
+![Exam](../../img/gcp_de_exam_33.jpg)
+
+### Cloud ML
+
+![Exam](../../img/gcp_de_exam_34.jpg)
+
+![Exam](../../img/gcp_de_exam_35.jpg)
+
+## Machine Learning
+
+
+
+
