@@ -538,6 +538,92 @@ The three modes of the natural language API are: Sentiment, Entity and Syntax
 
 ## Machine Learning
 
+![Exam](../../img/gcp_de_exam_36.jpg)
 
+|Step|Tool|
+|-|-|
+|Collect data|Logging API, Pub/Sub|
+|Organize data|BigQuery, Dataflow, ML Preprocessing SDK|
+|Create Model|Tensorflow|
+|Train, Deploy|Cloud ML|
 
+### Tensorflow
+
+High-Performance library for numerical computation. Tensorflow is coded for example in Python using DG (Directed Graphs) => Lazy evaluation (can be run in eager mode).
+
+![Exam](../../img/gcp_de_exam_37.jpg)
+
+Mathematical information is transported from node to node.
+
+![Exam](../../img/gcp_de_exam_38.jpg)
+
+#### TF Methods
+
+https://www.tensorflow.org/api_docs/python/tf/keras/losses
+
+|Method|Description|
+|-|-|
+|tf.layers|A layser is a class implementing common neural networks operations, such as convolution, bat chorm, etc. These operations require managing variables, losses and updates, as well as applying TensorFlow ops to input tensors|
+|tf.losses|Loss Function|
+|tf.metrics|General Metrics about the TF performance|
+
+### Unstructured Data
+
+![Exam](../../img/gcp_de_exam_39.jpg)
+
+|Task|Solution|
+|Real-time insight into supply chain operations. Which partner is causing issues?|Human|
+|Drive product decisions. How do people really use feature x?|Human|
+|Did error reates decrease after the bug fix was applied|Easy counting problems > Big Data|
+|Which stores are experiencing long delays in paymemt processing|Easy counting problems > Big Data|
+|Are procemmers checking in low-quality code?|Harder counting problemns > ML|
+|Which stores are experiencing a lack of parking space?|Harder counting problems > ML|
+
+![Exam](../../img/gcp_de_exam_40.jpg)
+
+### Supervised Learning
+
+Labels
+
+![Exam](../../img/gcp_de_exam_41.jpg)
+
+#### Regression, Classification
+
+Regression and Classification models are supervised ML methods.
+
+![Exam](../../img/gcp_de_exam_42.jpg)
+
+Structured data is a great source for machine learnign model, because it is already labeled.  
+
+Regression problems predict continuous values, like prices, whereas classification problems predict categorical values, like colours.
+
+### Measure Loss
+
+#### Mean Squared Error (MSE)
+
+![Exam](../../img/gcp_de_exam_43.jpg)e
+
+#### Root Mean Squared Error (RMSE)
+
+The root of MSE. The measure is in the unit of the model and is therefore easier to interpretate.
+
+#### XEntropy
+
+Xentropy is a hint for a classification problem.
+
+#### Gradient Descent
+
+![Exam](../../img/gcp_de_exam_44.jpg)
+
+Turn ML problem into search problem.
+
+#### Recompute Error after Batch of examples
+
+![Exam](../../img/gcp_de_exam_45.jpg)
+
+### Training and Validating
+
+#### When is a Model sufficiently good?
+
+![Exam](../../img/gcp_de_exam_46.jpg)
 
