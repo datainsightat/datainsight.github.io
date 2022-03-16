@@ -2,7 +2,7 @@
 
 A daily reporting pipeline with multiple sources and complex dependencies. Human intervention to data check quality, inputs, and proceed to next stage. Need daily updates on yesterday's data, but takes > 24 hours to run.
 
-![case](../../../gcp_de_exam_30.jpg)
+![case](../../../img/gcp_de_exam_30.jpg)
 
 ## Tools
 
@@ -10,5 +10,5 @@ A daily reporting pipeline with multiple sources and complex dependencies. Human
 * Airflow: Control to automate pipeline, handle dependencies as code, start query when preceding queries were done
 <a/>
 
-![case](../../../gcp_de_exam_31.jpg)
+![case](../../../img/gcp_de_exam_31.jpg)
 
