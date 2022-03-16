@@ -336,7 +336,26 @@ Your client wans a tranactionally consistent global retlational repository. You 
  
 >B is correct because of the requirement to globally scaleable transactions - use Cloud Spanner. CPU utilization is the recommended metric for scaling, per Google best practices, linked below. A is not correct because you should not use storage utilization as a scaling metric. C,D are not correct because you should not use Cloud Bigtable for such a scenario.
 
+Quickly and inexpensively develop an application that sorts product reviews by most favorable to least favorable.
+ 
+1. O Train an entity classification model with TensorFlow. Deploy the model using AI Platform. Use the entity to sort the reviews.
+2. O Build an application that performs entity analysis using the Natural Language API. Use the entity to sort the reviews.
+3. X Build an application that performs sentiment analysis using the Natural Language API. Use the score and magnitude to sort the reviews.
+4. O Train a sentiment regewssion model with Tensorflow. Deploy the model using AI Platform. Use the magnitude to sort the reviews.
+ 
+>C is correct. Use pre-trained model whenever possible. In this case the Natural Language API with sentiment analysis returns score and magnitude of sentimen. A and B are incorrect because they require creating a model insted of using an exising one. D is incorrect because entity analysis will not determine senitment: it recognizes objects, not opinions.
+
+Maximize speed and minimize cost of deploying a TensorFlow machine-learning model on Google Cloud.
+ 
+ 1. X Export your trained model to a SavedModel format. Deploy and run your model on AI Platform.
+ 2. O Export your trained model to a SavedModel format. Deploy and run your model from a Google Kubernetes Engine Cluster.
+ 3. O Export 2 copies of your trained model to a SavedModel format. Store artifacts in Cloud Storage. Run 1 version on CPUs and another version on GPUs.
+ 4. O Export 2 copies of your trained model to a SavedModel format. Store artifacts in AI Platform. Run 1 version on CPUs and another version on GPUs.
+ 
+>A is correct because of Google recommended practices; that is "just deploy it". B is not correct because you should not run your model from Google Kubernetes Engine. C and D are not correct because you should not export 2 copies of your trained model, etc. for this scenario.
+
 
  
+
  
  
