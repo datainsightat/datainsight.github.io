@@ -2,6 +2,7 @@
 
 [Data Engineer Exam Guide](https://cloud.google.com/certification/guides/data-engineer)  
 [Google Cloud Documentation](https://cloud.google.com/docs/overview)
+[Medium Blog](https://simonleewm.medium.com/a-study-guide-to-the-google-cloud-professional-data-engineer-certification-path-9e83e41e311)
 
 * Data Representation
 * Pipelines
@@ -626,4 +627,86 @@ Turn ML problem into search problem.
 #### When is a Model sufficiently good?
 
 ![Exam](../../img/gcp_de_exam_46.jpg)
+
+#### Training vs Evaluation Data
+
+![Exam](../../img/gcp_de_exam_47.jpg)
+
+##### Validation Techniques
+
+|Data|Validation|
+|-|-|
+|Scare|Independend Test Data, Cross Validate|
+
+Cross Validation
+* Training Validation
+* Test
+* Cross Validaton
+<a/>
+
+### Modeling Business Processes for Analysis and Optimization
+
+#### Confusion Matrix
+
+![Exam](../../img/gcp_de_exam_49.jpg)
+
+![Exam](../../img/gcp_de_exam_50.jpg)
+
+#### Build, Buy od Modify > Business Priorities
+
+![Exam](../../img/gcp_de_exam_51.jpg)
+
+AutoML > Use an existing ML Model and tailor it to your specific needs.
+
+#### Build Effective ML
+
+Big Data > Feature Engineering > Model Architectures  
+
+#### Make ML Pipeline Robust
+
+* Fault-tolerand distributed training framework
+* Choose model based on validatoin dataset
+* Monitor training, expecially if it will take days
+* Resume training if necessary
+<a/>
+
+#### Feature Engineering
+
+Good features bing human insight to a problem
+
+##### Choosing good features
+
+* Is the feature you are considering related to the result you are trying to predict?
+* Is the predictive value known?
+* Is the feature a numeric value with meaningful magnitude?
+* Are there enough examples?
+
+##### Feature Engineering Process
+
+* Pre-Processing
+* Feature Creation
+* Hyperparameter tuning
+
+##### Other Important Concepts
+
+* Feature crosses
+* Discretize floats that are not meaningful
+* Bucketize features
+* Dense and sparse features
+  * DNNs for dense, highly correlated
+  * Linear for sparse, independent
+##### Learning Rate
+
+![Exam](../../img/gcp_de_exam_52.jpg)
+
+#### Performance
+
+* Input data and data sources (I/O): How many bytes does your query read?
+* Communication between nodes (Shuffling): How many bytes does your query pass to the next stage? How many bytes does your query pass to each slot?
+* Computation: How much CPU work does your query require?
+* Output (materialization): How many bytes does your query write?
+* Query anti-patterns: Are your queries following SQL best practices?
+<a/>
+
+
 
