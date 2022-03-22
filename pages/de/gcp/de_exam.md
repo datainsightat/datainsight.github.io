@@ -644,25 +644,25 @@ Cross Validation
 * Cross Validaton
 <a/>
 
-### Modeling Business Processes for Analysis and Optimization
+## Modeling Business Processes for Analysis and Optimization
 
-#### Confusion Matrix
+### Confusion Matrix
 
 ![Exam](../../img/gcp_de_exam_49.jpg)
 
 ![Exam](../../img/gcp_de_exam_50.jpg)
 
-#### Build, Buy od Modify > Business Priorities
+### Build, Buy od Modify > Business Priorities
 
 ![Exam](../../img/gcp_de_exam_51.jpg)
 
 AutoML > Use an existing ML Model and tailor it to your specific needs.
 
-#### Build Effective ML
+### Build Effective ML
 
 Big Data > Feature Engineering > Model Architectures  
 
-#### Make ML Pipeline Robust
+### Make ML Pipeline Robust
 
 * Fault-tolerand distributed training framework
 * Choose model based on validatoin dataset
@@ -670,24 +670,24 @@ Big Data > Feature Engineering > Model Architectures
 * Resume training if necessary
 <a/>
 
-#### Feature Engineering
+### Feature Engineering
 
 Good features bing human insight to a problem
 
-##### Choosing good features
+#### Choosing good features
 
 * Is the feature you are considering related to the result you are trying to predict?
 * Is the predictive value known?
 * Is the feature a numeric value with meaningful magnitude?
 * Are there enough examples?
 
-##### Feature Engineering Process
+#### Feature Engineering Process
 
 * Pre-Processing
 * Feature Creation
 * Hyperparameter tuning
 
-##### Other Important Concepts
+#### Other Important Concepts
 
 * Feature crosses
 * Discretize floats that are not meaningful
@@ -695,11 +695,11 @@ Good features bing human insight to a problem
 * Dense and sparse features
   * DNNs for dense, highly correlated
   * Linear for sparse, independent
-##### Learning Rate
+#### Learning Rate
 
 ![Exam](../../img/gcp_de_exam_52.jpg)
 
-#### Performance
+# Performance
 
 * Input data and data sources (I/O): How many bytes does your query read?
 * Communication between nodes (Shuffling): How many bytes does your query pass to the next stage? How many bytes does your query pass to each slot?
@@ -708,5 +708,78 @@ Good features bing human insight to a problem
 * Query anti-patterns: Are your queries following SQL best practices?
 <a/>
 
+## Schema
 
+![Exam](../../img/gcp_de_exam_53.jpg)
+
+Performance (De-Normalize) vs Efficiency (Normalize).  
+
+### Nested Schemas
+
+![Exam](../../img/gcp_de_exam_54.jpg)
+
+## Key Elements of Performance
+
+* I/O: How many bytes did you read?
+ * Do no SELECT *
+ * Filter using WHERE as early as possible
+* Shuffle: How many bytes did you pass to next stage?
+* Grouping: How many bytes do you pass to each group?
+ * Works best if distinct number of groups is small
+* Materialization: How man bytes did you write to storage?
+* CPU work: User-definded functions (UDFs), functions
+ * Limit UDFs to reduce computational load
+<a/>
+
+### Query Explamation Map
+
+![Exam](../../img/gcp_de_exam_55.jpg)
+
+## Partitioning
+
+Time-partitioning tables are a cost-effective way to manage data. Be carfeul selecting training data from time-partitioned tables (shuffle data among time slots).
+
+## Order of Operatoins can inluence shuffling overhead
+
+![Exam](../../img/gcp_de_exam_56.jpg)
+
+## Windowing
+
+Use windowing to manage streaming data.
+
+## Performance BigTable
+
+Cloud BigTable spearates processing and storage.
+
+![Exam](../../img/gcp_de_exam_57.jpg)
+
+* A table can have only one Inedx
+* Sparse table deign
+* Looks at access patterns to improve itself by optimizing pointers
+<a/>
+
+### Row key Design
+
+![Exam](../../img/gcp_de_exam_58.jpg)
+
+Datasets get shuffled among different tablets, which enables parallel processing.
+
+### Growing a BigTable Cluster
+
+* Make sure clinets and Cloud Bigtable are in the same zone.
+* Change schema to minimize data skew.
+* Performance increses linerarly with the number of nodes.
+* SSD faster than HDD
+* Takes some time after scaling up nodes for performance improvement to be seen.
+<a/>
+
+## Pricing
+
+|Storage|Processing|Free|
+|-|-|-|
+|Amount of data in table|On-demand of Flate-rate|Loading|
+|Interest rate of streaming data|On-demand based on amount of data processed|Exporting|
+|Automatic discount for old data|1 TB/month free|Queries on metadata|
+||Have an opt in to run high-compute queries|Cached queries|
+|||Queries with errors|
 
