@@ -783,3 +783,54 @@ Datasets get shuffled among different tablets, which enables parallel processing
 ||Have an opt in to run high-compute queries|Cached queries|
 |||Queries with errors|
 
+# Designing for Security and Complience
+
+Privacy, Authorization and Authentication. Identity- and Accessmanagement. Intrusion detection, Attack medigationm Resililance and Recovery. Granularity of control (Table, tow, column, service).
+
+## Identity and Access
+
+* Separate responsibilities
+* Always have backup or alternative in case the responsible person is unreachable.
+* Have a separate maintenance path when the normal paths aren't working
+* Use groups to allocate permissions, then separately manage group memnbership
+* Customize roles for greater ganularity of permissions.
+* Give each group only the permicfsions they need to preform that job or task
+* Place critical functions on service machines to create accountability trail
+* Backup/spare logs and records, have a review, analysis, and monitoring strategy
+<a/>
+
+## Cloud IAM Resource Hierarchy
+
+* Organization
+* Folder
+* Project
+* Resources
+<a/>
+
+![Exam](../../img/gcp_de_exam_60.jpg)
+
+### Folders
+
+Additoinal grouping mechanism and isolation boudaries between projects
+
+* Different legal entities
+* Departments
+* Teams
+<a/>
+
+Folders allow delegation of administration rights
+
+## Encryption
+
+|Default Encryption|Coustomer-Managed Encrytion Keys CMEK|Customer-Supplied Encyptino Keys CSK|Client-Side Encryption|
+|-|-|-|-|
+|Data is automatically encrypted before being written to disk|Google-generated data encryption key (DEK) is sill used|Keep kes on premises, and use them to encrypt your cloud service|Data in encrypted before it is sent to the cloud|
+|Each encryption key is itself encrypted with a set of root keys|Allows you to create, use, and revoke the key encryption key (KEK)|Google cant't recover them|Your keys; your tools|
+||Uses Cloud Key Management Sevice (Cloud KMS)|Disk encryption on VMs Cloud Storage encryption|Google doesn't know wheether your data is encrypted before it's uploaded|
+|||Keys are never stored on disk unencrypted|No way to recover keys|
+|||You provide your key at each operation, and Google purges it from its servers when each operation completes|If you loase your keys, remember to delete the objects!|
+
+## Cloud Security
+
+![Exam](../../img/gcp_de_exam_61.jpg)
+
