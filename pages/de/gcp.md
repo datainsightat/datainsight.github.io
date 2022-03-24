@@ -1,3 +1,4 @@
+
 # Google Cloud Platform
 ![GCP Services](../img/gcp_services.png)
 
@@ -16,6 +17,11 @@
 |[Datafusion](gcp/datafusion.md)||[BigTable](gcp/bigtable.md)|[Kubeflow](gcp/kubeflow.md)||
 |[Pub/Sub](gcp/pubsub.md)||[Dataproc](gcp/dataproc.md)|||
 
-## [Examples](gcp/examples/)
+## [Examples](gcp/examples)
 
-## [Google GIT Ressources](https://github.com/GoogleCloudPlatform/training-data-analyst)
+## Data Engineer Exam
+
+* [Study Guide](gcp/de_exam.md)
+* [Example Questions](gcp/de_exam_questions.md)
+
+## [Google GIT Ressources](https://github.com/GoogleCloudPlatform/training-data-analyst)*
