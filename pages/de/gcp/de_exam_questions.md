@@ -354,8 +354,21 @@ Maximize speed and minimize cost of deploying a TensorFlow machine-learning mode
  
 >A is correct because of Google recommended practices; that is "just deploy it". B is not correct because you should not run your model from Google Kubernetes Engine. C and D are not correct because you should not export 2 copies of your trained model, etc. for this scenario.
 
-
+Group Analyst 1 and Analyst 2 should not have access to each other's BigQuery data.
  
-
+1. O Place the data in separate tables, and assign appropriate group access.
+2. O Analyst 1 and Analyst 2 must be in separate projects, along with the data.
+3. X Place the data in separate datesets, and assign appropriate group access.
+4. O Place the data in separate tables, but encrypt each table with different group key.
  
+>C is correct. BigQuery data access is controlled at the dataset level. A is not correct becauer BigQuery does not provide IAM access control to the individual table. B is not correct because the Analyst groups can be in the same project. D is incorrect because encryption does not determine access.
+ 
+Provide Analyst 3 secure access to BigQuery query results, but not the underlying tables or datasets.
+ 
+1. O Export the query results to a public Cloud Storage bucket.
+2. X Create a BigQuery Authorized View and assign a project-level user role to Analyst 3
+3. O Assign the bigquery.resultsonly.viewer role to Analyst 3
+4. O Create a BigQuery Authorized View and assign an organization-level role to Analyst 3
+ 
+> B is correct. You need to copy/store the query results in a separate dataset and provide authorization to view and/or user that dataset. A is not secure. C The readonly.viewer role does not exist AND secure access connot be applied to a query. D An organizational role is too broad and violates the principle of 'least privilege'.
  
