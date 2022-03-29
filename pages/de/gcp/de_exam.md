@@ -4,6 +4,7 @@
 [Google Cloud Documentation](https://cloud.google.com/docs/overview)
 [Medium Blog](https://simonleewm.medium.com/a-study-guide-to-the-google-cloud-professional-data-engineer-certification-path-9e83e41e311)
 
+
 * Data Representation
 * Pipelines
 * Processing Infrastructure
@@ -799,7 +800,7 @@ Privacy, Authorization and Authentication. Identity- and Accessmanagement. Intru
 * Backup/spare logs and records, have a review, analysis, and monitoring strategy
 <a/>
 
-## Cloud IAM Resource Hierarchy
+### Cloud IAM Resource Hierarchy
 
 * Organization
 * Folder
@@ -809,7 +810,7 @@ Privacy, Authorization and Authentication. Identity- and Accessmanagement. Intru
 
 ![Exam](../../img/gcp_de_exam_60.jpg)
 
-### Folders
+#### Folders
 
 Additoinal grouping mechanism and isolation boudaries between projects
 
@@ -820,7 +821,7 @@ Additoinal grouping mechanism and isolation boudaries between projects
 
 Folders allow delegation of administration rights
 
-## Encryption
+### Encryption
 
 |Default Encryption|Coustomer-Managed Encrytion Keys CMEK|Customer-Supplied Encyptino Keys CSK|Client-Side Encryption|
 |-|-|-|-|
@@ -830,7 +831,60 @@ Folders allow delegation of administration rights
 |||Keys are never stored on disk unencrypted|No way to recover keys|
 |||You provide your key at each operation, and Google purges it from its servers when each operation completes|If you loase your keys, remember to delete the objects!|
 
-## Cloud Security
+### Cloud Security
 
 ![Exam](../../img/gcp_de_exam_61.jpg)
 
+## Performing Quality Control
+
+Service specific Monitoring is available (like TensordBoard). Assessing, troubleshooting and improving data representations and improving data processing infrastracture are distributed through all the technologies. Advocating policies and publishing data and reports are not just technical skills.
+
+### Monitoring
+
+* Available for all BigQuery customers
+* Fully interactive GUI. Custom dashboards
+
+### TensorBoard
+
+![Exam](../../img/gcp_de_exam_62.jpg)
+
+Esimator comes with a method that handles distributed training and evaluation
+
+    estimator = tf.estimator.LinearRegressor(
+                             model_dir=output_dir,
+                             freature_columns=feature_cols)
+                             
+    ...
+    
+    tf.estimator.train_and_evaluatre(estimator, train_spec, eval_spec)
+
+* Distribute the graph
+* Share variables
+* Evaluate occasionally
+* Handle machine failures
+* Create checkpoint files
+* Recover from failures
+* Save summaries for TensorBoard
+<a/>
+
+Visualize TF.
+
+## Ensure Reliability
+
+Service produces consistent outputs and works as expected. Available vs Durable (Data loss).
+
+* Alternative
+* Failover
+* Backup
+* Disaster Rcovery (BR)
+<a/>
+
+### Distributing for Scale may improve reliability
+
+![Exam](../../img/gcp_de_exam_63.jpg)
+
+## Data Visualization and Reporting Tools
+
+Google Data Studio
+
+![Exam](../../img/gcp_de_exam_64.jpg)
