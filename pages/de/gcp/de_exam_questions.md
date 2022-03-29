@@ -1,21 +1,25 @@
 https://cloud.google.com/certification/data-engineer
 
  
-You are building storage for files for a data pipeline on Google Cloud. You want to support JSON files. The schema of these files will occasionally change. Your analyst teams will use running aggregate ANSI SQL queries on this data. What should you do?
+> You are building storage for files for a data pipeline on Google Cloud. You want to support JSON files. The schema of these files will occasionally change. Your analyst teams will use running aggregate ANSI SQL queries on this data. What should you do?
+
 1. O Use BigQuery for storage. Provide format files for data load. Update the format files as needed.
 2. X Use BigQuery for storage. Select "Automatically detect" in the Schema section.
 3. O Use Cloud Storage for storage. Link data as temporary tables in BigQuery and turn on the "Automatically detect" option in the Schema section of BigQuery. 
 4. O Use Cloud Storage for storage. Link data as permanent tables in BigQuery and turn on the "Automatically detect" option in the Schema section of BigQuery.
->B is correct because of the requirement to support occasionally (schema) changing JSON files and aggregate ANSI SQL queries: you need to use BigQuery, and it is quickest to use 'Automatically detect' for schema changes.
+
+B is correct because of the requirement to support occasionally (schema) changing JSON files and aggregate ANSI SQL queries: you need to use BigQuery, and it is quickest to use 'Automatically detect' for schema changes.
 A is not correct because you should not provide format files: you can simply turn on the 'Automatically detect' schema changes flag.
 C, D are not correct because you should not use Cloud Storage for this scenario: it is cumbersome and doesn't add value.
 
-You use a Hadoop cluster both for serving analytics and for processing and transforming data. The data is currently stored on HDFS in Parquet format. The data processing jobs run for 6 hours each night. Analytics users can access the system 24 hours a day. Phase 1 is to quickly migrate the entire Hadoop environment without a major re-architecture. Phase 2 will include migrating to BigQuery for analytics and to Dataflow for data processing. You want to make the future migration to BigQuery and Dataflow easier by following Google-recommended practices and managed services. What should you do?
+> You use a Hadoop cluster both for serving analytics and for processing and transforming data. The data is currently stored on HDFS in Parquet format. The data processing jobs run for 6 hours each night. Analytics users can access the system 24 hours a day. Phase 1 is to quickly migrate the entire Hadoop environment without a major re-architecture. Phase 2 will include migrating to BigQuery for analytics and to Dataflow for data processing. You want to make the future migration to BigQuery and Dataflow easier by following Google-recommended practices and managed services. What should you do?
+
 1. O Lift and shift Hadoop/HDFS to Dataproc.
 2. O Lift and shift Hadoop/HDFS to Compute Engine.
 3. O Create a single Dataproc cluster to support both analytics and data processing, and point it at a Cloud Storage bucket that contains the Parquet files that were previously stored on HDFS.
 4. X Create separate Dataproc clusters to support analytics and data processing, and point both at the same Cloud Storage bucket that contains the Parquet files that were previously stored on HDFS.
->A is not correct because it is not recommended to attach persistent HDFS to Dataproc clusters in Google Cloud. (see references link)
+
+A is not correct because it is not recommended to attach persistent HDFS to Dataproc clusters in Google Cloud. (see references link)
 B Is not correct because they want to leverage managed services which would mean Dataproc.
 C is not correct because it is recommended that Dataproc clusters be job specific.
 D Is correct because it leverages a managed service (Dataproc), the data is stored on Cloud Storage in Parquet format which can easily be loaded into BigQuery in the future and the Dataproc clusters are job specific.
@@ -354,21 +358,30 @@ Maximize speed and minimize cost of deploying a TensorFlow machine-learning mode
  
 >A is correct because of Google recommended practices; that is "just deploy it". B is not correct because you should not run your model from Google Kubernetes Engine. C and D are not correct because you should not export 2 copies of your trained model, etc. for this scenario.
 
-Group Analyst 1 and Analyst 2 should not have access to each other's BigQuery data.
+> Group Analyst 1 and Analyst 2 should not have access to each other's BigQuery data.
  
 1. O Place the data in separate tables, and assign appropriate group access.
 2. O Analyst 1 and Analyst 2 must be in separate projects, along with the data.
 3. X Place the data in separate datesets, and assign appropriate group access.
 4. O Place the data in separate tables, but encrypt each table with different group key.
  
->C is correct. BigQuery data access is controlled at the dataset level. A is not correct becauer BigQuery does not provide IAM access control to the individual table. B is not correct because the Analyst groups can be in the same project. D is incorrect because encryption does not determine access.
+C is correct. BigQuery data access is controlled at the dataset level. A is not correct becauer BigQuery does not provide IAM access control to the individual table. B is not correct because the Analyst groups can be in the same project. D is incorrect because encryption does not determine access.
  
-Provide Analyst 3 secure access to BigQuery query results, but not the underlying tables or datasets.
+> Provide Analyst 3 secure access to BigQuery query results, but not the underlying tables or datasets.
  
 1. O Export the query results to a public Cloud Storage bucket.
 2. X Create a BigQuery Authorized View and assign a project-level user role to Analyst 3
 3. O Assign the bigquery.resultsonly.viewer role to Analyst 3
 4. O Create a BigQuery Authorized View and assign an organization-level role to Analyst 3
  
-> B is correct. You need to copy/store the query results in a separate dataset and provide authorization to view and/or user that dataset. A is not secure. C The readonly.viewer role does not exist AND secure access connot be applied to a query. D An organizational role is too broad and violates the principle of 'least privilege'.
+B is correct. You need to copy/store the query results in a separate dataset and provide authorization to view and/or user that dataset. A is not secure. C The readonly.viewer role does not exist AND secure access connot be applied to a query. D An organizational role is too broad and violates the principle of 'least privilege'.
+ 
+> Use Data Studio to visualize YouTube titles and aggregated view counts summarized over 30 days and segmented by Country in the fewst steps.
+ 
+1. O Set up a YouTube data source for your channel data for Data Studio. set Views as the metric and set Video Title as a reporting deimenstion. Set Country Code as a filter.
+2. X Set up a YouTube data source for your channel dta for Data Studio. Set Views as the metric, and set Video Title and Country Code as report dimensions.
+3. O Export your YouTube views to Cloud Storage. Set up a Cloud Storage data source for Data Studio. Set Views as the metric, and set Video Title as a report dimension. Set Country Code as a filter.
+4. O Export your YouTube views to Cloud Storage. Set up a Cloud Storage data source for Data Studio. Set Views as the metric, and set Video Title and Country Code as report dimensions.
+ 
+B is correct because there is no need to export; you can use the existing YouTube data source. Country Code is a dimension because it's a string and should be displayed as such, that is, showing all countries, insted of filtering. A is not correct because you cannot produce a summazized report that meets you business requirements using the options listed. C and D are not correct because you do not need to export data from YouTube to Cloud Storage, you can simply use the exising YouTube data source.
  
