@@ -1,6 +1,99 @@
 https://cloud.google.com/certification/data-engineer
 
- 
+> Low-cost one-way one-time migration of two 100-TB file servers to Google Cldoud; data will be frequently accessed and only from Germany.
+
+1. Use Transfer Applicance. Transfer to a Cloud Storage Standard bucket.
+2. Use STorage Transfer Service. Ttransfer to a Cloud Storage Standard bucket.
+3. X Use Transfer Applicance. Transfer to a Cloud Storage Neraline bucket.
+4. Use STorage Transfer Service. Transfer to a Cloud Storage Coldline bucket.
+
+> A Data Analyst is concerned that a BigQuery query clould be too expensive.
+
+1. X Use the LIMIT clause to limit the number of values in the results.
+2. Set the Maximum Bytes Billed, which will limit the number of bytes processed but still run the query if the number of bytes requested goes over the limit.
+3. Use the SELECT clause to limit the amount of data in the query. Partition data by date so the query can be more focused.
+4. Use Group by so the results will be grouped into fewer output values.
+
+> 250,000 devices produce a JSON device status every 10 Seconds. How do you capture event data for outlier time series analysis?
+
+1. Capture data in BigQuery. Develop a BigQuery API custom application to query the dataset and display device outlier data.
+2. Capture data in Cloud Bigtable. Use Cloud BigTable cbt tool to display device outlier data.
+3. X Captere data in BigQuery. Use Biguery console to query the dateset and display device outlier data.
+4. Capture data in Cloud BigTable. Install and use HBase shell for cloud BigTable to query the table for device outlier data.
+
+> BigQuery data is stored in external CSV giles in Cloud Storage; as the data has invreased, the query performance has dropped.
+
+1. Import the data into BigQuery for better performance
+2. X Divide the data into partitions based on the data.
+3. Request more slots for greater capacity to improve performance.
+4. Time to move to Cloud BigTable; it is faster in all cases.
+
+> A client has been developing a pipeline based on PCollections using local programming techniques and is ready to scale up to production. What should they do?
+
+1. X They should use the Dataflow Cloud Runner.
+2. They should use the local version of the runner.
+3. They should upload the pipeline to Dataproc.
+4. Import the pipeline into BigQuery.
+
+> Host a deep neural network machine learning model on Google Cloud. Run and monitor jobs that could occasionally fail.
+
+1. Use AI Platform to host you model. Monitor the status of the Operation object for 'error' results.
+2. Use a Google Kubernetes Engine cluster to host you model. Monitor the status of the Jobs object for 'failed' job states.
+3. X Use AI Platform to host your model. Monitor the status of the Jobs object for 'failed' job states.
+4. Use a Google Kubernetes Engine cluster to host your model. Monitor the status of the Operation object for 'error' results.
+
+> Three Google Cloud services commonly used together in data engineering solutions
+
+1. Dataproc, Cloud SQL, BigQuery
+2. Pub/Sub, Kubvernetes Engine Cloud Spanner
+3. X Pub/Sub, Dataflow, BigQuery
+4. Cloud BigTable, Dataproc, Cloud Spanner
+
+> You want to minimize costs to run Google Data Studio reports on BigQuery queries by using prefetch caching.
+
+1. Set up the report to use the Owner's credentials to access the underlying data in BigQuery, and direct the users to view the report only once per business day.
+2. Set up the report to use the Viewer's credentials to access the underlying data in BigQuery, and also ser it up to be a 'view-only' report.
+3. X Set up the report to use the Owner's credentials to access the underlying data in BigQuery, an verify that the 'Enable cache' checkbox is selected in for the report.
+4. Set up the report to use the Viewer's credentials to access the underlying data in BigQuery, and verify that the 'Enable cache' checkbox is not selected for the report.
+
+> What is AVRO used for?
+
+1. Serialization and de-serialization of data so that it can be transmitted and stored while maintaining an object structure.
+2. X AVRO ist a file type usually specified with \*.avr and a common format for spreadsheets.
+3. AVRO is an encryption method. AVRO-256 is a 256-bit key standard.
+4. AVRO is a numerical type in SQL that stores a 38 digit value with 9 digit decimal representation. It avoids rounding errors in financial calculations.
+
+> Customer wants to maintain investment in an existing Apache Spark code data pipeline.
+
+1. DigQuery
+2. X Dataproc
+3. Dataflow
+4. Dataprerp
+
+> Promote a Cloud BigTable solution with a lot of data from develoopment to production and optimize for performance.
+
+1. Change your Cloud BigTable instance type from Development to Production, and set the number of nodes to a least 3. Verify that the storage type is HDD.
+2. Export the data from your current Cloud BigTable instance to Cloud Storage. Create a new Cloud BigTable Production instance type with a least 3 nodes. Select the HDD storage type. Import the data into the new instance from Cloud Storage.
+3. Change your Cloud Bigtable instance type from Development to Production, and set the number of nodes to at least 3. Verify that the storage type is SSD.
+4. X Export the data from your current Cloud BigTable instance to Cloud Storage. Create a new Cloud BigTable Production instance type with a least 3 nodes. Select the SSD storage type. Import the data into the new instance from Cloud Storage.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 > You are building storage for files for a data pipeline on Google Cloud. You want to support JSON files. The schema of these files will occasionally change. Your analyst teams will use running aggregate ANSI SQL queries on this data. What should you do?
 
 1. O Use BigQuery for storage. Provide format files for data load. Update the format files as needed.
