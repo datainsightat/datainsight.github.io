@@ -21,7 +21,7 @@ https://cloud.google.com/certification/data-engineer
 3. X Captere data in BigQuery. Use Biguery console to query the dateset and display device outlier data.
 4. Capture data in Cloud BigTable. Install and use HBase shell for cloud BigTable to query the table for device outlier data.
 
-> BigQuery data is stored in external CSV giles in Cloud Storage; as the data has invreased, the query performance has dropped.
+> BigQuery data is stored in external CSV files in Cloud Storage; as the data has invreased, the query performance has dropped.
 
 1. Import the data into BigQuery for better performance
 2. X Divide the data into partitions based on the data.
@@ -77,6 +77,105 @@ https://cloud.google.com/certification/data-engineer
 3. Change your Cloud Bigtable instance type from Development to Production, and set the number of nodes to at least 3. Verify that the storage type is SSD.
 4. X Export the data from your current Cloud BigTable instance to Cloud Storage. Create a new Cloud BigTable Production instance type with a least 3 nodes. Select the SSD storage type. Import the data into the new instance from Cloud Storage.
 
+> A company wants to connect cloud applications to an Oracle databese in its data center. Requirements are a maximum of 9 Gbps of data and a Service Level Agreements (SLA) of 99%
+ 
+1. X Implement a high-throughput Cloud VPN connection
+2. Dedicated Interconnect
+4. Cloud Router with VPN
+4. Partner Interconnect
+
+> Source data is streamed in bursts and must be transformed before use.
+
+1. Use Cloud Bigtable for fast input and cbt for ETL
+2. Use Pub/Sub to buffer the data, and then use BigQuery for ETL.
+3. Ingest data to Cloud Storage. Use Dataproc for ETL.
+4. X Use Pub/Sub to buffer the data, and then use Dataflow for ETL.
+
+> A cllient wants to store files from one location and retrieve them from another location. Security requirements are that no one should be able to access the contants of the file while it is hosted in the cloud. What is the best option?
+
+1. Default encryption should be sufficient
+2. Customer-Supplied Encryption Keys (CSEK)
+3. Client-side encryption
+4. X Customer Managed Encryption Keys (CMEK)
+
+> A company has a new IoT Pipeline. Which services will make this design work? Select the services that should be used to replace the icons with the number "1" and "2" in the diagram
+
+![Exam](../../../img/de_exam_65.jpg)
+
+1. IoT Core, Datastore
+2. X IoT Core, Pub/Sub
+3. Pub/Sub, Cloud Storeage
+4. App Engine, IoT Core
+
+> Calculate a runnig average of streaming data that can arrive late and out of order
+
+1. X Use Pub/Sub and Dataflow with Sliding Time Windows.
+2. Pub/Sub can guarantee timely arrical and order.
+3. Use Pub/Sub and Google Data Studio.
+4. Use Dataflow's built-in timestamps for ordering and filtering
+
+> Storage of JSON files with occasionally changing schema, for ANSI SQL queries.
+
+1. Store in BigQuery. Provide format files for data load an update them as needed.
+2. X Store in Cloud Storage. Link data as temporary tables in BigQuery and turn on the "Automatically detect" option in the Schema section of BigQuery.
+3. Store in BigQuery. Select "Automatically detect" in the Schema section.
+4. Store in Cloud Storage. Link data as permanenet tables in BigQuery and turn on the "Automatically detect" option in the Schema section of BigQuery.
+
+Testing a Machine Learning model with validatoin data returns 100% correct answers.
+
+1. The model is working extremely well, indicating the hyperparameters are set correctly.
+2. The model is underfit. There is a problem
+3. X The model is overfit. There is a problem
+4. The model is perfectly fit. You do not need to continue training.
+
+A company has migrated their Hadoop cluster to the cloud and is now using Dataproc with the same settings and same methodes as in the data center. What would you advise them to do to make better use of the cloud environment?
+
+1. Upgrade to the latest version of HDFS. Change the settings in Hadoop components to optimize for the different kinds of work in the mix.
+2. X Store persistent data off-cluster. Start a cluster for one kind of work then shut it down when it is not processing data.
+3. Find more jobs to run so the cluster utilization will cost-justify the expense.
+4. Migrate from Dataproc to an open source Hadoop Cluster hosted on Compute Engine, because this is the only way to get all the Hadoop customizations needed for efficiency.
+
+Cost-effective backup to Google Cloud of multi-TB databases from another cloud including monthly DR drills.
+
+1. Use Transfer Appliance. Transfer to Cloud Storage Nearline bucket.
+2. Use Storage Transfer Service. Transfer to Cloud Storage Nearline bucket.
+3. X Use Transfer Appliance. Transfer to Cloud Storage Coldline bucket.
+4. Use Storage Transfer Service. Transfer to Cloud Storage Coldline bucket.
+
+As part of your backup plan, you want to be able  to restore snapshots of Compute Engine instances using the fewest steps.
+
+1. Export the snapshots to Cloud Storage. Create disks from the exported snapshot files. Create images from the new disks.
+2. Use the snapshots to create replacement disks. Use the disks to create instances as needed.
+3. Export the snapshots to Cloud Storage. Create images from the exported snapshot files.
+4. X Use the snapshots to create replacement instances as needed.
+
+Cost-effective way to run non-critical Apache Spark jobs on Dataproc?
+
+1. Set up a cluster in high availability mode with high-memory machine types. Add 10 additional local SSDs.
+2. X Set up a cluster in standard mode with high-memory machine types. Add 10 additional preemptible worker nodes.
+3. Set up a cluster in high availability mode with default machine types. Add 10 additional preemptible worker nodes.
+4. Set up a cluster in standard mode with the default machine types. Add 10 additional local SSDs.
+
+A cllient is using Cloud SQL database to serve infrequently changing lookup tables. As they expand into other geographic regions they want to ensure good performance. What fo you recommend?
+
+1. X Migrate to Cloud Spanner
+2. Instance high availability configuration
+3. Read replicas
+4. Replicate from an external server
+
+Event data in CSV format to be queried for individual values over time windows. Which storage and schema to minimize query costs?
+
+1. X Use Cloud Bigtable. Design tall and narrow tables, and use a new row for each single event version.
+2. Use Cloud Storage. Join the raw file data with a BigQuery log table.
+3. Use Cloud BigTable. Design short and wide tables, and use a new column for each single event version.
+4. Use Cloud Storage. Write a Dataprep job to split the data into partitioned tables.
+
+A application has the following data requirements. 1. It requires strongly consistent transactions 2. Total data will be less than 500 GB. 3. The data does not need to be straming or real time. Which dta technology would fit these requirements?
+
+1. BigQuery
+2. Cloud SQL
+3. X Cloud BigTable
+4. Memorystore
 
 
 
