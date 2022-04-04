@@ -3,30 +3,38 @@ https://cloud.google.com/certification/data-engineer
 > Low-cost one-way one-time migration of two 100-TB file servers to Google Cldoud; data will be frequently accessed and only from Germany.
 
 1. Use Transfer Applicance. Transfer to a Cloud Storage Standard bucket.
-2. Use STorage Transfer Service. Ttransfer to a Cloud Storage Standard bucket.
-3. X Use Transfer Applicance. Transfer to a Cloud Storage Neraline bucket.
-4. Use STorage Transfer Service. Transfer to a Cloud Storage Coldline bucket.
+2. Use Storage Transfer Service. Ttransfer to a Cloud Storage Standard bucket.
+3. Use Transfer Applicance. Transfer to a Cloud Storage Neraline bucket.
+4. Use Storage Transfer Service. Transfer to a Cloud Storage Coldline bucket.
+
+B is not correct because you should only use Transfer Service for a one-time one-way transfer. Also, Storage Transfer Service does not work for data stored on-premises.
 
 > A Data Analyst is concerned that a BigQuery query clould be too expensive.
 
-1. X Use the LIMIT clause to limit the number of values in the results.
+1. Use the LIMIT clause to limit the number of values in the results.
 2. Set the Maximum Bytes Billed, which will limit the number of bytes processed but still run the query if the number of bytes requested goes over the limit.
 3. Use the SELECT clause to limit the amount of data in the query. Partition data by date so the query can be more focused.
 4. Use Group by so the results will be grouped into fewer output values.
+
+A is not correct because the LIMIT clause limits the output, but does not limit data processes.
 
 > 250,000 devices produce a JSON device status every 10 Seconds. How do you capture event data for outlier time series analysis?
 
 1. Capture data in BigQuery. Develop a BigQuery API custom application to query the dataset and display device outlier data.
 2. Capture data in Cloud Bigtable. Use Cloud BigTable cbt tool to display device outlier data.
-3. X Captere data in BigQuery. Use Biguery console to query the dateset and display device outlier data.
+3. Capture data in BigQuery. Use Biguery console to query the dateset and display device outlier data.
 4. Capture data in Cloud BigTable. Install and use HBase shell for cloud BigTable to query the table for device outlier data.
+
+C is not correct because you do not need to use BigQuery for the query pattern in this scenario. The focus is on a single action (identify outliers), not an interactive analysis. And the speed of the data is more suited for Cloud BigTable.
 
 > BigQuery data is stored in external CSV files in Cloud Storage; as the data has invreased, the query performance has dropped.
 
-1. Import the data into BigQuery for better performance
-2. X Divide the data into partitions based on the data.
+1. X Import the data into BigQuery for better performance
+2. Divide the data into partitions based on the data.
 3. Request more slots for greater capacity to improve performance.
 4. Time to move to Cloud BigTable; it is faster in all cases.
+
+A Is correct. The performance issue is because the dta is stored in a non-optimal format in an external storage medium.
 
 > A client has been developing a pipeline based on PCollections using local programming techniques and is ready to scale up to production. What should they do?
 
@@ -35,12 +43,16 @@ https://cloud.google.com/certification/data-engineer
 3. They should upload the pipeline to Dataproc.
 4. Import the pipeline into BigQuery.
 
+A is correct. The PCollectoin indicates it is a Dataflow pipeline. And the Cloud Runner will enable to scale to production levels.
+
 > Host a deep neural network machine learning model on Google Cloud. Run and monitor jobs that could occasionally fail.
 
-1. Use AI Platform to host you model. Monitor the status of the Operation object for 'error' results.
+1. Use AI Platform (Vertex AI) to host you model. Monitor the status of the Operation object for 'error' results.
 2. Use a Google Kubernetes Engine cluster to host you model. Monitor the status of the Jobs object for 'failed' job states.
-3. X Use AI Platform to host your model. Monitor the status of the Jobs object for 'failed' job states.
+3. X Use AI Platform (Vertex AI) to host your model. Monitor the status of the Jobs object for 'failed' job states.
 4. Use a Google Kubernetes Engine cluster to host your model. Monitor the status of the Operation object for 'error' results.
+
+C is correct because of the requirement to host an ML DNN. Vertex AI for Tensorflow can handle DNNs. Google recommends monitoring Jobs, not Operations.
 
 > Three Google Cloud services commonly used together in data engineering solutions
 
@@ -49,6 +61,8 @@ https://cloud.google.com/certification/data-engineer
 3. X Pub/Sub, Dataflow, BigQuery
 4. Cloud BigTable, Dataproc, Cloud Spanner
 
+C is correct. Pub/Sub provides messaging, Dataflow is used for ETL and data transformation, and BigQuery is used for interactive queries.
+
 > You want to minimize costs to run Google Data Studio reports on BigQuery queries by using prefetch caching.
 
 1. Set up the report to use the Owner's credentials to access the underlying data in BigQuery, and direct the users to view the report only once per business day.
@@ -56,12 +70,16 @@ https://cloud.google.com/certification/data-engineer
 3. X Set up the report to use the Owner's credentials to access the underlying data in BigQuery, an verify that the 'Enable cache' checkbox is selected in for the report.
 4. Set up the report to use the Viewer's credentials to access the underlying data in BigQuery, and verify that the 'Enable cache' checkbox is not selected for the report.
 
+C is correct because you must set Owner credentials to use the 'enable cache' option in BigQuery. It is also a Google best practive to use the 'enable cache' option when the business scenario calls for using prefetch caching. 1) Report must use Owner's Credentials. 2) You don't need to tell the users not to use the report, you need to tell the system to use Query and Pre-fetch caching to cut down on BigQuery jobs.
+
 > What is AVRO used for?
 
 1. Serialization and de-serialization of data so that it can be transmitted and stored while maintaining an object structure.
-2. X AVRO ist a file type usually specified with \*.avr and a common format for spreadsheets.
+2. AVRO ist a file type usually specified with \*.avr and a common format for spreadsheets.
 3. AVRO is an encryption method. AVRO-256 is a 256-bit key standard.
 4. AVRO is a numerical type in SQL that stores a 38 digit value with 9 digit decimal representation. It avoids rounding errors in financial calculations.
+
+B is not correct. AVRO is not a file format. It is a serialization method.
 
 > Customer wants to maintain investment in an existing Apache Spark code data pipeline.
 
@@ -70,19 +88,25 @@ https://cloud.google.com/certification/data-engineer
 3. Dataflow
 4. Dataprerp
 
+B is correct because Dataproc is a managed Hadoop service and runs Apacke Spark applications.
+
 > Promote a Cloud BigTable solution with a lot of data from develoopment to production and optimize for performance.
 
-1. Change your Cloud BigTable instance type from Development to Production, and set the number of nodes to a least 3. Verify that the storage type is HDD.
+1. X Change your Cloud BigTable instance type from Development to Production, and set the number of nodes to a least 3. Verify that the storage type is HDD.
 2. Export the data from your current Cloud BigTable instance to Cloud Storage. Create a new Cloud BigTable Production instance type with a least 3 nodes. Select the HDD storage type. Import the data into the new instance from Cloud Storage.
 3. Change your Cloud Bigtable instance type from Development to Production, and set the number of nodes to at least 3. Verify that the storage type is SSD.
-4. X Export the data from your current Cloud BigTable instance to Cloud Storage. Create a new Cloud BigTable Production instance type with a least 3 nodes. Select the SSD storage type. Import the data into the new instance from Cloud Storage.
+4. Export the data from your current Cloud BigTable instance to Cloud Storage. Create a new Cloud BigTable Production instance type with a least 3 nodes. Select the SSD storage type. Import the data into the new instance from Cloud Storage.
+
+A is correct because Cloud Bigtable allows you to 'scale in place' which meets your requirements for this scenario.
 
 > A company wants to connect cloud applications to an Oracle databese in its data center. Requirements are a maximum of 9 Gbps of data and a Service Level Agreements (SLA) of 99%
  
-1. X Implement a high-throughput Cloud VPN connection
+1. Implement a high-throughput Cloud VPN connection
 2. Dedicated Interconnect
 4. Cloud Router with VPN
 4. Partner Interconnect
+
+A is not correct. Cloud VPN traverses the public internet. It is useful for low-volume connections. The SLA offered by Google covers the Cloud VPN service itself, and not the internet transport. So it would not meet the SLA requirement.
 
 > Source data is streamed in bursts and must be transformed before use.
 
@@ -91,12 +115,16 @@ https://cloud.google.com/certification/data-engineer
 3. Ingest data to Cloud Storage. Use Dataproc for ETL.
 4. X Use Pub/Sub to buffer the data, and then use Dataflow for ETL.
 
+D is correct because the unpredictable data requires a buffer.
+
 > A cllient wants to store files from one location and retrieve them from another location. Security requirements are that no one should be able to access the contants of the file while it is hosted in the cloud. What is the best option?
 
 1. Default encryption should be sufficient
 2. Customer-Supplied Encryption Keys (CSEK)
 3. Client-side encryption
-4. X Customer Managed Encryption Keys (CMEK)
+4. Customer Managed Encryption Keys (CMEK)
+
+A is wrong, because the file will be readable within the project
 
 > A company has a new IoT Pipeline. Which services will make this design work? Select the services that should be used to replace the icons with the number "1" and "2" in the diagram
 
@@ -107,6 +135,8 @@ https://cloud.google.com/certification/data-engineer
 3. Pub/Sub, Cloud Storeage
 4. App Engine, IoT Core
 
+C is not correct, because Pub/Sub does not do device management.
+
 > Calculate a runnig average of streaming data that can arrive late and out of order
 
 1. X Use Pub/Sub and Dataflow with Sliding Time Windows.
@@ -114,70 +144,84 @@ https://cloud.google.com/certification/data-engineer
 3. Use Pub/Sub and Google Data Studio.
 4. Use Dataflow's built-in timestamps for ordering and filtering
 
+A is correct because together, Pub/Sub and Dataflow can provide a solution.
+
 > Storage of JSON files with occasionally changing schema, for ANSI SQL queries.
 
 1. Store in BigQuery. Provide format files for data load an update them as needed.
-2. X Store in Cloud Storage. Link data as temporary tables in BigQuery and turn on the "Automatically detect" option in the Schema section of BigQuery.
+2. tore in Cloud Storage. Link data as temporary tables in BigQuery and turn on the "Automatically detect" option in the Schema section of BigQuery.
 3. Store in BigQuery. Select "Automatically detect" in the Schema section.
 4. Store in Cloud Storage. Link data as permanenet tables in BigQuery and turn on the "Automatically detect" option in the Schema section of BigQuery.
 
-Testing a Machine Learning model with validatoin data returns 100% correct answers.
+D is not correct because you should not use Cloud Storage for this scenario: it is cumbersome and doesn't add value.
+
+> Testing a Machine Learning model with validatoin data returns 100% correct answers.
 
 1. The model is working extremely well, indicating the hyperparameters are set correctly.
 2. The model is underfit. There is a problem
 3. X The model is overfit. There is a problem
 4. The model is perfectly fit. You do not need to continue training.
 
-A company has migrated their Hadoop cluster to the cloud and is now using Dataproc with the same settings and same methodes as in the data center. What would you advise them to do to make better use of the cloud environment?
+> A company has migrated their Hadoop cluster to the cloud and is now using Dataproc with the same settings and same methodes as in the data center. What would you advise them to do to make better use of the cloud environment?
 
 1. Upgrade to the latest version of HDFS. Change the settings in Hadoop components to optimize for the different kinds of work in the mix.
 2. X Store persistent data off-cluster. Start a cluster for one kind of work then shut it down when it is not processing data.
 3. Find more jobs to run so the cluster utilization will cost-justify the expense.
 4. Migrate from Dataproc to an open source Hadoop Cluster hosted on Compute Engine, because this is the only way to get all the Hadoop customizations needed for efficiency.
 
-Cost-effective backup to Google Cloud of multi-TB databases from another cloud including monthly DR drills.
+B is correct. Storing persistent data off the cluster allows the cluster to be shut down when not processing data. And it allows separate clusters to be started per job of per kind of work, so tuning is less important.
+
+> Cost-effective backup to Google Cloud of multi-TB databases from another cloud including monthly DR drills.
 
 1. Use Transfer Appliance. Transfer to Cloud Storage Nearline bucket.
 2. Use Storage Transfer Service. Transfer to Cloud Storage Nearline bucket.
-3. X Use Transfer Appliance. Transfer to Cloud Storage Coldline bucket.
+3. Use Transfer Appliance. Transfer to Cloud Storage Coldline bucket.
 4. Use Storage Transfer Service. Transfer to Cloud Storage Coldline bucket.
 
-As part of your backup plan, you want to be able  to restore snapshots of Compute Engine instances using the fewest steps.
+D is not correct because you should not use Coldline if you want to access the files monthly.
+
+> As part of your backup plan, you want to be able  to restore snapshots of Compute Engine instances using the fewest steps.
 
 1. Export the snapshots to Cloud Storage. Create disks from the exported snapshot files. Create images from the new disks.
 2. Use the snapshots to create replacement disks. Use the disks to create instances as needed.
 3. Export the snapshots to Cloud Storage. Create images from the exported snapshot files.
 4. X Use the snapshots to create replacement instances as needed.
 
-Cost-effective way to run non-critical Apache Spark jobs on Dataproc?
+> Cost-effective way to run non-critical Apache Spark jobs on Dataproc?
 
 1. Set up a cluster in high availability mode with high-memory machine types. Add 10 additional local SSDs.
 2. X Set up a cluster in standard mode with high-memory machine types. Add 10 additional preemptible worker nodes.
 3. Set up a cluster in high availability mode with default machine types. Add 10 additional preemptible worker nodes.
 4. Set up a cluster in standard mode with the default machine types. Add 10 additional local SSDs.
 
-A cllient is using Cloud SQL database to serve infrequently changing lookup tables. As they expand into other geographic regions they want to ensure good performance. What fo you recommend?
+B is correct because Spark and high-memory machines only need the standared mode. Also, use prremptible nodes because you want to save money and this is not mission-critical.
 
-1. X Migrate to Cloud Spanner
+> A client is using Cloud SQL database to serve infrequently changing lookup tables that host data used by applications. The applications will not modify the tables. As they expand into other geographic regions they want to ensure good performance. What fo you recommend?
+
+1. Migrate to Cloud Spanner
 2. Instance high availability configuration
 3. Read replicas
 4. Replicate from an external server
 
-Event data in CSV format to be queried for individual values over time windows. Which storage and schema to minimize query costs?
+A is not correct because there is no mention of a scale issue requiring a larger database of globally consistent transactions.
 
-1. X Use Cloud Bigtable. Design tall and narrow tables, and use a new row for each single event version.
+> Event data in CSV format to be queried for individual values over time windows. Which storage and schema to minimize query costs?
+
+1. Use Cloud Bigtable. Design tall and narrow tables, and use a new row for each single event version.
 2. Use Cloud Storage. Join the raw file data with a BigQuery log table.
 3. Use Cloud BigTable. Design short and wide tables, and use a new column for each single event version.
 4. Use Cloud Storage. Write a Dataprep job to split the data into partitioned tables.
 
-A application has the following data requirements. 1. It requires strongly consistent transactions 2. Total data will be less than 500 GB. 3. The data does not need to be straming or real time. Which dta technology would fit these requirements?
+D is not correct because you do not need to use Google Cloud Storage for this scenario. It might be chraper for storage, but not for processing.
+
+> An application has the following data requirements. 1. It requires strongly consistent transactions 2. Total data will be less than 500 GB. 3. The data does not need to be straming or real time. Which dta technology would fit these requirements?
 
 1. BigQuery
 2. Cloud SQL
-3. X Cloud BigTable
+3. Cloud BigTable
 4. Memorystore
 
-
+C is not correct. Cloud BigTable is not designed to support strongly consistent transactions.
 
 
 
@@ -258,12 +302,14 @@ C is not correct because the goal is to use managed services as much as possible
 D is correct because it uses managed services, and also allows for the data to persist on GCS beyond the life of the cluster.
 E is not correct because of the same reasons as option C.
 
-You have 250,000 devices which produce a JSON device status event every 10 seconds. You want to capture this event data for outlier time series analysis. What should you do?
+> You have 250,000 devices which produce a JSON device status event every 10 seconds. You want to capture this event data for outlier time series analysis. What should you do?
+
 1. O Ship the data into BigQuery. Develop a custom application that uses the BigQuery API to query the dataset and displays device outlier data based on your business requirements.
 2. O Ship the data into BigQuery. Use the BigQuery console to query the dataset and display device outlier data based on your business requirements.
 3. X Ship the data into Cloud Bigtable. Use the Cloud Bigtable cbt tool to display device outlier data based on your business requirements.
 4. O Ship the data into Cloud Bigtable. Install and use the HBase shell for Cloud Bigtable to query the table for device outlier data based on your business requirements.
->C is correct because the data type, volume, and query pattern best fits BigTable capabilities and also Google best practices as linked below.
+
+C is correct because the data type, volume, and query pattern best fits BigTable capabilities and also Google best practices as linked below.
 A, B are not correct because you do not need to use BigQuery for the query pattern in this scenario.
 D is not correct because you can use the simpler method of 'cbt tool' to support this scenario.  
 [Best Practice](https://cloud.google.com/bigtable/docs/go/cbt-overview)  
