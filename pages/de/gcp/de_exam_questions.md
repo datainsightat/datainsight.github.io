@@ -2,30 +2,30 @@ https://cloud.google.com/certification/data-engineer
 
 > Low-cost one-way one-time migration of two 100-TB file servers to Google Cldoud; data will be frequently accessed and only from Germany.
 
-1. Use Transfer Applicance. Transfer to a Cloud Storage Standard bucket.
+1. X Use Transfer Applicance. Transfer to a Cloud Storage Standard bucket.
 2. Use Storage Transfer Service. Ttransfer to a Cloud Storage Standard bucket.
-3. Use Transfer Applicance. Transfer to a Cloud Storage Neraline bucket.
+3. Use Transfer Applicance. Transfer to a Cloud Storage Nearline bucket.
 4. Use Storage Transfer Service. Transfer to a Cloud Storage Coldline bucket.
 
-B is not correct because you should only use Transfer Service for a one-time one-way transfer. Also, Storage Transfer Service does not work for data stored on-premises.
+A is correct because you are performing a one-time (rather than an ongoing services) data transfer from on-premises to Google Cloud for users in a single region (Germany). Using a  Standard storage bucket is best for data is frequently accessed, will reduce cost and also best for data that is frequently accessed, will reduce cost and also conform to regulatory requirements. B is not correct because you should only use Transfer Service for a one-time one-way transfer. Also, Storage Transfer Service does not work for data stored on-premises.
 
 > A Data Analyst is concerned that a BigQuery query clould be too expensive.
 
 1. Use the LIMIT clause to limit the number of values in the results.
 2. Set the Maximum Bytes Billed, which will limit the number of bytes processed but still run the query if the number of bytes requested goes over the limit.
-3. Use the SELECT clause to limit the amount of data in the query. Partition data by date so the query can be more focused.
+3. X Use the SELECT clause to limit the amount of data in the query. Partition data by date so the query can be more focused.
 4. Use Group by so the results will be grouped into fewer output values.
 
-A is not correct because the LIMIT clause limits the output, but does not limit data processes.
+C is correct. SELECT limits the input data. A is not correct because the LIMIT clause limits the output, but does not limit data processes.
 
 > 250,000 devices produce a JSON device status every 10 Seconds. How do you capture event data for outlier time series analysis?
 
 1. Capture data in BigQuery. Develop a BigQuery API custom application to query the dataset and display device outlier data.
-2. Capture data in Cloud Bigtable. Use Cloud BigTable cbt tool to display device outlier data.
+2. X Capture data in Cloud Bigtable. Use Cloud BigTable cbt tool to display device outlier data.
 3. Capture data in BigQuery. Use Biguery console to query the dateset and display device outlier data.
 4. Capture data in Cloud BigTable. Install and use HBase shell for cloud BigTable to query the table for device outlier data.
 
-C is not correct because you do not need to use BigQuery for the query pattern in this scenario. The focus is on a single action (identify outliers), not an interactive analysis. And the speed of the data is more suited for Cloud BigTable.
+B is correct because the data type, volume, and query pattern best fit Cloud Bigtable capabilities. C is not correct because you do not need to use BigQuery for the query pattern in this scenario. The focus is on a single action (identify outliers), not an interactive analysis. And the speed of the data is more suited for Cloud BigTable.
 
 > BigQuery data is stored in external CSV files in Cloud Storage; as the data has invreased, the query performance has dropped.
 
@@ -74,12 +74,12 @@ C is correct because you must set Owner credentials to use the 'enable cache' op
 
 > What is AVRO used for?
 
-1. Serialization and de-serialization of data so that it can be transmitted and stored while maintaining an object structure.
+1. X Serialization and de-serialization of data so that it can be transmitted and stored while maintaining an object structure.
 2. AVRO ist a file type usually specified with \*.avr and a common format for spreadsheets.
 3. AVRO is an encryption method. AVRO-256 is a 256-bit key standard.
 4. AVRO is a numerical type in SQL that stores a 38 digit value with 9 digit decimal representation. It avoids rounding errors in financial calculations.
 
-B is not correct. AVRO is not a file format. It is a serialization method.
+A is correct. AVRO is a serialization / de-serialization standard. B is not correct. AVRO is not a file format. It is a serialization method.
 
 > Customer wants to maintain investment in an existing Apache Spark code data pipeline.
 
@@ -92,21 +92,21 @@ B is correct because Dataproc is a managed Hadoop service and runs Apacke Spark 
 
 > Promote a Cloud BigTable solution with a lot of data from develoopment to production and optimize for performance.
 
-1. X Change your Cloud BigTable instance type from Development to Production, and set the number of nodes to a least 3. Verify that the storage type is HDD.
+1. Change your Cloud BigTable instance type from Development to Production, and set the number of nodes to a least 3. Verify that the storage type is HDD.
 2. Export the data from your current Cloud BigTable instance to Cloud Storage. Create a new Cloud BigTable Production instance type with a least 3 nodes. Select the HDD storage type. Import the data into the new instance from Cloud Storage.
-3. Change your Cloud Bigtable instance type from Development to Production, and set the number of nodes to at least 3. Verify that the storage type is SSD.
+3. X Change your Cloud Bigtable instance type from Development to Production, and set the number of nodes to at least 3. Verify that the storage type is SSD.
 4. Export the data from your current Cloud BigTable instance to Cloud Storage. Create a new Cloud BigTable Production instance type with a least 3 nodes. Select the SSD storage type. Import the data into the new instance from Cloud Storage.
 
-A is correct because Cloud Bigtable allows you to 'scale in place' which meets your requirements for this scenario.
+C is correct because Cloud Bigtable allows you to 'scale in place' which meets your requirements for this scenario.
 
 > A company wants to connect cloud applications to an Oracle databese in its data center. Requirements are a maximum of 9 Gbps of data and a Service Level Agreements (SLA) of 99%
  
 1. Implement a high-throughput Cloud VPN connection
 2. Dedicated Interconnect
-4. Cloud Router with VPN
-4. Partner Interconnect
+3. Cloud Router with VPN
+4. X Partner Interconnect
 
-A is not correct. Cloud VPN traverses the public internet. It is useful for low-volume connections. The SLA offered by Google covers the Cloud VPN service itself, and not the internet transport. So it would not meet the SLA requirement.
+A is correct. Partner Interconenct is useful for data up to 10 Gbps and is offered by ISPs with SLAs. B is not correct. Direct Interconnect is useful for data from 10 Gbps to 80 Gbps. An ISP could offer a 99% SLA, but the max 9 Gbps requirement means this solution would not be optimal. A is not correct. Cloud VPN traverses the public internet. It is useful for low-volume connections. The SLA offered by Google covers the Cloud VPN service itself, and not the internet transport. So it would not meet the SLA requirement.
 
 > Source data is streamed in bursts and must be transformed before use.
 
@@ -121,10 +121,10 @@ D is correct because the unpredictable data requires a buffer.
 
 1. Default encryption should be sufficient
 2. Customer-Supplied Encryption Keys (CSEK)
-3. Client-side encryption
+3. X Client-side encryption
 4. Customer Managed Encryption Keys (CMEK)
 
-A is wrong, because the file will be readable within the project
+C is correct. The requirement is that the file cannot be decrypted in the cloud, so encrypt it before it is uploaded and after it is downloaded adds a layer of encryption. A is wrong, because the file will be readable within the project. D is not correct. The file can still be decrypted while hosted in the cloud
 
 > A company has a new IoT Pipeline. Which services will make this design work? Select the services that should be used to replace the icons with the number "1" and "2" in the diagram
 
@@ -135,7 +135,7 @@ A is wrong, because the file will be readable within the project
 3. Pub/Sub, Cloud Storeage
 4. App Engine, IoT Core
 
-C is not correct, because Pub/Sub does not do device management.
+B is correct because device data captured by IoT Core gets published to Pub/Sub. C is not correct, because Pub/Sub does not do device management.
 
 > Calculate a runnig average of streaming data that can arrive late and out of order
 
@@ -149,11 +149,11 @@ A is correct because together, Pub/Sub and Dataflow can provide a solution.
 > Storage of JSON files with occasionally changing schema, for ANSI SQL queries.
 
 1. Store in BigQuery. Provide format files for data load an update them as needed.
-2. tore in Cloud Storage. Link data as temporary tables in BigQuery and turn on the "Automatically detect" option in the Schema section of BigQuery.
+2. X Store in Cloud Storage. Link data as temporary tables in BigQuery and turn on the "Automatically detect" option in the Schema section of BigQuery.
 3. Store in BigQuery. Select "Automatically detect" in the Schema section.
 4. Store in Cloud Storage. Link data as permanenet tables in BigQuery and turn on the "Automatically detect" option in the Schema section of BigQuery.
 
-D is not correct because you should not use Cloud Storage for this scenario: it is cumbersome and doesn't add value.
+B is correct because of the requirement to support occasionally (schema) changing JSON files an aggregate ANSI SQL queries: you need to use BigQuery, and it is quickest to use 'Automatically detect' for schema changes. D is not correct because you should not use Cloud Storage for this scenario: it is cumbersome and doesn't add value.
 
 > Testing a Machine Learning model with validatoin data returns 100% correct answers.
 
@@ -174,11 +174,11 @@ B is correct. Storing persistent data off the cluster allows the cluster to be s
 > Cost-effective backup to Google Cloud of multi-TB databases from another cloud including monthly DR drills.
 
 1. Use Transfer Appliance. Transfer to Cloud Storage Nearline bucket.
-2. Use Storage Transfer Service. Transfer to Cloud Storage Nearline bucket.
+2. X Use Storage Transfer Service. Transfer to Cloud Storage Nearline bucket.
 3. Use Transfer Appliance. Transfer to Cloud Storage Coldline bucket.
 4. Use Storage Transfer Service. Transfer to Cloud Storage Coldline bucket.
 
-D is not correct because you should not use Coldline if you want to access the files monthly.
+B is correct because you will need to access you backup data monthly to test your disaster recovery process, so you should use a Nearline bucket; also because you will be performing ongoing, regular data transfers, so you should use Storage Transfer Services. D is not correct because you should not use Coldline if you want to access the files monthly.
 
 > As part of your backup plan, you want to be able  to restore snapshots of Compute Engine instances using the fewest steps.
 
@@ -200,28 +200,28 @@ B is correct because Spark and high-memory machines only need the standared mode
 
 1. Migrate to Cloud Spanner
 2. Instance high availability configuration
-3. Read replicas
+3. X Read replicas
 4. Replicate from an external server
 
-A is not correct because there is no mention of a scale issue requiring a larger database of globally consistent transactions.
+C is correct. A read replica will increase the availability of the service and can be located closer to the users in the new geographiers. A is not correct because there is no mention of a scale issue requiring a larger database of globally consistent transactions.
 
 > Event data in CSV format to be queried for individual values over time windows. Which storage and schema to minimize query costs?
 
-1. Use Cloud Bigtable. Design tall and narrow tables, and use a new row for each single event version.
+1. X Use Cloud Bigtable. Design tall and narrow tables, and use a new row for each single event version.
 2. Use Cloud Storage. Join the raw file data with a BigQuery log table.
 3. Use Cloud BigTable. Design short and wide tables, and use a new column for each single event version.
 4. Use Cloud Storage. Write a Dataprep job to split the data into partitioned tables.
 
-D is not correct because you do not need to use Google Cloud Storage for this scenario. It might be chraper for storage, but not for processing.
+A is correct because it is a recommended best practice. Use Cloud Bigtable and this schema for this scenario. Cloud Storage would have cheaper Storage costs than Cloud Bigtable, but we want to minimize Query Costs. D is not correct because you do not need to use Google Cloud Storage for this scenario. It might be chraper for storage, but not for processing.
 
 > An application has the following data requirements. 1. It requires strongly consistent transactions 2. Total data will be less than 500 GB. 3. The data does not need to be straming or real time. Which dta technology would fit these requirements?
 
 1. BigQuery
-2. Cloud SQL
+2. X Cloud SQL
 3. Cloud BigTable
 4. Memorystore
 
-C is not correct. Cloud BigTable is not designed to support strongly consistent transactions.
+B is correct. Cloud SQL supports strongly consistent transactions. And the size requirements will fit with a Cloud SQL instance. C is not correct. Cloud BigTable is not designed to support strongly consistent transactions.
 
 
 
@@ -304,10 +304,10 @@ E is not correct because of the same reasons as option C.
 
 > You have 250,000 devices which produce a JSON device status event every 10 seconds. You want to capture this event data for outlier time series analysis. What should you do?
 
-1. O Ship the data into BigQuery. Develop a custom application that uses the BigQuery API to query the dataset and displays device outlier data based on your business requirements.
-2. O Ship the data into BigQuery. Use the BigQuery console to query the dataset and display device outlier data based on your business requirements.
+1. Ship the data into BigQuery. Develop a custom application that uses the BigQuery API to query the dataset and displays device outlier data based on your business requirements.
+2. Ship the data into BigQuery. Use the BigQuery console to query the dataset and display device outlier data based on your business requirements.
 3. X Ship the data into Cloud Bigtable. Use the Cloud Bigtable cbt tool to display device outlier data based on your business requirements.
-4. O Ship the data into Cloud Bigtable. Install and use the HBase shell for Cloud Bigtable to query the table for device outlier data based on your business requirements.
+4. Ship the data into Cloud Bigtable. Install and use the HBase shell for Cloud Bigtable to query the table for device outlier data based on your business requirements.
 
 C is correct because the data type, volume, and query pattern best fits BigTable capabilities and also Google best practices as linked below.
 A, B are not correct because you do not need to use BigQuery for the query pattern in this scenario.
@@ -493,7 +493,8 @@ You are building a data pipeline on Google Cloud. You need to select services th
 A is not correct because you should not use the Operation object to monitor failures.
 C, D are not correct because you should not use a Kubernetes Engine cluster for this scenario.
  
-You work on a regression problem in a natural language processing domain, and you have 100M labeled examples in your dataset. You have randomly shuffled your data and split your dataset into training and test samples (in a 90/10 ratio). After you have trained the neural network and evaluated your model on a test set, you discover that the root-mean-squared error (RMSE) of your model is twice as high on the train set as on the test set. How should you improve the performance of your model?
+You work on a regression problem in a natural language processing domain, and you have 
+ M labeled examples in your dataset. You have randomly shuffled your data and split your dataset into training and test samples (in a 90/10 ratio). After you have trained the neural network and evaluated your model on a test set, you discover that the root-mean-squared error (RMSE) of your model is twice as high on the train set as on the test set. How should you improve the performance of your model?
 1. O Increase the share of the test sample in the train-test split.
 2. O Try to collect more data and increase the size of your dataset.
 3. O Try out regularization techniques (e.g., dropout or batch normalization) to avoid overfitting.
