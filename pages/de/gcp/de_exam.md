@@ -1,9 +1,9 @@
 # Data Engineer Exam
 
 [Data Engineer Exam Guide](https://cloud.google.com/certification/guides/data-engineer)  
-[Google Cloud Documentation](https://cloud.google.com/docs/overview)
-[Medium Blog](https://simonleewm.medium.com/a-study-guide-to-the-google-cloud-professional-data-engineer-certification-path-9e83e41e311)
-[Practice Exam](https://cloud.google.com/certification/practice-exam/data-engineer)
+[Google Cloud Documentation](https://cloud.google.com/docs/overview)  
+[Medium Blog](https://simonleewm.medium.com/a-study-guide-to-the-google-cloud-professional-data-engineer-certification-path-9e83e41e311)  
+[Practice Exam](https://cloud.google.com/certification/practice-exam/data-engineer)  
 
 * Data Representation
 * Pipelines
