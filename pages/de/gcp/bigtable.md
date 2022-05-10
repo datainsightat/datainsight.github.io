@@ -1,4 +1,4 @@
-# Cloud Bigtable
+# [Cloud Bigtable](https://cloud.google.com/bigtable)
 
 ![Bigtable](../../img/gcp_bigtable_1.jpg)
 
@@ -9,6 +9,7 @@
 * Time series data
 * Natural semantic ordering
 * Real-time processing
+* NO-SQL
 <a/>
 
 ![Bigtable works](../../img/gcp_bigtable_2.jpg)  
