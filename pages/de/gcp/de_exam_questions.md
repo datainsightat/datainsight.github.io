@@ -1,112 +1,138 @@
 https://cloud.google.com/certification/data-engineer
 
-> Low-cost one-way one-time migration of two 100-TB file servers to Google Cldoud; data will be frequently accessed and only from Germany.
+Low-cost one-way one-time migration of two 100-TB file servers to Google Cloud; data will be frequently accessed and only from Germany.
 
-1. X Use Transfer Applicance. Transfer to a Cloud Storage Standard bucket.
-2. Use Storage Transfer Service. Ttransfer to a Cloud Storage Standard bucket.
+1. X Use [Transfer Applicance](https://cloud.google.com/transfer-appliance/docs/4.0/overview). Transfer to a Cloud Storage Standard bucket.
+2. Use [Storage Transfer Service](https://cloud.google.com/storage-transfer-service). Ttransfer to a Cloud Storage Standard bucket.
 3. Use Transfer Applicance. Transfer to a Cloud Storage Nearline bucket.
 4. Use Storage Transfer Service. Transfer to a Cloud Storage Coldline bucket.
 
-A is correct because you are performing a one-time (rather than an ongoing services) data transfer from on-premises to Google Cloud for users in a single region (Germany). Using a  Standard storage bucket is best for data is frequently accessed, will reduce cost and also best for data that is frequently accessed, will reduce cost and also conform to regulatory requirements. B is not correct because you should only use Transfer Service for a one-time one-way transfer. Also, Storage Transfer Service does not work for data stored on-premises.
+> A is correct because you are performing a one-time (rather than an ongoing services) data transfer from on-premises to Google Cloud for users in a single region (Germany). Using a  Standard storage bucket is best for data is frequently accessed, will reduce cost and also best for data that is frequently accessed, will reduce cost and also conform to regulatory requirements. B is not correct because you should only use Transfer Service for a one-time one-way transfer. Also, Storage Transfer Service does not work for data stored on-premises.
 
-> A Data Analyst is concerned that a BigQuery query clould be too expensive.
+***
+
+A Data Analyst is concerned that a BigQuery query clould be too expensive.
 
 1. Use the LIMIT clause to limit the number of values in the results.
 2. Set the Maximum Bytes Billed, which will limit the number of bytes processed but still run the query if the number of bytes requested goes over the limit.
 3. X Use the SELECT clause to limit the amount of data in the query. Partition data by date so the query can be more focused.
 4. Use Group by so the results will be grouped into fewer output values.
 
-C is correct. SELECT limits the input data. A is not correct because the LIMIT clause limits the output, but does not limit data processes.
+> C is correct. SELECT limits the input data. A is not correct because the LIMIT clause limits the output, but does not limit data processes.
 
-> 250,000 devices produce a JSON device status every 10 Seconds. How do you capture event data for outlier time series analysis?
+***
 
-1. Capture data in BigQuery. Develop a BigQuery API custom application to query the dataset and display device outlier data.
-2. X Capture data in Cloud Bigtable. Use Cloud BigTable cbt tool to display device outlier data.
-3. Capture data in BigQuery. Use Biguery console to query the dateset and display device outlier data.
+250,000 devices produce a JSON device status every 10 Seconds. How do you capture event data for outlier time series analysis?
+
+1. Capture data in [BigQuery](https://github.com/datainsightat/DataScience_Examples/blob/gh-pages/pages/de/gcp/bigquery.md). Develop a BigQuery API custom application to query the dataset and display device outlier data.
+2. X Capture data in Cloud [Bigtable](https://github.com/datainsightat/DataScience_Examples/blob/gh-pages/pages/de/gcp/bigtable.md). Use Cloud BigTable cbt tool to display device outlier data.
+3. Capture data in BigQuery. Use Biguery console to query the dataset and display device outlier data.
 4. Capture data in Cloud BigTable. Install and use HBase shell for cloud BigTable to query the table for device outlier data.
 
-B is correct because the data type, volume, and query pattern best fit Cloud Bigtable capabilities. C is not correct because you do not need to use BigQuery for the query pattern in this scenario. The focus is on a single action (identify outliers), not an interactive analysis. And the speed of the data is more suited for Cloud BigTable.
+> B is correct because the data type, volume, and query pattern best fit Cloud Bigtable capabilities. C is not correct because you do not need to use BigQuery for the query pattern in this scenario. The focus is on a single action (identify outliers), not an interactive analysis. And the speed of the data is more suited for Cloud BigTable.
 
-> BigQuery data is stored in external CSV files in Cloud Storage; as the data has invreased, the query performance has dropped.
+***
+
+BigQuery data is stored in external CSV files in Cloud Storage; as the data has increased, the query performance has dropped.
+
+***
 
 1. X Import the data into BigQuery for better performance
 2. Divide the data into partitions based on the data.
 3. Request more slots for greater capacity to improve performance.
 4. Time to move to Cloud BigTable; it is faster in all cases.
 
-A Is correct. The performance issue is because the dta is stored in a non-optimal format in an external storage medium.
+> A Is correct. The performance issue is because the data is stored in a non-optimal format in an external storage medium.
 
-> A client has been developing a pipeline based on PCollections using local programming techniques and is ready to scale up to production. What should they do?
+***
 
-1. X They should use the Dataflow Cloud Runner.
+A client has been developing a pipeline based on PCollections using local programming techniques and is ready to scale up to production. What should they do?
+
+1. X They should use the [Dataflow](https://github.com/datainsightat/DataScience_Examples/blob/gh-pages/pages/de/gcp/dataflow.md) Cloud Runner.
 2. They should use the local version of the runner.
 3. They should upload the pipeline to Dataproc.
 4. Import the pipeline into BigQuery.
 
-A is correct. The PCollectoin indicates it is a Dataflow pipeline. And the Cloud Runner will enable to scale to production levels.
+> A is correct. The PCollection indicates it is a Dataflow pipeline. And the Cloud Runner will enable to scale to production levels.
 
-> Host a deep neural network machine learning model on Google Cloud. Run and monitor jobs that could occasionally fail.
+***
+
+Host a deep neural network machine learning model on Google Cloud. Run and monitor jobs that could occasionally fail.
 
 1. Use AI Platform (Vertex AI) to host you model. Monitor the status of the Operation object for 'error' results.
 2. Use a Google Kubernetes Engine cluster to host you model. Monitor the status of the Jobs object for 'failed' job states.
-3. X Use AI Platform (Vertex AI) to host your model. Monitor the status of the Jobs object for 'failed' job states.
+3. X Use AI Platform (Vertex AI)[https://github.com/datainsightat/DataScience_Examples/blob/gh-pages/pages/de/gcp/kubeflow.md] to host your model. Monitor the status of the Jobs object for 'failed' job states.
 4. Use a Google Kubernetes Engine cluster to host your model. Monitor the status of the Operation object for 'error' results.
 
-C is correct because of the requirement to host an ML DNN. Vertex AI for Tensorflow can handle DNNs. Google recommends monitoring Jobs, not Operations.
+> C is correct because of the requirement to host an ML DNN. Vertex AI for Tensorflow can handle DNNs. Google recommends monitoring Jobs, not Operations.
 
-> Three Google Cloud services commonly used together in data engineering solutions
+***
+
+Three Google Cloud services commonly used together in data engineering solutions
 
 1. Dataproc, Cloud SQL, BigQuery
 2. Pub/Sub, Kubvernetes Engine Cloud Spanner
-3. X Pub/Sub, Dataflow, BigQuery
+3. X (Pub/Sub)[https://github.com/datainsightat/DataScience_Examples/blob/gh-pages/pages/de/gcp/pubsub.md], (Dataflow)[https://github.com/datainsightat/DataScience_Examples/blob/gh-pages/pages/de/gcp/dataflow.md], (BigQuery)[https://github.com/datainsightat/DataScience_Examples/blob/gh-pages/pages/de/gcp/bigquery.md]
 4. Cloud BigTable, Dataproc, Cloud Spanner
 
-C is correct. Pub/Sub provides messaging, Dataflow is used for ETL and data transformation, and BigQuery is used for interactive queries.
+> C is correct. Pub/Sub provides messaging, Dataflow is used for ETL and data transformation, and BigQuery is used for interactive queries.
+
+***
 
 > You want to minimize costs to run Google Data Studio reports on BigQuery queries by using prefetch caching.
 
 1. Set up the report to use the Owner's credentials to access the underlying data in BigQuery, and direct the users to view the report only once per business day.
-2. Set up the report to use the Viewer's credentials to access the underlying data in BigQuery, and also ser it up to be a 'view-only' report.
+2. Set up the report to use the Viewer's credentials to access the underlying data in BigQuery, and also set it up to be a 'view-only' report.
 3. X Set up the report to use the Owner's credentials to access the underlying data in BigQuery, an verify that the 'Enable cache' checkbox is selected in for the report.
 4. Set up the report to use the Viewer's credentials to access the underlying data in BigQuery, and verify that the 'Enable cache' checkbox is not selected for the report.
 
-C is correct because you must set Owner credentials to use the 'enable cache' option in BigQuery. It is also a Google best practive to use the 'enable cache' option when the business scenario calls for using prefetch caching. 1) Report must use Owner's Credentials. 2) You don't need to tell the users not to use the report, you need to tell the system to use Query and Pre-fetch caching to cut down on BigQuery jobs.
+> C is correct because you must set Owner credentials to use the 'enable cache' option in BigQuery. It is also a Google best practive to use the 'enable cache' option when the business scenario calls for using prefetch caching. 1) Report must use Owner's Credentials. 2) You don't need to tell the users not to use the report, you need to tell the system to use Query and Pre-fetch caching to cut down on BigQuery jobs.
 
-> What is AVRO used for?
+***
+
+What is (AVRO)[https://avro.apache.org/docs/current/] used for?
 
 1. X Serialization and de-serialization of data so that it can be transmitted and stored while maintaining an object structure.
 2. AVRO ist a file type usually specified with \*.avr and a common format for spreadsheets.
 3. AVRO is an encryption method. AVRO-256 is a 256-bit key standard.
 4. AVRO is a numerical type in SQL that stores a 38 digit value with 9 digit decimal representation. It avoids rounding errors in financial calculations.
 
-A is correct. AVRO is a serialization / de-serialization standard. B is not correct. AVRO is not a file format. It is a serialization method.
+> A is correct. AVRO is a serialization / de-serialization standard. B is not correct. AVRO is not a file format. It is a serialization method.
 
-> Customer wants to maintain investment in an existing Apache Spark code data pipeline.
+***
+
+Customer wants to maintain investment in an existing Apache Spark code data pipeline.
 
 1. DigQuery
-2. X Dataproc
+2. X [Dataproc](https://github.com/datainsightat/DataScience_Examples/blob/gh-pages/pages/de/gcp/dataproc.md)
 3. Dataflow
-4. Dataprerp
+4. Dataprep
 
-B is correct because Dataproc is a managed Hadoop service and runs Apacke Spark applications.
+> B is correct because Dataproc is a managed Hadoop service and runs Apacke Spark applications.
 
-> Promote a Cloud BigTable solution with a lot of data from develoopment to production and optimize for performance.
+***
+
+> Promote a [Cloud BigTable](https://github.com/datainsightat/DataScience_Examples/blob/gh-pages/pages/de/gcp/bigtable.md) solution with a lot of data from development to production and optimize for performance.
 
 1. Change your Cloud BigTable instance type from Development to Production, and set the number of nodes to a least 3. Verify that the storage type is HDD.
 2. Export the data from your current Cloud BigTable instance to Cloud Storage. Create a new Cloud BigTable Production instance type with a least 3 nodes. Select the HDD storage type. Import the data into the new instance from Cloud Storage.
 3. X Change your Cloud Bigtable instance type from Development to Production, and set the number of nodes to at least 3. Verify that the storage type is SSD.
 4. Export the data from your current Cloud BigTable instance to Cloud Storage. Create a new Cloud BigTable Production instance type with a least 3 nodes. Select the SSD storage type. Import the data into the new instance from Cloud Storage.
 
-C is correct because Cloud Bigtable allows you to 'scale in place' which meets your requirements for this scenario.
+> C is correct because Cloud Bigtable allows you to 'scale in place' which meets your requirements for this scenario.
 
-> A company wants to connect cloud applications to an Oracle databese in its data center. Requirements are a maximum of 9 Gbps of data and a Service Level Agreements (SLA) of 99%
+***
+
+A company wants to connect cloud applications to an Oracle databese in its data center. Requirements are a maximum of 9 Gbps of data and a Service Level Agreements (SLA) of 99%
  
 1. Implement a high-throughput Cloud VPN connection
-2. Dedicated Interconnect
+2. [Dedicated Interconnect](https://cloud.google.com/network-connectivity/docs/interconnect/concepts/dedicated-overview)
 3. Cloud Router with VPN
-4. X Partner Interconnect
+4. X [Partner Interconnect](https://cloud.google.com/network-connectivity/docs/interconnect/concepts/partner-overview)
 
-A is correct. Partner Interconenct is useful for data up to 10 Gbps and is offered by ISPs with SLAs. B is not correct. Direct Interconnect is useful for data from 10 Gbps to 80 Gbps. An ISP could offer a 99% SLA, but the max 9 Gbps requirement means this solution would not be optimal. A is not correct. Cloud VPN traverses the public internet. It is useful for low-volume connections. The SLA offered by Google covers the Cloud VPN service itself, and not the internet transport. So it would not meet the SLA requirement.
+> A is correct. Partner Interconnect is useful for data up to 10 Gbps and is offered by ISPs with SLAs. B is not correct. Direct Interconnect is useful for data from 10 Gbps to 80 Gbps. An ISP could offer a 99% SLA, but the max 9 Gbps requirement means this solution would not be optimal. A is not correct. Cloud VPN traverses the public internet. It is useful for low-volume connections. The SLA offered by Google covers the Cloud VPN service itself, and not the internet transport. So it would not meet the SLA requirement.
+
+***
 
 > Source data is streamed in bursts and must be transformed before use.
 
