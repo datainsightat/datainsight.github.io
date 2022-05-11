@@ -1,3 +1,13 @@
+# Cloud Computing
+
+Fundamental attributes of cloud computing:
+* On-demand service
+* Network access
+* Ressource pooling
+* Rapid elasticity
+* Measured service
+<a/>
+
 # Google Cloud
 
 ![GCP Architecture](../../img/gcp_architecture.png)
@@ -22,11 +32,37 @@ Organization > Folder > Project > Resource
 
 ![GCP Services](../../img/gcp_services.png)
 
+## Services
+
+### Compute
+
+![GCP](../../img/gcp_cloud_02.jpg)
+
+* Dataproc = Apache Hadoop
+
+### Storage
+
+![GCP](../../img/gcp_cloud_03.jpg)
+
+### Big Data
+
+![GCP](../../img/gcp_cloud_04.jpg)
+
+* Bigtable = Apache HBase
+
+### Machine Learning
+
+![GCP](../../img/gcp_cloud_05.jpg)
+
 ## Compute
 
 ![Pre Trained Models](../../img/gcp_pretrainedmodels.png)
 
 ![GCP Big Data Tools](../../img/gcp_bigdatatools.png)
+
+### Architectures
+
+![GCP Architectures](../../img/gcp_cloud_00.jpg)
 
 ## Storage
 
@@ -43,7 +79,91 @@ Google network 10 GB/s
 
 ![Google Network](../../img/gcp_network.png)
 
+### Regions and Zones
+
+![Regions](../../img/gcp_cloud_01.jpg)
+
+* Region < 5ms latency
+* Multi-Regional Services: App Engine, Cloud Datastore, Cloud Storage, BigQuery
+<a/>
+
 ## Security
 
 ![Google Security](../../img/gcp_security.png)
-  
+
+![gcp](../../img/gcp_cloud_06.jpg)
+
+## IAM
+
+IAM (Identity and Access Management) defines WHO, can do WHAT, on which RESOURCE.
+
+### WHO
+
+* Google account of Cloud Identity user: test@gmail.com
+* Service account: test@project_id.iam.gserviceaccount.com
+* Google group: test@googlegroups.com
+* Cloud identity of G Suite domain: example.com
+<a/>
+
+### WHAT
+
+Instance Admin > Role
+
+|Service|Resource|Verb|
+|-|-|-|
+|compute|instances|list|
+|compute|instances|delete|
+|compute|instances|start|
+
+
+### On which RESOURCE
+
+![gcp](../../img/gcp_cloud_07.jpg)
+
+* A policy is set on a resource
+
+## Roles
+
+* Primitive
+* Predefined
+* Custom
+<a/>
+
+### Primitve Roles
+
+![gcp](../../img/gcp_cloud_08.jpg)
+
+### Predefined Roles
+
+![gcp](../../img/gcp_cloud_09.jpg)
+
+### Custom Roles
+
+![gcp](../../img/gcp_cloud_10.jpg)
+
+## Service Accounts
+
+* Provide an identity for carrying out server-to-server interactions in a project
+* Used to authenticate from one service to another
+* Control Privileges used by resources
+* Indentified with an email address:
+    * PROJECT_NUMBER-compute@developer.gserviceaccount.com
+    * PROJECT_ID@appspot.gserviceaccount.com
+<a/>
+
+## [Google Cloud SDK](https://cloud.google.com/sdk/cloudplatform)
+
+* gcloud
+* gsutil (Cloud Storage)
+* bq (Big Query)
+<a/>
+
+* Available as (Docker Image)[https://hub.docker.com/r/google/cloud-sdk/]
+* Available via Cloud Shell
+<a/>
+
+## RESTful APIs
+
+Programmatic access to products and services. Enabled through the Google Cloud Platform Console. The [API Explorer](https://developers.google.com/apis-explorer/) is an interactive tool that lets you easily try Google APIs using a browser.  
+
+
