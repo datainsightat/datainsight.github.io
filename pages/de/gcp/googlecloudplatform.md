@@ -166,4 +166,26 @@ Instance Admin > Role
 
 Programmatic access to products and services. Enabled through the Google Cloud Platform Console. The [API Explorer](https://developers.google.com/apis-explorer/) is an interactive tool that lets you easily try Google APIs using a browser.  
 
+# Virtual Machines
 
+## Virtual Private Cloud Network
+
+* Each VPC network is contained in a GCP project.
+* Cloud VPC networks are global, subnets are regional
+<a/>
+
+## Load-Balancing
+
+|Global HTTP(S)|Global SSL Proxy|Global TCP Proxy|Regional|Reginoal internal|
+|-|-|-|-|-|
+|Layer 7|Layer 4|Layer 4|Any Traffic|Traffic inside VPC|
+
+## Cloud CDN
+
+Cache Content close to users
+
+## Interconnection Options
+
+|VPN|Direct Peering|Dedicated Interconnect|Carrier Peering|Partner Interconnect|
+|-|-|-|-|-|
+|Secure mulit-Gbps connection over VPN tunnels|Private connection between you and Google for your hybrid cloud workloads|Connect N x 10G transport circuits for private cloud traffic to Google Cloud at Google POPs|Connection through the largest partner network of service providers|Connectivity between  you on-premises network and your VPC network through a supported service provider|
