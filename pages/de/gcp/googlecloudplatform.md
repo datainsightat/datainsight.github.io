@@ -168,24 +168,43 @@ Programmatic access to products and services. Enabled through the Google Cloud P
 
 # Virtual Machines
 
+Compute engine runs virtual machines. 
+
 ## Virtual Private Cloud Network
 
 * Each VPC network is contained in a GCP project.
 * Cloud VPC networks are global, subnets are regional
+* Subnet have a regional scope
+<a/>
+
+## Compute Engine
+
+* Pick memory and CPU
+* Pick GPU, if you need them
+* SSD
+* Windows, or Linux Server
+* Define a startup script
+* Make snapshots for backups
+* Preemptible VMs get terminated after completing the job.
 <a/>
 
 ## Load-Balancing
 
+Routing tables forward traffic within a network.
+
+Cloud load balancing. Managed service.
+
 |Global HTTP(S)|Global SSL Proxy|Global TCP Proxy|Regional|Reginoal internal|
 |-|-|-|-|-|
 |Layer 7|Layer 4|Layer 4|Any Traffic|Traffic inside VPC|
+|Different route URLs to different back ends|Specific port|Specific port|Any port|Internal tiers|
 
-## Cloud CDN
+## Cloud CDN (Edge Caches)
 
-Cache Content close to users
+Cache Content close to users. Lower latency.
 
 ## Interconnection Options
 
 |VPN|Direct Peering|Dedicated Interconnect|Carrier Peering|Partner Interconnect|
 |-|-|-|-|-|
-|Secure mulit-Gbps connection over VPN tunnels|Private connection between you and Google for your hybrid cloud workloads|Connect N x 10G transport circuits for private cloud traffic to Google Cloud at Google POPs|Connection through the largest partner network of service providers|Connectivity between  you on-premises network and your VPC network through a supported service provider|
+|Secure mulit-Gbps connection over VPN tunnels|Private connection between you and Google for your hybrid cloud workloads|Connect N x 10G transport circuits for private cloud traffic to Google Cloud at Google POPs|Connection through the largest partner network of service providers|Connectivity between  you on-premises network and your VPC network through a supported service provider. 99.99% SLA|
