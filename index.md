@@ -76,7 +76,7 @@
 ## BI - Business Intelligence
 
 * [Shiny](pages/bi/shiny.md)
-* [Power BI]
+* [Power BI](pages/bi/pbi.md)
 * [XLWings](https://www.xlwings.org/)
 
 # Projects
