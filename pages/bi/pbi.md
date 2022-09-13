@@ -101,7 +101,25 @@ An item is related to multiple categories. Leverages bi-directional filters. Cau
 Report pane reflects data in model, plus the filters applied. Filter pane applies filters for a visual, an entire page or all report pages.
 
 ![PBI Filters](../img/pbi_filters_1.jpg)
- 
+
+# Two Fact Tables
+    
+If on of the fact tables has as different level of granularity, a many-to-many relation might occur. To avoid suach a relation, use a Bridge table. Fact Table High Granularity < many-to-one < Dimension 1 with additional column for lower granularity > many-to-one > Bridge > one-to-many > Fact Table Low Granularity
+    
+![PBI Two Fact Tables](../img/pbi_2.jpg)
+
+# Multiple Date Tables
+
+Use the dax function USERELATIONSHIP to express to which of the many date columns in your fact table the date table should relate to. Examples for different date columns might be order date, shipping date ...  
+
+Another option is to create new date tables for each date column.
+
+# Disconnected Tables
+
+Table is not related to fact table, like a "What-if" Parameter.
+
+    New Forecast = 'What-if'[Forecast Adjust Value] * sum('Forecast'[forecast QTY Sales])
+
 # Write Data from BPI to SQL
 
 https://www.youtube.com/watch?v=WgIhsF7kEjI
