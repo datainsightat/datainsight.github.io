@@ -45,7 +45,7 @@ Power BI = Power Query + Data Model + Power BI Report
 * Any sensitive data?
 * Can we rely on the data?
 
-# M-Code
+# (M-Code)[https://docs.microsoft.com/en-us/powerquery-m/]
 
 Define Source > Navigate to Source Details > Name each change based on last step > Repeat until done
 
@@ -68,13 +68,75 @@ Define Source > Navigate to Source Details > Name each change based on last step
       #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns",{"PLU"})
     in
       #"Removed Duplicates"
+      
+## Text Object
+
+    Text.PadStart(text.From([Month]),2,"0")
+    
+## Logic
+
+    = each if [Month] >= FYStart
+      then [Month] - (FYStart - 1)
+      else [Month] + (12 - FYStart * 1)
 
 # Date Tables
 
     Calendar(<startdate>,<enddate>)
     CalendarAuto()
-      
     
+## Dynamic Date Table
 
+New Source > Blank Query
 
+    = Date.StartofYear(List.Min(#"Sales Transactions"[Date]))
+    
+    = Date.EndofYear(List.Max(#"Sales Transactions"[Date]))
+    
+rename Queries "Start" and "End".
+
+New Source > Blank Query
+
+    = {Number.From(#"Start")..Number.From(#"End")}
+     
+convert to table, convert column to date format.
+
+# Relationships
+
+Direction from dimension table to fact table.
+
+|Cardinalitly|Description|
+|-|-|
+|One-to-many|One value in dimension table relates to many values in fact table|
+|One-to-one||
+|Many-to-many||
+
+|Filter direction|Description|
+|-|-|
+|Single|Filters can be applied in one direction|
+|Both|Filters can be applied in both directions|
+
+## Bi-Directional Filters
+
+* One-to-one Relationships
+* Bridging Tables
+* Unique Slicer Requirements
+* Dimenstion to Dimension Analysis
+
+### One-to-One
+
+Check, if a merged table is possible for the requirement.
+
+### Many-to-Many
+
+An item is related to multiple categories. Leverages bi-directional filters. Causes unpredictable results.
+
+# Filters and Visuals
+
+Report pane reflects data in model, plus the filters applied. Filter pane applies filters for a visual, an entire page or all report pages.
+
+![PBI Filters](../img/pbi_filters_1.jpg)
+
+# (DAX (Data Analysis Expressions))[https://docs.microsoft.com/en-us/dax/]
+
+Implicit DAX functions (Applied by right-clicking) can only be used on aggregate columns, which are shown by the "E"-Symbol.
 
