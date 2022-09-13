@@ -36,6 +36,7 @@
 * [Oracle SQL](pages/cs/oraclesql.md)
 * [Microsoft SQL Server](pages/cs/mssql.md)
 * [MongoDB](pages/cs/mongo.md)
+* [DAX](pages/cs/dax.md)
 
 ### Other
 
