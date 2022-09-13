@@ -2,6 +2,10 @@
 
 Measures, or calculated columns? Measures are your first choice, because they are lightweight, scalable. You need a calculated column, if there is no key column, or you need another way to group or slice data.
 
+## Comments
+
+    // Your comment here //
+
 ## Implicit Measures
 
 Implicit DAX functions (Applied by right-clicking) can only be used on aggregate columns, which are shown by the "E"-Symbol.
