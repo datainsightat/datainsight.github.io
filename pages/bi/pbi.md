@@ -45,7 +45,7 @@ Power BI = Power Query + Data Model + Power BI Report
 * Any sensitive data?
 * Can we rely on the data?
 
-# (M-Code)[https://docs.microsoft.com/en-us/powerquery-m/]
+# [M-Code](https://docs.microsoft.com/en-us/powerquery-m/)
 
 Define Source > Navigate to Source Details > Name each change based on last step > Repeat until done
 
@@ -135,8 +135,9 @@ An item is related to multiple categories. Leverages bi-directional filters. Cau
 Report pane reflects data in model, plus the filters applied. Filter pane applies filters for a visual, an entire page or all report pages.
 
 ![PBI Filters](../img/pbi_filters_1.jpg)
+ 
+# Write Data from BPI to SQL
 
-# (DAX (Data Analysis Expressions))[https://docs.microsoft.com/en-us/dax/]
+https://www.youtube.com/watch?v=WgIhsF7kEjI
 
-Implicit DAX functions (Applied by right-clicking) can only be used on aggregate columns, which are shown by the "E"-Symbol.
-
+https://www.youtube.com/watch?v=uPHwjPRnRwE
