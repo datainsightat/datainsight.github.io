@@ -74,3 +74,7 @@ Temporary relationship just for that measure. Often used with an inactive relati
  
     switch(Expression,Value1,Result1,...,[Else])
     State Grouping = switch('Customer Data'[State],"Texas","Growth Market","New York","Established Market","Deprioritized Market")
+
+## Compound Measures
+    
+    [New Measure] := <Existing measures(s) + additional logic>
