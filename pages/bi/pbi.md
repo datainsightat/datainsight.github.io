@@ -54,9 +54,9 @@ Power BI = Power Query + Data Model + Power BI Report
 
 New Source > Blank Query
 
-    = Date.StartofYear(List.Min(#"Sales Transactions"[Date]))
+    = Date.StartOfYear(List.Min(#"Sales Transactions"[Date]))
     
-    = Date.EndofYear(List.Max(#"Sales Transactions"[Date]))
+    = Date.EndOfYear(List.Max(#"Sales Transactions"[Date]))
     
 rename Queries "Start" and "End".
 
