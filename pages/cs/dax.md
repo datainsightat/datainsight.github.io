@@ -37,6 +37,7 @@ Use Quick Measures to learn DAX syntax.
 
 * Iterates across individual rows
 * Sums the output of your function, row by row
+<a/>
 
     = SumX('Table',<Expression>)
  
