@@ -96,13 +96,13 @@ Check, if a merged table is possible for the requirement.
 
 An item is related to multiple categories. Leverages bi-directional filters. Causes unpredictable results.
 
-# Filters and Visuals
+## Filters and Visuals
 
 Report pane reflects data in model, plus the filters applied. Filter pane applies filters for a visual, an entire page or all report pages.
 
 ![PBI Filters](../img/pbi_filters_1.jpg)
 
-# Two Fact Tables
+## Two Fact Tables
     
 If on of the fact tables has as different level of granularity, a many-to-many relation might occur. To avoid suach a relation, use a Bridge table. Fact Table High Granularity < many-to-one < Dimension 1 with additional column for lower granularity > many-to-one > Bridge > one-to-many > Fact Table Low Granularity
     
@@ -114,11 +114,21 @@ Use the dax function USERELATIONSHIP to express to which of the many date column
 
 Another option is to create new date tables for each date column.
 
-# Disconnected Tables
+## Disconnected Tables
 
 Table is not related to fact table, like a "What-if" Parameter.
 
     New Forecast = 'What-if'[Forecast Adjust Value] * sum('Forecast'[forecast QTY Sales])
+
+# Visualization
+
+## Chart Types
+
+### Bar Charts
+![Bar Charts](../img/pbi_3.jpg)
+
+### Line Charts
+![Line Charts](../img/pbi_4.jpg)
 
 # Write Data from BPI to SQL
 
