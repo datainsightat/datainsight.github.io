@@ -122,6 +122,44 @@ Table is not related to fact table, like a "What-if" Parameter.
 
 # Visualization
 
+## Design principles.
+
+![Bar Charts](../img/pbi_5.jpg)
+
+![Bad Good](../img/pbi_14.jpg)
+
+### Shape
+
+![Shape](../img/pbi_6.jpg)
+
+### Color
+
+![Color](../img/pbi_7.jpg)
+
+### Grouping
+
+![Grouping](../img/pbi_8.jpg)
+
+### Space
+
+![Space](../img/pbi_9.jpg)
+
+### Border
+
+![Border](../img/pbi_10.jpg)
+
+### Alignment
+
+![Alignment](../img/pbi_11.jpg)
+
+### Size
+
+![Size](../img/pbi_12.jpg)
+
+### Order
+
+![Order](../img/pbi_13.jpg)
+
 ## Chart Types
 
 ### Bar Charts
