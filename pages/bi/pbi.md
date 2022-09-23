@@ -128,37 +128,10 @@ Table is not related to fact table, like a "What-if" Parameter.
 
 ![Bad Good](../img/pbi_14.jpg)
 
-### Shape
-
-![Shape](../img/pbi_6.jpg)
-
-### Color
-
-![Color](../img/pbi_7.jpg)
-
-### Grouping
-
-![Grouping](../img/pbi_8.jpg)
-
-### Space
-
-![Space](../img/pbi_9.jpg)
-
-### Border
-
-![Border](../img/pbi_10.jpg)
-
-### Alignment
-
-![Alignment](../img/pbi_11.jpg)
-
-### Size
-
-![Size](../img/pbi_12.jpg)
-
-### Order
-
-![Order](../img/pbi_13.jpg)
+|A|B|C|D|
+|-|-|-|-|
+|![Shape](../img/pbi_6.jpg)|![Color](../img/pbi_7.jpg)|![Grouping](../img/pbi_8.jpg)|![Space](../img/pbi_9.jpg)|
+|![Border](../img/pbi_10.jpg)|![Alignment](../img/pbi_11.jpg)|![Size](../img/pbi_12.jpg)|![Order](../img/pbi_13.jpg)|
 
 ## Chart Types
 
