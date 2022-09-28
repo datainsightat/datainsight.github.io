@@ -146,3 +146,16 @@ Table is not related to fact table, like a "What-if" Parameter.
 https://www.youtube.com/watch?v=WgIhsF7kEjI
 
 https://www.youtube.com/watch?v=uPHwjPRnRwE
+
+# Data Analytics
+
+## Analytics Process
+
+|Stage|Description|Example|
+|-|-|-|
+|Define|Problem Statement|We need to prepare for the challenges of an aging population|
+|Construct|Research Topic|Which countries age the fastest?|
+|Retrieve|Access Data Sources|Census data, population statistics, economic data|
+|Cleaning|Clean and Organize the Data||
+|Conclusion|Take Measurements, make Conclusion||
+
