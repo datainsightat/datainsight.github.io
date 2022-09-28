@@ -1,5 +1,7 @@
 # [M-Code](https://docs.microsoft.com/en-us/powerquery-m/)
 
+![Overview](../../imgs/pbi_15.jpg)
+
 Define Source > Navigate to Source Details > Name each change based on last step > Repeat until done
 
     let
