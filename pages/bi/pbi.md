@@ -25,6 +25,20 @@ Power BI = Power Query + Data Model + Power BI Report
 * Avoid versioning of report
 * Access to dataset, data flow or data model
 
+# M vs DAX
+
+|M|Both|DAX|
+|-|-|-|
+|Data Connections|Calculated Columns|Calculated Measures|
+|Data Fromatting|Calculated Tables|Analysis|
+|Data Cleaning|Table Splitting (M)|Analysis|
+|Data Organizing|Tabel Joining (M)|Visual Filters|
+
+||M|DAX|
+|-|-|-|
+|Pro|Evaluation at refresh|Flexibility with measures and filters|
+|Con|No measures|Can slow down data model|
+
 # Data Model
 
 ## Components
