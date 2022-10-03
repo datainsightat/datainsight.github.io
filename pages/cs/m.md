@@ -1,12 +1,12 @@
 # [M-Code](https://learn.microsoft.com/en-us/powerquery-m/)
 
-## Overview
+# Overview
 
 Aid the cleaning and formating of data.
 
 ![Overview](../img/pbi_15.jpg)
 
-## Syntax
+# Syntax
 
 Define Source > Navigate to Source Details > Name each change based on last step > Repeat until done
 
@@ -101,4 +101,54 @@ Format data to define new columns, or aggregate values of columns.
 * List.Numberns({0..100})
 * List.Dates(#date(2021,6,1),100,#duration(1,0,0,0)})
 </a>
+
+# Examples
+
+## Duration to Hours
+
+    = Table.AddColumn(#"Changed Type", "Duration Hours", 
+    each Duration.TotalHours(#duration([Duration],0,0,0)))
+    
+## Real Time Duration Hours
+
+    = Table.AddColumn(#"Added Custom", "Real Time Duration Hours", 
+    each Duration.TotalHours(Date.From(DateTime.LocalNow())-[Date 1]))
+    
+## Identify Longer Durations
+
+    = Table.AddColumn(#"Added Custom1", "Duration Check", 
+    each if [Real Time Duration Hours] > 800 then "Long" else "Short")
+    
+## Remove White Space
+
+    #"Added Custom3" = Table.AddColumn(#"Added Custom2", "Category 2", 
+     each Text.Trim([Category])),
+
+    #"Reordered Columns" = Table.ReorderColumns(#"Added Custom3",
+    {"Date 1", "Date 2", "Category", "Category 2", "Serial Number", 
+    "Duration", "Duration Hours", "Real Time Duration Hours", "Duration 
+     Check"}),
+
+    #"Removed Columns" = Table.RemoveColumns(#"Reordered Columns",
+    {"Category"}),
+
+    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",
+    {{"Category 2", "Category"}})
+
+## Convert Setial Numbers to Text With Leading Zeros
+
+    #"Added Custom4" = Table.AddColumn(#"Renamed Columns", 
+     "Serial Number 2", each Text.PadStart(Text.From
+     ([Serial Number]),7,"0")),
+
+    #"Reordered Columns1" = Table.ReorderColumns(#"Added Custom4",
+    {"Date 1", "Date 2", "Category", "Serial Number", 
+    "Serial Number 2", "Duration", "Duration Hours", 
+    "Real Time Duration Hours", "Duration Check"}),
+
+    #"Removed Columns1" = Table.RemoveColumns(#"Reordered Columns1",
+    {"Serial Number"}),
+
+    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns1",
+    {{"Serial Number 2", "Serial Number"}})
 
