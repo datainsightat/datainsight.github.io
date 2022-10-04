@@ -203,3 +203,27 @@ Temporary relationship just for that measure. Often used with an inactive relati
 ## Compound Measures
     
     [New Measure] := <Existing measures(s) + additional logic>
+    
+# Named Variables
+
+    Z Score =
+    
+    VAR x = sum('Complete Table'[Monthly Sales]),
+    
+    VAR mu = calculate(
+      average('Complete Table'[Monthly Sales]),
+        filter(allselected('Complete Table'),
+          average('Complete Table'[Monthly Sales])
+        )
+      )
+      
+    VAR sigma = 261100
+    
+    Return
+    
+    if(
+      [Top 10 Net] > 0,
+      (x - mu) / sigma,
+      ''
+    )
+    
