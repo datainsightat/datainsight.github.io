@@ -227,3 +227,13 @@ Temporary relationship just for that measure. Often used with an inactive relati
       ''
     )
     
+# Calculated Tables
+
+Like SQL views
+
+    Bonus Summary Table = 
+        SUMMARIZE('Employee Listing',
+               'Employee Listing'[Location], 
+               "Sum of Bonuses",
+                SUM('Employee Listing'[Bonus])
+        )
