@@ -155,6 +155,15 @@ Table is not related to fact table, like a "What-if" Parameter.
 ### Line Charts
 ![Line Charts](../img/pbi_4.jpg)
 
+## Advanced Data Visualization
+
+* Advanced DAX
+* Advanced Insight
+* Advanded Customization
+<a/>
+
+### 
+
 # Write Data from BPI to SQL
 
 https://www.youtube.com/watch?v=WgIhsF7kEjI
