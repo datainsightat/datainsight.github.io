@@ -5,6 +5,7 @@ How to choose a storage solution?
 ![Access Patterns](../../img/gcp_storage_patterns.png)  
 ![Storage Tree](../../img/gcp_storage_patterns2.png)
 ![Specifications](../../img/gcp_storage_01.jpg)
+![Applications](../../img/gcp_storage_04.jpg)
 
 ## [Cloud Storage](cloudstorage.md)
 
@@ -14,6 +15,9 @@ How to choose a storage solution?
 * Data encryption in transit by default from Google endpoint
 * Online and offline import services are available
 * Tightly integrated with other services
+<a/>
+
+* Immutable blobs
 <a/>
 
 ![Access Classes](../../img/gcp_storage_03.jpg)
@@ -45,6 +49,10 @@ How to choose a storage solution?
   * Same Database as Google Core Services
 <a/>
 
+* Does not support SQL Queries
+* No Muli-row transactions
+<a/>
+
 ### When to choose Cloud BigTable
 
 * Replicated storage
@@ -64,12 +72,19 @@ How to choose a storage solution?
 
 ## Cloud SQL
 
+Database as a service.
+
 * MySQL and PostgreSQL
 * Automatic replication
 * Managed backups
-* Vertical scaling
-* Horizontal scaling
+* Vertical scaling (read and write)
+* Horizontal scaling (read)
 * Google security
+* Integrated in GCP services
+<a/>
+
+* Full SQL
+* No horizontal scalability
 <a/>
 
 ## Cloud Spanner
@@ -77,14 +92,20 @@ How to choose a storage solution?
 * Horizontally scalable RDBMS
 * Automatic replication
 * Strong global consistency
+* SQL Queries
 * Managed instances with high availability
-* SQL
+* Outgrown relational database, global data, consolidate database
+* Financial applications, inventory applications
 <a/>
 
 * Database >2TB
+* Full SQL
+* Horizontal scalability
 <a/>
 
 ## Cloud Datastore
+
+Horizontally scalable NoSQL DB.
 
 * NoSQL designed for aplication backends
 * Fully managed
@@ -96,6 +117,11 @@ How to choose a storage solution?
 * Local development tools
 * Includes a free daily quota
 * Access from anywhere though a  [RESTful](https://cloud.google.com/datastore/docs/apis) interface
+<a/>
+
+* Unstructured objects
+* Transactions
+* SQL-like queries
 <a/>
 
 
