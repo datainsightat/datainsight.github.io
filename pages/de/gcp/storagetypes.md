@@ -4,17 +4,20 @@ How to choose a storage solution?
 
 ![Access Patterns](../../img/gcp_storage_patterns.png)  
 ![Storage Tree](../../img/gcp_storage_patterns2.png)
-![Specifications](../../i,g/gcp_storage_1.jpg)
-![Usecases](../../i,g/gcp_storage_2.jpg)
+![Specifications](../../img/gcp_storage_01.jpg)
+![Usecases](../../img/gcp_storage_02.jpg)
 
-## Cloud Storage
+## [Cloud Storage](cloudstorage.md)
 
 * High performance, internet-scale
 * Simple administration (Does not reqire capacity management)
 * Data encryption at rest
 * Data encryption in transit by default from Google endpoint
 * Online and offline import services are available
+* Tightly integrated with other services
 <a/>
+
+![Access Classes](![Usecases](../../img/gcp_storage_03.jpg)
 
 |Bucket attributes|Bucket contents|
 |-|-|
@@ -27,7 +30,7 @@ How to choose a storage solution?
 
 ### Get Data into Cloud Storage
 
-* Online Transfer (Self-managed, Command-line tools)
+* Online Transfer (Self-managed, Command-line tools like gsutil)
 * Storage Transfer Service (Scheduled batch transfers)
 * Transfer Appliance (Rackable applicances)
 <a/>
