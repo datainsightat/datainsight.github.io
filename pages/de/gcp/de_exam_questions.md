@@ -650,3 +650,26 @@ B is correct. You need to copy/store the query results in a separate dataset and
  
 B is correct because there is no need to export; you can use the existing YouTube data source. Country Code is a dimension because it's a string and should be displayed as such, that is, showing all countries, insted of filtering. A is not correct because you cannot produce a summazized report that meets you business requirements using the options listed. C and D are not correct because you do not need to export data from YouTube to Cloud Storage, you can simply use the exising YouTube data source.
  
+True or false: Cloud Storage is well suited to providing the root file system of a Linux virtual machine
+
+1. X False
+2. True
+
+> A is correct. Cloud Storage is object storage rather than file storage. Compute Engine virtual machines use Persistent Disk storage to contain their file systems.
+
+Your Cloud Storage objects live in buckets. Which of these characterisctics do you define on a per-bucket basis?
+
+1. An encryptino-at-rest setting
+2. X A geographic location
+3. X A default storage class
+4. X A globally-unique name
+5. A default file type for the objects in the bucket
+
+Why would a customer consider the Coldline storage class ?
+
+1. To use the Coldline Storage API
+2. To save money on sotring frequently accessed data
+3. To improve security
+4. X To save money on storing infrequently accessed data
+
+> D is correct. Data stored in Coldline is billed at a low monthly storage rate, although a fee is assessed on retrievals.
