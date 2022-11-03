@@ -673,3 +673,70 @@ Why would a customer consider the Coldline storage class ?
 4. X To save money on storing infrequently accessed data
 
 > D is correct. Data stored in Coldline is billed at a low monthly storage rate, although a fee is assessed on retrievals.
+
+<hr>
+ 
+Each table in NoSQL databases such as Cloud Bigtable has a single schema that is enforced vy the database engine itself.
+ 
+1. True
+2. X False
+ 
+> B is correct
+ 
+Some developers think of Cloud  Bigtable as a persitent hashtable. What does that mean?
+ 
+1. Each item in the database constists of exactly the same fields, and can be looked up based on a variety of keys.
+2. X Each item in the database can be sparsely populated, and is looked up with a single key.
+ 
+> B is correct.
+ 
+<hr>
+ 
+Which database service presents a MySQL or PostgreSQL interface to clients
+ 
+1. Cloud Spanner
+2. X Cloud SQL
+
+> B is correct.
+
+<hr>
+ 
+Which database service offers transactional consistency at a global scale?
+ 
+1. X Cloud Spanner
+2. Cloud SQL
+ 
+> A is correct
+ 
+<hr>
+ 
+Which database service can scale to hiher database sizes?
+ 
+1. X Cloud Spanner
+2. Cloud SQL
+
+> B is correct
+ 
+<hr>
+ 
+Cloud Datastore databases can span App Engine and Compute Engine applications
+ 
+1. X True
+2. False
+ 
+> A is True
+ 
+<hr>
+ 
+How are Cloud Datastore and Cloud Bigtable alike? Choose all that are correct
+ 
+1. They both have a free daily quota
+2. X The are both NoSQL databases.
+3. They both offer SQL-like queries.
+4. They are both highly scaleable.
+ 
+> B and C are true. 
+ 
+<hr>
+ 
+ 
