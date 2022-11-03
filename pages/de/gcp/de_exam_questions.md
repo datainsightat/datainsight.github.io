@@ -739,4 +739,91 @@ How are Cloud Datastore and Cloud Bigtable alike? Choose all that are correct
  
 <hr>
  
- 
+You are building a small application. If possible, you'd like this aplication's data storage to be at no additional charge. Which service has a free daily quota, separate from any fee trials?
+
+1. Cloud Spanner
+2. Cloud SQL
+3. X Cloud Datastore
+4. Bigtable
+
+> C is right
+
+<hr>
+
+Which GCP storage service is often the ingestion point for data being moved into the cloud, and is frequently the long-term storage location for data?
+
+1. Cloud Datastore
+2. Cloud Spanner
+3. X Cloud Storage
+4. Local SSD
+
+> C is right
+
+<hr>
+
+Your application needs to store data with strong transactional consistency, and you want seamless scaling up. Which storage option is the best choice for your application?
+
+1. Cloud SQL
+2. Cloud Storage
+3. Cloud Spanner
+4. Cloud Datastore
+
+> C is right
+
+<hr>
+
+Which statement is true about objects in Cloud Storage?
+
+1. They can be edited in place
+2. They are immutable, and versioned by default
+3. X They are immutable, and new versions overwrite old unless you turn on versioning.
+4. They are immutable unless you turn on versioning.
+
+> C is right
+
+<hr>
+
+You are developing an application that transcodes large video files. Which storage option is the best choice for your application?
+
+1. Google Drive
+2. Cloud Spanner
+3. X Cloud Storage
+4. Cloud Datastore
+
+> C is right
+
+<hr>
+
+Your application needs a relational database, and it excepts to talk to MySQL. Which storage option is the best choice for your application?
+
+1. Cloud Spanner
+2. Bigtable
+3. X Cloud SQL
+4. Cloud Storage
+
+> C is right
+
+<hr>
+
+You manufacture devices with sensors and need to stream huge amounts of data from these devices to a storage option in the cloud. Which Google Cloud Platform storage option is the best choice for your application?
+
+1. Cloud Datastore
+2. BigQuery
+3. X Cloud Bigtable
+4. Cloud Spanner
+
+> C is right
+
+<hr>
+
+How do the Nearline and Coldline storage classes differ from Multi-regional and Regional? Choose all that are correct.
+
+1. Nearline and Coldline have lower durability
+2. Nearline and Coldline use a differntly-architected API
+3. X Nearline and Coldline assess lower storage fees.
+4. X Nearilne and Coldline assess additional retrieval fees.
+5. Data in Nearline and Coldline is not retrievable immediately.
+
+> C and D are correct.
+
+<hr>
