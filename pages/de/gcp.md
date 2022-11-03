@@ -17,6 +17,10 @@
 |[Datafusion](gcp/datafusion.md)||[BigTable](gcp/bigtable.md)|[Kubeflow](gcp/kubeflow.md)||
 |[Pub/Sub](gcp/pubsub.md)||[Dataproc](gcp/dataproc.md)|||
 
+## Tools
+
+* [gsutil](gcp/gsutil.md)
+
 ## [Examples](gcp/examples)
 
 ## Data Engineer Exam
