@@ -8,6 +8,7 @@
 * [Data Engineering](gcp/dataengineering.md)
 * [Data Processing](gcp/dataprocessing.md)
 * [Storage Types](gcp/storagetypes.md)
+* [Containers](gcp/containers.md)
 
 ## GCP Modules
 
