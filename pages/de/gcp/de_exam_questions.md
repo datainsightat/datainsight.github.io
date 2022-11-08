@@ -827,3 +827,43 @@ How do the Nearline and Coldline storage classes differ from Multi-regional and 
 > C and D are correct.
 
 <hr>
+
+
+What ist a Kubernetes cluster?
+
+1 X A group of machines where Kubernetes can schedule workloads
+2 group of containers that provide high availability for applications
+
+> A is correct. A Kubernetes cluster is a group of machines where Kubernetes can schedule containers in pods. The machines in the cluster are called "nodes".
+
+<hr>
+
+What is Kubernetes pod?
+
+1 A group of containers
+2 A group of nodes
+3 X A group of clusters
+
+> C is correct. In Kubernetes, a group of one or more containers is called a pod. Cotnainers in a pod are deployes together. They are started, stopped, and repolicated as a group. The simplest workload that Kubernets can deploy is pod that consists onöy of a single container.
+
+<hr>
+
+Google keeps Kubernetes Engine refreshed with successive version of Kubernetes.
+
+1 X True
+2 False
+
+> A is correct. The Kubernetes Engine team periodically performs automatic upgrades of your cluster master to newer stable versions of Kubernetes, and you can enable automatic node upgrades too.
+
+<hr>
+
+Where do the resources used to build Kubernetes Enginge clusters come from?
+
+1 X Compute Engine
+2 Bare-metal servers
+3 App Engine
+
+A is correct. Because the resources used to build Kubernetes Engine clusters come from Compute Engine, Kubernetes Engine gets to take advantage of Compute Engines's and Goodle VPC's capabilities.
+
+<hr>
+
