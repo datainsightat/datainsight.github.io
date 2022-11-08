@@ -857,7 +857,7 @@ Google keeps Kubernetes Engine refreshed with successive version of Kubernetes.
 
 <hr>
 
-Where do the resources used to build Kubernetes Enginge clusters come from?
+> Where do the resources used to build Kubernetes Enginge clusters come from?
 
 1 X Compute Engine
 2 Bare-metal servers
@@ -867,3 +867,64 @@ A is correct. Because the resources used to build Kubernetes Engine clusters com
 
 <hr>
 
+Does Goole Cloud Platform offer its own tool for building containers (other than the ordinary docker command)?
+
+1. Yes. Kubernetes Engine customers must use the GCP-provided tool.
+2. X Yes. The GCP-provided tool is an option, but customers may choose not to use it.
+3. No. All customers use the ordinary docker command.
+
+> B is correct.
+
+<hr>
+
+Google Clod Platform provides a secure, high-speed container image storage sevice for use with Kubernetes Engine.
+
+1. False
+2. X True
+
+> B is correct.
+
+<hr>
+
+In Kubernetes, what does "pod" refer to?
+
+1. A popular logging subsystem
+2. A popular management subsystem
+3. A group of clusters that work together
+4. X A group of containers that work together
+
+> D is correct.
+
+<hr>
+
+Identiy two reasons for deploying applications using containers.
+
+1. No need to allocate resources in which to run containers
+2. X Simpler to migrate workloads
+3. Tight coupling between applications and operating systems
+4. X Consistency across development, testing, productions environments
+
+> A and D are correct
+
+<hr>
+
+Kubernetes allows you to mange container clusters in multiple cloud providers
+
+1. False
+2. X True
+
+> B is correct
+
+<hr>
+
+Where do your Kubernetes Engine workloads run?
+
+1. In clusters implemented usign App Engine
+2. In clusters implemented using Cloud Functions
+3. In clusters that are built into GCP, not separately manageable
+4. X In clusters built from Compute Engine virual machines
+
+> D is correct
+
+<hr>
+Where
