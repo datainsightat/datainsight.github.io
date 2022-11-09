@@ -9,14 +9,15 @@
 * [Data Processing](gcp/dataprocessing.md)
 * [Storage Types](gcp/storagetypes.md)
 * [Containers](gcp/containers.md)
+* [Development/Monitoring](gcp/development.md)
 
 ## GCP Modules
 
-|Ingestion|Storage|Analytics|Machine Learning|Orchestration|
-|-|-|-|-|-|
-|[Dataflow](gcp/dataflow.md)|[Cloud Storage](gcp/cloudstorage.md)|[BigQuery](gcp/bigquery.md)|[AI](gcp/ai.md)|[Cloud Composer](gcp/cloudcomposer.md)|
-|[Datafusion](gcp/datafusion.md)||[BigTable](gcp/bigtable.md)|[Kubeflow](gcp/kubeflow.md)||
-|[Pub/Sub](gcp/pubsub.md)||[Dataproc](gcp/dataproc.md)|||
+|Ingestion|Storage|Analytics|Machine Learning|Orchestration|Serving|
+|-|-|-|-|-|-|
+|[Dataflow](gcp/dataflow.md)|[Cloud Storage](gcp/cloudstorage.md)|[BigQuery](gcp/bigquery.md)|[AI](gcp/ai.md)|[Cloud Composer](gcp/cloudcomposer.md)|[AppEngine](gcp/appengine.md)|
+|[Datafusion](gcp/datafusion.md)||[BigTable](gcp/bigtable.md)|[Kubeflow](gcp/kubeflow.md)|||
+|[Pub/Sub](gcp/pubsub.md)||[Dataproc](gcp/dataproc.md)||||
 
 ## Tools
 
