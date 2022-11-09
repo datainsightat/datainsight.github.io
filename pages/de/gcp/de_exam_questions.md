@@ -1028,6 +1028,80 @@ Name 3 advantages of using the App Engine Flexible Environment over App Engine S
 > A, B and D are correct
  
 <hr>
- 
 
+Why would a developer choose to store source code in Cloud Source Repositories?
+ 
+1. X To keep code private to a GCP project
+2. To have total control over the hosting infrastructre
+3. X to reduce work
+ 
+> A and C are correct
+ 
+<hr>
+ 
+What is the advantage of putting event-driven components of your application into Cloud Functions?
+ 
+1. Cloud Functions means that processing always happens free of charge
+2. X Cloud Functions handles scaling these components seamlessly.
+ 
+> B is correct
+ 
+<hr>
+ 
+Why might a GCP customer choose to use Deployment Mangager?
+ 
+1. Deployment Manager enforces maximum resource utilization and spending limits on your GCP resources.
+2. Deployment Manager is an infrastructure management system for Kubernetes pods
+3. X Deployment Manager is an infrastructure management system for GCP resources
+4. Deployment Manager is a version control system for your GCP infrastructure layout
+ 
+> C is correct
+ 
+<hr>
+ 
+You want to define alerts on your GCP resources, such as when health checks fail. Which is the best GCP product to use?
+ 
+1. Strackdriver Trace
+2. Deployment Manager
+3. Cloud Functions
+4. Stackdriver Monitoring
+5. Stackdriver Debugger
+
+> D is correct
+ 
+<hr>
+ 
+Why might a GCP customer choose to use Cloud Source Repositories?
+ 
+1. They want to host and manage their own git instance, and they don't want to integrate with IAM permissions.
+2. They don't want to host their own git instance, and they don't want to integrate with IAM permissions.
+3. They don't want to host their own git instance, and they want to integrate IAM permissions.
+4. They want to host and manage their own git instance, and they want to integrate with IAM permissions.
+
+> C is correct
+ 
+<hr>
+ 
+Which statements are true about Strackdriver Logging? Choose all that are true
+ 
+1. Stackdriver Logging lets you define uptime checks.
+2. Stackdriver Logging requires that you store your logs in BigQuery or Cloud Storage
+3. Stackdriver Logging requires the use of a third-party monitoring agent.
+4. Stackdriver Logging lets you view logs from your applications, and filter and search for them.
+5. Stackdriver Logging lets you define matrics based on your logs.
+ 
+> D and E are correct
+ 
+<hr>
+ 
+Why might a GCP customer choose to use Cloud Functions?
+ 
+1. Their application has a legacy monolithic structure that they want to break apart into microservices with little developer effort.
+2. Cloud Functions is a free service for hosting compute operations
+3. Their application contains event-driven code that they don't want to have to provision compute resources for.
+4. Cloud Functions is the primary way to run Node.js applications in GCP.
+ 
+> C is correct
+ 
+<hr>
 
