@@ -927,4 +927,107 @@ Where do your Kubernetes Engine workloads run?
 > D is correct
 
 <hr>
-Where
+ 
+App Engine is a better choice for a web application than for long-running batch processing
+ 
+1. X True
+2. False
+ 
+> A is correct
+ 
+<hr>
+ 
+App Engine just runs applications; it doesn't offer any services to the applications it runs
+ 
+1. True
+2. X False
+ 
+> B is correct
+ 
+<hr>
+ 
+Which of these cirteeria would make you choose App Engine Flexible Environment, rather than Standard Environment, for your application? Choose all that are corrext
+ 
+1. X Ability to ssh in
+2. Daily free usage quota
+3. X Wider range of choices for application language
+4. Finer-grained scaling
+ 
+> A and C are correact
+ 
+<hr>
+ 
+App Engine Flexible Environment applications let their owners control the gropgraphic region where they run.
+ 
+1. False
+2. X True
+ 
+> B is correct
+ 
+<hr>
+ 
+You want to do businesss analytics and billing on a customer-facing API. Which GCP service should you choose?
+ 
+ 1. X Apigee Edge
+ 2. Cloud Endpoints
+ 
+ > A is correct
+ 
+ <hr>
+ 
+Name 3 advantages of using the App Engine Standard Environment over App Engine Flexible.
+ 
+1. X Google provides and maintains runtime binaries
+2. X Billing can drop to zero if your application is idle
+3. You can install third-party binaries
+4. You can choose any programming language
+5. X Scaling is finer grained
+ 
+> A, B and C are correct
+ 
+<hr>
+ 
+You want to support developers who are building services in GCP through API logging and monitoring. Which GCP service should you choose?
+ 
+1. X Cloud Endpoints
+2. Apigee Edge
+ 
+> A is correct
+ 
+<hr>
+ 
+Which statements are true about App engine?
+ 
+1. X App Engine manages the hardware and networkign infrastructure required to run your code
+2. X It is possible for an App Engine application's daily billing to drop to zero.
+3. Developres who write for App Engine fo not need to code their applications in any particular way to use the services.
+4. App Engine requires you to supply or code your own application load balancing and logging services
+5. App Engine charges you based on the resources you pre-allocate rather than based on the resourcs you use.
+ 
+> A and B are correct
+ 
+<hr>
+
+You want to gradually decompose a pre-existing monolithic application, not implemented in GCP, into microservices. Which GCP service should you choose?
+ 
+1. X Apigeee Edge
+2. Cloud Endpoints
+ 
+> A is correct
+ 
+<hr>
+ 
+Name 3 advantages of using the App Engine Flexible Environment over App Engine Standard.
+ 
+1. X You can SSH in to your application
+2. X Your application can write to local disk
+3. Your application can execute code in background threads.
+4. X You can install third-party binaries
+5. Google provices automatic in-place security patches
+ 
+> A, B and D are correct
+ 
+<hr>
+ 
+
+
