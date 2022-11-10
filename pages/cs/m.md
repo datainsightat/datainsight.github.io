@@ -152,3 +152,50 @@ Format data to define new columns, or aggregate values of columns.
     #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns1",
     {{"Serial Number 2", "Serial Number"}})
 
+## Add Missing Dates
+
+Basis is a list with sparse dates. We need to fill the missing dates with the values of the sparese list.
+
+![Sparse List](../img/gcp_m_demo_01.jpg)
+
+### Group Sparse List by Date
+
+Insert step "Grouped Rows"
+
+![Sparse List](../img/gcp_m_demo_02.jpg)
+
+        #"Grouped Rows" = Table.Group(#"Renamed Columns", {"TAG"}, {{"All rows", each _, type table [Custom=nullable text, TAG=nullable date, Column1=nullable text, Value=number]}}),
+
+### Create Table of missing Dates
+
+Insert Step below "Grouped Rows". The table starts with the end of the week of the lowest date and creates dates in 7 day steps. Name this step "ListMissingDates"
+
+        ListMissingDates = 
+            Table.RenameColumns(
+                Table.FromList(
+                    List.Difference(
+                        List.Dates(
+                            Date.EndOfWeek(List.Min(#"Grouped Rows"[TAG])),
+                            Duration.TotalDays(List.Max(#"Grouped Rows"[TAG])-List.Min(#"Grouped Rows"[TAG]))/7+53, 
+                            #duration(7,0,0,0) 
+                        ), 
+                    #"Grouped Rows"[TAG]),     
+                Splitter.SplitByNothing(),null, null, ExtraValues.Error), 
+            {{"Column1", "TAG"}}),
+        
+### Merge Sparse List with missing Dates
+
+Merge both tables, sort by date and fill missing rows
+
+        Custom1 = Table.Combine({#"Grouped Rows", ListMissingDates}),
+        #"Sorted Rows" = Table.Sort(Custom1,{{"TAG", Order.Ascending}}),
+        #"Filled Down" = Table.FillDown(#"Sorted Rows",{"All rows"}),
+        
+![Sparse List](../img/gcp_m_demo_03.jpg)
+![Sparse List](../img/gcp_m_demo_04.jpg)
+
+### Expand Tables
+
+        #"Expanded All rows" = Table.ExpandTableColumn(#"Filled Down", "All rows", {"Custom", "Column1", "Value"}, {"Custom", "Column1", "Value"}),
+        
+![Sparse List](../img/gcp_m_demo_05.jpg)
