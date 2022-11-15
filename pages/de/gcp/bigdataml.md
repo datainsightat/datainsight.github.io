@@ -1,5 +1,7 @@
 # Big Data and Maschine Learning in the Cloud
 
+![ml](../../img/gcp_ml_01.jpg)
+
 ## Cloud Dataproc is managed Hadoop
 
 * Fast, easy, managed wa to run Hadoop and Spark/hive/Pig on GCP
