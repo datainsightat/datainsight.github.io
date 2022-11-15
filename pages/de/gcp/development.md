@@ -30,3 +30,11 @@ Signals from infrastructue, containers ...
 * Error Reporting
 * Debugging
 </a>
+
+## Load Balancing
+
+![Load Balancing](./../img/gcp_load_01.md)
+
+## Interconnection
+
+![Interconnection](./../img/gcp_connect_01.md)
