@@ -2,6 +2,10 @@
 
 ![Kubernetes Engine](../../img/gcp_containers_01.jpg)
 
+## Compute Options
+
+![Compute Options](../../img/gcp_containers_12.jpg)
+
 ## IaaS
 
 Share compute resources by virtualizing hardware. Smallest entity is a whole server. Full control of hardware, but hard to scale.
