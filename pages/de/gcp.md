@@ -10,6 +10,7 @@
 * [Storage Types](gcp/storagetypes.md)
 * [Containers](gcp/containers.md)
 * [Development/Monitoring](gcp/development.md)
+* [BigData/Machine Learning](gcp/bigdataml.md)
 
 ## GCP Modules
 
