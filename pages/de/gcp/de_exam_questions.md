@@ -1105,3 +1105,76 @@ Why might a GCP customer choose to use Cloud Functions?
  
 <hr>
 
+Name three use cases for Cloud Pub/Sub
+
+1. Storage of binary web content
+2. X Analyzing streaming data
+3. Executing ad-hoc SQL queries
+4. X Decoupling systems
+5. X Internet of Things applications
+
+> B, C and D are correct
+
+<hr>
+
+Name three use cases for the Google Cloud Machine Learning Platform
+
+1. Data preparation
+2. X Fraud detection
+3. X Content personalization
+4. Query architecture
+5. X Sentiment analysis
+
+> B, C and E are correct
+
+<hr>
+
+Name two use cases for Google Cloud Dataflow
+
+1. X Extract, Transform and Load (ETL)
+2. Reseverd compute instances
+3. X Orchestration
+4. Manual resource management
+
+> A and C are correct
+
+<hr>
+
+What is Tensorflow
+
+1. X An open-source software library that's useful for building machine learning applications
+2. A managed service for building data pipelines
+3. A managed service for building machine learning models
+4. A hardware device designed to accelerate machine learning workloads.
+
+> A is correct
+
+<hr>
+
+Which statements are true about BigQuery?
+
+1. Once in BigQuery, data is not accessible from other GCP services
+2. X BigQuery lets you run fast SQL queries agains large databases.
+3. BigQuery requires that your provision database instances ahead of use
+4. BigQuery is a good choice for online tranaction processing
+5. X BigQuery is a good choice for data anayltics warehousing.
+
+> B and E are correct
+
+What does the Cloud Natural Language API do?
+
+1. X It analyzes text to reveal its structure and meaning
+2. It performs sentiment analysis on audio and video content.
+3. It extracts text in various languages from images
+4. It translates arbitrary strings into any supportet language
+
+> A is correct
+
+Name two use cases for Google Cloud Dataproc
+
+1. Migrate on-premises Hasoop jobs to the cloud
+2. Manage data that arrices in realtime
+3. Manage datasets of unpredictable size
+4. Data mining and analysis in datasets of known size
+
+> A and D are correct
