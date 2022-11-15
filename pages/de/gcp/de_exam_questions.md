@@ -1010,7 +1010,7 @@ Which statements are true about App engine?
 
 You want to gradually decompose a pre-existing monolithic application, not implemented in GCP, into microservices. Which GCP service should you choose?
  
-1. X Apigeee Edge
+1. X Apigee Edge
 2. Cloud Endpoints
  
 > A is correct
@@ -1160,6 +1160,8 @@ Which statements are true about BigQuery?
 5. X BigQuery is a good choice for data anayltics warehousing.
 
 > B and E are correct
+ 
+ <hr>
 
 What does the Cloud Natural Language API do?
 
@@ -1170,6 +1172,8 @@ What does the Cloud Natural Language API do?
 
 > A is correct
 
+<hr>
+ 
 Name two use cases for Google Cloud Dataproc
 
 1. Migrate on-premises Hasoop jobs to the cloud
@@ -1178,3 +1182,117 @@ Name two use cases for Google Cloud Dataproc
 4. Data mining and analysis in datasets of known size
 
 > A and D are correct
+
+<hr>
+ 
+Which of these storage needs is best addressed ny Cloud Spanner?
+ 
+1. A relational database with SQL queries and horizontal scalability
+2. Structured objects, with lookups based on a single key
+3. Structured objects, with transactions and SQL-like queries
+4. Immutable binary objects
+ 
+> A is correct
+ 
+<hr>
+ 
+For what kind of traffic would the regional load balancer be the first choice?
+ 
+1. UDP traffic
+2. TCL/SSL traffic on popular well-known port numbers
+3. TCP traffic (non-SSL) on popular well-known port numbers
+4. TCP traffic on arbitrary port numbers
+ 
+> A and D are correct
+ 
+<hr>
+ 
+Which compute service lets customers focus on their applications, leaving most infrastructure and procisioning to Google, while still offer offering various choices af runtime?
+ 
+1. X App Engine
+2. Kubernetes Engine
+3. Compute Engine
+4. Cloud Functions
+
+> A is correct
+ 
+<hr>
+ 
+Which compute service lets customers supply chunks of code, which get run on-demand in response to events, on infrastructure wholly managed by Google?
+ 
+1. X Cloud Functions
+2. Kubernets Engine
+3. Compute Engine
+4. App Engine
+ 
+> A is correct
+ 
+<hr>
+ 
+Which of these storage needs is best addressed by Cloud Bigtable?
+ 
+1. Structured objects, with lookups based on a single key
+2. Immutable binary objects
+3. Structured objects, with transactions and SQL-like queries
+4. X A relational database with SQL queries and horizontal scalability
+ 
+> D is correct
+ 
+<hr>
+ 
+Which compute service lets customers run virtual machines that run on Google's infrastructure
+ 
+1. X Compute Engine
+2. App Engine
+3. Kubernetes Engine
+4. Cloud Functions
+ 
+> C is correct
+ 
+<hr>
+ 
+Choose a simple way to let a VPN into your Google VPC continue to work in spite of routing changes
+ 
+1. X Cloud Router
+2. Direct Peering
+3. Carrier Peering
+4. Dedicated Interconnect
+ 
+> A is correct
+ 
+<hr>
+ 
+Which compute service lets customers deploy their applications in containers that run in clusters on Google's infrastructure?
+ 
+1. X Kubernetes Engine
+2. App Engine
+3. Compute Engine
+4. Cloud Functions
+ 
+> A is correct
+ 
+<hr>
+ 
+Which of these storage needs is best addressed by Cloud Datastore?
+ 
+1. X Structured objects, with transactions and SQL-like queries
+2. Immutable binary objects
+3. Structzured objects, with lookups based on a single key
+4. A relational database with SQL queries and horizontal scalability
+ 
+> A is correct
+ 
+<hr>
+ 
+Which of these storage needs is best addressed by Cloud Storage?
+ 
+ 
+1. Structured objects, with transactions and SQL-like queries
+2. X Immutable binary objects
+3. Structzured objects, with lookups based on a single key
+4. A relational database with SQL queries and horizontal scalability
+ 
+> B is correct
+ 
+<hr>
+ 
