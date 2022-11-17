@@ -173,5 +173,23 @@ You want to improve the performance of this data read. What should you do?
 ? Use .fromQuery operation to read specific fields from the table.
 > ? Call a transform that returns TableRow objects, where each element in the PCollection represents a single row in the table.
 
+<hr>
+
+#32 Your company is running their first dynamic campaign, serving different offers by analyzing real-time data during the holiday season. The data scientists are collecting terabytes of data that rapidly grows every hour during the 30-day campaign. They are using Google Cloud dataflow to preprocess the data and collecct the features (signals) data that is needed for the machine learning model in Google Cloud Bigtable. The team is observing suboptimal performance with reads and writes of their initial load of 10TB of data. They want to imorove this performance while mainimizing cost. What should they do?.
+
+* Redefine the schema by evenly distributing reads and writes across the row space of the table.
 
 <hr>
+
+#33 Your software uses a simple JSON format for all messages. These messags are published to Google Cloud Pub/Sub, the processed with Google Cloud Dataflow to create a real-time dashboard for the CFO. Durign testing, you notice that some messages are missing in the dashobaord. You check the logs, and all messages are being published to Cloud Pub/Sub successfully. What shoudl you do next?
+
+* Use Google Stackdriver Monitoring on Cloud Pub/Sub to find the missing messages.
+
+<hr>
+
+#46 You work for an economic consulting firm that helps companies identify economic trends as they happen. As part of your analysis, you use Google BigQuery to correlate customer data with the average prices of the 100 most common goods sold, including bread, gasoline, milk and others. The average prices of these goods are updated every 30 minuts. You want to make sure this data stays op to date so you can combine it with other data in BigQuery as cheaply as possible. What should you do?
+
+* Store and update the data in a regional Google Cloud Storage bucket and crate a federated data source in BigQuery
+
+<hr>
+
