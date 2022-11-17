@@ -94,3 +94,84 @@ You used a small amount of data to build a machine learning model that gives you
 
 <hr>
 
+#8 You are building new real-time data warehouse for your company and will use Google BigQuery streaming inserts. There is no guarantee that data will only be sent in once but you do have a unique ID for each row of data and an event timestamp. You want to ensure that duplicates are not included while interactively quering data. Which query type should you use?
+
+> Use the ROW_NUMBER window function with PARTITION by unique ID along with WHERE row equals 1.
+
+<hr>
+
+#10 Your company is in a highly regulated industry. One of your requirements is to ensure individual users have access only to the minimum amount of information required to do their jobs. You want to enforce this requirement with Google BigQuery. Which three approaches can you take?
+
+> Restrict access to tables by role
+> Restrict BigQuery API access to approved users
+> Use Google Stackdriver Audit Logging to determine policy violations
+
+#11 You are designing a basket abandoment system for an ecommerce company. The system will send a message to a user based on these rules: No interaction by the user on the site for 1 hour. Has added more than $30 worth of products to the basket. Has not completed a transaction. You use Google Cloud Dataflow to process the data and decide if a message should be sent. How should you design the pipeline?
+
+> Use a session window with a gap time duration of 60 minutes
+
+<hr>
+
+#12 You company handles data processing for a number of different clinets. Each clinent prefers to use their own suite of analytics tools, with some allowing direct query access via Google BigQuery. You need to secure the data so that clients cannot see each other's data. You want to ensure appropriate access to the data. Which steps should you take?
+
+> Load data into different dataset for each client
+> Restrict a client's dataset to approved users
+> Use the appropriate identity and access management (IAM) roles for each client's users
+
+#13 You want to process payment transactions in a point-of-sale application that will run on Google Cloud Platform. You user base could grow expnentially, but you do not want to manage infrastructrure scaling. Which Google database sevice should you use.
+
+> Cloud Datastore
+
+<hr>
+
+#14 You wna to use a database of tissue samles to classify future tissue samples as either normal or mutated. You are evaluating an unsupervised anomaly detection method for classifying the tissue samples. Which two characterisics support this mehod?
+
+> ? There are very few occurances of mutation relative to normal samples.
+? There are roughly equal occurrences of both normal and mutated samples in the database.
+> ? You expect future mutations to have different features from the mutated samples in the database
+? You expect future mutations to have similar features to the mutated samples in the database.
+? You already have labels for which samples are mutated and which are normal in the database
+
+<hr>
+
+#15 You need to store social media postings in Google Big Query at a rate of 10000 messages per minute in near real-time. Initially, design the application to use streaming inserts for individual postings. You application also performs data aggregations right after the streaming inserts. You discover that the queries after streaming inserts fo not eshibit strong consistency, and reports from the queries might miss in-flight data. How can you adjust your application design ?
+
+? Re-write the application to load accumulated data every 2 minutes.
+? Convert the streaming insert code to batch load for individual messages.
+? Load the original message to Google Cloud SQL, and export the table every hour to BigQuery via steramin inserts.
+> ? Estimate the average latency for data availability after streaming inserts, and always run queries after waiting twice as long.
+
+<hr>
+
+#18 Business owneers at your company have given you a database of bank transactions. Each row contains the user ID, transaction type, transaction location, and transaction amount. They ask you to investigate what type of machine learning can be appilced to the data. Which threee machine learning applications can you use?
+
+
+? Supervised learning to determine which transactions are most likely to be fraudulent.
+> ? Unsupervised learning to determine which transactions are most likely to be fraudulent.
+> ? Clustering to divide the transactions into N categories based on feature similarity.
+> ? Supervised learning to predict the location of a transaction
+? Reinforcement learnign to predict the location of a transaction
+? Unsupervised learning to predict the location of a transaction.
+
+<hr>
+
+#19 Your company's on-premises Apache Hadoop servers are approaching end-of-life, and IT has decided to migrate the cluster to Google Cloud Dataproc. A like-for-like migration of the cluste rwould require 50 TB of Google Persistent Disk per node. The CIO is concerned about the cost of using that much block storage. You want to minimize the storage cost of the migration. What should you do?
+
+> ! Put the data into Google Cloud Storage.
+! Use preemptible virtual machines (VMs) for the Cloud Dataproc cluster.
+! Tune the Cloud Dataproc cluster so that there is just enough disk for all data.
+! Migrate some of the cold data into Google Cloud Storage, and keep only the hot data in Persistent Disk.
+
+<hr>
+
+#28 Your compoany is performaing data processing for a learning algorithm in Google Cloud Dataflow. Numerous data logs are being generated during this step, and the team wants to analyze them. Due to the dynamic nature of the campaig, the data is growing exponentially every hour. The data scientists have wrtitten the following code to read the data for a new key features in the logs.
+
+BigQueryIO.Read.names("ReadLogData").from("Clouddataflow-readonly::samples.log_data")
+
+You want to improve the performance of this data read. What should you do?
+
+? Use .fromQuery operation to read specific fields from the table.
+> ? Call a transform that returns TableRow objects, where each element in the PCollection represents a single row in the table.
+
+
+<hr>
