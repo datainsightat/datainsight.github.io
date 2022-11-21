@@ -257,4 +257,9 @@ Your organization has been collecting and analyzing data in Google BigQuery for 
 
 <hr>
 
+Your infrastructure includes a set of YouTune channels. You have neem taked with creating a process for sending the YouTube channel data to Google Cloud for analysis. You want to design a solution that allows your world-wide marketing teams to perform ANSI SQL and other types of analyis on up-to-date YouTune channel log data. How should you set up the log data transfer into Google Cloud?
+
+* Use Storage Transfer Service to transfer the offsite backup files to a Cloud Storage Mulit-Regional storage bucket as a final destination.
+
+<hr>
 
