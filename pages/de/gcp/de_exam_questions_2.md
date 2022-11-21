@@ -193,3 +193,68 @@ You want to improve the performance of this data read. What should you do?
 
 <hr>
 
+#47 You are designing the database schema for a machine learning based food ordering service that will predict what userrs want to eat. Here is some of the information you need to store:
+- The user profile: What the user likes and doesn't like to eat
+- The user acount information: Name, adress, preferred meal times
+- The order information: When orders are made, from where, to whom
+- The database  will be used to store all transactional data of the product. You want to optimize the data schema. Which Goodle Cloud Platform product should you use?
+
+* Cloud Datastore
+
+<hr>
+
+#50 You are choosing ad NoSQL database to handle telemetry data submitted from millions of internet-of-Things (IoT) devices. The volume of data is growing at 100 TB per year, and each jdata entry has about 100 attributes. The data processing pipeline does not require atomicitiy, consistency, isolation, and durability (ACID). However, high availability and low latency are required.
+You need to analyze the data ny querying against individual fields. Which threee databases meet your requirements?
+
+* HBase
+* MongoDB
+* Cassandra
+
+<hr>
+
+#51 You are training a spam classifier. You notice that you are overfitting the training data. Which threee actions can you take to resolve this pronlem?
+
+* Get more training examples
+* Use a smaller set of features
+* Increase the regulariuation parameters
+
+<hr>
+
+Your globally distributed auction application allows users to bid om items. Occasionally, users place identical bids at klnearly identical times, and different application servers process those bids. Each bid event contains the item, amount, user, and timesttamp. You want to collate those bid events into a single location in real time to determine whichuser bid first. What should you do?
+
+* Have each application server write the bid events to Cloud Pub/Sub as they occur. Push the events from Cloud Pub/Sub to a custom endpoint that wirte the nid event information into Cloud SQL.
+
+<hr>
+
+Your organization has been collecting and analyzing data in Google BigQuery for 6 months. The majority of the data analyzed is placed in a time-partitioned table named events_partitioned. To reduce the cost of queries, your organization created a view calles events, which requires only the last 14 days of data. The view is described in legacy SQL. Next month, existing applications will be connecting to BigQuery to read the events data via an ODBC connection. You need to ensure the applications can connecct. Which two actions should you take?
+
+* Create a new view over events_partitioned using standard SQL
+* Create a service account for the ODBC connection to use for authentication.
+
+<hr>
+
+#57 Your company is curreently setting up data pipelines for their campaign. For all the Goodle Cloud Pub/Sub streaming data, one of the important business requirements is to be able to peridodically identify the inputs and their timings during their campaign. Engineers have decided to use windowing and transformation in Google Cloud Dataflow for this purpose. However, when testing this feature, they find that the Cloud Dataflow job fails for all the streaming insert. What is the most likely cause of this problem?
+
+* They have not applied a non-global windowing function, which causes the job to fail when the pipeline is created.
+
+<hr>
+
+#59 An online retailer has built their current application on Google App Engine. A new initiative at the company mandates that they extend their application to allow their customers to transact directly via the application. They need to manage their shopping transactions and analyze combined data from multiple datasetts using a business intelligence tool. They want to use only a single database for this purpose. Whih google Cloud dtabase should they choose?
+
+* Cloud SQL
+
+<hr>
+
+#60 You launched a new gaming app almost three years ago. You have been uplloading log files ffrom the previous day to a sparate Google Big Query Tanle with the table name format LOGS_yyyymmdd. You have beem using tanle wildcard functions to generate daily and monthly reports for all time ranges. Recently, you discovered that some queries that cover longs date ranges are exceeding the liit of 1000 tables and failing. How can you resolve this issue?
+
+* Convert the sharded tanles into a single partinioned table
+
+<hr>
+
+#66 You set up a streaming data insert into a Redis cluster via a Kafka cluster. Both clusters are running on Compute Engine instances. You need to encrypt data at rest with encryption keys that you can create, rotate, and destroy as needed. What should your do?
+
+* Create encryption keys in Cloud Key Management Service. Use those keys to encrypt your data in all of the Compute Engine cluster instances.
+
+<hr>
+
+
