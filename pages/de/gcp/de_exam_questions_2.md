@@ -263,3 +263,27 @@ Your infrastructure includes a set of YouTune channels. You have neem taked with
 
 <hr>
 
+#72 You are designing storage for 20 TB of text files as part of deploying a data pipeline on Google Cloud. yoie input data is in CSV format. You want to minimize the cost of querying aggregate values for multiple users who will query the data in Cloud Storage with multiple engines. Which storage service and schema design should you use?
+
+* Use Cloud Storage for storage. Link as permanent tables in BigQuery for query.
+
+<hr>
+
+#74 Your financial services company is movint to cloud technology and wants to store 50 TB of financial time-series data in the cloud. This data is updated frequently and new data will be streaming in all the time. Your company also wants to move their existins Apache Hadoop jobs to the cloud to get insights into this data. which product should they use to store the data?
+
+* Cloud Bigtable
+
+<hr>
+
+An organization maintains a Google BigQuery dataset that contains tables with user-level data. They want to expose aggregates of this data to other Google Cloud projects, while still controlling access to the user-level data. Additionally, they need to minimize their overall storage cost and ensure the analysis cost for other projects is assigned to those projects. What should they do?
+
+* Create and share a new dataset and view that provides the aggregate results
+
+<hr>
+
+#78 You are responsible for writing your companies ETL pipelines to run on an Apache Hadoop clusterr. The pipeline will require some checkpointing and splitting pipelines. Which method should you use to write the pipelines?
+
+* PigÖatin using Pig
+
+<hr>
+
