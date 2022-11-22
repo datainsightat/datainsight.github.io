@@ -283,7 +283,25 @@ An organization maintains a Google BigQuery dataset that contains tables with us
 
 #78 You are responsible for writing your companies ETL pipelines to run on an Apache Hadoop clusterr. The pipeline will require some checkpointing and splitting pipelines. Which method should you use to write the pipelines?
 
-* PigÖatin using Pig
+* PigLatin using Pig
+
+<hr>
+
+#80 MJTelco is building a custom interface to share data. They have these requirements: 1. They need to do aggregations over theis petabyte-scale datasets. 2. They need to scan specific time range rows with a very fast reponse time (milliseconds). Which combination of Google Cloud Platform products should you recommend?
+
+* BigQuery and Cloud Bigtable
+
+<hr>
+
+#84 After migrating ETL jobs to run on BigQuery, you need to verfy that the output of the migrated hobs is the same as the output of the original. You've loaded a tanle containing the output of the original job and want to compare the contents from the migrated job to show that they are identical . The tables do not contain a primary key column that would enable you to join them together for comparison. What should you do?
+
+* Use a Datapproc cluster and the BigQuery Hadoop connector to read the data from each table and calculate a hash from non-timestamp columns of the table after sorting. Compare the hasehes of each table.
+
+<hr>
+
+You are the head of BI at a large enterprise company with multiple business units that each have different priorities and budgets. You use on-demand pricing for BigQuery with a quota of 2K concurrent on-demand slots per project. Users at your organization sometimes don't get slots to execute their query and you need to correct this. You'd like to avoid introducting new projects to your account.
+
+* Switch to flat-rate pricing and establish a hierarchical priority model for your projects
 
 <hr>
 
