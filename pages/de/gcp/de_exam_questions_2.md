@@ -305,3 +305,94 @@ You are the head of BI at a large enterprise company with multiple business unit
 
 <hr>
 
+#86 You have an Apache Kafka cluster on-prem with topics containing web application logs. You need to replicate the data to Google Cloud for analysis in Big Query and Cloud Storage. The preferred replication method is mirroring to avoid developmentt of Kafka Connect plugins.
+
+* Deploy a Kafka cluster on GCE VM instances. Configure your on-prem cluster to mirror your topics to the cluster running in GCE. Use a Dataproc cluster or Dataflow job to read from Kafka and write to GCS.
+
+<hr>
+
+#87 You've migrated a Hadoop job from an on-prem cluster to dataproc and GCS. Your Spark job is a complicated analytical workload that consists of many shuffling operations and initial data are parquet files (on average 200-400 MB size each). You see some degradation in performance after the migration to Dataproc, so you'd like to optimize for it. You need to keep in mind that your organization is very cost-sensitive, so you'd like to continue using Dataproc on preemptibles (with 2 non-preemptible worker only) for this workload.
+
+* Increase the size of your parquet files to ensure them to be 1 GB minimum.
+
+<hr>
+
+#88 Your team is responsible for developing and maintaining ETLs in your company. One of your Dataflow jobs is failing because of some errors in the input data, and you need to improve realianility of the pipeline (incl. being able to reprocess all failing data).
+
+* Add a try-catch block to your DoFn that transforms the data, write erroneous rows to Pub/Sub directly from th DoFn.
+
+<hr>
+
+#89 Your're training a model to predict housing prices based on an available dataset with real estate properties. Your plan is to train a fully conneccted neural net, and you've discovered that the dataset contains latitude and longitude of the property. Real estate professionals have told you that the location of the property is highly influential on price, so you'd like to engineer a feature that incorporates this physical dependency. what should you do?
+
+* Create a feature cross af latitude and longitude, bucketizeis at the minute level and use L1 regularization during optimization.
+
+<h1>
+  
+#93 You're using Bigtanel for a real-time application, and you have a heavy load that is a mix of red and writes. You've recently identified an additional use case and need to perform hourly an analytical job to calculate certain statistics across the whole database. You need to ensure both the reliability of your production application as well as the analytical workload. What should you do?
+  
+* Add a second cluster to an existing instance with a single-cluster routing, use live-traffic app profile for your regular workload and batch-analytics profile for the analytics workload.
+  
+<hr>
+  
+#95 You have a data pipeline that writes data to Cloud Bigtable using well-designed row keys. You want to monitor your pipeline to determine when to increase the size of your cloud Bigtable cluster. Which two actions can you take to accomplish this?
+  
+* Monitor the latency of write operations. Increase the size of the Cloud Bigtable cluster when there is a sistained increase in write latency.
+* Monitor storage utilization. Increase the size of the Cloud Bigtable cluster when utilization increases above 70% of max capacity.
+  
+<hr>
+  
+#98 Your company needs to upload their historic data to Cloud Storage. The securit rules don't allow access from external IPs to their on-premises resources. After an initial upload, they will add new data from existing on-premise applications every day. What should they do?
+  
+ * Execute gsutil rsync from the on-premises servers.
+  
+<hr>
+  
+#101 You need to copy millions of sensitive patient records from a relational database to BigQuery. The total size of the database is 10TB. You need to design a solution that is secure and time-efficient. What should you do?
+  
+* Export the records from the database as an Avro file. Copy the file onto a Transfer Appliance and send it to Google, and then load the Avro file into BigQury using the BigQuery wen UI in the GCP Console.
+  
+<hr>
+  
+#102 You needto create a near real-time inventory dashboard that reads the main inventory tables in your BigQuery data warehouse. Historical inventory data is stored as inventory balances by item and location. You have several thousand updates to inentory every hour. You want to maximize performance of the dashboard and ensure that the data is accurate. What should you do?
+  
+* Use the BigQuery streaming the stream changes into a daily inventory movement table. Calculate balances in a view that joints it to the historical inventory balance table. Update the inventory balance table nightly.
+  
+<hr>
+  
+#104 You used Dataprep to create a recipe on a sample of data in a BigQuery table. You want to reuse this recipie on a daily upload of data with the same schema, after the load job with variable execution time completes. What should you do?
+  
+* Export the recipe as a Dataprep template, and create a job in Cloud Scheduler
+  
+<hr>
+  
+#109 You have Cloud Functions written in Node.js that pull messages from Cloud Pub/Sub and send the data to Bigquery. You observe that the message proessing rate on the Pub/Sub topic is orders of magnitude higher than anticipated, but there is no error logged in Cloud Logging. What are the two most likely causes of this problem?
+  
+* Error handling in the subscriber code is not handling run-time errors properly.
+* The subscriber code does not acknowledge the messages that it pulls.
+  
+<hr>
+  
+#110 You are creating a new pipeline in Google Cloud to stream IoT data from Cloud Pub/Sub through Cloud Dataflor to BigQuery. While previewing the data, you notice that roughly 2% of the data appears to be corrupt. You need to modify the Cloud Dataflow pipeline to filter out this corrupt data. What should you do?
+  
+* Add a ParDo transform in Cloud Dataflow to discard corrupt elements.
+  
+<hr>
+ 
+#113 You are a retail that wants to integrate your online sales capabilities with different in-home assistants, such as Google Home. You need to interpret customer voice commands and issue an order to the backend systems. Which solution should you choose?
+  
+* Dialogflow Enterprise Edition
+  
+<hr>
+  
+#115 You use a dataet in BigQuery for analysis. You want to provide third-party companies with accesss to the same dataest. You need to keep  the costs of data sharing low and ensure that thedata is current. Which solution should you choose?
+  
+* Use Analytics Hub to control data access, and provide third party companies with access to the dataset
+  
+<hr>
+  
+#116 Your company is in the process of migrating its on-premis data warehousing solutions to BigQuery. The exisitng  data warehouse uses trigger-based change data capture (CDC) to apply updates from multiple transactional datanase sources on a daily basis. With BigQuery, your company hopes to improve its handling of CDC so that changes to the source systems are available to query in BigQuery in near-real time using log-nased CDC streams, wjile also optimizing for the performane of applying changes to the data warehouse. Which two steps should they take to ensure that changes are available in the Big Query reporting table with minimal latency while reducing compute overhead?
+  
+* Insert each new CDC record and corresponding operation type to a staging table in real time.
+* Periodically use a DML MERGE to perform several DML INESRT, UPDATE, and DELETTE operations at the same time on the reporting table.
+                                                              
