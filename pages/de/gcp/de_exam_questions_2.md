@@ -327,7 +327,7 @@ You are the head of BI at a large enterprise company with multiple business unit
 
 * Create a feature cross af latitude and longitude, bucketizeis at the minute level and use L1 regularization during optimization.
 
-<h1>
+<hr>
   
 #93 You're using Bigtanel for a real-time application, and you have a heavy load that is a mix of red and writes. You've recently identified an additional use case and need to perform hourly an analytical job to calculate certain statistics across the whole database. You need to ensure both the reliability of your production application as well as the analytical workload. What should you do?
   
