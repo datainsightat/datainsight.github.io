@@ -396,3 +396,56 @@ You are the head of BI at a large enterprise company with multiple business unit
 * Insert each new CDC record and corresponding operation type to a staging table in real time.
 * Periodically use a DML MERGE to perform several DML INESRT, UPDATE, and DELETTE operations at the same time on the reporting table.
                                                               
+<hr>
+
+#121 You currently have a single on-premises Kadka cluster in a data enter in the us-east region that is responsible for ingesting messages from IoT devices globally. Because large parts of globe have poor internet connectivity, messages sometimes batch at the edge, come in all at once, and cause a spike in load on your Kafka clusterr. This is becoming difficult to manage and prohibitevely expensive. What is the Google-recommended cloud native architecture for this scenario?
+
+* An IoT gateway connected to Cloud Pub/Sub, with Cloud Dataflow to read and process the messages from Cloud Pub/Sub.
+
+<hr>
+
+#123 You need to create a data pipeline that copies time-series transaction datta so that it can be queries from within BigQuery by your data science team for analysis. Every hour, thousands of transactions are updated with a new status. The size of the initial dataset is 1.5 PB, and it will grow ny 3 TB per day. The data is heavily structured, and your data science team will build machine learning models based on this data. You want to maximise performance and usability for your data sciene team. Which two strategies should you adopt?
+
+* Denormalize the data as much as possible
+* Develop a data pipeline where status updates are appended to BigQuery instead of updated.
+
+<hr>
+
+#125 You have a petabyte of analytics data and need to design a storage and processing platform for it. You must ne able to perrform data warehouse-style analytics on the data in google Cloud and expos the dataset as files for batch analysis tools in other cloud providers. What should you do?
+
+* Store the full dataset in BigQuery, and store a compressed copy of the data in a Cloud Storage bucket.
+
+<hr>
+
+#126 You work for a manufacturing company that sources up to 750 different components, each from a different supplier. You've collected a laneled dattasett that has on average 1000 examples for each unique component. Your team wants to implement an app to help warehouse workers recognize incoming components based on a photo of the compoonent. You want to implement the first working version of the app within a few working days. What should you do?
+
+* Use Cloud Vision AutoML, but reduce your dataset twice.
+
+> 100 samples/class if there are just a few classes and more than 200 samples/class if your have more than 50 distinct classes.
+
+<hr>
+
+#127 You are working on a niche product in the image recognition domain. Your team has developed a model that is dominated by custom C++ TensorFlow ops your team has implemented. These ops are used inside our main training loop and are performing bulky matrix multiplications. It currently takes up to several days to train a model. You want to decrease this time significantly and keep the cost low by using an accelerator on Google Cloud. What should you do?
+
+* Stay on CPUs, and increase the size of the cluser you're training your model on.
+
+> TPU does not support custom C++ tensorflow ops.
+
+<hr>
+
+#128 You work on a regression problem in a natural language processing domain, and you have 100M labeled examples in your dataset. You have randomly shuffled your data and split your datasett into train and test samples. After you trained the neral network and evaluated your mmodel on a test set, you discover that the RMSE of your model is tiwce as high on the train set as on the test set. how should you improce the performance of your model?
+
+* Increase the complexity of your model by introducing an additional layer or increase sizing the size of vocabularies or n-grams used.
+
+<hr>
+
+#129 You use BigQuery as your centrlized analytics platform. New data is loaded every day, and an ETL pipeline modifies the original data and prepares it for the final uses. This ETL pipeline is regularly modified and can generate errors, but sometimes the errors are detected only after 2 weeks. You need to provide a method to recover from these errors, and your backup should be optimized for storge costs. How should you organize your data in BigQuery and store your backups?
+
+* Organize your data in separate tables for each month, and export, compress, and store the data in Cloud Storage
+
+<hr>
+
+#130 The marketing team at your organization provides regular updates of a segment of your customer dataset. The marketing team has given youa CSV with 1 million records that must be updated in BigQuery. When you use the UPDATE statement in BigQury, you receive a quotaExceeded error. What should you do?
+
+* Import the new records from the CSV file intoa new BigQuery table. Create a BigQuery job that merges the new records with the existing records and writes the results to a new BigQuery table.
+
