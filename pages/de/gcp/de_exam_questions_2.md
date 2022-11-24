@@ -449,3 +449,133 @@ You are the head of BI at a large enterprise company with multiple business unit
 
 * Import the new records from the CSV file intoa new BigQuery table. Create a BigQuery job that merges the new records with the existing records and writes the results to a new BigQuery table.
 
+#131 As your organization expands its usage of GCP, many teams have started to create their own projects. Projects are further multiplied to accomodate different stages of deployments and target audiences. Each project requires unique access control configurations. The central IT team needs to have access o all projects. Furthermore, data from Cloud Storage buckets and BigQuerry datasets must be shared for use in other projects in an ad hoc way. You want to simplify access control management by minimizing the number of policies. Which two steps should you take?
+
+* Introduce resource hierarchy to leverage access control policy inheritance.
+* Create distinct groups for various temas, and specify groups in Cloud IAM policies.
+
+<hr>
+
+#132 Your United States-based company has created an application for assessing and responding to user actions. The primary tables's data volume grows by 250.000 records per second. Many third parties use your application's API to build the functionality into their own frontend applications. Your application's API should comply with the following requirements: single global endpoint, ANSI SQL supoort, Consistent access to the most up-to-date data. What should you do?
+
+* Implement Cloud Spanner with the leader in North America and read-only replicas in Asia and Europa.
+
+<hr>
+
+#133 A data scientist has created a BigQuery  ML model and asks you to create an ML pipeline to serve predictions. You a REST API application with the requirement to serverr predicitinos for an individual user ID with latency under 100 milliseconds. You use the following query to generate predictions: SELECT predicted_label, user_id FROM ML.PREDICT (MoDEL 'dataset.model', table user_features). How should you creaate the ML pipeline?
+
+* Create a Dataflow pipeline using BigQueryIO to read predictions for all users from the query. Write the results to Bigtable usind BigtableIO. Grant the Bigtable Reader role to the application service account so that the application can read predictions for individual users form Bigtable.
+
+<hr>
+
+#134 You are building an appilcation to share financial market data with consumers, who will receive data feeds.  Data is collected from the markets in real time. Consumers will receive the data in the following ways: Real-time event stream, ANSI SQL access to real-time stream and historical data, Batch historical exports. Which solution should you use?
+
+* Cloud Pub/Sub, Cloud Storage, BigQuery
+
+<hr>
+
+#136 You are running a pipeline in Dataflow that receives messages from a Pub/Sub topic and writes the results to a BigQuery dataset in the EU. Currently, your Pipeline is located in europe-west4 and has a maximum of 3 workers, instance type n1-standard-1. You notice that during peak periods, you pipeline is struggling to process records in a timely fashion, when all 3 workers are a maximum CPU utilization. Which two actions can you take to increase performance of your pipeline?
+
+* Increase the number of max workers
+* Use a larger instance type of your Dataflow workers
+
+<hr>
+
+#137 You have a data pipeline with a Dataflow job that aggregates and writes time series metrics to Bigtable. You notice that data is slow to update in Bigtable. This data feeds a dashboard used by thousands of users across the organization. You need to support additional concurrent users and reduce the amount of time required to write the data. Which two actoins should you take?
+
+* Increase the maximum number of Dataflow workers by setting maxNumWorkers in PipelineOptions
+* Increasee the number of nodes in the Bigtable cluster
+
+<hr>
+
+#140 You need to create a new transaction table in Cloud Spanner that stores product sales dat. You are deciding what to use as a primary key. From a performance perspective, which strategy should you choose?
+
+* A random universally unique identifier number (version 4 UUID)
+
+<hr>
+
+#141 Data Analysts in your company have the Cloud IAM Owne role assigned to them in their projects to allow them to work with multiple GCP products in their projects. Your organizatin requires that all BigQueryy data access logs ne retained for 6 months. You need to ensure that only audit personnel in your company can access the data access logs for all projects. What should you do?
+
+* Export the data access logs via an aggregated export sink to a Cloud Storage in a newly created project for audit logs. Restrict access to the project that contains the exported logs.
+
+<hr>
+
+#146 You want to migrate an on-premise Hadoop system to Cloud Dataproc. Hive is the primary tool in use, and the data format is Optimized Row Columnar (ORC). All ORC files have been successfully copied to a Cloud Storage bucket. You need to replicate some data to the cluster's local Hadoop Dirstributed File System (HDFS). to maximize performance. What are two ways to start using Hive in Cloud Dataproc?
+
+* Run the gsutil utility to transfer all ORC files from the Cloud Storage bucket to the master node of the Dataproc cluster. Then run the Hadoop utilit to copy them to HDFS. Mount the Hive tables from HDFS.
+* Leverate Cloud Storage connecctor for Hadoop to mount the ORC files as external Hive tables. Replicate external Hive tables to native ones.
+
+<hr>
+
+#150 You want to build a managed Hadoop system as your data lake. The data transformation process is composed of a series of Hadoop jobs executed in sequence. To accomplish the deisn of separating storage from compute, you decided to use the Cloud Storage connector to store all input data, output data, and intermediary data. However, you noticed that on Hadoop job runs very slowly with Cloud Dataproc, when compared with the on-premises bare-metal Hadoop environment (8-core nodes with 100 GB RAM). Analysis shows that this particular Hadoop job is disk I/O intensive. You want to resolve the issue. What should you do?
+
+* Allocate sufficient persistent disk space to the Hadoop cluster, and store the intermediate data of that particular Hadoop job on native HDFS.
+
+<hr>
+
+#155 Your company is selecting a system to centralize data ingestion and delivery. You are considering messaging and data integration systems to address requirements. The key requirements are: The ability to seek to a particular offsettt in a topic, piossibly back to the start of all data ever captured. Support for publish/subscribe semantics on hundreds of topics.
+
+* Apache Kafka
+
+<hr>
+
+#158 You need to deploy additinal dependencies to all nodes of a Cloud Dataproc cluster at stratup using an existing initialization action. Company security policies require that Cloud Dataproc nodes do not have access to the internet so public initialization actions cannot fetch resources. What should you do?
+
+* Copy all dependencies to a Cloud Storage bucket within your VPC security perimeter
+
+<hr>
+
+#162 You want to archive data in Cloud storage. Because some data is very sensitive, you want to use 'Trust No One' (TNO) approach to encrypt your data and prevent the cloud provider staff from decrypting your data. What should you do?
+
+* Use gcloud kms keys create to create a symmettric key. Then use gcloud kms encrypt to encrypt ecah arichival file with the key and unique additional authenticated data (AAD). Use gsutil cp to upload each encrypted file to the Cloud Storage bucket, and keep the AAD outside of Google Cloud.
+
+<hr>
+
+#165 You work for a large bank that operates in locatoins throughout North America. You are setting up a storage system that will handle bank account transactions. You require ACID compliance and the ability to access data with SQL. Which solution is appropriate?
+
+* Store transactions in Cloud Spanner. Use locking read-write transactions.
+
+<hr>
+
+#168 You work for a financial institution that lets customers register online. As new custoemrs register, their user data is sent to Pub/Sub before being ingested into BigQuery. For security reasons, you decide to redact your customers' Governemtn issued Identifiction Number while allowing customer service representatives to view the original values when necessary. What should you do?
+
+* use BigQuery column-level security. Set the table permissions so that only members of the Customer Service user group can see the SSN column.
+
+<hr>
+
+#170 You are updating the ccode for a subscriber to a Pub/Sub feed. Your are concerned that upon deployment the subscriber may erroneously acknowledge messages, leading to message loss. Your subscriber is not set up to retain acknowledged messages. What should you do to ensure that you can recover from errors after deployment?
+
+* Create a Pub/Sub snapshot before deploying new subscriber code. Use a Seek operation to re-deliver messages that became available after the snapshot was created.
+
+<hr>
+
+#171 You work for a large real estate firm and are preparing 6TB of home sales dat to be used for machine learning. You will use SQL to transform the data and use BigQuer ML to create a machine learning model. You plan to use the model for predictions against a raw dataset that has not been transformed. How should you set up your workflow in order to prevent skew at prediction time?
+
+* When creating your model, usee BigQuery's TRANSFORM clause to define preprocessing steps. At prediction time, use BigQuery's ML.EVALUATE clause without specifying any transformations on the raw input data.
+
+<hr>
+
+#173 You are designing a pipeline that publishes application events to a Pub/Sub topic. Although message ordering is not important, you need to be able to aggregate events across disjoint hourly intervals before loading the results to BigQuery for analysis. What technology should you use to process and load this data to BigQuery while ensuring that it will scale with large volumes of events?
+
+* Create a streaming Dataflow job that reads continually from the Pub/Sub topic and performs the necessary aggregations using tumbling windows.
+
+<hr>
+
+#177 You want to rebuild you batch pipeline for structured data on Google Cloud. You are using Pyspark to conduct data transformations at scale, but your pipelines are taking over twelve hours to run. To expedite development and pipeline run time, you want to use a serverless tool and SQL syntax. You have already moved your raw data into Cloud Storage. How should you build the pipeline on Google Cloud while meeting speed and processing requirements?
+
+* Ingest your data into BigQuery from Cloud Storage, convert your PySpark commands into BigQuery SQL queries to transform the data, and then write the transformations to a new table.
+
+<hr>
+
+#178 You are testing a Dataflow pipeline to ingest and transform text files. The files are compressed gzip, errors are written to a dear-letter queue, and you are using SideInputs to join data. You noticed that the pipeline is taking longer to complee than expected; what should you do to expedite the Dataflow job?
+
+* Use CoGroupByKey instead of the SideInput.
+
+<hr>
+
+#179 You are building a real-time prediction engine that streams files, which may contain PII (personal identifiable information) data, into Cloud Storage and eventually into BigQuery. You want to ensure that the sensitive data is masked but still maintains referential integrity, because names and emails are often used as join keys. How shouldyou use the Cloud Data Loss Prevention API (DLP API) to ensure that the PII data is not accessible by unauthorized individuals?
+
+* Create a pseudonym by replacing the PII data with cryptogenic format-preserving token.
+
+<hr>
+
