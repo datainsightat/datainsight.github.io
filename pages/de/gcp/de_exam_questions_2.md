@@ -579,3 +579,66 @@ You are the head of BI at a large enterprise company with multiple business unit
 
 <hr>
 
+#181 You need to give new website users a globally unique identifier (GUID) using a service that takes in data points and returns a GUID. This data is rouced from bith internal and external systems via HTTP calls that you will make via microservices within you pipeline. There will be tens of thousands of messages per second and that can be multi-threaded. You worry about the backpressure on the system. How should you design your pipeline to minimize that backpreassure?
+
+* Batch the job into ten-second increments.
+
+<hr>
+
+#184 You are building a report-only data warehouse where the data is streamed into BigQuery bia the steaming API. Following Google's best practices, you have both a staging and a production table for the data. How should you design you data loading to ensure that there is only one master dataset without affecting performance on either the ingestion or reporting pieces?
+
+* Have a staging table that moves the staged data over the production table and delettes the contents of the staging table every three hours.
+
+> When using streaming API, the BigQuery streaming buffer remains active for about 30 to 60 minutes, which means that you can't delete or change data during that time.
+
+<hr>
+
+#185 You issue a new batch job to Dataflow. The job starts successfully, processes a few elements, and then suddenly fails ans shuts down. You navigate to the Dataflow monitoring interface where you fing errors related to a particular DoFn in you pipeline. What is the most likely cause of the errors?
+
+* Exceptions in worker code
+
+<hr>
+
+#186 Your new customer has requested daily reports that show their net consumption of Google Cloud compute resources and who used the resources. You need to quickly and efficiently generate these daily reports. What should you do?
+
+* Do daily exports of Cloud Logging data to BigQuery. Create views filtering by project, log type, resource, and user.
+
+<hr>
+
+#188 Your startup has a web application that currently serves customers out of a single region in Asia. You are targeting funding that will allow your startup to serve customers globally. Your current goal is to optimize for cost, and your post-funding goal is to optimize for global presence and performance. You must use a native JDBC driver. What should you do?
+
+* Use Cloud Spanner to configure a single region instance initially, and then configure multi-region Cloud Spanner instances after securing fungding.
+
+<hr>
+
+#191 You are developing a new deep learning model that predicts a customer's likelihood to buy on your ecommerce site. After running an evaluation of the model against both the original data and new test data, you find that your model is overfitting the data. You want to improve the accuracy of the model when predicting new data. What should you do?
+
+* Increase the size of the training dataset, and decrease the numner of input features.
+
+<hr>
+
+#193 An aerospace company uses a proprietary data format to store its flight data. You need to connecct this new data source to BigQuery and stream the data into BigQuery. You want to  efficiently import the data into BigQuery while consuming as few resources as possible. What should you do?
+
+
+* Use an Apache Beam custom connector to write a Dataflow pipeline that streams the data into BigQuery in Acro format.
+
+<hr>
+
+#195 Your company wants to be able to retrieve large results of medical information from your current system, which has over 10 TBs in the database, and store the data in new tables for further query. The database must have a low-maintenance architecture and be accessible via SQL. You need to implement a cost-effective solution that can support data analytics for large reult sets. What should you do? 
+
+* Use BigQuery as a data warehouse. Set output destinations for caching large queries.
+
+<hr>
+
+#196 You are designing a system that requires an ACID-compliantt database. You must ensure that the system requires minimal human intervention in case of a failure. What should you do?
+
+* Configure a Cloud SQL for PostgreSQL isntance with high availability enabled.
+
+<hr>
+
+#201 You need to migrate a Redis database from an on-premise data center to a Memorystore for Redis instance. You want to follow Google-recommended practices and perform the migration for minimal cost, time and effort. What should you do?
+
+* Make a RDB backup of the Redis database, use the gsutil utility to copy the RDB file into the Cloud Storage bucket, and then import the RDB file into the Memorystore for Redis instance.
+
+<hr>
+
