@@ -94,6 +94,12 @@ You used a small amount of data to build a machine learning model that gives you
 
 <hr>
 
+#4 You create an important report for your large team in Google Data Studio 360. The report uses BigQuery as its data source. You notice that visualizations are not showing data that is less than 1 hour old. What should you do?
+
+* Disable caching by editing the report settings.
+
+<hr>
+
 #8 You are building new real-time data warehouse for your company and will use Google BigQuery streaming inserts. There is no guarantee that data will only be sent in once but you do have a unique ID for each row of data and an event timestamp. You want to ensure that duplicates are not included while interactively quering data. Which query type should you use?
 
 > Use the ROW_NUMBER window function with PARTITION by unique ID along with WHERE row equals 1.
@@ -118,7 +124,7 @@ You used a small amount of data to build a machine learning model that gives you
 > Restrict a client's dataset to approved users
 > Use the appropriate identity and access management (IAM) roles for each client's users
 
-#13 You want to process payment transactions in a point-of-sale application that will run on Google Cloud Platform. You user base could grow expnentially, but you do not want to manage infrastructrure scaling. Which Google database sevice should you use.
+##13 You want to process payment transactions in a point-of-sale application that will run on Google Cloud Platform. You user base could grow expnentially, but you do not want to manage infrastructrure scaling. Which Google database sevice should you use.
 
 > Cloud Datastore
 
@@ -146,21 +152,15 @@ You used a small amount of data to build a machine learning model that gives you
 #18 Business owneers at your company have given you a database of bank transactions. Each row contains the user ID, transaction type, transaction location, and transaction amount. They ask you to investigate what type of machine learning can be appilced to the data. Which threee machine learning applications can you use?
 
 
-? Supervised learning to determine which transactions are most likely to be fraudulent.
-> ? Unsupervised learning to determine which transactions are most likely to be fraudulent.
-> ? Clustering to divide the transactions into N categories based on feature similarity.
-> ? Supervised learning to predict the location of a transaction
-? Reinforcement learnign to predict the location of a transaction
-? Unsupervised learning to predict the location of a transaction.
+* Unsupervised learning to determine which transactions are most likely to be fraudulent.
+* Clustering to divide the transactions into N categories based on feature similarity.
+* Supervised learning to predict the location of a transaction
 
 <hr>
 
 #19 Your company's on-premises Apache Hadoop servers are approaching end-of-life, and IT has decided to migrate the cluster to Google Cloud Dataproc. A like-for-like migration of the cluste rwould require 50 TB of Google Persistent Disk per node. The CIO is concerned about the cost of using that much block storage. You want to minimize the storage cost of the migration. What should you do?
 
-> ! Put the data into Google Cloud Storage.
-! Use preemptible virtual machines (VMs) for the Cloud Dataproc cluster.
-! Tune the Cloud Dataproc cluster so that there is just enough disk for all data.
-! Migrate some of the cold data into Google Cloud Storage, and keep only the hot data in Persistent Disk.
+* Put the data into Google Cloud Storage
 
 <hr>
 
@@ -170,8 +170,7 @@ BigQueryIO.Read.names("ReadLogData").from("Clouddataflow-readonly::samples.log_d
 
 You want to improve the performance of this data read. What should you do?
 
-? Use .fromQuery operation to read specific fields from the table.
-> ? Call a transform that returns TableRow objects, where each element in the PCollection represents a single row in the table.
+* Use .fromQuery operation to read specific fields from the table
 
 <hr>
 
@@ -181,9 +180,21 @@ You want to improve the performance of this data read. What should you do?
 
 <hr>
 
-#33 Your software uses a simple JSON format for all messages. These messags are published to Google Cloud Pub/Sub, the processed with Google Cloud Dataflow to create a real-time dashboard for the CFO. Durign testing, you notice that some messages are missing in the dashobaord. You check the logs, and all messages are being published to Cloud Pub/Sub successfully. What shoudl you do next?
+##33 Your software uses a simple JSON format for all messages. These messags are published to Google Cloud Pub/Sub, the processed with Google Cloud Dataflow to create a real-time dashboard for the CFO. Durign testing, you notice that some messages are missing in the dashobaord. You check the logs, and all messages are being published to Cloud Pub/Sub successfully. What shoudl you do next?
 
 * Use Google Stackdriver Monitoring on Cloud Pub/Sub to find the missing messages.
+
+<hr>
+
+#41 MJTelco needs you to create a schema in Google Bigtable that will allow for the historical analysis of the last 2 years of records. Each record that comes in is sent every 15 minutes, and contains a unique identifier of the device and a data record. The most common query is for all the data for a given device for a given day. Which schema should you use?
+
+* Rowkey: date#device_id Column_data:data_point
+
+<hr>
+
+#44 You are deploying a new storage system for your mobile application, which is a media streaming service. You decide the best fit is Google Cloud Datastore. You have entities with multiple properties, some of which  can take on multiple values. for example, in the entity 'Movie' the property 'actors' and the property 'tags' have multiple values but the property 'date_released' does not. A typical query might would ask for all moview with actor=<actorname> ordered by date_released or all movies with tag=Comedy orderes by date_released. How should you avoid a combinatorial explosion in the number of indexes?
+  
+* Set the following in your entity options: exclude_from_indexes = 'date_published'
 
 <hr>
 
@@ -220,13 +231,13 @@ You need to analyze the data ny querying against individual fields. Which threee
 
 <hr>
 
-Your globally distributed auction application allows users to bid om items. Occasionally, users place identical bids at klnearly identical times, and different application servers process those bids. Each bid event contains the item, amount, user, and timesttamp. You want to collate those bid events into a single location in real time to determine whichuser bid first. What should you do?
+##54 Your globally distributed auction application allows users to bid om items. Occasionally, users place identical bids at klnearly identical times, and different application servers process those bids. Each bid event contains the item, amount, user, and timesttamp. You want to collate those bid events into a single location in real time to determine whichuser bid first. What should you do?
 
 * Have each application server write the bid events to Cloud Pub/Sub as they occur. Push the events from Cloud Pub/Sub to a custom endpoint that wirte the nid event information into Cloud SQL.
 
 <hr>
 
-Your organization has been collecting and analyzing data in Google BigQuery for 6 months. The majority of the data analyzed is placed in a time-partitioned table named events_partitioned. To reduce the cost of queries, your organization created a view calles events, which requires only the last 14 days of data. The view is described in legacy SQL. Next month, existing applications will be connecting to BigQuery to read the events data via an ODBC connection. You need to ensure the applications can connecct. Which two actions should you take?
+##55 Your organization has been collecting and analyzing data in Google BigQuery for 6 months. The majority of the data analyzed is placed in a time-partitioned table named events_partitioned. To reduce the cost of queries, your organization created a view calles events, which requires only the last 14 days of data. The view is described in legacy SQL. Next month, existing applications will be connecting to BigQuery to read the events data via an ODBC connection. You need to ensure the applications can connecct. Which two actions should you take?
 
 * Create a new view over events_partitioned using standard SQL
 * Create a service account for the ODBC connection to use for authentication.
@@ -248,16 +259,20 @@ Your organization has been collecting and analyzing data in Google BigQuery for 
 #60 You launched a new gaming app almost three years ago. You have been uplloading log files ffrom the previous day to a sparate Google Big Query Tanle with the table name format LOGS_yyyymmdd. You have beem using tanle wildcard functions to generate daily and monthly reports for all time ranges. Recently, you discovered that some queries that cover longs date ranges are exceeding the liit of 1000 tables and failing. How can you resolve this issue?
 
 * Convert the sharded tanles into a single partinioned table
+  
+##62 Your company receives both batch- and stream-based event data. You want to process the data using Google Cloud Dataflow over a predictable time period. However, you realize that in some instances data can arrive late or out of order. How should you design your Cloud Dataflow pipeline to handle data that is late or out of order?
+  
+* Use watermarks and timestamps to capture the lagged data.
 
 <hr>
 
-#66 You set up a streaming data insert into a Redis cluster via a Kafka cluster. Both clusters are running on Compute Engine instances. You need to encrypt data at rest with encryption keys that you can create, rotate, and destroy as needed. What should your do?
+##66 You set up a streaming data insert into a Redis cluster via a Kafka cluster. Both clusters are running on Compute Engine instances. You need to encrypt data at rest with encryption keys that you can create, rotate, and destroy as needed. What should your do?
 
 * Create encryption keys in Cloud Key Management Service. Use those keys to encrypt your data in all of the Compute Engine cluster instances.
 
 <hr>
 
-Your infrastructure includes a set of YouTune channels. You have neem taked with creating a process for sending the YouTube channel data to Google Cloud for analysis. You want to design a solution that allows your world-wide marketing teams to perform ANSI SQL and other types of analyis on up-to-date YouTune channel log data. How should you set up the log data transfer into Google Cloud?
+##69 Your infrastructure includes a set of YouTune channels. You have neem taked with creating a process for sending the YouTube channel data to Google Cloud for analysis. You want to design a solution that allows your world-wide marketing teams to perform ANSI SQL and other types of analyis on up-to-date YouTune channel log data. How should you set up the log data transfer into Google Cloud?
 
 * Use Storage Transfer Service to transfer the offsite backup files to a Cloud Storage Mulit-Regional storage bucket as a final destination.
 
@@ -269,13 +284,13 @@ Your infrastructure includes a set of YouTune channels. You have neem taked with
 
 <hr>
 
-#74 Your financial services company is movint to cloud technology and wants to store 50 TB of financial time-series data in the cloud. This data is updated frequently and new data will be streaming in all the time. Your company also wants to move their existins Apache Hadoop jobs to the cloud to get insights into this data. which product should they use to store the data?
+##74 Your financial services company is movint to cloud technology and wants to store 50 TB of financial time-series data in the cloud. This data is updated frequently and new data will be streaming in all the time. Your company also wants to move their existins Apache Hadoop jobs to the cloud to get insights into this data. which product should they use to store the data?
 
 * Cloud Bigtable
 
 <hr>
 
-An organization maintains a Google BigQuery dataset that contains tables with user-level data. They want to expose aggregates of this data to other Google Cloud projects, while still controlling access to the user-level data. Additionally, they need to minimize their overall storage cost and ensure the analysis cost for other projects is assigned to those projects. What should they do?
+##75 An organization maintains a Google BigQuery dataset that contains tables with user-level data. They want to expose aggregates of this data to other Google Cloud projects, while still controlling access to the user-level data. Additionally, they need to minimize their overall storage cost and ensure the analysis cost for other projects is assigned to those projects. What should they do?
 
 * Create and share a new dataset and view that provides the aggregate results
 
@@ -299,7 +314,7 @@ An organization maintains a Google BigQuery dataset that contains tables with us
 
 <hr>
 
-You are the head of BI at a large enterprise company with multiple business units that each have different priorities and budgets. You use on-demand pricing for BigQuery with a quota of 2K concurrent on-demand slots per project. Users at your organization sometimes don't get slots to execute their query and you need to correct this. You'd like to avoid introducting new projects to your account.
+##85 You are the head of BI at a large enterprise company with multiple business units that each have different priorities and budgets. You use on-demand pricing for BigQuery with a quota of 2K concurrent on-demand slots per project. Users at your organization sometimes don't get slots to execute their query and you need to correct this. You'd like to avoid introducting new projects to your account.
 
 * Switch to flat-rate pricing and establish a hierarchical priority model for your projects
 
@@ -335,7 +350,7 @@ You are the head of BI at a large enterprise company with multiple business unit
   
 <hr>
   
-#95 You have a data pipeline that writes data to Cloud Bigtable using well-designed row keys. You want to monitor your pipeline to determine when to increase the size of your cloud Bigtable cluster. Which two actions can you take to accomplish this?
+##95 You have a data pipeline that writes data to Cloud Bigtable using well-designed row keys. You want to monitor your pipeline to determine when to increase the size of your cloud Bigtable cluster. Which two actions can you take to accomplish this?
   
 * Monitor the latency of write operations. Increase the size of the Cloud Bigtable cluster when there is a sistained increase in write latency.
 * Monitor storage utilization. Increase the size of the Cloud Bigtable cluster when utilization increases above 70% of max capacity.
@@ -360,9 +375,9 @@ You are the head of BI at a large enterprise company with multiple business unit
   
 <hr>
   
-#104 You used Dataprep to create a recipe on a sample of data in a BigQuery table. You want to reuse this recipie on a daily upload of data with the same schema, after the load job with variable execution time completes. What should you do?
+##104 You used Dataprep to create a recipe on a sample of data in a BigQuery table. You want to reuse this recipie on a daily upload of data with the same schema, after the load job with variable execution time completes. What should you do?
   
-* Export the recipe as a Dataprep template, and create a job in Cloud Scheduler
+* Export the Dataprep job as a Dataflow template, and incorporete it into a Composter job.
   
 <hr>
   
@@ -385,13 +400,13 @@ You are the head of BI at a large enterprise company with multiple business unit
   
 <hr>
   
-#115 You use a dataet in BigQuery for analysis. You want to provide third-party companies with accesss to the same dataest. You need to keep  the costs of data sharing low and ensure that thedata is current. Which solution should you choose?
+##115 You use a dataset in BigQuery for analysis. You want to provide third-party companies with accesss to the same dataest. You need to keep  the costs of data sharing low and ensure that thedata is current. Which solution should you choose?
   
 * Use Analytics Hub to control data access, and provide third party companies with access to the dataset
   
 <hr>
   
-#116 Your company is in the process of migrating its on-premis data warehousing solutions to BigQuery. The exisitng  data warehouse uses trigger-based change data capture (CDC) to apply updates from multiple transactional datanase sources on a daily basis. With BigQuery, your company hopes to improve its handling of CDC so that changes to the source systems are available to query in BigQuery in near-real time using log-nased CDC streams, wjile also optimizing for the performane of applying changes to the data warehouse. Which two steps should they take to ensure that changes are available in the Big Query reporting table with minimal latency while reducing compute overhead?
+##116 Your company is in the process of migrating its on-premis data warehousing solutions to BigQuery. The exisitng  data warehouse uses trigger-based change data capture (CDC) to apply updates from multiple transactional datanase sources on a daily basis. With BigQuery, your company hopes to improve its handling of CDC so that changes to the source systems are available to query in BigQuery in near-real time using log-nased CDC streams, wjile also optimizing for the performane of applying changes to the data warehouse. Which two steps should they take to ensure that changes are available in the Big Query reporting table with minimal latency while reducing compute overhead?
   
 * Insert each new CDC record and corresponding operation type to a staging table in real time.
 * Periodically use a DML MERGE to perform several DML INESRT, UPDATE, and DELETTE operations at the same time on the reporting table.
@@ -400,7 +415,15 @@ You are the head of BI at a large enterprise company with multiple business unit
 
 #121 You currently have a single on-premises Kadka cluster in a data enter in the us-east region that is responsible for ingesting messages from IoT devices globally. Because large parts of globe have poor internet connectivity, messages sometimes batch at the edge, come in all at once, and cause a spike in load on your Kafka clusterr. This is becoming difficult to manage and prohibitevely expensive. What is the Google-recommended cloud native architecture for this scenario?
 
-* An IoT gateway connected to Cloud Pub/Sub, with Cloud Dataflow to read and process the messages from Cloud Pub/Sub.
+* An IoT gateway connected to Cloud Pub/Sub, with Cloud Dataflow to read and process the messages from Cloud Pub/Sub
+  
+<hr>
+  
+#122 You decided to use Cloud Datastoree to ingest vehicle telemetry data in real time. You want to build a storage system tht will account for the long-term dta growth, while keeping the costs low. You also want to create snapshots of the data periodically, so that you can make a point-in-time (PIT) recovery, or clone a copy of the data for Cloud Datastore in a different environment. You want to archive these snapshots for a long time. Which two methods can accompliash this?
+  
+  
+* Use managed export, and store the data in a Cloud Storage bucket using Nearline or Coldline class
+* Use managed export, and then import to Cloud Datastore in a separate project under a unique namespace reserved for that export.
 
 <hr>
 
@@ -439,17 +462,17 @@ You are the head of BI at a large enterprise company with multiple business unit
 
 <hr>
 
-#129 You use BigQuery as your centrlized analytics platform. New data is loaded every day, and an ETL pipeline modifies the original data and prepares it for the final uses. This ETL pipeline is regularly modified and can generate errors, but sometimes the errors are detected only after 2 weeks. You need to provide a method to recover from these errors, and your backup should be optimized for storge costs. How should you organize your data in BigQuery and store your backups?
+##129 You use BigQuery as your centrlized analytics platform. New data is loaded every day, and an ETL pipeline modifies the original data and prepares it for the final uses. This ETL pipeline is regularly modified and can generate errors, but sometimes the errors are detected only after 2 weeks. You need to provide a method to recover from these errors, and your backup should be optimized for storge costs. How should you organize your data in BigQuery and store your backups?
 
 * Organize your data in separate tables for each month, and export, compress, and store the data in Cloud Storage
 
 <hr>
 
-#130 The marketing team at your organization provides regular updates of a segment of your customer dataset. The marketing team has given youa CSV with 1 million records that must be updated in BigQuery. When you use the UPDATE statement in BigQury, you receive a quotaExceeded error. What should you do?
+##130 The marketing team at your organization provides regular updates of a segment of your customer dataset. The marketing team has given youa CSV with 1 million records that must be updated in BigQuery. When you use the UPDATE statement in BigQury, you receive a quotaExceeded error. What should you do?
 
 * Import the new records from the CSV file intoa new BigQuery table. Create a BigQuery job that merges the new records with the existing records and writes the results to a new BigQuery table.
 
-#131 As your organization expands its usage of GCP, many teams have started to create their own projects. Projects are further multiplied to accomodate different stages of deployments and target audiences. Each project requires unique access control configurations. The central IT team needs to have access o all projects. Furthermore, data from Cloud Storage buckets and BigQuerry datasets must be shared for use in other projects in an ad hoc way. You want to simplify access control management by minimizing the number of policies. Which two steps should you take?
+##131 As your organization expands its usage of GCP, many teams have started to create their own projects. Projects are further multiplied to accomodate different stages of deployments and target audiences. Each project requires unique access control configurations. The central IT team needs to have access o all projects. Furthermore, data from Cloud Storage buckets and BigQuerry datasets must be shared for use in other projects in an ad hoc way. You want to simplify access control management by minimizing the number of policies. Which two steps should you take?
 
 * Introduce resource hierarchy to leverage access control policy inheritance.
 * Create distinct groups for various temas, and specify groups in Cloud IAM policies.
@@ -474,7 +497,7 @@ You are the head of BI at a large enterprise company with multiple business unit
 
 <hr>
 
-#136 You are running a pipeline in Dataflow that receives messages from a Pub/Sub topic and writes the results to a BigQuery dataset in the EU. Currently, your Pipeline is located in europe-west4 and has a maximum of 3 workers, instance type n1-standard-1. You notice that during peak periods, you pipeline is struggling to process records in a timely fashion, when all 3 workers are a maximum CPU utilization. Which two actions can you take to increase performance of your pipeline?
+##136 You are running a pipeline in Dataflow that receives messages from a Pub/Sub topic and writes the results to a BigQuery dataset in the EU. Currently, your Pipeline is located in europe-west4 and has a maximum of 3 workers, instance type n1-standard-1. You notice that during peak periods, you pipeline is struggling to process records in a timely fashion, when all 3 workers are a maximum CPU utilization. Which two actions can you take to increase performance of your pipeline?
 
 * Increase the number of max workers
 * Use a larger instance type of your Dataflow workers
@@ -507,10 +530,22 @@ You are the head of BI at a large enterprise company with multiple business unit
 
 <hr>
 
+##149 You are migrating your data warehousee to BigQuery. You have migrated all of your data into tables in a dataset. Mulitplie users from your organization will be using the data. They should only see certain tables based on their team membership. How should you set your permissions?
+  
+* Assign the users/groups data view access at the table level for each table.
+  
+<hr>
+  
 #150 You want to build a managed Hadoop system as your data lake. The data transformation process is composed of a series of Hadoop jobs executed in sequence. To accomplish the deisn of separating storage from compute, you decided to use the Cloud Storage connector to store all input data, output data, and intermediary data. However, you noticed that on Hadoop job runs very slowly with Cloud Dataproc, when compared with the on-premises bare-metal Hadoop environment (8-core nodes with 100 GB RAM). Analysis shows that this particular Hadoop job is disk I/O intensive. You want to resolve the issue. What should you do?
 
 * Allocate sufficient persistent disk space to the Hadoop cluster, and store the intermediate data of that particular Hadoop job on native HDFS.
 
+<hr>
+  
+##154 You plan to deploy Cloud SQL using MySQL. You need to ensure high availability in the event of a zone failure. What should you do?
+
+* Create a Cloud SQL instance in one zone, and crate a failover replica in another zone within the same region.
+  
 <hr>
 
 #155 Your company is selecting a system to centralize data ingestion and delivery. You are considering messaging and data integration systems to address requirements. The key requirements are: The ability to seek to a particular offsettt in a topic, piossibly back to the start of all data ever captured. Support for publish/subscribe semantics on hundreds of topics.
@@ -523,6 +558,12 @@ You are the head of BI at a large enterprise company with multiple business unit
 
 * Copy all dependencies to a Cloud Storage bucket within your VPC security perimeter
 
+<hr>
+  
+##162 You need to choose a database to store time series CPU and memory usage for millions of computers. You need to store this data in one-second interval samples. Analysts will be performing real-time, ad hoc analytics against the database. You want to avoid beeing charged for every query executed and ensure that the schema design will allow for future growth of the dataset. Which database and data model should you choose?
+  
+* Create a narrow table in Bigtable with a row key that combines the Compute Engine computer identifier with the sample time at each second.
+  
 <hr>
 
 #162 You want to archive data in Cloud storage. Because some data is very sensitive, you want to use 'Trust No One' (TNO) approach to encrypt your data and prevent the cloud provider staff from decrypting your data. What should you do?
@@ -554,6 +595,12 @@ You are the head of BI at a large enterprise company with multiple business unit
 * When creating your model, usee BigQuery's TRANSFORM clause to define preprocessing steps. At prediction time, use BigQuery's ML.EVALUATE clause without specifying any transformations on the raw input data.
 
 <hr>
+  
+##172 You are analyzing the price of a company's stock. Every 5 seconds, you need to compute a moving avaerage of the past 30 seconds' worth of data. You are reading data from Pub/Sub and using DataFlow to conduct the analysis. How should you set up your windowed pipelin?
+  
+* Use a sliding window with a duration of 30 seconds and a period of 5 seconds. Emit results by setting the following trigger: AfterWatermark.pastEndOfWindow()
+  
+<hr>
 
 #173 You are designing a pipeline that publishes application events to a Pub/Sub topic. Although message ordering is not important, you need to be able to aggregate events across disjoint hourly intervals before loading the results to BigQuery for analysis. What technology should you use to process and load this data to BigQuery while ensuring that it will scale with large volumes of events?
 
@@ -561,7 +608,7 @@ You are the head of BI at a large enterprise company with multiple business unit
 
 <hr>
 
-#177 You want to rebuild you batch pipeline for structured data on Google Cloud. You are using Pyspark to conduct data transformations at scale, but your pipelines are taking over twelve hours to run. To expedite development and pipeline run time, you want to use a serverless tool and SQL syntax. You have already moved your raw data into Cloud Storage. How should you build the pipeline on Google Cloud while meeting speed and processing requirements?
+##177 You want to rebuild you batch pipeline for structured data on Google Cloud. You are using Pyspark to conduct data transformations at scale, but your pipelines are taking over twelve hours to run. To expedite development and pipeline run time, you want to use a serverless tool and SQL syntax. You have already moved your raw data into Cloud Storage. How should you build the pipeline on Google Cloud while meeting speed and processing requirements?
 
 * Ingest your data into BigQuery from Cloud Storage, convert your PySpark commands into BigQuery SQL queries to transform the data, and then write the transformations to a new table.
 
@@ -585,7 +632,7 @@ You are the head of BI at a large enterprise company with multiple business unit
 
 <hr>
 
-#184 You are building a report-only data warehouse where the data is streamed into BigQuery bia the steaming API. Following Google's best practices, you have both a staging and a production table for the data. How should you design you data loading to ensure that there is only one master dataset without affecting performance on either the ingestion or reporting pieces?
+##184 You are building a report-only data warehouse where the data is streamed into BigQuery bia the steaming API. Following Google's best practices, you have both a staging and a production table for the data. How should you design you data loading to ensure that there is only one master dataset without affecting performance on either the ingestion or reporting pieces?
 
 * Have a staging table that moves the staged data over the production table and delettes the contents of the staging table every three hours.
 
@@ -602,7 +649,11 @@ You are the head of BI at a large enterprise company with multiple business unit
 #186 Your new customer has requested daily reports that show their net consumption of Google Cloud compute resources and who used the resources. You need to quickly and efficiently generate these daily reports. What should you do?
 
 * Do daily exports of Cloud Logging data to BigQuery. Create views filtering by project, log type, resource, and user.
-
+  
+##187 The Development and external teams have the project viewer identity and Access Management role in a folder named Visualization. You want the Development team to be able to read data from both Cloud Storage and BigQuery, but the External Team should only be able to read data from BigQuery. What should you do?
+  
+* Create a VPC Service Controls perimeter containg both projeccts and Cloud Storage as a restricted API. Add the Development Team users to the perimeters Access Level.
+  
 <hr>
 
 #188 Your startup has a web application that currently serves customers out of a single region in Asia. You are targeting funding that will allow your startup to serve customers globally. Your current goal is to optimize for cost, and your post-funding goal is to optimize for global presence and performance. You must use a native JDBC driver. What should you do?
@@ -633,7 +684,11 @@ You are the head of BI at a large enterprise company with multiple business unit
 #196 You are designing a system that requires an ACID-compliantt database. You must ensure that the system requires minimal human intervention in case of a failure. What should you do?
 
 * Configure a Cloud SQL for PostgreSQL isntance with high availability enabled.
-
+  
+##198 You are implementing workflow pipeline scheduling using open source-based tools and Google Kubernetes Engine (GKE). You want to use a Google managed service to simplify and automate the task. You also want to accomodate Shared VPC networking considerations. What should you do?
+  
+* User Cloud Conposer in a Shared VPC configuration. Place the Cloud Compose resources in the service project.
+  
 <hr>
 
 #201 You need to migrate a Redis database from an on-premise data center to a Memorystore for Redis instance. You want to follow Google-recommended practices and perform the migration for minimal cost, time and effort. What should you do?
