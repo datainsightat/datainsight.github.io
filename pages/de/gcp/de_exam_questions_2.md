@@ -164,6 +164,12 @@ You used a small amount of data to build a machine learning model that gives you
 
 <hr>
 
+You want to use Google Strackdriver Logging to monitor Google BigQuery usage. You need an instant notification to be sent to your monitoring tool when neww data is appended to a certain table using an dinsert job, but you do not want to receive notifications for other tables. What should you do?
+
+* Using the Stackdriver API, create a project sink with advanced log filter to export to Pub/Sub, and subscribe to the topic from your monitoring tool.
+
+<hr>
+
 #28 Your compoany is performaing data processing for a learning algorithm in Google Cloud Dataflow. Numerous data logs are being generated during this step, and the team wants to analyze them. Due to the dynamic nature of the campaig, the data is growing exponentially every hour. The data scientists have wrtitten the following code to read the data for a new key features in the logs.
 
 BigQueryIO.Read.names("ReadLogData").from("Clouddataflow-readonly::samples.log_data")
@@ -186,6 +192,12 @@ You want to improve the performance of this data read. What should you do?
 
 <hr>
 
+###34 Flowlogistics wants to use Google BigQuery as their primary analysis system, but they still have Apache Hadoop and Sparl workloads that they cannot move to BigQuery. flowlogistic does not know how to store the data that is common to both workloads. What should they do?
+
+* Store the common data encoded in Avro in Google Cloud storage.
+
+<hr>
+
 #41 MJTelco needs you to create a schema in Google Bigtable that will allow for the historical analysis of the last 2 years of records. Each record that comes in is sent every 15 minutes, and contains a unique identifier of the device and a data record. The most common query is for all the data for a given device for a given day. Which schema should you use?
 
 * Rowkey: date#device_id Column_data:data_point
@@ -204,13 +216,15 @@ You want to improve the performance of this data read. What should you do?
 
 <hr>
 
-#47 You are designing the database schema for a machine learning based food ordering service that will predict what userrs want to eat. Here is some of the information you need to store:
+###47 You are designing the database schema for a machine learning based food ordering service that will predict what userrs want to eat. Here is some of the information you need to store:
 - The user profile: What the user likes and doesn't like to eat
 - The user acount information: Name, adress, preferred meal times
 - The order information: When orders are made, from where, to whom
 - The database  will be used to store all transactional data of the product. You want to optimize the data schema. Which Goodle Cloud Platform product should you use?
 
-* Cloud Datastore
+* BigQuery
+  
+> DataStore is NoSQL and has therefore no schema definition.
 
 <hr>
 
@@ -250,9 +264,11 @@ You need to analyze the data ny querying against individual fields. Which threee
 
 <hr>
 
-#59 An online retailer has built their current application on Google App Engine. A new initiative at the company mandates that they extend their application to allow their customers to transact directly via the application. They need to manage their shopping transactions and analyze combined data from multiple datasetts using a business intelligence tool. They want to use only a single database for this purpose. Whih google Cloud dtabase should they choose?
+###59 An online retailer has built their current application on Google App Engine. A new initiative at the company mandates that they extend their application to allow their customers to transact directly via the application. They need to manage their shopping transactions and analyze combined data from multiple datasetts using a business intelligence tool. They want to use only a single database for this purpose. Whih google Cloud dtabase should they choose?
 
-* Cloud SQL
+* CloudSQL
+  
+> DataStore is NoSQL
 
 <hr>
 
@@ -284,13 +300,13 @@ You need to analyze the data ny querying against individual fields. Which threee
 
 <hr>
 
-##74 Your financial services company is movint to cloud technology and wants to store 50 TB of financial time-series data in the cloud. This data is updated frequently and new data will be streaming in all the time. Your company also wants to move their existins Apache Hadoop jobs to the cloud to get insights into this data. which product should they use to store the data?
+###74 Your financial services company is movint to cloud technology and wants to store 50 TB of financial time-series data in the cloud. This data is updated frequently and new data will be streaming in all the time. Your company also wants to move their existins Apache Hadoop jobs to the cloud to get insights into this data. which product should they use to store the data?
 
 * Cloud Bigtable
 
 <hr>
 
-##75 An organization maintains a Google BigQuery dataset that contains tables with user-level data. They want to expose aggregates of this data to other Google Cloud projects, while still controlling access to the user-level data. Additionally, they need to minimize their overall storage cost and ensure the analysis cost for other projects is assigned to those projects. What should they do?
+###75 An organization maintains a Google BigQuery dataset that contains tables with user-level data. They want to expose aggregates of this data to other Google Cloud projects, while still controlling access to the user-level data. Additionally, they need to minimize their overall storage cost and ensure the analysis cost for other projects is assigned to those projects. What should they do?
 
 * Create and share a new dataset and view that provides the aggregate results
 
@@ -375,6 +391,12 @@ You need to analyze the data ny querying against individual fields. Which threee
   
 <hr>
   
+You have data stored in BigQuery. the data in the BigQuery dataset must be highly available. You need to define a storage, backup, and recovery strategy of this data that minimizes cost. How should you configure the BigQuery table that have a recovery point objective (RPO) pof 30 days.
+  
+* Set the Big Query dataset to be mulit-regional. In the event of an emergency, use a point-in-time snapshot to recover the data.
+  
+<hr>
+  
 ##104 You used Dataprep to create a recipe on a sample of data in a BigQuery table. You want to reuse this recipie on a daily upload of data with the same schema, after the load job with variable execution time completes. What should you do?
   
 * Export the Dataprep job as a Dataflow template, and incorporete it into a Composter job.
@@ -406,7 +428,7 @@ You need to analyze the data ny querying against individual fields. Which threee
   
 <hr>
   
-##116 Your company is in the process of migrating its on-premis data warehousing solutions to BigQuery. The exisitng  data warehouse uses trigger-based change data capture (CDC) to apply updates from multiple transactional datanase sources on a daily basis. With BigQuery, your company hopes to improve its handling of CDC so that changes to the source systems are available to query in BigQuery in near-real time using log-nased CDC streams, wjile also optimizing for the performane of applying changes to the data warehouse. Which two steps should they take to ensure that changes are available in the Big Query reporting table with minimal latency while reducing compute overhead?
+###116 Your company is in the process of migrating its on-premis data warehousing solutions to BigQuery. The exisitng  data warehouse uses trigger-based change data capture (CDC) to apply updates from multiple transactional datanase sources on a daily basis. With BigQuery, your company hopes to improve its handling of CDC so that changes to the source systems are available to query in BigQuery in near-real time using log-nased CDC streams, wjile also optimizing for the performane of applying changes to the data warehouse. Which two steps should they take to ensure that changes are available in the Big Query reporting table with minimal latency while reducing compute overhead?
   
 * Insert each new CDC record and corresponding operation type to a staging table in real time.
 * Periodically use a DML MERGE to perform several DML INESRT, UPDATE, and DELETTE operations at the same time on the reporting table.
@@ -540,6 +562,12 @@ You need to analyze the data ny querying against individual fields. Which threee
 
 * Allocate sufficient persistent disk space to the Hadoop cluster, and store the intermediate data of that particular Hadoop job on native HDFS.
 
+<hr>
+  
+###153 You operate an IoT ipeline built around Apache Kafka that normally revives around 5000 messages per second. You want to use Google Cloud Platform to create an alert as soon as the moving average over 1 hour dops below 4000 messages per second. What should you do?
+  
+* Consume the stream of data in Dataflow using Kafka IO. Set a sliding time window of 1 hour ever 5 minutes. Compute the average when the window closes, and send an alert if the averge is less than 4000 messages per second.
+  
 <hr>
   
 ##154 You plan to deploy Cloud SQL using MySQL. You need to ensure high availability in the event of a zone failure. What should you do?
