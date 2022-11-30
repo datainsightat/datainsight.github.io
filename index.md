@@ -66,6 +66,7 @@
 * [Kafka](pages/de/kafka.md)
 * [Beam](pages/de/beam.md)
 * [Airflow](pages/de/airflow.md)
+* [Snowflake](pages/de/snowflake.md)
 
 ## DS - Data Science
 
