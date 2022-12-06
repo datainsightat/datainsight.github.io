@@ -1,8 +1,30 @@
 # dbt (Data Build Tool)
 
+dbt: https://www.getdbt.com/
+Snowflake: https://ns18238.us-east-2.aws.snowflakecomputing.com
+Jinja: https://jinja.palletsprojects.com/en/3.1.x/
+
+## Admin
+
+### Install
+
+    pip install virtualenv
+    virtualenv venv
+    
+    source venv\Scripts\activate
+    
+### Check Structure
+
+    dbt compile
+    
+### Create Models
+
+    dbt run
+
 ## Data Maturity Model
 
-Data Collection > Data Wrangling > Data Integration > BI and Analytics > Artificial Intelligence  
+Data Collection > Data Wrangling > Data Integration > BI and Analytics > Artificial Intelligence 
+
 ### Data Integration
 
 Write data from staging area to database.
@@ -55,3 +77,45 @@ Row oriented databases are good in reading and writing data, but not efficient f
 
 ![Modern Data Stack](../img/de_dbt_04.jpg)
 
+## dbt Strucutres
+
+### Materialization
+
+### Seeds and Sources
+
+* Seeds are local files that you upload to the dwh
+* Sources are abstraction layers on th top of your input tables
+</a>
+
+#### Seeds
+
+Copy csv file in 'seeds' folder
+
+    dbt seed
+    
+#### Sources
+
+Sources are abstractions of tables.
+
+    with raw_reviews as (
+        select * from {{source('airbnb','reviews')}}--AIRBNB.RAW.RAW_REVIEWS
+    )
+    
+##### Data Freshness
+
+Check, if data is current. Condigure freshness in 'sources.yml'
+
+    sources:
+      - name: airbnb
+        schema: raw
+        tables:
+          - name: reviews
+            identifier: raw_reviews
+            loaded_at_field: date
+            freshness:
+              warn_after: {count: 1, period: hour}
+              error_after: {count: 24, period: hour}
+              
+run command
+
+    dbt source freshness
