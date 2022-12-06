@@ -50,6 +50,27 @@ Storage of unstructured data like Images and text files.
 
 Data management like in a data warehouse, but data is stored cheap datalakes
 
+## SCDs Slowly Changing Dimensions
+
+|Type|Desctiption|
+|-|-|
+|0|Not updating the DWH when a dimension changes|
+|1|Overwrite original data|
+|2|Add new row|
+|3|Add new attribute|
+
+## CTE Common Table Expression
+
+    -- STEP 1
+    with raw_listings as (
+    
+    -- STEP 2
+        select * from [source] [listings]
+    )
+    
+    -- STEP 3
+    select * ftom raw_listings
+
 ## Data Stack
 
 ### SMP Warehouses (Symmetric Multi Procecessing)
@@ -119,3 +140,6 @@ Check, if data is current. Condigure freshness in 'sources.yml'
 run command
 
     dbt source freshness
+
+### Snapshots
+
