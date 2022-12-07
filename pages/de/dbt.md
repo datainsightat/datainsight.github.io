@@ -200,3 +200,31 @@ snapshots/scd_raw_listings.sql
 
 https://docs.getdbt.com/docs/building-a-dbt-project/building-models/python-models
 
+models/my_python_model.py
+
+    def model(dbt, session):
+
+    ...
+
+    return final_df
+    
+
+    def model(dbt, session):
+
+        # DataFrame representing an upstream model
+        upstream_model = dbt.ref("upstream_model_name")
+
+        # DataFrame representing an upstream source
+        upstream_source = dbt.source("upstream_source_name", "table_name")
+
+        ...
+        
+models/downstream_model.sql
+
+    with upstream_python_model as (
+
+        select * from {{ ref('my_python_model') }}
+
+    ),
+
+    ...
