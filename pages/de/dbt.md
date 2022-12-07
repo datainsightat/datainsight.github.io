@@ -3,6 +3,7 @@
 dbt: https://www.getdbt.com/
 Snowflake: https://ns18238.us-east-2.aws.snowflakecomputing.com
 Jinja: https://jinja.palletsprojects.com/en/3.1.x/
+Udemy: https://www.udemy.com/course/complete-dbt-data-build-tool-bootcamp-zero-to-hero-learn-dbt
 
 ## Admin
 
@@ -20,6 +21,10 @@ Jinja: https://jinja.palletsprojects.com/en/3.1.x/
 ### Create Models
 
     dbt run
+    
+### Create Snapshots
+
+    dbt snapshot
 
 ## Data Maturity Model
 
@@ -100,7 +105,16 @@ Row oriented databases are good in reading and writing data, but not efficient f
 
 ## dbt Strucutres
 
-### Materialization
+![Dataflow](../img/de_dbt_07.jpg)
+
+### Materializations
+
+|Type|Use|Don't Use|
+|-|-|-|
+|View|lightweight representation|Date often used|
+|Table|Data often used|Single-use models, Incremental tables|
+|Incremental|Fact tables, Appends|Update historical records|
+|Ephemeral|Alias data|Read model several times|
 
 ### Seeds and Sources
 
@@ -142,4 +156,47 @@ run command
     dbt source freshness
 
 ### Snapshots
+
+Handle type 2 slowly changing dimensions. Example update e-mail address and keep history. dbt adds two dimensions: dbt_valid_from and dbt_valid_to.  
+
+|Strategy|How To|
+|-|-|
+|Timestamp|Unique columns: key and updated_ad|
+|Check|Any change in set of columns trigger snapshot|
+
+snapshots/scd_raw_listings.sql
+
+    {% snapshot scd_raw_listings %}
+
+    {{
+        config(
+            target_schema='dev',
+            unique_key='id',
+            strategy='timestamp',
+            updated_at='updated_at',
+            invalide_hard_deletes=True
+        )
+    }}
+
+    select * from {{ source('airbnb','listings')}}
+
+    {% endsnapshot %}
+
+### Tests
+
+* There are two types of tests: singular and generic
+* Singular tests are SQL queries stored in tests which are expected to return an empty resultset
+* Generic tests:
+    * unique
+    * not_null
+    * accepted_values
+    * relationships
+* You can define your own custom generic tests.
+</a>
+
+#### Generic Tests
+
+### Python Models
+
+https://docs.getdbt.com/docs/building-a-dbt-project/building-models/python-models
 
