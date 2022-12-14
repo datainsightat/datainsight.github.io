@@ -13,22 +13,30 @@ Udemy: https://www.udemy.com/course/complete-dbt-data-build-tool-bootcamp-zero-t
     virtualenv venv
     
     source venv\Scripts\activate
-    
-### Check Structure
+
+### dbt commands
+
+#### Check Structure
 
     dbt compile
     
-### Create Models
+#### Create Models
 
     dbt run
     
-### Create Snapshots
+#### Create Snapshots
 
     dbt snapshot
     
-### Run Tests
+#### Run Tests
 
     dbt test
+    
+#### Install Packages
+
+Get packages fromhttps://hub.getdbt.com/ and reference it in packages.yml
+
+    dbt deps
 
 ## Data Maturity Model
 
@@ -107,7 +115,7 @@ Row oriented databases are good in reading and writing data, but not efficient f
 
 ![Modern Data Stack](../img/de_dbt_04.jpg)
 
-## dbt Strucutres
+## dbt Structures
 
 ![Dataflow](../img/de_dbt_07.jpg)
 
@@ -230,7 +238,7 @@ models/schema.yml
 
 Tests passes, if query returns no values.
 
-sql/dim_listings_minimum_nights.sql
+test/dim_listings_minimum_nights.sql
 
     select
         *
@@ -239,6 +247,76 @@ sql/dim_listings_minimum_nights.sql
     where
         minimum_nights < 1
     limit 10
+
+tests/consistent_crated_at.sql
+
+    SELECT
+        *
+    FROM
+        {{ ref('dim_listings_cleansed') }} l
+    INNER JOIN {{ ref('fct_reviews') }} r
+        USING (listing_id)
+    WHERE
+        l.created_at >= r.review_date
+
+### Macros
+
+* Nacros are jinja templates created in the macros folder
+* There are many built-in macros in DBT
+* You can use macros in model definitions and tests
+
+macros/no_null_in_columns.sql
+
+    {% macro no_nulls_in_columns(model) %}
+        select
+            *
+        from
+            {{model}}
+        where
+            {% for col in adapter.get_columns_in_relation(model) -%}
+                {{col.column}} is null or
+            {% endfor %}
+                false
+    {% endmacro %}
+    
+tests/no_nulls_in_dim_listings.sql
+
+    {{no_nulls_in_columns(ref('dim_linstings_cleansed'))}}
+    
+    dbt test --select dim_listings_cleansed
+    
+#### Custom Generic Tests
+
+macros/positive_value.sql
+
+    {% test positive_value(model,column_name)%}
+        select
+            *
+        from
+            {{model}}
+        where
+            {{column_name}} < 1
+    {% endtest %}
+    
+models/schema.yml
+
+    - name: minimum_nights
+        test:
+            - positive_value
+
+### Third-Party Paackages
+
+https://hub.getdbt.com/
+
+#### dbt_utils
+
+packages.yml
+
+    packages:
+        - package: dbt-labs/dbt_utils
+            version: 0.8.0
+
+
 
 ### Python Models
 
