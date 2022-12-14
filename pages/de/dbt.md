@@ -25,6 +25,10 @@ Udemy: https://www.udemy.com/course/complete-dbt-data-build-tool-bootcamp-zero-t
 ### Create Snapshots
 
     dbt snapshot
+    
+### Run Tests
+
+    dbt test
 
 ## Data Maturity Model
 
@@ -195,6 +199,46 @@ snapshots/scd_raw_listings.sql
 </a>
 
 #### Generic Tests
+
+models/schema.yml
+
+    version: 2
+
+    models:
+      - name: dim_listings_cleansed
+        columns:
+          - name: listing_id
+            tests:
+              - unique
+              - not_null
+              
+          - name: host_id
+            tests:
+              - relationships:
+                  to: ref('dim_hosts_cleaned')
+                  field: host_id
+                  
+          - name: room_type
+            tests:
+              - accepted_values:
+                  values: ['Entire home/apt',
+                          'Private room',
+                          'Shared room',
+                          'Hotel room']
+
+#### Singular Tests
+
+Tests passes, if query returns no values.
+
+sql/dim_listings_minimum_nights.sql
+
+    select
+        *
+    from
+        {{ref('dim_listings_cleaned')}}
+    where
+        minimum_nights < 1
+    limit 10
 
 ### Python Models
 
