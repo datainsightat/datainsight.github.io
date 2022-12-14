@@ -37,6 +37,11 @@ Udemy: https://www.udemy.com/course/complete-dbt-data-build-tool-bootcamp-zero-t
 Get packages fromhttps://hub.getdbt.com/ and reference it in packages.yml
 
     dbt deps
+    
+#### Generate Documentation
+
+    dbt docs generate
+    dbt docs serve
 
 ## Data Maturity Model
 
@@ -304,7 +309,7 @@ models/schema.yml
         test:
             - positive_value
 
-### Third-Party Paackages
+### Third-Party Packages
 
 https://hub.getdbt.com/
 
@@ -339,6 +344,66 @@ models/fct/fct_reviews.sql
     {% if is_incremental() %}
         and review_date > (select max(review_date) from {{this}})
     {% endif %}
+
+    $ dbt run --full-refresh --select fct-reviews
+
+### Documentation
+
+* Documents can be provided as yaml files, or as markdown files
+* dbt ships with a documentation web server
+* Customize the landing page with overview.md
+* Add assets in special folder
+<a/>
+
+#### Basic Documentation
+
+models/schema.yml
+
+    version: 2
+
+    models:
+      - name: dim_listings_cleansed
+        description: Cleansed table which contains Airbnb listings.
+        columns:
+          - name: listing_id
+            decription: Primary key fot the listing
+
+#### Markdown Files
+
+models/docs.md
+
+    {% docs dim_listing_cleansed__minimum_nights %}
+    Minmum number of nights required to rent this property.
+    
+    Keep in mind that old listings might have 'minimum_nights' set
+    to 0 in the source tables. Our cleansing algorithm updates this
+    to '1'.
+    {% enddocs %}
+
+models/schema.yml
+
+    - name: minimum_nights
+      description: '{{doc("dim_listing_cleansed__minimum_nights")}}'
+
+#### Overview
+
+Put images in folder "assets"
+
+dbt_project.yml
+
+    asset-paths:["assets"]
+
+models/overview.md
+
+    {% docs __overview__ %}
+    #Airbnb Pipeline
+    
+    Hey, welcome to our Airbnb pipeline documentation!
+    
+    Here is the schema of our input data:
+    ![input schema](assets/input_schema.png)
+    
+    {% enddocs %}
 
 ### Python Models
 
