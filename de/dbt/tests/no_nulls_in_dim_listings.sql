@@ -1,0 +1,1 @@
+{{no_nulls_in_columns(ref('dim_linstings_cleansed'))}}
