@@ -1,9 +1,13 @@
 # dbt (Data Build Tool)
 
-dbt: https://www.getdbt.com/
-Snowflake: https://ns18238.us-east-2.aws.snowflakecomputing.com
-Jinja: https://jinja.palletsprojects.com/en/3.1.x/
-Udemy: https://www.udemy.com/course/complete-dbt-data-build-tool-bootcamp-zero-to-hero-learn-dbt
+* dbt: https://www.getdbt.com/
+* Snowflake: https://ns18238.us-east-2.aws.snowflakecomputing.com
+* Jinja: https://jinja.palletsprojects.com/en/3.1.x/
+* Udemy: https://www.udemy.com/course/complete-dbt-data-build-tool-bootcamp-zero-to-hero-learn-dbt
+
+## Demo Model
+
+https://github.com/datainsightat/DataScience_Examples/tree/main/de/dbt
 
 ## Admin
 
@@ -23,6 +27,7 @@ Udemy: https://www.udemy.com/course/complete-dbt-data-build-tool-bootcamp-zero-t
 #### Create Models
 
     dbt run
+    dbt run --select src_hosts+
     
 #### Create Snapshots
 
@@ -42,6 +47,8 @@ Get packages fromhttps://hub.getdbt.com/ and reference it in packages.yml
 
     dbt docs generate
     dbt docs serve
+    
+![DAG](../img/de_dbt_05.jpg)
 
 ## Data Maturity Model
 
@@ -404,6 +411,67 @@ models/overview.md
     ![input schema](assets/input_schema.png)
     
     {% enddocs %}
+
+### Analyses, Hooks and Exposures
+
+#### Analyses
+
+Queries, without crearting a model
+
+analyses/full_moon_no_sleep.sql
+
+    with markt_fullmoon_reviews as (
+        select * from {{ref('mart_fullmoon_reviews')}}
+    )
+    
+    select
+        is_full_moon,
+        review_sentiment,
+        count(*) as reviews
+    from
+        mart_fullmoon_reviews
+    group by
+        is_full_moon,
+        review_sentiment
+    order by
+        is_full_moon,
+        review_sentiment
+
+    $ dbt compile
+    $ less target/compiled/dbtlearn/analyses/full_moon_no_sleep.sql
+
+### Hooks
+
+* SQLs that are executed at predefined times.
+* Hooks can be configures on the project, subdolder, or model level
+* Types:
+    * on_run_start: Execute at start of dbt
+    * on_run_end: Execute at end of dbt
+    * pre-hook: Execute before a model is built
+    * post-hook: Execute after a model was built
+
+### Exposures
+
+Links to external applications.
+
+models/dashboard.yml
+
+    version: 2
+    
+    exposures:
+        - name: Executive Dashboard
+          type: dashboard
+          maturity: low
+          url: XXX
+          description: Executive Dashboard
+          
+          depends_on:
+            - ref('dim_listings_cleansed')
+            - ref('mart_fullmoon_reviews')
+            
+          owner:
+            name: me
+            email: me@email.com
 
 ### Python Models
 
