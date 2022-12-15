@@ -1,0 +1,16 @@
+version: 2
+
+exposures:
+  - name: Executive Dashboard
+    type: dashboard
+    maturity: low
+    url: XXX
+    description: Executive Dashboard
+    
+    depends_on:
+      - ref('dim_listings_cleansed')
+      - ref('mart_fullmoon_reviews')
+      
+    owner:
+      name: me
+      email: me@email.com
