@@ -1,6 +1,6 @@
 # dbt (Data Build Tool)
 
-* dbt: https://www.getdbt.com/
+* dbt: [https://www.getdbt.com/](https://docs.getdbt.com/docs/build/projects)
 * Snowflake: https://ns18238.us-east-2.aws.snowflakecomputing.com
 * Jinja: https://jinja.palletsprojects.com/en/3.1.x/
 * Udemy: https://www.udemy.com/course/complete-dbt-data-build-tool-bootcamp-zero-to-hero-learn-dbt
