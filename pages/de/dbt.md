@@ -505,3 +505,47 @@ models/downstream_model.sql
     ),
 
     ...
+
+### Incremental Tables
+
+/loop.sh
+
+    #!/bin/bash
+
+    clear
+
+    echo "#### Set variables ... ####"
+
+    START_MONTH=202201
+    END_MONTH=202212
+
+    declare -i periods=$END_MONTH-$START_MONTH
+
+    echo $periods
+
+    echo "#### Loop ... ####"
+
+    # Write new table with first period
+    
+    declare -i period=$START_MONTH
+    echo $period
+
+    # declare 'model_increment' as: {{config(materialized='incremental')}}
+    
+    dbt run --vars '{start_period: '$period',end_period: '$period'}' --full-refresh --select model_increment --target schema
+
+    # Append periods, if more than 1 period
+    
+    if [ $periods > 1 ]
+    then
+
+        for i in $(seq 1 $periods)
+        do
+            declare -i period=$START_MONTH+$i
+            echo $period
+
+            dbt run --vars '{start_period: '$period',end_period: '$period'}' --select model_increment --target schema
+
+        done
+
+    fi
