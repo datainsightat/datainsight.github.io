@@ -48,7 +48,7 @@
 
 ### ETL
 
-* [DBT](pages/de/dbt.html)
+* [DBT](pages/de/dbt.md)
 
 ### CI/CD
 * [Git](pages/de/git.md)
