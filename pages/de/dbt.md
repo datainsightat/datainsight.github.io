@@ -549,3 +549,5 @@ models/downstream_model.sql
         done
 
     fi
+
+# Test
