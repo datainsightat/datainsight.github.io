@@ -105,6 +105,10 @@ Build image
     $ docker container run --vm -p 80:3000 testnode
     $ docker tag testnode username/testing-node
     $ docker push username/testing-node
+    
+## Build Image from Container
+
+    $ docker commit llm alpaca-llm:latest
 
 # Get Bash in Docker
 
