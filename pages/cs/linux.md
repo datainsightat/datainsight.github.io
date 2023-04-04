@@ -205,6 +205,12 @@
 
     $ cat more-secrets
     $ sort -u -k2 more-secrets
+    
+## curl
+
+Get file from internet source.
+
+    curl http://some.url --output some.file
 
 ## tar	collection of files
 
