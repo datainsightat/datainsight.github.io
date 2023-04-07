@@ -121,4 +121,59 @@ Build image
     $ xhost +
     $ docker run -it --name gimp -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro gimp:0.1
 
+# Run Docker in Windows 11 WSL 2 without Docker Desktop
 
+https://dev.to/felipecrs/simply-run-docker-on-wsl2-3o8
+
+## Install Docker WSL 2: Ubuntu
+    
+    $ # Ensures not older packages are installed
+    $ sudo apt-get remove docker docker-engine docker.io containerd runc
+
+    # Ensure pre-requisites are installed
+    $ sudo apt-get update
+    $ sudo apt-get install \
+        ca-certificates \
+        curl \
+        gnupg \
+        lsb-release
+
+    # Adds docker apt key
+    $ sudo mkdir -p /etc/apt/keyrings
+    $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+    # Adds docker apt repository
+    $ echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+    # Refreshes apt repos
+    $ sudo apt-get update
+
+    # Installs Docker CE
+    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    
+    # Ensures docker group exists
+    $ sudo groupadd docker
+
+    # Ensures you are part of it
+    $ sudo usermod -aG docker $USER
+
+    # Now, close your shell and open another for taking the group changes into account
+    
+    $ touch /etc/wsl.conf
+    
+    [boot]
+    systemd=true
+
+reboot
+
+## Install VSCode
+
+https://securecloud.blog/2021/12/07/wsl2-use-docker-with-vscode-without-docker-desktop/
+
+    VSCode: Install 'Remote - WSL' Extension
+    Remote - Explorer: WSL Targets > Ubuntu > Connect to WSL
+    Ubuntu Remote: Install 'Docker' Extension
+
+    
