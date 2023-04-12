@@ -95,6 +95,12 @@
     $ umask 077 sales.data
 
     chmod 777 - umask 002 =  chmod 775
+    
+### Create Symbolic Links
+
+    ln -s target_file link_name
+    
+    realpath link_name
 
 ## Findig Files and Directories
 
