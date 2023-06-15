@@ -30,6 +30,7 @@
 * [HTML/CSS](pages/cs/html.md)
 * [JavaScript](pages/cs/js.md)
 * [Visual Basic]
+* [Perl](pages/cs/perl.md)
 
 ### Database
 
