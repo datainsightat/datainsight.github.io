@@ -77,6 +77,9 @@ my %days = (
 ```
 
 ### Regex
+```perl
+/()
+```
 
 ### Packages
 
