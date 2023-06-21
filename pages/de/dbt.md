@@ -188,7 +188,7 @@ Handle type 2 slowly changing dimensions. Example update e-mail address and keep
 |Timestamp|Unique columns: key and updated_ad|
 |Check|Any change in set of columns trigger snapshot|
 
-snapshots/scd_raw_listings.sql
+#snapshots/scd_raw_listings.sql
 
     {% snapshot scd_raw_listings %}
 
