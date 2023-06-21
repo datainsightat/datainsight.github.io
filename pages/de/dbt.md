@@ -191,7 +191,7 @@ Handle type 2 slowly changing dimensions. Example update e-mail address and keep
 snapshots/scd_raw_listings.sql
 
 ```dbt
-{% snapshot scd_raw_listings %}
+{\% snapshot scd_raw_listings \%}
 
 {{
     config(
