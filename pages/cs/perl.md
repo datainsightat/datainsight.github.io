@@ -76,11 +76,6 @@ my %days = (
 )
 ```
 
-### Regex
-```perl
-/()
-```
-
 ### Packages
 
 #### Download Web > LWP::Simple
