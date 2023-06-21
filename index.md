@@ -31,6 +31,7 @@
 * [JavaScript](pages/cs/js.md)
 * [Visual Basic]
 * [Perl](pages/cs/perl.md)
+* [Regex](pages/cs/regex.md)
 
 ### Database
 
