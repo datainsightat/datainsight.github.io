@@ -205,7 +205,7 @@ snapshots/scd_raw_listings.sql
 
 select * from {{ source('airbnb','listings')}}
 
-{% endsnapshot %}
+{\% endsnapshot \%}
 ```
 
 ### Tests
@@ -282,17 +282,17 @@ tests/consistent_crated_at.sql
 macros/no_null_in_columns.sql
 
 ```dbt
-{% macro no_nulls_in_columns(model) %}
+{\% macro no_nulls_in_columns(model) \%}
     select
         *
     from
         {{model}}
     where
-        {% for col in adapter.get_columns_in_relation(model) -%}
+        {\% for col in adapter.get_columns_in_relation(model) -\%}
             {{col.column}} is null or
-        {% endfor %}
+        {\% endfor \%}
             false
-{% endmacro %}
+{\% endmacro \%}
 ```
     
 tests/no_nulls_in_dim_listings.sql
@@ -306,14 +306,14 @@ tests/no_nulls_in_dim_listings.sql
 macros/positive_value.sql
 
 ```dbt
-{% test positive_value(model,column_name)%}
+{\% test positive_value(model,column_name)\%}
     select
         *
     from
         {{model}}
     where
         {{column_name}} < 1
-{% endtest %}
+{\% endtest \%}
 ```
     
 models/schema.yml
@@ -355,9 +355,9 @@ from
     src_reviews
 where
     review_text is not null
-{% if is_incremental() %}
+{\% if is_incremental() \%}
     and review_date > (select max(review_date) from {{this}})
-{% endif %}
+{\% endif \%}
 
 $ dbt run --full-refresh --select fct-reviews
 ```
@@ -388,13 +388,13 @@ models/schema.yml
 models/docs.md
 
 ```dbt
-{% docs dim_listing_cleansed__minimum_nights %}
+{\% docs dim_listing_cleansed__minimum_nights \%}
 Minmum number of nights required to rent this property.
 
 Keep in mind that old listings might have 'minimum_nights' set
 to 0 in the source tables. Our cleansing algorithm updates this
 to '1'.
-{% enddocs %}
+{\% enddocs \%}
 ```
 
 models/schema.yml
@@ -413,7 +413,7 @@ dbt_project.yml
 models/overview.md
 
 ```dbt
-{% docs __overview__ %}
+{\% docs __overview__ \%}
 #Airbnb Pipeline
 
 Hey, welcome to our Airbnb pipeline documentation!
@@ -421,7 +421,7 @@ Hey, welcome to our Airbnb pipeline documentation!
 Here is the schema of our input data:
 ![input schema](assets/input_schema.png)
 
-{% enddocs %}
+{\% enddocs \%}
 ```
 
 ### Analyses, Hooks and Exposures
