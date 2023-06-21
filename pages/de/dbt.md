@@ -188,23 +188,25 @@ Handle type 2 slowly changing dimensions. Example update e-mail address and keep
 |Timestamp|Unique columns: key and updated_ad|
 |Check|Any change in set of columns trigger snapshot|
 
-#snapshots/scd_raw_listings.sql
+snapshots/scd_raw_listings.sql
 
-    {% snapshot scd_raw_listings %}
+```dbt
+{% snapshot scd_raw_listings %}
 
-    {{
-        config(
-            target_schema='dev',
-            unique_key='id',
-            strategy='timestamp',
-            updated_at='updated_at',
-            invalide_hard_deletes=True
-        )
-    }}
+{{
+    config(
+        target_schema='dev',
+        unique_key='id',
+        strategy='timestamp',
+        updated_at='updated_at',
+        invalide_hard_deletes=True
+    )
+}}
 
-    select * from {{ source('airbnb','listings')}}
+select * from {{ source('airbnb','listings')}}
 
-    {% endsnapshot %}
+{% endsnapshot %}
+```
 
 ### Tests
 
@@ -279,17 +281,19 @@ tests/consistent_crated_at.sql
 
 macros/no_null_in_columns.sql
 
-    {% macro no_nulls_in_columns(model) %}
-        select
-            *
-        from
-            {{model}}
-        where
-            {% for col in adapter.get_columns_in_relation(model) -%}
-                {{col.column}} is null or
-            {% endfor %}
-                false
-    {% endmacro %}
+```dbt
+{% macro no_nulls_in_columns(model) %}
+    select
+        *
+    from
+        {{model}}
+    where
+        {% for col in adapter.get_columns_in_relation(model) -%}
+            {{col.column}} is null or
+        {% endfor %}
+            false
+{% endmacro %}
+```
     
 tests/no_nulls_in_dim_listings.sql
 
@@ -301,14 +305,16 @@ tests/no_nulls_in_dim_listings.sql
 
 macros/positive_value.sql
 
-    {% test positive_value(model,column_name)%}
-        select
-            *
-        from
-            {{model}}
-        where
-            {{column_name}} < 1
-    {% endtest %}
+```dbt
+{% test positive_value(model,column_name)%}
+    select
+        *
+    from
+        {{model}}
+    where
+        {{column_name}} < 1
+{% endtest %}
+```
     
 models/schema.yml
 
@@ -330,29 +336,31 @@ packages.yml
 
 models/fct/fct_reviews.sql
 
-    {{
-        config(
-            materialized = 'incremental',
-            on_schema_change='fail'
-        )
-    }}
-
-    with src_reviews as (
-        select * from {{ref('src_reviews')}}
+```dbt
+{{
+    config(
+        materialized = 'incremental',
+        on_schema_change='fail'
     )
+}}
 
-    select
-        {{dbt_utils.surrogate_key(['listing_id','review_date','reviewer_name','review_text'])}} as review_id,
-        *
-    from
-        src_reviews
-    where
-        review_text is not null
-    {% if is_incremental() %}
-        and review_date > (select max(review_date) from {{this}})
-    {% endif %}
+with src_reviews as (
+    select * from {{ref('src_reviews')}}
+)
 
-    $ dbt run --full-refresh --select fct-reviews
+select
+    {{dbt_utils.surrogate_key(['listing_id','review_date','reviewer_name','review_text'])}} as review_id,
+    *
+from
+    src_reviews
+where
+    review_text is not null
+{% if is_incremental() %}
+    and review_date > (select max(review_date) from {{this}})
+{% endif %}
+
+$ dbt run --full-refresh --select fct-reviews
+```
 
 ### Documentation
 
@@ -379,13 +387,15 @@ models/schema.yml
 
 models/docs.md
 
-    {% docs dim_listing_cleansed__minimum_nights %}
-    Minmum number of nights required to rent this property.
-    
-    Keep in mind that old listings might have 'minimum_nights' set
-    to 0 in the source tables. Our cleansing algorithm updates this
-    to '1'.
-    {% enddocs %}
+```dbt
+{% docs dim_listing_cleansed__minimum_nights %}
+Minmum number of nights required to rent this property.
+
+Keep in mind that old listings might have 'minimum_nights' set
+to 0 in the source tables. Our cleansing algorithm updates this
+to '1'.
+{% enddocs %}
+```
 
 models/schema.yml
 
@@ -402,15 +412,17 @@ dbt_project.yml
 
 models/overview.md
 
-    {% docs __overview__ %}
-    #Airbnb Pipeline
-    
-    Hey, welcome to our Airbnb pipeline documentation!
-    
-    Here is the schema of our input data:
-    ![input schema](assets/input_schema.png)
-    
-    {% enddocs %}
+```dbt
+{% docs __overview__ %}
+#Airbnb Pipeline
+
+Hey, welcome to our Airbnb pipeline documentation!
+
+Here is the schema of our input data:
+![input schema](assets/input_schema.png)
+
+{% enddocs %}
+```
 
 ### Analyses, Hooks and Exposures
 
