@@ -1,5 +1,7 @@
 ## Perl
 
+[Code Examples](https://github.com/datainsightat/DataScience_Examples/tree/main/cs/perl)
+
 ### Structures
 
 #### Boilerplate
