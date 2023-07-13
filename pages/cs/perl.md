@@ -69,6 +69,37 @@ my @files = (
 )
 ```
 
+##### Split String into Array
+```perl
+my $line = 'first,second,third';
+chomp $line; # REmove non-printing charcters at the beginning and the end of the line
+my @values = split(',',$line);
+```
+
+##### Add value to array
+```perl
+my @lines; #define array
+my $line = 'This is a test';
+push @lines, $line;
+
+for my $line(@lines) {
+  print $line . "\n";
+}
+```
+
+##### Add reference on array to array
+```perl
+my @lines; #define array
+my $line = 'first,second,third';
+my @values = split /\s*,\s*/, $line;
+
+push @lines, \@values;
+
+for my $line(@lines) {
+  print $line->[0] . "\n";
+}
+```
+
 #### Hash
 ```perl
 my %days = (
@@ -77,6 +108,38 @@ my %days = (
   3 => "Wednesday",
   4 => "Thursday",
 )
+
+print $days{1} . "\n";
+
+my @day_keys = keys %days;
+
+while(my ($key,$value) = each %days) {
+    print "$key: $value\n";
+}
+
+foreach my $key(sort keys %days) {
+    my $value = $days{$key};
+
+    print "$key: $value\n";
+}
+```
+
+##### Add reference on hash to array
+```perl
+my %hash = (
+    "cat" => "meat",
+    "birds" => "seeds",
+    "fish" => "worms",
+);
+
+my @test;
+
+push @test, \%hash;
+
+$test[1] = \%hash;
+
+print $test[0]{"birds"} . "\n";
+print $test[1]{"fish"} . "\n";
 ```
 
 ### Packages
