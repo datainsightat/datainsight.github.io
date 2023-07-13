@@ -1145,3 +1145,9 @@ Dynmaic host configuration protocol
 ## Strip out comments and blank lines
 	
 	$ grep -Ev '^#|^$' file.txt
+
+## SSH Connection
+
+	$ ssh-keygen -t rsa -m PEM -b 4096 -C "<your-email-here>"
+ 	$ ssh-keygen -R <host_name> -f ~/.ssh/known_hosts
+ 	
