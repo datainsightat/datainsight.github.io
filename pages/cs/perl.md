@@ -142,6 +142,245 @@ print $test[0]{"birds"} . "\n";
 print $test[1]{"fish"} . "\n";
 ```
 
+### Arguments
+```bash
+$ perl main.pl -a -f some_argument -c
+```
+```perl
+use strict;
+use warnings;
+use Data::Dumper;
+use Getopt::Std; # Get Arguments
+
+$|=1;
+
+sub main {
+    my %opts;
+
+    getopts('af:c',\%opts); # Add ':' to flags that can take arguments
+
+    print Dumper(%opts);
+
+    my $file = $opts{'f'};
+
+    print "File: $file\n";
+}
+
+main();
+```
+
+### Subroutines
+```perl
+sub main {
+  my @arguments = ('one','two','three');
+  subroutine1(@arguments);
+  subroutine2(@arguments);
+}
+
+sub subroutine1 {
+  my $opt1 = shift;
+  my $opt2 = shift;
+  my $opt3 = shift;
+}
+
+sub subroutine2 {
+  my ($opt1,$opt2,$opt3) = @_;
+}
+
+main();
+```
+
+### Perl One Liners
+
+#### Execute Perl Program
+'-e' executes the perl code
+
+```perl
+$ perl -e 'print "Hello World!\n;"'
+```
+
+#### Get Data from URL
+
+```perl
+$ perl -e 'use LWP::Simple; print get("http://www.orf.at");'
+```
+
+#### Replace Text in File
+
+'-p' iterates over textfile. The line is stored in the '@_' variable.
+
+```perl
+$ perl -pe 's/\bme\b/ZORG/gi' moby_dick.txt
+```
+
+'-i' creates a new file with the substitution. It stores the original file in a new file version.
+
+```perl
+$ perl -i.orig -pe 's/\bme\b/ZORG/gi' moby_dick.txt
+```
+
+### Modules
+```
+/main.pl
+/Speak.pm
+/Dir1/Speak_Dir.pm
+```
+
+#### main.pl
+```perl
+use strict;
+use warnings;
+use Data::Dumper;
+
+# @INC contains all paths, perl is searching for modules
+
+#use File::Basename;
+#use lib dirname (__FILE__);
+use lib '.'; # Add current folder to @INC
+use Speak qw(test greet);
+use Dir1::Speak_Dir qw(test_dir greet_dir);
+
+$|=1;
+
+sub main {
+    #Speak::test();
+    test();
+    greet();
+    
+    test_dir();
+    greet_dir();
+
+    #my @dogs = ("retriever","labrador");
+    my @dogs = qw(retriever labrador);
+
+    print Dumper(@dogs);
+}
+
+main();
+```
+
+#### Seak.pm
+```perl
+package Speak;
+
+use Exporter qw(import);
+
+@EXPORT_OK = qw(test greet); #declare array of subroutine names
+
+sub test {
+    print "Hello world!\n";
+}
+
+sub greet {
+    print "Hello user\n";
+}
+
+1; #return value 1
+```
+
+#### Seak_Dir.pm
+```perl
+package Dir1::Speak_Dir;
+
+use Exporter qw(import);
+
+@EXPORT_OK = qw(test_dir greet_dir); #declare array of subroutine names
+
+sub test_dir {
+    print "Hello world dir!\n";
+}
+
+sub greet_dir {
+    print "Hello user dir\n";
+}
+
+1; #return value 1
+```
+
+### Classes
+```
+/main.pl
+/Data/Person.pm
+```
+
+#### main.pl
+```perl
+use strict;
+use warnings;
+
+use lib '.';
+use Data::Person;
+
+$|=1;
+
+sub main {
+
+    my $person1 = new Data::Person("Bob",45);
+    $person1->greet("Mike");
+
+    my $person2 = new Data::Person("Sue",30);
+    $person2->greet("Bob");
+
+}
+
+main();
+```
+
+#### Person.pm
+```perl
+package Data::Person;
+
+sub new {
+    my $class = shift;
+
+    # Create hash
+    # my %self = (
+    #     "name" => shift,
+    #     "age" => shift,
+    # );
+    
+    # Crete reference to hash
+    my $self = {
+        "name" => shift,
+        "age" => shift,
+    };
+
+    bless($self,$class);
+
+    return $self;
+}
+
+sub greet {
+    my ($self,$other) = @_;
+
+    print "Hello, $other, I am " . $self->{"name"} . ". My age is " . $self->{"age"} . ".\n";
+}
+
+1;
+```
+
+### Shell Commands
+```perl
+use strict;
+use warnings;
+
+use File::Copy;
+
+$|=1;
+
+sub main {
+    copy('./moby_dick.txt','./Dir1/');
+    move('./moby_dick.txt','./Dir2/');
+    move('./Dir2/moby_dick.txt','./');
+
+    # Execute system command with backticks '`'.
+    print `ls -l`;
+    `cp ./moby_dick.txt ./Dir3/`
+}
+
+main();
+```
+
 ### Packages
 
 #### Download Web > LWP::Simple
