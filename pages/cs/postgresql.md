@@ -22,7 +22,7 @@ $ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 54
 
 ## Basic SQL Commands
 
-### Create Table
+### *CREATE TABLE* > Create Table
 
 ```sql
 create table cities (
@@ -33,7 +33,7 @@ create table cities (
 );
 ```
 
-### Insert Data into Table
+### *INSERT INTO* > Insert Data into Table
 
 ```sql
 insert into cities (name,country,population,area)
@@ -43,7 +43,7 @@ values
     ('Sao Paulo','Brazil',20935000,3043);
 ```
 
-### Select Data from Table
+### *SELECT* > Select Data from Table
 
 ```sql
 select * from cities;
@@ -91,3 +91,31 @@ SELECT
 FROM
     cities;
 ```
+
+### *WHERE* > Filter Table
+
+|Operator|Function|
+|-|-|
+|=|Equal|
+|>|Greater|
+|<|Smaller|
+|>=|Greater or Equal|
+|<=|Smaller or Equal|
+|<>|Not Equal|
+|!=|Not Equal|
+|between|Between two values|
+|in|Value in list|
+|not in|Value not in list|
+
+```sql
+SELECT
+    name,
+    area
+FROM
+    cities
+WHERE
+    area between 2000 and 5000
+    and name in ('Delhi','Shanghai');
+```
+
+### *UPDATE* > Update rows
