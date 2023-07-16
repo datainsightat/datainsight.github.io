@@ -6,20 +6,20 @@
 
 #### Linux
 
-* [Admin](pages/cs/linux.html)
-* [Arch Linux](pages/cs/archlinux.html)
+* [Admin](pages/cs/linux.md)
+* [Arch Linux](pages/cs/archlinux.md)
  
 #### Other
 
 * [Windows]
-* [Docker](pages/de/docker.html)
+* [Docker](pages/de/docker.md)
 * [Kubernetes]
 
 ### Code
 
-* [Big O](pages/cs/bigo.html)
-* [Algorithm](pages/cs/algorithm.html)
-* [Datastructure](pages/cs/datastructure.html)
+* [Big O](pages/cs/bigo.md)
+* [Algorithm](pages/cs/algorithm.md)
+* [Datastructure](pages/cs/datastructure.md)
 
 ### Languages
 
