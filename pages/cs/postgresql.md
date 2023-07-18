@@ -119,3 +119,21 @@ WHERE
 ```
 
 ### *UPDATE* > Update rows
+
+```sql
+UPDATE
+    cities
+set
+    population = 39505000
+WHERE
+    name = 'Shanghai';
+```
+
+### *DELETE* > Delete rows
+
+```sql
+DELETE FROM
+    cities
+WHERE
+    name = 'Tokyo';
+```
