@@ -137,3 +137,97 @@ DELETE FROM
 WHERE
     name = 'Tokyo';
 ```
+
+## Tables
+
+### Primary Keys and Foreign Keys
+
+- Primary Key: Uniquely identifies a record in a table
+    - You cannot delete a user with a key, that is refenced by a foreign key in another table
+        - ON DELETE RESTRICT > error
+        - ON DELETE NO ACTION > error
+        - ON DELETE CASCADE > delete value in associated table too!
+        - ON DELETE SET NULL
+        - ON DELETE SET DEFAULT
+- Foreign Key: Identifies a record in another table that this record is associated with
+    - The foreign key must exist in the associated table
+    - You can add a value with user 'NULL'
+</a>
+
+```sql
+create Table users (
+    id serial primary key,
+    username varchar(50)
+);
+
+insert INTO
+    users (username)
+VALUES
+    ('monahan93'),
+    ('pferrer'),
+    ('si930nis'),
+    ('99stroman');
+
+select * from users;
+```
+|id|username|
+|-|-|
+|1|monahan93|
+|2|pferrer|
+|3|si930nis|
+|4|99stroman|
+
+```sql
+create Table photos (
+    id serial primary key,
+    url varchar(200),
+    user_id integer REFERENCES users(id) on delete cascade
+);
+
+insert INTO
+    photos (url,user_id)
+VALUES
+    ('http://img1.jpg',4),
+    ('http://img2.jpg',4),
+    ('http://img3.jpg',1),
+    ('http://img4.jpg',2),
+    ('http://img01.jp2',NULL); 
+
+select * from photos;
+```
+|id|url|user_id|
+|-|-|-|
+|1|http://img1.jpg|4|
+|2|http://img2.jpg|4|
+|3|http://img3.jpg|1|
+|4|http://img4.jpg|2|
+
+```sql
+create Table comments (
+    id serial primary key,
+    photo_id integer REFERENCES photos(id) on delete cascade,
+    user_id integer REFERENCES photos(id) on delete cascade,
+    contents varchar(240)
+);
+
+insert INTO
+    comments (contents,photo_id,user_id)
+VALUES
+    ('Quo velit iusto ducimus quos a incidunt nesciunt facilis.', 2, 1),
+    ('Non est totam.', 2, 1),
+    ('Fuga et iste beatae.', 3, 2),
+    ('Molestias tempore est.', 1, 2);
+
+select * from comments;
+```
+|id|photo_id|user_id|contents|
+|-|-|-|-|
+|1|2|1|Quo velit iusto ducimus quos a incidunt nesciunt facilis.|
+|2|2|1|Non est totam.|
+|3|3|2|Fuga et iste beatae.|
+|4|1|2|Molestias tempore est.|
+
+## Joins
+
+
+
