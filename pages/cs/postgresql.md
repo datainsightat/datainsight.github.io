@@ -18,8 +18,6 @@ $ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 54
 |Port|5432|
 |Password|mysecretpassword|
 
-![01](../drawio/postgresql/01.svg)
-
 ## Basic SQL Commands
 
 ### *CREATE TABLE* > Create Table
@@ -229,5 +227,16 @@ select * from comments;
 
 ## Joins
 
+For each comment, show the contents of the comment and the username of the user who wrote the comment:
 
-
+```sql
+SELECT
+  a.contents,
+  b.username
+FROM
+  comments a
+JOIN
+  users b ON
+    a.user_id = b.id;
+```
+![joins](../drawio/postgresql/joins.svg)
