@@ -240,3 +240,63 @@ JOIN
     a.user_id = b.id;
 ```
 ![joins](../drawio/postgresql/joins.svg)
+
+Search for all users that commented on their own photos.
+
+```sql
+SELECT
+  url, contents, username
+FROM
+  comments a
+JOIN
+  photos b on
+    b.id = a.photo_id
+JOIN
+  users c ON
+    c.id = a.user_id
+    and a.user_id = b.user_id;
+```
+
+## Aggregation
+
+|Function|Description|
+|-|-|
+|COUNT()|Number of values|
+|SUM()|Sum of a group of numbers|
+|AVG()|Average of a group of numbers|
+|MIN()|Minimum|
+|MAX()|Maximum|
+
+### *GROUP BY* > Groups rows by a unique set of values
+
+```sql
+SELECT
+  user_id,
+  count(*)
+FROM
+  photos
+GROUP BY
+ user_id;
+```
+
+### *HAVING* > Filter the set of groups
+
+HAVING filters grouped values
+
+```sql
+SELECT
+  b.username,
+  count(*)
+FROM
+  photos a
+LEFT JOIN
+  users b ON
+    b.id = a.user_id
+GROUP BY
+  b.username
+HAVING
+  count(*) >= 4;
+```
+
+## Sorting
+
