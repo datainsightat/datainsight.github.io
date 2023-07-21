@@ -300,3 +300,77 @@ HAVING
 
 ## Sorting
 
+### *ORDER BY* > Sort columns
+
+```sql
+select
+    *
+from
+    products
+order by
+    price,
+    weight desc;
+```
+
+### *OFFSET* > Skip the first n lines
+
+```sql
+select
+    *
+from
+    users
+offset
+    10;
+```
+
+### *LIMIT* > Get specific number of records
+
+```sql
+select
+    *
+from
+    users
+limit
+    5;
+```
+
+## Union and Intersections
+
+'UNION' removes identical entries. Use the 'UNION ALL' keyword wo keep identical records.
+
+|Keyword|Function|
+|-|-|
+|UNION|Join together the reults of two queries and remove duplicate rows|
+|UNION ALL|Join together results of two queries|
+|INTERSECT|Find the rows common in the results of two queries. Remove duplicates|
+|INTERSECT ALL|Find the rows common in the results of two queries|
+|EXCEPT|Find the rows that are present in first query but not second query. Remove duplicates|
+|EXCEPT ALL|Find the rows that are present in first query butg not second query|
+
+```sql
+(
+    select
+        *
+    from
+        products
+    order by
+        price desc
+    limit
+        4
+)
+
+union
+
+(
+    select
+        *
+    from
+        products
+    order by
+        price / weight desc
+    limit
+        4
+);
+
+## Subqueries
+
