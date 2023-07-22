@@ -116,6 +116,8 @@
 
     $ find
     $ find . 
+    $ find . -name '*v9*'
+    $ find . -iname "*.SomeExt" | xargs cp -t Directory
 
     locate
 
