@@ -90,6 +90,41 @@ FROM
     cities;
 ```
 
+#### *DISTINCT* > Unique Values
+
+```sql
+select
+    distinct
+    country
+from
+    cities
+```
+
+#### *GREATER/LEAST* > Biggest, Smallest values
+
+```sql
+select
+    name,
+    weight,
+    greatest(30,2*weight),
+    least(30,2*weight)
+from
+    products;
+```
+
+#### *CASE* > If then else Statement
+
+```sql
+select
+    name,
+    price,
+    case
+        when price > 600 then 'high'
+        when price > 300 then 'medium'
+        else 'cheap'
+    end
+```
+
 ### *WHERE* > Filter Table
 
 |Operator|Function|
@@ -478,7 +513,7 @@ WHERE
 ```
 
 |Operator|Description|
-|-|-|-|
+|-|-|
 |ALL|All items in list|
 |SOME/ANY|At least one item in list|
 
@@ -498,4 +533,41 @@ where
         where
             department = 'Industrial'
 );
+```
+
+### Correlated Subqueries
+
+Get the most expensive product for each department
+
+```sql
+select
+    name,
+    deparment,
+    price
+from
+    products p1
+where
+    p1.price = (
+        select
+            max(price)
+        from
+            products p2
+        where
+            p2.department = p1.department
+);
+```
+
+```sql
+select
+    p1.name
+    (
+        select
+            count(*)
+        from
+            orders as o1
+        where
+            o1.product_id = p1.id
+    ) as num_orders
+from
+    products as p1
 ```
