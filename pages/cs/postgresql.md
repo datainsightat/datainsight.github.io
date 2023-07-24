@@ -371,6 +371,131 @@ union
     limit
         4
 );
+```
 
 ## Subqueries
 
+The shape of data matters in the use of subqueries
+
+|Statement|shape|
+|-|-|
+|select * from orders|Many rows, many columns|
+|select id from orders|Many rows, one column|
+|select count(*) from orders|Single value|
+
+### Subqueries in SELECT Statements
+
+Any subquery must result in a single value
+
+```sql
+select
+    name,
+    price,
+    (select max(price) from products) price_max,
+    (select price from products where id = 3) price_id_3
+from
+    products
+where
+    price > 867;
+```
+
+### Subqueries in FROM Statements
+
+Any subquery compatible to the outer query. Apply alias to subquery.
+
+```sql
+select
+    avg(p.order_count)
+from (
+    select
+        user_id,
+        count(*) as order_count
+    from
+        orders
+    group by
+        user_id
+) as p;
+```
+
+### Subqueries in JOIN Clauses
+
+Any subquery that is compatible to the on statement
+
+```sql
+select
+    u.first_name
+from
+    users as u
+join (
+    select
+        user_id
+    from
+        orders
+    where
+        product_id = 3
+) as o on
+    u.id = o.user_id;
+```
+
+### Subqueries in WHERE Statements
+
+|Operator|Datastructure|
+|-|-|
+|>,<,>=,<=,=,<>,!=|Single Value|
+|IN, NOT IN|Single Column|
+|(>,<,>=,<=,=,<>) ALL/SOME/ANY|Single Column|
+
+```sql
+select
+    id
+from
+    orders
+where
+    product_id in (
+        select
+            id
+        from
+            products
+        where
+            price / weight > 5
+);
+```
+
+```sql
+SELECT
+    name, price
+FROM
+    products
+WHERE
+    price > (
+        SELECT
+            max(price)
+        FROM
+            products
+        WHERE
+            department = 'toys'
+    );
+```
+
+|Operator|Description|
+|-|-|-|
+|ALL|All items in list|
+|SOME/ANY|At least one item in list|
+
+```sql
+select
+    name,
+    department,
+    price
+from
+    products
+where
+    price > some (
+        select
+            price
+        from
+            products
+        where
+            department = 'Industrial'
+);
+```
