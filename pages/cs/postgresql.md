@@ -263,6 +263,8 @@ select
 |between|Between two values|
 |in|Value in list|
 |not in|Value not in list|
+|is null|value is NULL|
+|is not null|value is not null|
 
 ```sql
 SELECT
@@ -359,6 +361,8 @@ select * from photos;
 |3|http://img3.jpg|1|
 |4|http://img4.jpg|2|
 
+The 'SERIAL' keyword lets the index column increase by 1, each time a new record is inserted.
+
 ```sql
 create Table comments (
     id serial primary key,
@@ -386,7 +390,121 @@ select * from comments;
 
 ### Validation
 
+#### NOT NULL
 
+The value must not be null
+
+```sql
+create table products (
+    is serial primary key,
+    name varchar(50),
+    department varchar(50),
+    price integer not null,
+    weight integer
+);
+```
+
+Add validation to existing column. If the column contains already null values, these values need to be replaced by actual values.
+
+```sql
+update
+    products
+set
+    price = 999
+where
+    price is null;
+
+alter table
+    products
+alter column
+    price
+set not null;
+```
+
+#### DEFAULT
+
+Set a default value for unspecified columns.
+
+```sql
+create table products (
+    is serial primary key,
+    name varchar(50),
+    department varchar(50),
+    price integer default 999,
+    weight integer
+);
+
+alter table
+    products
+alter column
+    price
+set default 999;
+```
+
+#### UNIQUE
+
+Ensure that column values are unique.
+
+```sql
+create table products (
+    is serial primary key,
+    name varchar(50) unique,
+    department varchar(50),
+    price integer default 999,
+    weight integer
+);
+```
+
+You cannot add the constraint to existing tables, if the column contans mulitple entries with the same value.
+
+```sql
+alter table
+    products
+alter column
+    name
+add unique (name);
+
+alter table
+    products
+drop constraint products_name_key;
+```
+
+##### Multi column Uniqueness
+
+```sql
+create table products (
+    is serial primary key,
+    name varchar(50),
+    department varchar(50),
+    price integer default 999,
+    weight integer,
+    unique(name,department)
+);
+
+alter table
+    products
+add unique (name, department);
+```
+
+### Validation Check
+
+```sql
+create table products (
+    is serial primary key,
+    name varchar(50),
+    department varchar(50),
+    price integer check (price > 0),
+    weight integer
+);
+```
+
+Existing rows must satisfy the restriction.
+
+```sql
+alter table
+    products
+add check (price > 0);
+```
 
 ## Joins
 
