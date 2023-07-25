@@ -18,6 +18,130 @@ $ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 54
 |Port|5432|
 |Password|mysecretpassword|
 
+## Datatypes
+
+### Numbers
+
+|Datatype|Description|
+|-|-|
+|smalling|-32,768 to +32,767|
+|integerr|-2,147,583,648 to +2,147,583,647|
+|bigint|-9.22 10^18 to +9.22 10^18|
+|smallserial|+1 to +32,767|
+|serial|+1 to +2,147,583,647|
+|bigserial|+1 to +9.22 10^18|
+|decimalr|131,072 digits before decimal point, 16,383 after|
+|numeric|131,072 digits before decimal point, 16,383 after|
+|real|-1 10^37 to +1 10^37 with a least 6 place precision|
+|double precision|-1 10^307 to +1 10^308 with a least 15 place precision|
+|float|-same as real or double|
+
+Creat table using these datatypes like so:
+
+```sql
+create table products (
+    id serial primary key,
+    name varchar(50).
+    department varchar(50),
+    price integer,
+    weight integer
+)
+```
+
+#### Characters
+
+|Datatype|Description|
+|-|-|
+|char(5)|Store come characters, length will always be 5, even if PG has to insert spaces|
+|varchar|Store any length of string|
+|varchar(40)|Store a string up to 40 characters|
+|text|Store any length of string|
+
+#### Boolean
+
+|Value|Boolean representation|
+|-|-|
+|true, yes, on 1, t, y|TRUE|
+|false, no, off, 0, f, n|FALSE|
+|null|NULL|
+
+```sql
+select ('yes'::BOOLEAN);
+-> TRUE
+```
+
+#### Date and Time
+
+|Date|Value|
+|-|-|
+|1980-11-20|20 November 1980|
+|Nov-20-1980|20 November 1980|
+|20-Nov-1980|20 November 1980|
+|1980-November-20|20 November 1980|
+|November 20, 1980|20 November 1980|
+
+```sql
+select ('NOV-20-1980')::DATE);
+select ('NOV 20 1980')::DATE);
+...
+```
+
+|Time|Value|
+|-|-|
+|01:23 AM|01:23, no time zone|
+|05:23 PM|17:23, no time zone|
+|20:34|20:34, no time zone|
+
+```sql
+select ('01:23 AM')::TIME);
+select ('20:34')::TIME);
+...
+```
+
+|Time with Timezone|Value|
+|-|-|
+|01:23 AM EST|01:23-05:00|
+|05:23 PM PST|17:23-08:00|
+|20:34 UTC|20:34+00:00|
+
+```sql
+select ('01:23 AM EST')::TIME WITH TIME ZONE);
+select ('20:34 UTC')::TIME WITH TIME ZONE);
+...
+```
+
+|Timestamp with Timezone|Value|
+|-|-|
+|Nov-20-1980 01:23 AM PST|1980-11-20 01:23:00-07|
+
+```sql
+select ('Nov-20-1980 01:23 AM PST')::TIMESTAMP WITH TIME ZONE);
+```
+
+### Intervals
+
+|Interval|Description|
+|-|-|
+|1 day, 1 D|1 day|
+|1 D 1 H 1 M 1 S|1 day 1 hour 1 minute 1 second|
+
+```sql
+select ('1 D 20 H 30 M 45 S')::INTERVAL);
+
+select ('1 D 20 H 30 M 45 S')::INTERVAL) - ('1 D'::INTERVAL);
+-> 20:30:45
+
+select ('NOV-20-1980 1:23 AM EST')::TIMESTAMP WITH TIME ZONE)
+-
+('1 D'::INTERVAL);
+-> 1980-11-18 23:23:00-07
+
+select ('NOV-20-1980 1:23 AM EST'::TIMESTAMP WITH TIME ZONE)
+-
+('NOV-20-1980 11:43 AM EST'::TIMESTAMP WITH TIME ZONE);
+-> { "hours": -10, "minutes": -20 }
+```
+
 ## Basic SQL Commands
 
 ### *CREATE TABLE* > Create Table
@@ -259,6 +383,10 @@ select * from comments;
 |2|2|1|Non est totam.|
 |3|3|2|Fuga et iste beatae.|
 |4|1|2|Molestias tempore est.|
+
+### Validation
+
+
 
 ## Joins
 
