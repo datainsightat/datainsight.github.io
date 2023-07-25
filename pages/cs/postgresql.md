@@ -842,3 +842,77 @@ select
 from
     products as p1
 ```
+
+## Performance
+
+Minimize the amount of data loaded from heap files to memory. A 'full table scan' requires postgresql to load all heap files into memory. 
+
+### Internals
+
+|Term|Description|
+|-|-|
+|Heap, Heap File|File that contains all data of a table|
+|Tuple, Item|Individual row of a table|
+|Block, Page|A heap file is divided into many 'blocks'|
+
+```sql
+select oid, datname from pg_database; -- id databases
+
+select * from pq_class; -- id objects
+
+show data_directory; -- folder where data is stored
+
+select * from pq_stats where tablename = 'users'; -- statistics about columns of the table
+```
+
+### Index
+
+An index tells the query which heap file(s) to load in order to retrieve the information.
+
+```sql
+create index on users (username);
+```
+
+### Query Tuning
+
+SQL Query > Parser > Rewrite > Planner > Execute
+
+#### *EXPLAIN, EXPLAN ANALYZE* > Display info about query
+
+Explan builds the query and provides information about it, but does not run it. Explan Analyze actually runs the query.
+
+```sql
+EXPLAIN ANALYZE SELECT
+    username,
+    contents
+FROM
+    users
+JOIN
+    comments ON
+        comments.user_id = users.id
+WHERE
+    username = 'Alyson14';
+```
+
+Analyze the result from the inner most rows to the outer rows
+
+```
+Hash Join  (cost=8.17..19.95 rows=3 width=576) (actual time=0.003..0.004 rows=0 loops=1)
+  Hash Cond: (comments.user_id = users.id)
+  ->  Seq Scan on comments  (cost=0.00..11.40 rows=140 width=502) (actual time=0.002..0.002 rows=0 loops=1)
+  ->  Hash  (cost=8.16..8.16 rows=1 width=82) (never executed)
+        ->  Index Scan using users_username_idx on users  (cost=0.14..8.16 rows=1 width=82) (never executed)
+              Index Cond: ((username)::text = 'Alyson14'::text)
+
+Planning Time: 0.136 ms
+Execution Time: 0.038 ms
+```
+
+|Step|Description|
+|-|-|
+|->|Query node. Access, or process data|
+|Hash|How the node is generating data|
+|cost|Amount of processing power, time, required for the step|
+|rows|How many rows will be produced|
+|width|average number of bytes or each row|
+
