@@ -843,6 +843,108 @@ from
     products as p1
 ```
 
+### Common Table Expressions (CTEs)
+
+```sql
+with
+  tags as (
+    select
+      user_id,
+      created_at
+    from
+      caption_tags
+
+    union all
+
+    select
+      user_id,
+      created_at
+    from
+      photo_tags
+  )
+
+select
+  username,
+  tags.created_at
+from
+  users
+join
+  tags on
+    tags.user_is = users.id
+where
+  tags.created_at < '2020-01-07';
+```
+
+### Recursive CTEs
+
+Very different from simple CTEs. They are useful anytime you have a tree or graph-type data structure. Every recursive CTE has a union inside it.
+
+```sql
+with
+  recursive countdown(val) as (
+
+    select -- working table
+      3 as val
+
+    union
+
+    select -- results table
+      val - 1
+    from
+      countdown
+    where
+      val > 1
+  )
+
+select
+  *
+from
+  countdown;
+```
+
+![Recursive CTE](../drawio/postgresql/recursive_cte.drawio.svg)
+
+```sql
+with
+  recursive suggestions(leader_id,follower_id,depth) as (
+    select
+      leader_id,
+      follow_id,
+      1 as depth
+    from
+      followers
+    where
+      follower_id = 1000 -- 'me'
+
+    union
+
+    select
+      followers.leader_id,
+      followers.follower_id,
+      depth + 1
+    from
+      followers
+    join
+      suggestions on
+        suggestions.leader_id = followers.follower_id
+    where
+      depth < 3
+  )
+
+select distinct
+  users.id,
+  users.username
+from
+  suggestions
+join
+  users on
+    users.id = suggestions.leader_id
+where
+  depth > 1
+limit
+  30;
+```
+
 ## Performance
 
 Minimize the amount of data loaded from heap files to memory. A 'full table scan' requires postgresql to load all heap files into memory. 
@@ -894,7 +996,7 @@ WHERE
     username = 'Alyson14';
 ```
 
-Analyze the result from the inner most rows to the outer rows
+Analyze the result from the inner most rows to the outer rows. Costs flow upwards.
 
 ```
 Hash Join  (cost=8.17..19.95 rows=3 width=576) (actual time=0.003..0.004 rows=0 loops=1)
@@ -915,4 +1017,29 @@ Execution Time: 0.038 ms
 |cost|Amount of processing power, time, required for the step|
 |rows|How many rows will be produced|
 |width|average number of bytes or each row|
+
+#### Cost Calculation
+
+Costs are shown in two numbers. The first is the cost for the first row, the second ist the cost for all other rows.
+
+```
+cost=8.17..19.95
+
+Cost =
+  (# pages read sequentially) * seq_page_cost
+  + (# pages read at random) * random_page_cost
+  + (# rows scanned) * cpu_tuple_cost
+  + (# index entries scanned) * cpu_index_tuple_cost
+  + (# times function/operator evaluated) * cpu_operator_cost
+```
+
+[Cost Factors](postgresql.org/docs/current/runtime-config-query.html)
+
+ |Factor|Cost|
+ |-|-|
+ |seq_page_cost|1.0|
+ |random_page_cost|4.0|
+ |cpu_tuple_cost|0.01|
+ |cpu_index_tuple_cost|0.005|
+ |cpu_operator_cost|0.0025|
 
