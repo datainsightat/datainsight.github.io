@@ -66,4 +66,10 @@ DATABASE_URL=postgres://USERNAME:PASSWORD@localhost:5432/socialnetwork npm run m
 
 ## Run API
 
+```bash
+npm run start
+```
+
+Access the API using Postman, or the VSCode REST Client.
+
 
