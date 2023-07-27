@@ -64,7 +64,6 @@ DATABASE_URL=postgres://USERNAME:PASSWORD@localhost:5432/socialnetwork npm run m
 |/users/:id|PUT|Update a user with a particular ID|
 |/users/:id|DELETE|Delete a user with a particular ID|
 
-src/app.js
-```js
+## Run API
 
-```
+
