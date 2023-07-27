@@ -1,21 +1,19 @@
 const pool = require('../pool');
+const toCamelCase = require('./utils/to-camel-case');
 
 class UserRepo {
   static async find() {
     const { rows } = await pool.query('SELECT * FROM users;');
 
-    return rows;
+    return toCamelCase(rows);
   }
 
-  static async findById(Id) {
-    // WARNING: BIG SECURITY ISSUE! => SQL Injection Exploit
-    //const { rows } = await pool.query(`
-    //  select * from users where id = ${id}
-    //`);
-    
-    const { rows } = await pool.query(`
-      select * from users where id = $1;
-    `,[id]);
+  static async findById(id) {
+    const { rows } = await pool.query('SELECT * FROM users WHERE id = $1;', [
+      id,
+    ]);
+
+    return toCamelCase(rows)[0];
   }
 
   static async insert(username, bio) {
@@ -29,9 +27,24 @@ class UserRepo {
     return toCamelCase(rows)[0];
   }
 
-  static async update() {}
+  static async update(id, username, bio) {
+    const {
+      rows,
+    } = await pool.query(
+      'UPDATE users SET username = $1, bio = $2 WHERE id = $3 RETURNING *;',
+      [username, bio, id]
+    );
 
-  static async delete() {}
+    return toCamelCase(rows)[0];
+  }
+
+  static async delete(id) {
+    const {
+      rows,
+    } = await pool.query('DELETE FROM users WHERE id = $1 RETURNING *;', [id]);
+
+    return toCamelCase(rows)[0];
+  }
 }
 
 module.exports = UserRepo;
