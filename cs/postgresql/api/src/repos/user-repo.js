@@ -7,7 +7,16 @@ class UserRepo {
     return rows;
   }
 
-  static async findById() {}
+  static async findById(Id) {
+    // WARNING: BIG SECURITY ISSUE! => SQL Injection Exploit
+    //const { rows } = await pool.query(`
+    //  select * from users where id = ${id}
+    //`);
+    
+    const { rows } = await pool.query(`
+      select * from users where id = $1;
+    `,[id]);
+  }
 
   static async insert() {}
 
