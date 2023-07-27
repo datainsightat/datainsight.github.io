@@ -1141,3 +1141,63 @@ Cost =
 
 ### Schema Migrations
 
+* Changes to the DB structure and changes to clients need to be made at precisely the same time
+* When working with other engineers, we need a really easy way to tie the  structure of our database to our code
+</a>
+
+![MigrationE](../drawio/postgresql/migration_0.drawio.svg)
+
+#### Schema Migration File
+
+A schema migration file contains two sections: up and down:
+* The up section contains a statement that advances, or upgrades the structure of our DB
+* The down section undos the up section
+</a>
+
+```sql
+--up
+alter table
+  comments
+rename column
+  contents
+to
+  body;
+
+--down
+alter table
+  comments
+rename column
+  body
+to
+  comments;
+```
+
+#### Example Create Table
+
+```sql
+--up
+create table comments (
+  id serial primary key,
+  created_at timestamp,
+  updated_at timestamp,
+  contents varchar(240),
+);
+
+--down
+drop table comments;
+```
+
+### Data Migration
+
+Schema Migration > Data Migration > Schema Migration  
+
+1) Add column
+2) Deploy new Version of API that fills both old column and new column
+3) Copy data to new column
+4) Deploy new version of API to write data just to new column
+5) Drop old column
+</a>
+
+[Demo Webserver](https://github.com/datainsightat/DataScience_Examples/blob/main/cs/postgresql/index.js)
+
+![MigrationE](../drawio/postgresql/migration_1.drawio.svg)
