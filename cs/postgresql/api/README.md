@@ -56,13 +56,13 @@ DATABASE_URL=postgres://USERNAME:PASSWORD@localhost:5432/socialnetwork npm run m
 
 ## Node API
 
-|Route|Method|Goal|
-|-|-|-|
-|/users|GET|Fetch all users from the users table|
-|/users/:id|GET|Fetch a user with a particular ID|
-|/users|POST|Create a new user|
-|/users/:id|PUT|Update a user with a particular ID|
-|/users/:id|DELETE|Delete a user with a particular ID|
+|Route|Method|Goal|Function|Goal|
+|-|-|-|-|-|
+|/users|GET|Fetch all users from the users table|find|REturn an array of objects, each object representing a user|
+|/users/:id|GET|Fetch a user with a particular ID|findById|Find a user with the provided ID|
+|/users|POST|Create a new user|insert|Add a user with some provided properties|
+|/users/:id|PUT|Update a user with a particular ID|update|Update a user with the provided ID|
+|/users/:id|DELETE|Delete a user with a particular ID|delete|Delete the user with the provided ID|
 
 ## Run API
 
