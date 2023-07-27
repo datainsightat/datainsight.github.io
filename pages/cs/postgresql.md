@@ -531,6 +531,100 @@ alter table
 add check (price > 0);
 ```
 
+## Views
+
+Create a fake table that has rows from other tables. These rows can be exact rows as they exist on another table, or a computed value. You can referance a view in any place where we would normally reference a table. View don't create a new table or move any data around.
+
+```sql
+create view tags as (
+  select
+    id,
+    created_at,
+    user_id,
+    post_id,
+    'photo_tag' as type
+  from
+    photo_tags
+
+  union all
+
+  select
+    id,
+    created_at,
+    user_id,
+    post_id,
+    'caption_tag' as type
+  from
+    caption_tags
+);
+
+select * from tags;
+```
+
+### Materialized Views
+
+Query that gets executed only at very specific times, gut the results are saved an can be referenced without rerunning the query.
+
+```sql
+create materialized view weekly_likes as (
+  select
+    date_trunc('week', coalesce(posts.created_at, comments.created_at)) as week,
+    count(posts.id) as num_likes_for_posts,
+    count(comments.id) as num_likes_for_comments
+  from
+    likes
+  left join
+    posts on
+      posts.id = likes.post_id
+  left join
+    comments on
+      comments.id = likes.comment_id
+  group by
+    week
+  order by
+    week
+) with data;
+
+select * from weekly_likes;
+
+refresh materialized view weekly_likes;
+```
+
+## Transactions
+
+Every time you access the PG database, you create a connection to the database. Each connection can access all the data from the database. Start a transaction using the 'BEGIN' keyword. The transaction isolates a connection from other connections. Just this connection can access the table that is uses inside the transaction. Changes within the transaction are just shown in the connection. Other connections do no see the changes until the transaction is closed using the 'COMMIT' keyword. If a connection crashes, PG undoes any changes within the transaction.
+
+|Keyword|Action|
+|-|-|
+|BEGIN|Start transaction|
+|COMMIT|End connection. Merge changes|
+|ROLLBACK|End transaction. Undo changes|
+
+```sql
+create table accounts (
+  id serial primary_key,
+  name varchar(20) not null,
+  balance integer not null
+);
+
+insert into
+  accounts (name, balance)
+values
+  ('Gia',100),
+  ('Alyson',100);
+
+begin; -- Start Transaction.
+
+update
+  accounts
+set
+  balance = balance - 50
+where name = 'Gia';
+
+commit; -- End Transaction. Merge changes to database.
+--rollback; -- End Transaction. Remove changes.
+```
+
 ## Joins
 
 For each comment, show the contents of the comment and the username of the user who wrote the comment:
@@ -1042,4 +1136,8 @@ Cost =
  |cpu_tuple_cost|0.01|
  |cpu_index_tuple_cost|0.005|
  |cpu_operator_cost|0.0025|
+
+## Migrations
+
+### Schema Migrations
 
