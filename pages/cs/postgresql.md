@@ -1201,3 +1201,32 @@ Schema Migration > Data Migration > Schema Migration
 [Demo Webserver](https://github.com/datainsightat/DataScience_Examples/blob/main/cs/postgresql/index.js)
 
 ![MigrationE](../drawio/postgresql/migration_1.drawio.svg)
+
+## Data Isolation with Schemas
+
+Schemas are like folders to organize things in a database. Every database gets a default schmea called 'public'. Each schema can have its own seperate copy of a table.
+
+```sql
+create schema test;
+
+create table test.users (
+  id serial primary key,
+  username varchar
+);
+
+insert into test.users (username)
+values
+  ('Alice'),
+  ('Bob');
+```
+
+### Controlling Schema Access with Search Paths
+
+'''sql
+show search_path;
+
+  seach_path = "$user", public;
+  search_path = "sg", test;
+
+set search_path to test, public -- Access schema "test" first, before defaulting to "public"
+'''
