@@ -14,6 +14,7 @@
 * [Windows]
 * [Docker](pages/de/docker.md)
 * [Kubernetes]
+* [API](pages/cs/api.md)
 
 ### Code
 
