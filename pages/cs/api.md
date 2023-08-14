@@ -206,3 +206,22 @@ apicall.update_status('Here is a sample tweet from the API call program.')
 
 print('Tweet created')
 ```
+
+## API Access
+
+###  Authorization and Authentication
+
+* Authentication: Prove Identity
+* Authorization: Limited Access
+<a/>
+
+|Name|Authentication|Authorization|Examples|
+|-|-|-|-|
+|No Auth|N|N|Google search page|
+|Basic Auth|Y|N|Email|
+|Bearer Token|N|Y|Not many|
+|OAuth|Y|Y|Wayz|
+|Two Factor|Y|N|Git|
+
+## Apps
+
