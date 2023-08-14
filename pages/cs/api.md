@@ -148,7 +148,31 @@ soap:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
 |Blank Line|-|
 |Body|JSON, XML, Image, Html, ...|
 
-```json
+### Start Line
+```
+PUT
+```
 
+### Header Line
+```
+Authorization:Bearer ...
+Accept:application/json
+Content-Type:application/json
+Content-Language:en-US
+```
+
+### Body
+```json
+{
+  "availability": {
+    "shipToLocationAbailability": {
+      "quantity": 50
+    }
+  },
+  "condition": "NEW",
+  "product": {
+    "title": "An Item"
+  }
+}
 ```
 
