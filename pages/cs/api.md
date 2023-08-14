@@ -176,3 +176,33 @@ Content-Language:en-US
 }
 ```
 
+#### Demo
+
+[Twitter API](https://developer.twitter.com/en/docs/twitter-api)
+
+```python
+import tweepy
+
+client_secret = '1eQr5yqKHnzXKJHCCsZ-fwo4YZ1OvXdd6k-5ub68aANVskxr8N'
+
+ak = 'xxx'
+aks = 'xxx'
+
+at = 'xxx'
+ats = 'xxx'
+
+def OAuth():
+    try:
+        auth = tweepy.OAuthHandler(ak,aks)
+        auth.set_access_token(at,ats)
+        return auth
+    except Exception as e:
+        return None
+
+oauth = OAuth()
+apicall = tweepy.API(oauth)
+
+apicall.update_status('Here is a sample tweet from the API call program.')
+
+print('Tweet created')
+```
