@@ -69,3 +69,86 @@ __C__.reate __R__.ead __U__.pdate __D__.elete
 |3xx|Redirection|
 |4xx|Error from origin|
 |5xx|Error from destination|
+
+## XML (eXtensible Markup Language)
+
+[W3 Schools](https://www.w3schools.com/xml/xml_whatis.asp)  
+
+test.xml
+```xml
+<?xml version="1.0"?>
+<Pizza>
+  <Size>Small</Size>
+  <Toppings>
+    <Topping>Onions</Topping>
+    <Topping>Mushrooms</Topping>
+  </Toppings>
+</Pizza>
+```
+
+## JSON (JavaScript Object Notation)
+
+[W3 Schools](https://www.w3schools.com/js/js_json_intro.asp)  
+
+test.json
+```json
+{ "Pizza" : [
+  {"Size" : "Small",
+    "Toppings" : ["Onions","Mushrooms"],
+  },
+  {"Size" : "Large",
+    "Toppings" : ["Ham","Egg"],
+  }
+  ]
+}
+```
+
+## SOAP (Simple Object Access Protocol)
+
+[W3 Schools](https://www.w3schools.com/xml/xml_soap.asp)  
+
+Soap uses a WSDL (Web Services Description Language) that describes the web service. SOAP uses POST method.
+
+|Item|Content|
+|-|-|
+|Start Line|POST WSL HTTP Version|
+|Header Line|Content-Type: text/xml|
+|Blank Line|-|
+|Body|XML envelope formed using WSDL|
+
+```xml
+<?xml version="1.0"?>
+
+<soap:Envelope
+xmlns:soap="http://www.w3.org/2003/05/soap-envelope/"
+soap:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+
+<soap:Header>
+...
+</soap:Header>
+
+<soap:Body>
+...
+  <soap:Fault>
+  ...
+  </soap:Fault>
+</soap:Body>
+
+</soap:Envelope>
+```
+
+## REST (Representational State Transfer)
+
+[W3c](https://www.w3.org/2001/sw/wiki/REST)  
+
+|Item|Content|
+|-|-|
+|Start Line|GET, POST, PUT, DELETE, etc|
+|Header Line|All|
+|Blank Line|-|
+|Body|JSON, XML, Image, Html, ...|
+
+```json
+
+```
+
