@@ -227,12 +227,13 @@ print('Tweet created')
 
 #### API Directories
 
-[Rapid API](https://rapidapi.com/)
-[API List](https://apilist.fun/))
+[Rapid API](https://rapidapi.com/)  
+[API List](https://apilist.fun/)
 
 [Postman](https://www.postman.com/)
 
 [Basic Auth](https://postman-echo.com/basic-auth)
+[Digest Auth](https://postman-echo.com/digest-auth)
 
 
 
