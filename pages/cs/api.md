@@ -223,17 +223,39 @@ print('Tweet created')
 |OAuth|Y|Y|Wayz|
 |Two Factor|Y|N|Git|
 
+#### OAuth (Open Authorization)
+
+An application is authorized to acces certain ressources.
+
+![request_response](../drawio/oauth.svg)
+
 ### Postman
 
 #### API Directories
 
-[Rapid API](https://rapidapi.com/)  
-[API List](https://apilist.fun/)
+* [Rapid API](https://rapidapi.com/)
+* [API List](https://apilist.fun/)
 
 [Postman](https://www.postman.com/)
 
-[Basic Auth](https://postman-echo.com/basic-auth)
-[Digest Auth](https://postman-echo.com/digest-auth)
+* [Basic Auth](https://postman-echo.com/basic-auth)
+* [Digest Auth](https://postman-echo.com/digest-auth)
+* [Bearer Auth](https://httpbin.org/bearer)
+* [OAuth](https://developers.google.com/oauthplayground/)
 
+### Python
 
+```python
+import requests
 
+url = "https://httpbin.org/bearer"
+
+payload = {}
+headers = {
+  'Authorization': 'Bearer sdfgsdfg'
+}
+
+response = requests.request("GET", url, headers=headers, data=payload)
+
+print(response.text)
+```
