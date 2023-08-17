@@ -229,9 +229,9 @@ An application is authorized to acces certain ressources.
 
 ![request_response](../drawio/oauth.svg)
 
-### Postman
+## Postman
 
-#### API Directories
+### API Directories
 
 * [Rapid API](https://rapidapi.com/)
 * [API List](https://apilist.fun/)
@@ -259,3 +259,26 @@ response = requests.request("GET", url, headers=headers, data=payload)
 
 print(response.text)
 ```
+
+## Webhooks (Reverse API)
+
+A hook is an event that calls a webservice.
+
+![webhook](../drawio/webhook.drawio.svg)
+
+1. Event/Trigger
+2. Configuration (Endpoints)
+3. HTTP request
+4. HTTP response
+</a>
+
+## Microservice
+
+A microservice is a 'small' API.
+
+|Monolith Architecture|Microservice|
+|-|-|
+|One API|Many APIs|
+|API calls many programs|Specific API for each program|
+||+ scalable, language independent, specialised teams|
+||- inconsistent|
