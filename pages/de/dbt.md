@@ -563,3 +563,116 @@ models/downstream_model.sql
     fi
 
 # Test
+
+# Project
+
+## Python Connector
+
+### Sharepoint
+
+#### sharepointAPI.py
+```python
+import requests
+import xmltodict
+from requests_ntlm2 import HttpNtlmAuth
+
+import pandas as pd
+
+import os
+import re
+
+import logging
+logging.basicConfig(level=logging.INFO)
+
+logging.info('Module sharepoint loaded')
+
+class SharepointSource(object):
+
+    def __init__(self,site_url,user,password,db_name=None, db_user=None, db_pw=None): #,listener_table=None
+
+        self.site_url = site_url
+        self.api_url = "{0}_api/web/".format(self.site_url)
+        self.user = user
+        self.authntlm = HttpNtlmAuth(user,password)
+
+    def get_list_filenames(self,page_url):
+        sp_url = "{0}GetFolderByServerRelativeUrl('{1}')/files".format(self.api_url,page_url) #/Files?$select=Name
+
+        response = requests.get(sp_url,auth=self.authntlm)
+        data = xmltodict.parse(response.text)
+
+        file_count = len(data["feed"]["entry"])
+        
+        files = []
+
+        for i in range(file_count):
+            if (file_count == 0):
+                files.append([data["feed"]["entry"]["content"]["m:properties"]["d:Name"],data["feed"]["entry"]["content"]["m:properties"]["d:TimeLastModified"]["#text"]])
+            else:
+                files.append([data["feed"]["entry"][i]["content"]["m:properties"]["d:Name"],data["feed"]["entry"][i]["content"]["m:properties"]["d:TimeLastModified"]["#text"]]) #[i]
+
+        return(files)
+```
+
+#### app.py
+```python
+import os
+import pandas as pd
+import numpy as np
+import re
+import yaml
+
+from datetime import datetime
+
+from dotenv import load_dotenv
+load_dotenv()
+
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
+from sharepointAPI import sharepoint
+
+###############
+# Load Config #
+###############
+
+with open(os.path.dirname(__file__)+'/src_config.yaml', 'r') as f:
+    config = yaml.safe_load(f)
+
+################
+# Extract Data #
+################
+
+def extract():
+
+    site_url=config['site_url']['upload']
+    sp_folder = config['folder']['datenbasis']
+
+    sp = sharepoint.SharepointSource(site_url,user=os.getenv(config['sharepoint']['user_env']),password=os.getenv(config['sharepoint']['pw_env']))
+
+    name = sp.get_latest_filename(page_url=sp_folder)[0]
+    logging.info(name)
+
+    raw_data = sp.get_file(page_url=sp_folder,file=name)
+
+    data = pd.read_excel(raw_data,sheet_name=0,engine='openpyxl')
+
+    logging.debug('extract done ...')
+
+    return data
+
+data_l = extract()
+
+logging.debug(data_l.head())
+```
+#### src_config.yaml
+```yaml
+#####################
+# Paths and Folders #
+#####################
+
+sharepoint :
+  user_env : 'RSP_WARE1' # Set the value of this variable in your .env file
+  pw_env : 'PW_RSP_WARE1' # Set the value of this variable in your .env file
+```
