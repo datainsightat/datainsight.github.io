@@ -673,6 +673,6 @@ logging.debug(data_l.head())
 #####################
 
 sharepoint :
-  user_env : 'RSP_WARE1' # Set the value of this variable in your .env file
-  pw_env : 'PW_RSP_WARE1' # Set the value of this variable in your .env file
+  user_env : 'user' # Set the value of this variable in your .env file
+  pw_env : 'pw' # Set the value of this variable in your .env file
 ```
