@@ -33,6 +33,7 @@
 * [Visual Basic]
 * [Perl](pages/cs/perl.md)
 * [Regex](pages/cs/regex.md)
+* [6502](pages/cs/6502.md)
 
 ### Database
 
