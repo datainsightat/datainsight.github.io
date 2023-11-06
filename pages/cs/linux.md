@@ -112,12 +112,14 @@
     -mtime days	modification date
     -size num	
     -newer file	files newer than …
-    -exec command {} \;	
+    -exec command {} \;
+    -delete
 
     $ find
     $ find . 
     $ find . -name '*v9*'
     $ find . -iname "*.SomeExt" | xargs cp -t Directory
+    $ find . -name "*.txtutf8" -delete
 
     locate
 
