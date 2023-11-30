@@ -27,6 +27,7 @@
 * [Shell Script](pages/cs/shellscript.md)
 * [R](pages/cs/r.md)
 * [Python](pages/cs/python.md)
+* [Java](pages/cs/java/java.md)
 * [Scala](pages/cs/scala.md)
 * [HTML/CSS](pages/cs/html.md)
 * [JavaScript](pages/cs/js.md)
