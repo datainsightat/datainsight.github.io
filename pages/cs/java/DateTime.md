@@ -1,7 +1,11 @@
+
+## Date and Time
+```java
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 public class DateTime {
     public static void main(String[] args) {
         LocalDate myDate = LocalDate.now();
@@ -17,3 +21,4 @@ public class DateTime {
         System.out.println(formattedDate);
     }
 }
+```
