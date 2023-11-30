@@ -1,3 +1,5 @@
+## Enumerator
+```java
 public class Enum {
     enum Level {
         LOW,
@@ -26,3 +28,4 @@ public class Enum {
         }
     }
 }
+```
