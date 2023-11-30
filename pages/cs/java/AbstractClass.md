@@ -1,3 +1,5 @@
+## Abstact Class
+```java
 abstract class Sound {
     public abstract void animalSound();
     public void sleep() {
@@ -18,3 +20,4 @@ public class Animal {
         myPig.sleep();
     }
 }
+```
