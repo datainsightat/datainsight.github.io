@@ -1,4 +1,5 @@
 ## ArrayList
+An ArrayList is a dynamic array-like data structure that provides resizable arrays. It's part of the 'java.util' package and implements the List interface. Unlike regulary arrays, ArrayLists can dynamically grow or shrink in size during runtime.
 ```java
 import java.util.ArrayList;
 import java.util.Collections;
