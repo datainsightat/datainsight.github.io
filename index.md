@@ -50,6 +50,7 @@
 * [Vim Configuration](pages/cs/vim.md)
 * [Markdown](pages/cs/md.md)
 * [Maven](pages/cs/maven.md)
+* [Testing](pages/cs/testing.md)
 
 ## DE - Data Engineering
 
